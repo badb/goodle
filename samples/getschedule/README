@@ -1,0 +1,9 @@
+oryginalny skrypt znalazłem: http://sandbox.usos.edu.pl/usosapi/developers/api/examples/
+
+przerobiłem go, tak, aby wyciągał wszystkie przedmioty z których mamy zajęcia w ciągu nadchodzącego tygodnia (tak, wiem, że to nie jest dokładnie to o co chodziło)
+
+aby skrypt zadziałał należy w głównym katalogu:
+cp goodle_auth_example.py goodle_auth.py
+i wpisać tam wysłane przeze mnie mailem dane
+WAŻNE:
+nie comitujemy goodle_auth.py !!!

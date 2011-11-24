@@ -6,4 +6,4 @@ aby skrypt zadziałał należy w głównym katalogu:
 cp goodle_auth_example.py goodle_auth.py
 i wpisać tam wysłane przeze mnie mailem dane
 WAŻNE:
-nie comitujemy goodle_auth.py !!!
+!!!nie comitujemy goodle_auth.py !!!

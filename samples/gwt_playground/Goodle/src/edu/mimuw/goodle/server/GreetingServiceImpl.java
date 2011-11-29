@@ -1,5 +1,11 @@
 package edu.mimuw.goodle.server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import edu.mimuw.goodle.client.GreetingService;
 import edu.mimuw.goodle.shared.FieldVerifier;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -26,9 +32,27 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
     // Escape data from the client to avoid cross-site script vulnerabilities.
     input = escapeHtml(input);
     userAgent = escapeHtml(userAgent);
+    String toRet = "";
 
-    return "Hello, " + input + "!<br><br>I am running " + serverInfo
-        + ".<br><br>It looks like you are using:<br>" + userAgent;
+    try {
+        URL url = new URL("http://apps.usos.edu.pl/services/courses/classtypes_index?format=json");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            toRet += line;
+        }
+        reader.close();
+
+    } catch (MalformedURLException e) {
+        // ...
+    } catch (IOException e) {
+        // ...
+    }
+    
+    return toRet;
+    		/*"Hello, " + input + "!<br><br>I am running " + serverInfo
+        + ".<br><br>It looks like you are using:<br>" + userAgent;*/
   }
 
   /**

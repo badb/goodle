@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
@@ -35,6 +36,8 @@ public class Goodle implements EntryPoint {
 	private Button searchButton = new Button("search");
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private Label errorMsgLabel = new Label();
+	private final GreetingServiceAsync greetingService = GWT
+			.create(GreetingService.class);
 
 	public void onModuleLoad() {
 
@@ -102,6 +105,18 @@ public class Goodle implements EntryPoint {
 	}
 
 	private void getCourses () {
+		greetingService.greetServer("aaaaa", new AsyncCallback<String>() {
+			public void onFailure(Throwable caught) {
+				// Show the RPC error message to the user
+				displayError("" + caught.getMessage());
+				
+			}
+
+			public void onSuccess(String result) {
+				displayError(result);
+			}
+		});
+		/*
 		RequestBuilder builder =
 			new RequestBuilder(RequestBuilder.GET, JSON_URL);
 
@@ -122,6 +137,6 @@ public class Goodle implements EntryPoint {
 			});
 		} catch (RequestException e) {
 			displayError("Coudn't retrive JSON (exception)");
-		}
+		}*/
 	}
 }

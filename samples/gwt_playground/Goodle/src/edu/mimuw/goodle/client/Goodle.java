@@ -22,8 +22,14 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.logging.client.ConsoleLogHandler;
+import com.google.gwt.logging.client.FirebugLogHandler;
+
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public class Goodle implements EntryPoint {
 
@@ -36,10 +42,41 @@ public class Goodle implements EntryPoint {
 	private Button searchButton = new Button("search");
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private Label errorMsgLabel = new Label();
+	
 	private final GreetingServiceAsync greetingService = GWT
 			.create(GreetingService.class);
+	
+	private String sessionID = null;
+	private Button authButton = new Button("pincode auth button");
+	private Button getCoursesButton = new Button("getCourses Button");
+	private Button loginButton = new Button("login Button");
+	private Button logoutButton = new Button("logout Button");
+	private final GoodleServiceAsync goodleService = GWT.create(GoodleService.class);
+	private Logger logger = Logger.getLogger("");
+	
+
+	
 
 	public void onModuleLoad() {
+		logger.addHandler(new FirebugLogHandler());
+		mainPanel.add(authButton);
+		mainPanel.add(getCoursesButton);
+		mainPanel.add(loginButton);
+		mainPanel.add(logoutButton);
+		RootPanel.get("courseList").add(mainPanel);
+		
+		authButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				goodleService.authorisePinCode(sessionID, "pinpin", new AsyncCallback<Boolean>() {
+					public void onFailure(Throwable caught) {
+						logger.severe("PinCodeRequest failed.");
+					}
+					public void onSuccess(Boolean result) {
+						logger.info("PinCodeAuth returned:" + result);
+					}
+				});
+			}
+		});
 
 		/* TODO: pobranie listy przedmiotow. Do zastapienia Z1*/
 		Course c = new Course("P1", "pp", "pe");
@@ -55,16 +92,11 @@ public class Goodle implements EntryPoint {
 			coursesPanel.add(l);
 		}
 
-		searchPanel.add(searchTextBox);
-		searchPanel.add(searchButton);
-
-		errorMsgLabel.setVisible(false);
-
 		mainPanel.add(errorMsgLabel);
 		mainPanel.add(searchPanel);
 		mainPanel.add(coursesPanel);
 
-		RootPanel.get("courseList").add(mainPanel);
+		
 
 		searchButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {

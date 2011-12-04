@@ -1,4 +1,4 @@
-package edu.mimuw.goodle.client;
+package edu.mimuw.goodle.server;
 
 import java.io.Serializable;
 

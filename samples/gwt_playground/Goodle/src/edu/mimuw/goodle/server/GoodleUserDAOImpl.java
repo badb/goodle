@@ -6,7 +6,6 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
-import edu.mimuw.goodle.client.GoodleUser;
 
 public class GoodleUserDAOImpl implements GoodleUserDAO {
 	private static final PersistenceManagerFactory pmfInstance = JDOHelper

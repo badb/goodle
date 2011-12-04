@@ -2,8 +2,6 @@ package edu.mimuw.goodle.server;
 
 import java.util.List;
 
-import edu.mimuw.goodle.client.GoodleSession;
-import edu.mimuw.goodle.client.GoodleUser;
 
 public interface GoodleSessionDAO {
 	void addGoodleSession(GoodleSession session);

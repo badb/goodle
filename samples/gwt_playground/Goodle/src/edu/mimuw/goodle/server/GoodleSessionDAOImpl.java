@@ -6,8 +6,6 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
-import edu.mimuw.goodle.client.GoodleSession;
-import edu.mimuw.goodle.client.GoodleUser;
 import edu.mimuw.goodle.server.GoodleSessionDAO;
 
 public class GoodleSessionDAOImpl implements GoodleSessionDAO {

@@ -6,11 +6,13 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
+import com.google.appengine.api.datastore.Key;
+
 import edu.mimuw.goodle.server.GoodleSessionDAO;
+import edu.mimuw.goodle.shared.PMF;
 
 public class GoodleSessionDAOImpl implements GoodleSessionDAO {
-	private static final PersistenceManagerFactory pmfInstance = JDOHelper
-			.getPersistenceManagerFactory("transactions-optional");
+	private static final PersistenceManagerFactory pmfInstance = PMF.get();
 
 	public static PersistenceManagerFactory getPersistenceManagerFactory() {
 		return pmfInstance;
@@ -92,7 +94,7 @@ public class GoodleSessionDAOImpl implements GoodleSessionDAO {
 			return null;
 	}
 
-	public GoodleUser getSessionUser(Long id) {
+	public Key getSessionUser(Long id) {
 		PersistenceManager pm = getPersistenceManagerFactory()
 		.getPersistenceManager();
 String query = "select from " + GoodleSession.class.getName()

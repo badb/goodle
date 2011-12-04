@@ -10,5 +10,6 @@ public interface GoodleUserDAO {
 	List<GoodleUser> listGoodleUser();
 
 	GoodleUser getUserByLogin(String login);
+	GoodleUser getUserByID(Long Id);
 
 }

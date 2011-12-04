@@ -8,10 +8,11 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-
 public class GoodleSession implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +21,7 @@ public class GoodleSession implements Serializable {
 	private Long id;
 	
 	@Persistent
-	private GoodleUser user;
+	private Key user;
 
 	public Long getId() {
 		return id;
@@ -30,11 +31,11 @@ public class GoodleSession implements Serializable {
 		this.id = id;
 	}
 
-	public GoodleUser getUser() {
+	public Key getUser() {
 		return user;
 	}
 
-	public void setUser(GoodleUser user) {
+	public void setUser(Key user) {
 		this.user = user;
 	} 
 

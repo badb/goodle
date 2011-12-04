@@ -2,11 +2,13 @@ package edu.mimuw.goodle.server;
 
 import java.util.List;
 
+import com.google.appengine.api.datastore.Key;
+
 
 public interface GoodleSessionDAO {
 	void addGoodleSession(GoodleSession session);
 	void removeGoodleSession(GoodleSession session);
 	void updateGoodleSession(GoodleSession session);
 	List<GoodleSession> listGoodleSession();
-	GoodleUser getSessionUser(Long id);
+	Key getSessionUser(Long id);
 }

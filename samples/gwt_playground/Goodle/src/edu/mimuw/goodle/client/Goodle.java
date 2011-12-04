@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
@@ -51,6 +52,9 @@ public class Goodle implements EntryPoint {
 	private Button getCoursesButton = new Button("getCourses Button");
 	private Button loginButton = new Button("login Button");
 	private Button logoutButton = new Button("logout Button");
+	private TextBox userNameBox = new TextBox();
+	private PasswordTextBox passwdBox = new PasswordTextBox();
+	private Button getAllUsers = new Button("list users");
 	private final GoodleServiceAsync goodleService = GWT.create(GoodleService.class);
 	private Logger logger = Logger.getLogger("");
 	
@@ -63,6 +67,9 @@ public class Goodle implements EntryPoint {
 		mainPanel.add(getCoursesButton);
 		mainPanel.add(loginButton);
 		mainPanel.add(logoutButton);
+		mainPanel.add(userNameBox);
+		mainPanel.add(passwdBox);
+		mainPanel.add(getAllUsers);
 		RootPanel.get("courseList").add(mainPanel);
 		
 		authButton.addClickHandler(new ClickHandler(){
@@ -77,6 +84,21 @@ public class Goodle implements EntryPoint {
 				});
 			}
 		});
+		
+		loginButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event){
+				goodleService.loginUser(userNameBox.getText(), 
+						passwdBox.getText(), new AsyncCallback<String>() {
+					public void onFailure(Throwable caught) {
+						logger.severe("Login command failed.");
+					}
+					public void onSuccess(String result) {
+						logger.info("SessionID: "+result);
+					}
+				});
+			}
+		});
+		
 
 		/* TODO: pobranie listy przedmiotow. Do zastapienia Z1*/
 		Course c = new Course("P1", "pp", "pe");

@@ -6,10 +6,11 @@ import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
+import edu.mimuw.goodle.shared.PMF;
+
 
 public class GoodleUserDAOImpl implements GoodleUserDAO {
-	private static final PersistenceManagerFactory pmfInstance = JDOHelper
-			.getPersistenceManagerFactory("transactions-optional");
+	private static final PersistenceManagerFactory pmfInstance = PMF.get();
 
 	public static PersistenceManagerFactory getPersistenceManagerFactory() {
 		return pmfInstance;
@@ -44,7 +45,7 @@ public class GoodleUserDAOImpl implements GoodleUserDAO {
 		try {
 			pm.currentTransaction().begin();
 
-			user = pm.getObjectById(GoodleUser.class, user.getId());
+			user = pm.getObjectById(GoodleUser.class, user.getKey().getId());
 			pm.deletePersistent(user);
 
 			pm.currentTransaction().commit();
@@ -64,7 +65,7 @@ public class GoodleUserDAOImpl implements GoodleUserDAO {
 
 try {
 	pm.currentTransaction().begin();
-	GoodleUser dbuser = pm.getObjectById(GoodleUser.class, user.getId());
+	GoodleUser dbuser = pm.getObjectById(GoodleUser.class, user.getKey().getId());
 	dbuser.setLogin(user.getLogin());
 	dbuser.setPassword(user.getPassword());
 	dbuser.setAccess_token_key(user.getAccess_token_key());
@@ -84,12 +85,24 @@ try {
 	public GoodleUser getUserByLogin(String login) {
 		PersistenceManager pm = getPersistenceManagerFactory()
 		.getPersistenceManager();
-String query = "select from " + GoodleUser.class.getName() + "where login == " + login;
-List<GoodleUser> list =  (List<GoodleUser>) pm.newQuery(query).execute();
+String query = "select from " + GoodleUser.class.getName() + " where login == '" + login + "'";
+
+List<GoodleUser> list =  listGoodleUser();//(List<GoodleUser>) pm.newQuery(query).execute();
 if (list != null) {
-	return list.get(0);
+	for (GoodleUser goodleUser : list) {
+		if(goodleUser.getLogin().equals(login))
+			return goodleUser;
+	}
+	return null;
 }
 else return null;
+	}
+
+	@Override
+	public GoodleUser getUserByID(Long Id) {
+		PersistenceManager pm = getPersistenceManagerFactory()
+				.getPersistenceManager();
+		return pm.getObjectById(GoodleUser.class, Id);
 	}
 
 }

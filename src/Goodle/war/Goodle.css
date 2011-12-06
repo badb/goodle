@@ -1,0 +1,37 @@
+body {
+	margin:0;
+	padding:0;
+}
+
+#goodleLogin td {
+	padding: 5px;
+}
+
+#logo {
+	margin: 20px;
+	width: auto;
+	text-align: center;
+}
+
+#goodleLogin {
+	padding:20px;
+	margin: auto;
+	width:30%;
+	height:50%;
+	background-color: #dddddd;
+	border: 2px solid grey;
+	border-radius: 5px;
+	float:center;
+}
+
+.gwt-TextBox {
+	width: 200px;
+}
+
+.gwt-PasswordTextBox {
+	width: 200px;
+}
+
+.gwt-Button {
+   color: #000000;
+}

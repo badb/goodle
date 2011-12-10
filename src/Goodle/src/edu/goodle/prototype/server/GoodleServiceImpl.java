@@ -26,9 +26,9 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 	@Override
 	public String loginUser(String userName, String passwd) {
 		Long sessionID=0L;
-		GoodleUserDAO userDB = new GoodleUserDAOImpl();
+// 		GoodleUserDAO userDB = new GoodleUserDAOImpl();
 // 		GoodleSessionDAO sessionDB = new GoodleSessionDAOImpl();
-		// remove users
+// 		// remove users
 // 		List<GoodleUser> list = userDB.listGoodleUser();
 // 		logger.severe("Number of existing users:" + list.size());
 // 		for (Iterator<GoodleUser> iterator = list.iterator(); iterator
@@ -55,7 +55,7 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 // 		// Logging User;
 		GoodleUser user;
 		try{
-// 		 user= userDB.getUserByLogin(userN	ame);
+// 		 user= userDB.getUserByLogin(userName);
 		}catch(IndexOutOfBoundsException e){
 			logger.severe("failed to get User. UserName: " + userName);
 			throw e;

@@ -34,7 +34,6 @@ public class GoodleUserDAOImpl implements GoodleUserDAO {
 				.getPersistenceManager();
 		String query = "select from " + GoodleUser.class.getName();
 		return (List<GoodleUser>) pm.newQuery(query).execute();
-
 	}
 
 	@Override

@@ -2,11 +2,13 @@ package edu.goodle.prototype.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -17,10 +19,12 @@ import java.util.logging.LogRecord;
 public class LoginPanel {
 
 	private final GoodleServiceAsync goodleService;
+	private final Goodle goodle;
 	private static Logger logger = Logger.getLogger("");
 
-	public LoginPanel(GoodleServiceAsync goodleService) {
+	public LoginPanel(GoodleServiceAsync goodleService, Goodle goodle) {
 		this.goodleService = goodleService;
+		this.goodle = goodle;
 	}
 
 	private VerticalPanel loginPanel = new VerticalPanel();
@@ -70,7 +74,8 @@ public class LoginPanel {
 						logger.severe("Login failed." + caught);
 					}
 					public void onSuccess(String result) {
-						logger.info("SessionID: "+result);
+						RootPanel.get("goodleLogin").remove(loginPanel);
+						goodle.afterLogin(result);
 					}
 				});
 			}

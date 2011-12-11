@@ -24,6 +24,12 @@ body {
 	float:center;
 }
 
+#goodleLogout {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
 .gwt-TextBox {
 	width: 200px;
 }

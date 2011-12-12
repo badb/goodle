@@ -10,21 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.LogRecord;
 
-public class CourseListPanel {
-	private final GoodleServiceAsync goodleService;
-	private final Goodle goodle;
+public class CourseListPanel extends GoodlePanel{
 	private VerticalPanel coursePanel = new VerticalPanel();
 	private static Logger logger = Logger.getLogger("");
 	private Boolean loaded;
 
 	public CourseListPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		this.goodleService = goodleService;
-		this.goodle = goodle;
+		super(goodleService, goodle);
 		this.loaded = false;
 	}
 
 	public void loadCourses (String sessionId) {
-		goodleService.getCourses(sessionId, new AsyncCallback<String>() {
+		getGoodleService().getCourses(sessionId, new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.severe("getCourses: fail " + caught);
 			}

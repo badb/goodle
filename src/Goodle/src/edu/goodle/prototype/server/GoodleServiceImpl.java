@@ -19,6 +19,16 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 	}
 
 	@Override
+	public String getAllCourses(String sessionID) {
+		return "This is getAllCourses(" + sessionID +")";
+	}
+
+	@Override
+	public String searchCourse(String searchText, String sessionID) {
+		return "This is searchCourses.";
+	}
+
+	@Override
 	public Boolean authorisePinCode(String sessionID, String PinCode) {
 		return new Boolean(false);
 	}
@@ -79,8 +89,5 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 
 	@Override
 	public void logoutUser(String sessionID) {
-		;
-
 	}
-
 }

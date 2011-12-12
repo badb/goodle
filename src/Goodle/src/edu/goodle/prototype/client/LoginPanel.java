@@ -16,15 +16,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.LogRecord;
 
-public class LoginPanel {
+public class LoginPanel extends GoodlePanel{
 
-	private final GoodleServiceAsync goodleService;
-	private final Goodle goodle;
 	private static Logger logger = Logger.getLogger("");
 
 	public LoginPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		this.goodleService = goodleService;
-		this.goodle = goodle;
+		super(goodleService, goodle);
 	}
 
 	private VerticalPanel loginPanel = new VerticalPanel();
@@ -65,7 +62,7 @@ public class LoginPanel {
 
 		loginButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				goodleService.loginUser(nameField.getText(), 
+				getGoodleService().loginUser(nameField.getText(), 
 						passwordField.getText(), new AsyncCallback<String>() {
 					public void onFailure(Throwable caught) {
 						dialogBox.setText("Login failed");
@@ -75,7 +72,7 @@ public class LoginPanel {
 					}
 					public void onSuccess(String result) {
 						RootPanel.get("goodleLogin").remove(loginPanel);
-						goodle.afterLogin(result);
+						getGoodle().afterLogin(result);
 					}
 				});
 			}

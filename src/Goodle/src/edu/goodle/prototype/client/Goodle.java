@@ -9,7 +9,11 @@ import com.google.gwt.logging.client.FirebugLogHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +27,7 @@ public class Goodle implements EntryPoint {
 
 	private LoginPanel lp = new LoginPanel(goodleService, this);
 	private CourseListPanel cp = new CourseListPanel(goodleService, this);
+	private SearchPanel sp = new SearchPanel(goodleService, this);
 	private Button logoutButton = new Button("Wyloguj");
 
 	public void onModuleLoad() {
@@ -39,9 +44,12 @@ public class Goodle implements EntryPoint {
 		sessionId = result;
 		DOM.setElementAttribute(
 			DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
+		DOM.setElementAttribute(
+			DOM.getElementById("courses"), "style", "visibility:visible");
 		logger.info("SessionID: "+result);
 		RootPanel.get("courses").add(cp.getPanel(sessionId));
 		RootPanel.get("goodleLogout").add(logoutButton);
+		RootPanel.get("goodleSearch").add(sp.getPanel());
 
 		logoutButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -51,12 +59,28 @@ public class Goodle implements EntryPoint {
 					}
 					public void onSuccess(Void v) {
 						RootPanel.get("goodleLogout").remove(logoutButton);
+						DOM.setElementAttribute(DOM.getElementById(
+							"main"), "style", "visibility:hidden");
 						sessionId = "";
 						cp.remove();
+						sp.remove();
 						onModuleLoad();
 					}
 				});
 			}
 		});
+	}
+
+	public String getSession() {
+		return sessionId;
+	}
+
+	public void showSearchResultPanel(Panel searchResultPanel) {
+		RootPanel.get("main").clear();
+		RootPanel.get("main").add(searchResultPanel);
+		DOM.setElementAttribute(
+			DOM.getElementById("courses"), "style", "visibility:hidden");
+		DOM.setElementAttribute(DOM.getElementById(
+			"main"), "style", "visibility:visible");
 	}
 }

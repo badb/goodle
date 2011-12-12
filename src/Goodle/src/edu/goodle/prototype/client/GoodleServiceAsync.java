@@ -14,4 +14,8 @@ public interface GoodleServiceAsync {
 
 	void logoutUser(String sessionID, AsyncCallback<Void> callback);
 
+	void getAllCourses(String sessionID, AsyncCallback<String> callback);
+
+	void searchCourse(String searchText, String sessionID, 
+		AsyncCallback<String> callback);
 }

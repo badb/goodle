@@ -6,16 +6,13 @@ public interface GoodleServiceAsync {
 
 	void authorisePinCode(String sessionID, String PinCode,
 			AsyncCallback<Boolean> callback);
-
-	void getCourses(String sessionID, AsyncCallback<String> callback);
-
 	void loginUser(String userName, String passwd,
 			AsyncCallback<String> callback);
-
 	void logoutUser(String sessionID, AsyncCallback<Void> callback);
-
+	void getCourses(String sessionID, AsyncCallback<String> callback);
 	void getAllCourses(String sessionID, AsyncCallback<String> callback);
-
-	void searchCourse(String searchText, String sessionID, 
+	void searchCourse(String sessionID, String searchText,
 		AsyncCallback<String> callback);
+	void getCourseInfo(String sessionID, String courseID, AsyncCallback<String>
+		callback);
 }

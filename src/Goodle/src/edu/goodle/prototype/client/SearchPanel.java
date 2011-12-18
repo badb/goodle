@@ -41,8 +41,8 @@ public class SearchPanel extends GoodlePanel {
 		searchButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				searchResultPanel.clear();
-				getGoodleService().searchCourse(searchBox.getText(),
-					getGoodle().getSession(), new AsyncCallback<String>() {
+				getGoodleService().searchCourse(getGoodle().getSession(),
+					searchBox.getText(), new AsyncCallback<String>() {
 
 					public void onFailure(Throwable caught) {
 						logger.severe("Search failed." + caught);

@@ -36,6 +36,23 @@ body {
 	right: 120px;
 }
 
+#course_name {
+	text-align: center;
+	font-size: 200%;
+	font-weight: bold;
+}
+
+#course_info td {
+	padding: 10px;
+}
+
+#course_info {
+	position:absolute;
+	left: 25px;
+	padding:10px;
+	margin:auto;
+}
+
 .gwt-TextBox {
 	width: 200px;
 }

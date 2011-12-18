@@ -83,4 +83,8 @@ public class Goodle implements EntryPoint {
 		DOM.setElementAttribute(DOM.getElementById(
 			"main"), "style", "visibility:visible");
 	}
+
+	public void showCourse(String course) {
+		RootPanel.get("courses").remove(cp.getPanel(sessionId));
+	}
 }

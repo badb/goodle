@@ -1,6 +1,8 @@
 package edu.goodle.prototype.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -20,14 +22,23 @@ public class CourseListPanel extends GoodlePanel{
 		this.loaded = false;
 	}
 
-	public void loadCourses (String sessionId) {
-		getGoodleService().getCourses(sessionId, new AsyncCallback<String>() {
+	public void loadCourses (String sessionID) {
+		getGoodleService().getCourses(sessionID, new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.severe("getCourses: fail " + caught);
 			}
 			public void onSuccess(String result) {
 				logger.info("getCourses: ok");
 				Hyperlink h = new Hyperlink(result, "");
+
+				h.addClickHandler(new ClickHandler(){
+					@Override
+					public void onClick(ClickEvent event) {
+						RootPanel.get("courses").remove(coursePanel);
+						CoursePanel cp = new CoursePanel(getGoodleService(), getGoodle(), "Blablaliza fetoryczna");
+						RootPanel.get("course_info").add(cp.getPanel(getGoodle().getSession()));
+					}
+				});
 				coursePanel.add(h);
 			}
 		});

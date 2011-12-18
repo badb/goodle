@@ -27,7 +27,6 @@ public class GoodleSessionDAOImpl implements GoodleSessionDAO {
 		} finally {
 			pm.close();
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,7 +36,6 @@ public class GoodleSessionDAOImpl implements GoodleSessionDAO {
 				.getPersistenceManager();
 		String query = "select from " + GoodleSession.class.getName();
 		return (List<GoodleSession>) pm.newQuery(query).execute();
-
 	}
 
 	@Override
@@ -57,7 +55,6 @@ public class GoodleSessionDAOImpl implements GoodleSessionDAO {
 		} finally {
 			pm.close();
 		}
-
 	}
 
 	@Override

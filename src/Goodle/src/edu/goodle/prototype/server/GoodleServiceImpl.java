@@ -14,21 +14,6 @@ import java.util.logging.Logger;
 public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleService {
 	private Logger logger = Logger.getLogger("");
 	@Override
-	public String getCourses(String sessionID) {
-		return "This is getCourses(" + sessionID +")";
-	}
-
-	@Override
-	public String getAllCourses(String sessionID) {
-		return "This is getAllCourses(" + sessionID +")";
-	}
-
-	@Override
-	public String searchCourse(String searchText, String sessionID) {
-		return "This is searchCourses.";
-	}
-
-	@Override
 	public Boolean authorisePinCode(String sessionID, String PinCode) {
 		return new Boolean(false);
 	}
@@ -36,8 +21,8 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 	@Override
 	public String loginUser(String userName, String passwd) {
 		Long sessionID=0L;
-// 		GoodleUserDAO userDB = new GoodleUserDAOImpl();
-// 		GoodleSessionDAO sessionDB = new GoodleSessionDAOImpl();
+		GoodleUserDAO userDB = new GoodleUserDAOImpl();
+		GoodleSessionDAO sessionDB = new GoodleSessionDAOImpl();
 // 		// remove users
 // 		List<GoodleUser> list = userDB.listGoodleUser();
 // 		logger.severe("Number of existing users:" + list.size());
@@ -56,7 +41,7 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 		GoodleUser testUser = new GoodleUser();
 		testUser.setLogin(tUserName);
 		testUser.setPassword(tPasswd);
-// 		userDB.addGoodleUser(testUser);
+		userDB.addGoodleUser(testUser);
 		testUser = null;
 		} catch (Exception e) {
 			logger.severe("failed to add user: " + e.toString());
@@ -89,5 +74,25 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 
 	@Override
 	public void logoutUser(String sessionID) {
+	}
+
+	@Override
+	public String getCourses(String sessionID) {
+		return "This is getCourses(" + sessionID +")";
+	}
+
+	@Override
+	public String getAllCourses(String sessionID) {
+		return "This is getAllCourses(" + sessionID +")";
+	}
+
+	@Override
+	public String searchCourse(String sessionID, String searchText) {
+		return "This is searchCourses.";
+	}
+
+	@Override
+	public String getCourseInfo(String sessionID, String courseID) {
+		return courseID;
 	}
 }

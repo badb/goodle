@@ -49,7 +49,17 @@ public class SearchPanel extends GoodlePanel {
 					}
 					public void onSuccess(String result) {
 						logger.info("Search ok: " + result);
-						searchResultPanel.add(new Hyperlink(result, result));
+						Hyperlink h = new Hyperlink(result, result);
+						searchResultPanel.add(h);
+
+						h.addClickHandler(new ClickHandler(){
+							@Override
+							public void onClick(ClickEvent event) {
+								RootPanel.get("main").remove(searchResultPanel);
+								CoursePanel cp = new CoursePanel(getGoodleService(), getGoodle(), "Blablaliza fetoryczna");
+								RootPanel.get("course_info").add(cp.getPanel(getGoodle().getSession()));
+							}
+						});
 						getGoodle().showSearchResultPanel(searchResultPanel);
 					}
 				});

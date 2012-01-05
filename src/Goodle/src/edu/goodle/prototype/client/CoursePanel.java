@@ -28,6 +28,7 @@ public class CoursePanel extends GoodlePanel{
 	}
 
 	public void loadCourseInfo (String sessionID) {
+		
 		getGoodleService().getCourseInfo(sessionID, courseID, new AsyncCallback<String>() {
 			public void onFailure(Throwable caught) {
 				logger.severe("loadCourseInfo fail: " + caught);
@@ -36,6 +37,7 @@ public class CoursePanel extends GoodlePanel{
 				logger.info("loadCourseInfo: ok");
 				Label l = new Label(result);
 				DOM.setElementAttribute(l.getElement(), "id", "course_name");
+				DOM.setElementAttribute(DOM.getElementById("course_info"), "style", "visibility:visible");
 				coursePanel.insert(l, 0);
 			}
 		});

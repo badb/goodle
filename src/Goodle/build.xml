@@ -139,7 +139,17 @@ Test targets suppressed because -junit argument was not specified when running w
     <antcall target="test.prod" />
   </target>
 -->
-
+  <target name="eclipse.generate" depends="libs" description="Generate eclipse project">
+    <java failonerror="true" fork="true" classname="com.google.gwt.user.tools.WebAppCreator">
+      <classpath>
+        <path refid="project.class.path"/>
+      </classpath>
+      <arg value="-XonlyEclipse"/>
+      <arg value="-ignore"/>
+      <arg value="edu.goodle.prototype.Goodle"/>
+    </java>
+  </target>
+  
   <target name="hosted" depends="devmode" description="Run development mode (NOTE: the 'hosted' target is deprecated)" />
 
   <target name="build" depends="gwtc" description="Build this project" />

@@ -10,16 +10,14 @@ import edu.goodle.prototype.shared.PMF;
 
 
 public class GoodleUserDAOImpl implements GoodleUserDAO {
-	private static final PersistenceManagerFactory pmfInstance = PMF.get();
 
 	public static PersistenceManagerFactory getPersistenceManagerFactory() {
-		return pmfInstance;
+		return PMF.get();
 	}
 
 	@Override
 	public void addGoodleUser(GoodleUser user) {
-		PersistenceManager pm = getPersistenceManagerFactory()
-				.getPersistenceManager();
+		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
 			pm.makePersistent(user);
 		} finally {

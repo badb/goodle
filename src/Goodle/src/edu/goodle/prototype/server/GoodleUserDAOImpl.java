@@ -100,5 +100,4 @@ public class GoodleUserDAOImpl implements GoodleUserDAO {
 				.getPersistenceManager();
 		return pm.getObjectById(GoodleUser.class, Id);
 	}
-
 }

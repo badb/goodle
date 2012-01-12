@@ -1,66 +1,201 @@
 body {
-	margin:0;
-	padding:0;
+		font-family: Helvetica, "DejaVu Sans", sans-serif;
+		font-size: 14px;
+		background-color: white;
+		color: black;
+        margin:0;
+        padding:0;
 }
 
-#goodleLogin td {
-	padding: 5px;
+#content, #nav_bar {
+        max-width: 900px;
+        margin: 0 auto;
+}
+
+
+#header {
+        background-color: #efefef;
+        border-bottom: 1px solid #c9c9c9;
+        box-shadow: 0 0 15px 0 #ccc;
+        margin-left:20px;
+        margin-right:20px;
 }
 
 #logo {
-	margin: 20px;
-	width: auto;
-	text-align: center;
+        background-color: white;
+        border-bottom: 1px solid #c9c9c9;
+}
+
+#logo h1 {
+        /* display: none; */
+        text-shadow: #cde6ff 0 0 10px;
+}
+
+h1 {
+        font-size: 40px;
+}
+
+h2 {
+        font-size: 32px;
+        padding: 0;
+        margin: 0;
+}
+
+#goodleLogin td {
+        padding: 5px;
+}
+
+#banner {
+		margin:auto;
+        float:center;
 }
 
 #goodleLogin {
-	padding:20px;
-	margin: auto;
-	width:30%;
-	height:50%;
-	background-color: #dddddd;
-	border: 2px solid grey;
-	border-radius: 5px;
-	float:center;
+        padding:20px;
+        margin: auto;
+        width:30%;
+        height:50%;
+        background-color: #dddddd;
+        border: 2px solid grey;
+        border-radius: 5px;
+        float:center;
+        visibility:hidden;
 }
 
-#goodleLogout {
-	position: absolute;
-	top: 45px;
-	right: 20px;
+#user_nav {
+        float: right;
+        margin: 6px 0;
 }
 
-#goodleSearch {
-	position: absolute;
-	top: 30px;
-	right: 120px;
+#user_nav td {
+	padding-left: 5px;
 }
+
+#search input {
+        font-size: 14px;
+        background-color: white;
+        border: 1px solid #c9c9c9;
+        color: #8f8f8f;
+        width: 212px;
+        margin: 6px 0;
+        padding: 0 4px;
+}
+
+#navpath {
+        padding: 0 0 10px 0;
+}
+
+#navpath td {
+		padding: 3px;
+}
+
+#navpath a {
+        font-size: 12px;
+        text-decoration: none;
+}
+
 
 #course_name {
-	text-align: center;
-	font-size: 200%;
-	font-weight: bold;
+        text-align: center;
+        font-size: 200%;
+        font-weight: bold;
 }
 
 #course_info td {
-	padding: 10px;
+        padding: 10px;
 }
 
 #course_info {
-	position:absolute;
-	left: 25px;
-	padding:10px;
-	margin:auto;
+        position:absolute;
+        left: 25px;
+        padding:10px;
+        margin:auto;
+}
+
+#page {
+	padding: 25px 0 0 0;
+	line-height: 20px;
+}
+
+#page a {
+	text-decoration: none;
+	line-height: 10px;
+}
+
+#name {
+	font-size: 38px;
+}
+
+#info {
+	padding: 5px 0 10px 0;
+}
+
+#info td {
+	padding: 5px;
 }
 
 .gwt-TextBox {
-	width: 200px;
+        width: 200px;
 }
 
 .gwt-PasswordTextBox {
-	width: 200px;
+        width: 200px;
 }
 
 .gwt-Button {
-   color: #000000;
+	   color: #000000;
 }
+
+.tabs {
+        background-image: url('img/tabbar.png');
+        background-repeat: repeat-x;
+        background-position: top;
+        width: 900px;
+}
+
+.get-TabBar {
+        background-image: url('img/tabbar.png');
+        background-repeat: repeat-x;
+        background-position: top;
+}
+.gwt-TabBarFirst-wrapper {
+        background-image: url('img/tabbar_left.png');
+        background-repeat: no-repeat;
+        background-position: top left;
+        padding-left: 18px;
+}
+
+.gwt-TabBarFirst {
+		background-image: url('img/tabbar.png');
+        background-repeat: repeat-x;
+        background-position: top;
+}
+
+.gwt-TabBarItem-wrapper {
+        background-image: url('img/tabbar_right.png');
+        background-repeat: no-repeat;
+        background-position: top right;
+        height: 37px;
+        margin: 0; padding: 0;
+}
+
+.gwt-TabBarItem-wrapper-selected {
+		font-weight: bold;
+}
+
+.gwt-TabBarItem {
+	    background-image: url('img/tabbar.png');
+        background-repeat: repeat-x;
+        background-position: top;
+        display: block;
+        float: left;
+        height: 21px;
+        padding: 8px 16px;
+        color: black;
+        border-right: 1px solid #c9c9c9;    
+}
+
+.gwt-Label {
+	paddin: 10px;
+}
+

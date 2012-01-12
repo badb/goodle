@@ -4,7 +4,9 @@
   <property name="gwt.args" value="" />
 
   <!-- Configure path to GWT SDK -->
-  <property name="gwt.sdk" location="/home/julia/studia/zpp/gwt-2.4.0" />
+  <property name="loc" location="/home/badb/studia/zpp" />
+  <property name="gwt.sdk" location="${loc}/gwt-2.4.0" />
+   <property name="sdk.dir" location="/${loc}/appengine-java-sdk-1.6.0" />
 
   <path id="project.class.path">
     <pathelement location="war/WEB-INF/classes"/>
@@ -39,8 +41,8 @@
       <classpath>
         <pathelement location="src"/>
         <path refid="project.class.path"/>
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
+        <pathelement location="${loc}/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
+        <pathelement location="${loc}/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
       <!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
       <jvmarg value="-Xmx256M"/>
@@ -57,8 +59,8 @@
       <classpath>
         <pathelement location="src"/>
         <path refid="project.class.path"/>
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
+        <pathelement location="${loc}/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
+        <pathelement location="${loc}/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
       <jvmarg value="-Xmx256M"/>
       <arg value="-startupUrl"/>
@@ -94,8 +96,8 @@ Test targets suppressed because -junit argument was not specified when running w
         <pathelement location="src" />
         <pathelement location="test" />
         <path refid="project.class.path" />
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
+        <pathelement location="/home/badb/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
+        <pathelement location="/home/badb/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
         <pathelement location="path_to_the_junit_jar" />
       </classpath>
       <batchtest todir="reports/htmlunit.dev" >
@@ -118,8 +120,8 @@ Test targets suppressed because -junit argument was not specified when running w
         <pathelement location="src" />
         <pathelement location="test" />
         <path refid="project.class.path" />
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
-        <pathelement location="/home/julia/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
+        <pathelement location="/home/badb/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA.jar" />
+        <pathelement location="/home/badb/studia/zpp/gwt-2.4.0/validation-api-1.0.0.GA-sources.jar" />
         <pathelement location="path_to_the_junit_jar" />
       </classpath>
       <batchtest todir="reports/htmlunit.prod" >
@@ -137,7 +139,17 @@ Test targets suppressed because -junit argument was not specified when running w
     <antcall target="test.prod" />
   </target>
 -->
-
+  <target name="eclipse.generate" depends="libs" description="Generate eclipse project">
+    <java failonerror="true" fork="true" classname="com.google.gwt.user.tools.WebAppCreator">
+      <classpath>
+        <path refid="project.class.path"/>
+      </classpath>
+      <arg value="-XonlyEclipse"/>
+      <arg value="-ignore"/>
+      <arg value="edu.goodle.prototype.Goodle"/>
+    </java>
+  </target>
+  
   <target name="hosted" depends="devmode" description="Run development mode (NOTE: the 'hosted' target is deprecated)" />
 
   <target name="build" depends="gwtc" description="Build this project" />
@@ -149,6 +161,47 @@ Test targets suppressed because -junit argument was not specified when running w
   <target name="clean" description="Cleans this project">
     <delete dir="war/WEB-INF/classes" failonerror="false" />
     <delete dir="war/goodle" failonerror="false" />
+  </target>
+  
+    <path id="project.classpath">
+    <pathelement path="war/WEB-INF/classes" />
+    <fileset dir="war/WEB-INF/lib">
+      <include name="**/*.jar" />
+    </fileset>
+    <fileset dir="${sdk.dir}/lib">
+      <include name="shared/**/*.jar" />
+    </fileset>
+  </path>
+  
+    <target name="copyjars"
+      description="Copies the App Engine JARs to the WAR.">
+    <copy
+        todir="war/WEB-INF/lib"
+        flatten="true">
+      <fileset dir="${sdk.dir}/lib/user">
+        <include name="**/*.jar" />
+      </fileset>
+    </copy>
+  </target>
+  
+    <target name="compile" depends="copyjars"
+      description="Compiles Java source and copies other source files to the WAR.">
+    <mkdir dir="war/WEB-INF/classes" />
+    <copy todir="war/WEB-INF/classes">
+      <fileset dir="src">
+        <exclude name="**/*.java" />
+      </fileset>
+    </copy>
+    <javac
+        srcdir="src"
+        destdir="war/WEB-INF/classes"
+        classpathref="project.classpath"
+        debug="on" />
+  </target>
+  
+  <target name="datanucleusenhance" depends="compile"
+      description="Performs JDO enhancement on compiled data classes.">
+    <enhance_war war="war" />
   </target>
 
 </project>

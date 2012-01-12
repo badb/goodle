@@ -1,90 +1,87 @@
 package edu.goodle.prototype.client;
 
+import java.sql.Date;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.logging.client.ConsoleLogHandler;
-import com.google.gwt.logging.client.FirebugLogHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SuggestBox;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.LogRecord;
 
 public class Goodle implements EntryPoint {
-	private static Logger logger = Logger.getLogger("");
-	private final GoodleServiceAsync goodleService =
-		GWT.create(GoodleService.class);
-	String sessionId = "";
-
+	private final GoodleServiceAsync goodleService = GWT
+			.create(GoodleService.class);
 	private LoginPanel lp = new LoginPanel(goodleService, this);
-	private CourseListPanel cp = new CourseListPanel(goodleService, this);
+	private MainStudentPanel mp = new MainStudentPanel(goodleService, this);
 	private SearchPanel sp = new SearchPanel(goodleService, this);
-	private Button logoutButton = new Button("Wyloguj");
+	private UserNavPanel up = new UserNavPanel(goodleService, this); 
+	private NavPathPanel np = new NavPathPanel(goodleService, this);
+	private CourseInfoPanel cp = new CourseInfoPanel(goodleService, this);
 
 	public void onModuleLoad() {
-		if (sessionId == "") {
-			RootPanel.get("goodleLogin").add(lp.getPanel());
-			DOM.setElementAttribute(
-				DOM.getElementById("goodleLogin"), "style", "visibility:visible");
-		} else {
-			afterLogin(sessionId);
-		}
+        DOM.setElementAttribute(
+                DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
+	    String sessionID = Cookies.getCookie("sessionID");
+	    if ( sessionID != null && checkSessionID(sessionID)) {
+	    	showNavBar();
+	    	showCourseList();
+	    } else {
+	    	displayLoginBox();
+	    }
 	}
-
+	
+	public boolean checkSessionID(String sessionID) {
+		return true;
+	}
+	
+	public void displayLoginBox() {
+		RootPanel.get("tabs").clear();
+		RootPanel.get("page").clear();
+		RootPanel.get("goodleLogin").add(lp.getPanel());
+	    DOM.setElementAttribute(
+	                DOM.getElementById("goodleLogin"), "style", "visibility:visible");
+	}
+	
+	public void rememberLogin(String sessionID) {
+		final long DURATION = 1000 * 60 * 30;
+		Date expires = new Date(System.currentTimeMillis() + DURATION);
+		Cookies.setCookie("sessionID", sessionID, expires, null, "/", false);
+	}
+	
 	public void afterLogin(String result) {
-		sessionId = result;
-		DOM.setElementAttribute(
-			DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
-		DOM.setElementAttribute(
-			DOM.getElementById("courses"), "style", "visibility:visible");
-		logger.info("SessionID: "+result);
-		RootPanel.get("courses").add(cp.getPanel(sessionId));
-		RootPanel.get("goodleLogout").add(logoutButton);
-		RootPanel.get("goodleSearch").add(sp.getPanel());
-
-		logoutButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				goodleService.logoutUser(sessionId, new AsyncCallback<Void>() {
-					public void onFailure(Throwable caught) {
-						logger.severe("Logout failed." + caught);
-					}
-					public void onSuccess(Void v) {
-						RootPanel.get("goodleLogout").remove(logoutButton);
-						DOM.setElementAttribute(DOM.getElementById(
-							"main"), "style", "visibility:hidden");
-						sessionId = "";
-						cp.remove();
-						sp.remove();
-						onModuleLoad();
-					}
-				});
-			}
-		});
+		rememberLogin(result);
+        DOM.setElementAttribute(
+                DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
+        showNavBar();
+		showCourseList();
+	}
+	
+	public void showNavBar() {
+		RootPanel.get("search").add(sp.getPanel());
+		RootPanel.get("user_nav").add(up.getPanel());
+		RootPanel.get("navpath").add(np.getPanel());
+	}
+	
+	public void showCourseList() {
+		RootPanel.get("tabs").add(mp.getPanel());
 	}
 
 	public String getSession() {
-		return sessionId;
+		String sessionID = Cookies.getCookie("sessionID");
+		return sessionID;
 	}
-
-	public void showSearchResultPanel(Panel searchResultPanel) {
-		RootPanel.get("main").clear();
-		RootPanel.get("main").add(searchResultPanel);
-		DOM.setElementAttribute(
-			DOM.getElementById("courses"), "style", "visibility:hidden");
-		DOM.setElementAttribute(DOM.getElementById(
-			"main"), "style", "visibility:visible");
-	}
-
-	public void showCourse(String course) {
-		RootPanel.get("courses").remove(cp.getPanel(sessionId));
+	
+	public void changeToCourse(String course) {
+		RootPanel.get("tabs").clear();
+		RootPanel.get("page").clear();
+		RootPanel.get("navpath").clear();
+		RootPanel.get("info").clear();
+		np.addNext(course);
+		RootPanel.get("navpath").add(np.getPanel());
+		RootPanel.get("name").add(new Label(course));
+		RootPanel.get("info").add(cp.getPanel());
+		MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
+		RootPanel.get("tabs").add(mcp.getPanel());
 	}
 }

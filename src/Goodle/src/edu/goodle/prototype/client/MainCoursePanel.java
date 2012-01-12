@@ -14,6 +14,7 @@ public class MainCoursePanel extends GoodlePanel {
 		bar.addTab("Zajęcia");
 		bar.addTab("Prace domowe");
 		bar.addTab("Ankiety");
+		bar.selectTab(0);
 		mainPanel.add(bar);
 	}
 	

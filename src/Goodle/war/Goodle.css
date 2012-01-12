@@ -82,8 +82,11 @@ h2 {
 }
 
 #navpath {
-        margin: 0 0 0 0;
         padding: 0 0 10px 0;
+}
+
+#navpath td {
+		padding: 3px;
 }
 
 #navpath a {
@@ -117,6 +120,18 @@ h2 {
 #page a {
 	text-decoration: none;
 	line-height: 10px;
+}
+
+#name {
+	font-size: 38px;
+}
+
+#info {
+	padding: 5px 0 10px 0;
+}
+
+#info td {
+	padding: 5px;
 }
 
 .gwt-TextBox {

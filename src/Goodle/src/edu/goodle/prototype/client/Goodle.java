@@ -6,6 +6,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class Goodle implements EntryPoint {
@@ -16,6 +17,7 @@ public class Goodle implements EntryPoint {
 	private SearchPanel sp = new SearchPanel(goodleService, this);
 	private UserNavPanel up = new UserNavPanel(goodleService, this); 
 	private NavPathPanel np = new NavPathPanel(goodleService, this);
+	private CourseInfoPanel cp = new CourseInfoPanel(goodleService, this);
 
 	public void onModuleLoad() {
         DOM.setElementAttribute(
@@ -73,6 +75,12 @@ public class Goodle implements EntryPoint {
 	public void changeToCourse(String course) {
 		RootPanel.get("tabs").clear();
 		RootPanel.get("page").clear();
+		RootPanel.get("navpath").clear();
+		RootPanel.get("info").clear();
+		np.addNext(course);
+		RootPanel.get("navpath").add(np.getPanel());
+		RootPanel.get("name").add(new Label(course));
+		RootPanel.get("info").add(cp.getPanel());
 		MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
 		RootPanel.get("tabs").add(mcp.getPanel());
 	}

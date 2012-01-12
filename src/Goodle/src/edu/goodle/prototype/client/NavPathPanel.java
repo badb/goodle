@@ -2,6 +2,8 @@ package edu.goodle.prototype.client;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 
 public class NavPathPanel extends GoodlePanel {
 
@@ -15,5 +17,12 @@ public class NavPathPanel extends GoodlePanel {
 
 	public HorizontalPanel getPanel() {
 		return panel;
+	}
+	
+	public void addNext(String name) {
+		Label l = new Label(" » ");
+		Hyperlink h = new Hyperlink(name, name);
+		panel.add(l);
+		panel.add(h);
 	}
 }

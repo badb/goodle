@@ -1,7 +1,6 @@
 package edu.goodle.prototype.client;
 
 import java.sql.Date;
-import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -16,6 +15,7 @@ public class Goodle implements EntryPoint {
 	private MainStudentPanel mp = new MainStudentPanel(goodleService, this);
 	private SearchPanel sp = new SearchPanel(goodleService, this);
 	private UserNavPanel up = new UserNavPanel(goodleService, this); 
+	private NavPathPanel np = new NavPathPanel(goodleService, this);
 
 	public void onModuleLoad() {
         DOM.setElementAttribute(
@@ -34,6 +34,8 @@ public class Goodle implements EntryPoint {
 	}
 	
 	public void displayLoginBox() {
+		RootPanel.get("tabs").clear();
+		RootPanel.get("page").clear();
 		RootPanel.get("goodleLogin").add(lp.getPanel());
 	    DOM.setElementAttribute(
 	                DOM.getElementById("goodleLogin"), "style", "visibility:visible");
@@ -56,6 +58,7 @@ public class Goodle implements EntryPoint {
 	public void showNavBar() {
 		RootPanel.get("search").add(sp.getPanel());
 		RootPanel.get("user_nav").add(up.getPanel());
+		RootPanel.get("navpath").add(np.getPanel());
 	}
 	
 	public void showCourseList() {
@@ -65,5 +68,12 @@ public class Goodle implements EntryPoint {
 	public String getSession() {
 		String sessionID = Cookies.getCookie("sessionID");
 		return sessionID;
+	}
+	
+	public void changeToCourse(String course) {
+		RootPanel.get("tabs").clear();
+		RootPanel.get("page").clear();
+		MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
+		RootPanel.get("tabs").add(mcp.getPanel());
 	}
 }

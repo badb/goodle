@@ -17,6 +17,8 @@ body {
         background-color: #efefef;
         border-bottom: 1px solid #c9c9c9;
         box-shadow: 0 0 15px 0 #ccc;
+        margin-left:20px;
+        margin-right:20px;
 }
 
 #logo {
@@ -79,6 +81,17 @@ h2 {
         padding: 0 4px;
 }
 
+#navpath {
+        margin: 0 0 0 0;
+        padding: 0 0 10px 0;
+}
+
+#navpath a {
+        font-size: 12px;
+        text-decoration: none;
+}
+
+
 #course_name {
         text-align: center;
         font-size: 200%;
@@ -94,6 +107,16 @@ h2 {
         left: 25px;
         padding:10px;
         margin:auto;
+}
+
+#page {
+	padding: 25px 0 0 0;
+	line-height: 20px;
+}
+
+#page a {
+	text-decoration: none;
+	line-height: 10px;
 }
 
 .gwt-TextBox {

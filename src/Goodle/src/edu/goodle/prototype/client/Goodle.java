@@ -36,8 +36,12 @@ public class Goodle implements EntryPoint {
 	}
 	
 	public void displayLoginBox() {
+		RootPanel.get("search").clear();
+		RootPanel.get("user_nav").clear();
+		RootPanel.get("navpath").clear();
 		RootPanel.get("tabs").clear();
 		RootPanel.get("page").clear();
+		RootPanel.get("info").clear();
 		RootPanel.get("goodleLogin").add(lp.getPanel());
 	    DOM.setElementAttribute(
 	                DOM.getElementById("goodleLogin"), "style", "visibility:visible");
@@ -61,6 +65,11 @@ public class Goodle implements EntryPoint {
 		RootPanel.get("search").add(sp.getPanel());
 		RootPanel.get("user_nav").add(up.getPanel());
 		RootPanel.get("navpath").add(np.getPanel());
+	}
+	
+	public void logout () {
+		Cookies.removeCookie("sessionID");
+		displayLoginBox();
 	}
 	
 	public void showCourseList() {

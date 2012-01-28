@@ -53,9 +53,10 @@ h2 {
 #goodleLogin {
         padding:20px;
         margin: auto;
+        margin-top: 30px;
         width:30%;
         height:50%;
-        background-color: #dddddd;
+        background-color: #e8e8e8 ;
         border: 2px solid grey;
         border-radius: 5px;
         float:center;
@@ -94,6 +95,12 @@ h2 {
         text-decoration: none;
 }
 
+#logout_button {
+	background-color:transparent;
+	border:none;
+	padding: 0px 30px 0px 0px;
+	text-decoration:none;
+}
 
 #course_name {
         text-align: center;

@@ -5,7 +5,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -31,8 +30,10 @@ public class LoginPanel extends GoodlePanel{
         private PasswordTextBox passwordField = new PasswordTextBox();
         private Label nameLabel = new Label("Login");
         private Label passwordLabel = new Label("Hasło");
+        final Label loginFailLabel = new Label("Login failed");
 
         public VerticalPanel getPanel() {
+        		loginPanel.clear();
                 loginPanel.add(nameLabel);
                 loginPanel.add(nameField);
                 loginPanel.add(passwordLabel);
@@ -43,35 +44,18 @@ public class LoginPanel extends GoodlePanel{
                 nameField.setFocus(true);
                 nameField.selectAll();
 
-                VerticalPanel dialogVPanel = new VerticalPanel();
-                final DialogBox dialogBox = new DialogBox();
-                dialogBox.setText("Login failed");
-                dialogBox.setAnimationEnabled(true);
-                final Button closeButton = new Button("Close");
-                closeButton.getElement().setId("closeButton");
-                dialogVPanel.add(closeButton);
-                dialogBox.setWidget(dialogVPanel);
-
-                closeButton.addClickHandler(new ClickHandler() {
-                        public void onClick(ClickEvent event) {
-                                dialogBox.hide();
-                                loginButton.setEnabled(true);
-                                loginButton.setFocus(true);
-                        }
-                });
-
                 loginButton.addClickHandler(new ClickHandler() {
                         public void onClick(ClickEvent event) {
+                        		loginPanel.remove(loginFailLabel);
                                 getGoodleService().loginUser(nameField.getText(), 
                                                 passwordField.getText(), new AsyncCallback<String>() {
                                         public void onFailure(Throwable caught) {
-                                                dialogBox.setText("Login failed");
-                                                dialogBox.center();
-                                                closeButton.setFocus(true);
+                                        		loginPanel.add(loginFailLabel);
                                                 logger.severe("Login failed." + caught);
                                         }
                                         public void onSuccess(String result) {
                                                 RootPanel.get("goodleLogin").remove(loginPanel);
+                                                loginPanel.remove(loginFailLabel);
                                                 getGoodle().afterLogin(result);
                                         }
                                 });

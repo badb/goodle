@@ -57,6 +57,7 @@ public class Goodle implements EntryPoint {
 		rememberLogin(result);
         DOM.setElementAttribute(
                 DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
+        sp.clearTextBox();
         showNavBar();
 		showCourseList();
 	}

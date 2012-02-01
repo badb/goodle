@@ -2,7 +2,6 @@ package edu.goodle.prototype.client;
 
 import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class MainCoursePanel extends GoodlePanel {
 

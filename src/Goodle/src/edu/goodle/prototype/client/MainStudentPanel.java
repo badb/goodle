@@ -2,13 +2,10 @@ package edu.goodle.prototype.client;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TabBar;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
-@SuppressWarnings({ "deprecation", "unused" })
 public class MainStudentPanel extends GoodlePanel {
 
 	private VerticalPanel mainPanel = new VerticalPanel();

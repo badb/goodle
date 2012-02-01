@@ -1,11 +1,13 @@
 package edu.goodle.prototype.client;
 
 import java.sql.Date;
+import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -19,6 +21,8 @@ public class Goodle implements EntryPoint {
 	private NavPathPanel np = new NavPathPanel(goodleService, this);
 	private CourseInfoPanel cp = new CourseInfoPanel(goodleService, this);
 
+	private static Logger logger = Logger.getLogger("");
+	
 	public void onModuleLoad() {
         DOM.setElementAttribute(
                 DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
@@ -35,13 +39,23 @@ public class Goodle implements EntryPoint {
 		return true;
 	}
 	
-	public void displayLoginBox() {
-		RootPanel.get("search").clear();
-		RootPanel.get("user_nav").clear();
-		RootPanel.get("navpath").clear();
+	public void clearPage() {
 		RootPanel.get("tabs").clear();
 		RootPanel.get("page").clear();
+		np.clear();
+		RootPanel.get("navpath").clear();
 		RootPanel.get("info").clear();
+		RootPanel.get("name").clear();
+	}
+	
+	public void clearAll() {
+		clearPage();
+		RootPanel.get("search").clear();
+		RootPanel.get("user_nav").clear();		
+	}
+	
+	public void displayLoginBox() {
+		clearAll();
 		RootPanel.get("goodleLogin").add(lp.getPanel());
 	    DOM.setElementAttribute(
 	                DOM.getElementById("goodleLogin"), "style", "visibility:visible");
@@ -83,10 +97,7 @@ public class Goodle implements EntryPoint {
 	}
 	
 	public void changeToCourse(String course) {
-		RootPanel.get("tabs").clear();
-		RootPanel.get("page").clear();
-		RootPanel.get("navpath").clear();
-		RootPanel.get("info").clear();
+		clearPage();
 		np.addNext(course);
 		RootPanel.get("navpath").add(np.getPanel());
 		RootPanel.get("name").add(new Label(course));
@@ -94,4 +105,19 @@ public class Goodle implements EntryPoint {
 		MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
 		RootPanel.get("tabs").add(mcp.getPanel());
 	}
+
+	public void loadCourse(final String text) {
+	       goodleService.searchCourse(getSession(), text,
+	                new AsyncCallback<String>() {
+
+	                public void onFailure(Throwable caught) {
+	                        logger.severe("searchCourses failed." + caught);
+	                }
+	                public void onSuccess(String result) {
+	                		changeToCourse(text);
+	                        logger.info("searchCourses:" + result);
+	                }
+	        });
+	}
+
 }

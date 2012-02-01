@@ -7,8 +7,6 @@ import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -23,23 +21,26 @@ public class SearchPanel extends GoodlePanel {
 	
 	public SearchPanel(GoodleServiceAsync goodleService, Goodle goodle) {
 		super(goodleService, goodle);
-		searchBox.setText("Szukaj przedmiotu...");
+		final String defaultText = "Szukaj przedmiotu...";
+		searchBox.setText(defaultText);
 		panel.add(searchBox);
 		
 		searchBox.getTextBox().addFocusHandler(new FocusHandler() {
 			@Override
 			public void onFocus(FocusEvent event) {
-				searchBox.setText("");
-				searchBox.getTextBox().getElement().setAttribute("style", "color:black");
+				if (searchBox.getText().compareTo(defaultText) == 0) { 
+					searchBox.setText("");
+					searchBox.getTextBox().getElement().setAttribute("style", "color:black");
+				}
 			}
 		});
 		searchBox.setLimit(20);
-	
 		
 		searchBox.addKeyPressHandler(new KeyPressHandler() {
 			public void onKeyPress(KeyPressEvent event) {
 			    if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-			       logger.info(searchBox.getText());
+			       logger.info("Search for: " + searchBox.getText());
+			        getGoodle().loadCourse(searchBox.getText());
 			      }
 			}
 		});
@@ -56,9 +57,11 @@ public class SearchPanel extends GoodlePanel {
 	
     private MultiWordSuggestOracle createCoursesOracle() {
         MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+        /* to tylko testowe */
         oracle.add("Kurs1Kurs1Kurs1Kurs1Kurs1Kurs1Kurs1Kurs1Kurs1Kurs1Kurs1");
         oracle.add("Kurs2");
-        oracle.add("Kurs3");       
+        oracle.add("Kurs3");  
+        /* koniec testowych danych */
         
         getGoodleService().getAllCourses(getGoodle().getSession(),
                 new AsyncCallback<String>() {

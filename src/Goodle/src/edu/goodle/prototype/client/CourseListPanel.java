@@ -1,6 +1,6 @@
 package edu.goodle.prototype.client;
 
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class CourseListPanel extends GoodlePanel {
@@ -14,8 +14,8 @@ public class CourseListPanel extends GoodlePanel {
     	String delimiter = "\\|";
     	String[] courses = text.split(delimiter);
     	for (int i = 0; i < courses.length; ++i) {
-        	Label l = new Label(courses[i]);
-        	coursePanel.add(l);
+    		Hyperlink h = new Hyperlink(courses[i], courses[i]);
+        	coursePanel.add(h);
     	}
         return coursePanel;
     }

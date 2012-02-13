@@ -1,5 +1,6 @@
 package edu.goodle.prototype.client;
 
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;

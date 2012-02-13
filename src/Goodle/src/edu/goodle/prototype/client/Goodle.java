@@ -24,6 +24,8 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private NavPathPanel np = new NavPathPanel(goodleService, this);
 	private CourseInfoPanel cp = new CourseInfoPanel(goodleService, this);
 	private CourseListPanel clp = new CourseListPanel(goodleService, this);
+	private MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
+	private RegisterPanel rp = new RegisterPanel(goodleService, this);
 
 	private static Logger logger = Logger.getLogger("");
 	private String initToken = History.getToken();
@@ -112,8 +114,19 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 		RootPanel.get("navpath").add(np.getPanel());
 		RootPanel.get("name").add(new Label(course));
 		RootPanel.get("info").add(cp.getPanel());
-		MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
-		RootPanel.get("tabs").add(mcp.getPanel());
+		goodleService.getCourseInfo(getSession(), course, new AsyncCallback<String>() {
+                public void onFailure(Throwable caught) {
+                        logger.severe("isRegistered failed." + caught);
+                }
+                public void onSuccess(String result) {
+                        logger.info("isRegistered:" + result);
+                        if (result.equals("yes")) {
+                    		RootPanel.get("tabs").add(mcp.getPanel());
+                        } else {
+                        	RootPanel.get("page").add(rp.getPanel());
+                        }
+                }
+        });
 	}
 	
 	public void changeToCourseList(String text) {

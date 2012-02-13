@@ -36,5 +36,9 @@ public class MainStudentPanel extends GoodlePanel {
 	public VerticalPanel getPanel() {
 		return mainPanel;
 	}
+	
+	public void setNone() {
+		bar.selectTab(-1);
+	}
 
 }

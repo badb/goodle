@@ -5,15 +5,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import edu.goodle.prototype.be.UserDB;
 import edu.goodle.prototype.client.GoodleService;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.logging.Logger;
-
 
 @SuppressWarnings("serial")
 public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleService {
-        private Logger logger = Logger.getLogger("");
         public Boolean authorisePinCode(String sessionID, String PinCode) {
                 return new Boolean(false);
         }
@@ -39,7 +33,7 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
 
         @Override
         public String searchCourse(String sessionID, String searchText) {
-                return "This is searchCourses.";
+                return "This is searchCourses1. " + searchText + " | This is searchCourses2. " + searchText;
         }
 
         @Override

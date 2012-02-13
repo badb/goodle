@@ -20,6 +20,7 @@ public class Goodle implements EntryPoint {
 	private UserNavPanel up = new UserNavPanel(goodleService, this); 
 	private NavPathPanel np = new NavPathPanel(goodleService, this);
 	private CourseInfoPanel cp = new CourseInfoPanel(goodleService, this);
+	private CourseListPanel clp = new CourseListPanel(goodleService, this);
 
 	private static Logger logger = Logger.getLogger("");
 	
@@ -105,8 +106,16 @@ public class Goodle implements EntryPoint {
 		MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
 		RootPanel.get("tabs").add(mcp.getPanel());
 	}
+	
+	public void changeToCourseList(String text) {
+		clearPage();
+		showNavBar();
+		RootPanel.get("tabs").add(mp.getPanel());
+		mp.setNone();
+		RootPanel.get("page").add(clp.getPanel(text));
+	}
 
-	public void loadCourse(final String text) {
+	public void searchForCourse(final String text) {
 	       goodleService.searchCourse(getSession(), text,
 	                new AsyncCallback<String>() {
 
@@ -114,7 +123,7 @@ public class Goodle implements EntryPoint {
 	                        logger.severe("searchCourses failed." + caught);
 	                }
 	                public void onSuccess(String result) {
-	                		changeToCourse(text);
+	                		changeToCourseList(result);
 	                        logger.info("searchCourses:" + result);
 	                }
 	        });

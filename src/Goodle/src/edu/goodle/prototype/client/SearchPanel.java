@@ -40,7 +40,7 @@ public class SearchPanel extends GoodlePanel {
 			public void onKeyPress(KeyPressEvent event) {
 			    if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
 			       logger.info("Search for: " + searchBox.getText());
-			        getGoodle().loadCourse(searchBox.getText());
+			        getGoodle().searchForCourse(searchBox.getText());
 			      }
 			}
 		});

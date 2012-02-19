@@ -2,89 +2,87 @@ package edu.goodle.prototype.server;
 
 import java.util.List;
 
-import javax.jdo.JDOHelper;
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import com.google.appengine.api.datastore.Key;
 
 import edu.goodle.prototype.server.GoodleSessionDAO;
-import edu.goodle.prototype.shared.PMF;
+import edu.goodle.prototype.shared.EMF;
 
 public class GoodleSessionDAOImpl implements GoodleSessionDAO {
-        private static final PersistenceManagerFactory pmfInstance = PMF.get();
+        private static final EntityManagerFactory emfInstance = EMF.get();
 
-        public static PersistenceManagerFactory getPersistenceManagerFactory() {
-                return pmfInstance;
+        public static EntityManagerFactory createEntityManagerFactory() {
+                return emfInstance;
         }
 
         @Override
         public void addGoodleSession(GoodleSession session) {
-                PersistenceManager pm = getPersistenceManagerFactory()
-                                .getPersistenceManager();
+                EntityManager em = createEntityManagerFactory()
+                                .createEntityManager();
                 try {
-                        pm.makePersistent(session);
+                        em.persist(session);
                 } finally {
-                        pm.close();
+                        em.close();
                 }
         }
 
         @SuppressWarnings("unchecked")
         @Override
         public List<GoodleSession> listGoodleSession() {
-                PersistenceManager pm = getPersistenceManagerFactory()
-                                .getPersistenceManager();
+                EntityManager em = createEntityManagerFactory()
+                                .createEntityManager();
                 String query = "select from " + GoodleSession.class.getName();
-                return (List<GoodleSession>) pm.newQuery(query).execute();
+                return (List<GoodleSession>) em.createQuery(query).getResultList();
         }
 
         @Override
         public void removeGoodleSession(GoodleSession session) {
-                PersistenceManager pm = getPersistenceManagerFactory()
-                                .getPersistenceManager();
+                EntityManager em = createEntityManagerFactory()
+                                .createEntityManager();
                 try {
-                        pm.currentTransaction().begin();
+                        em.getTransaction().begin();
 
-                        session = pm.getObjectById(GoodleSession.class, session.getId());
-                        pm.deletePersistent(session);
+                        session = em.find(GoodleSession.class, session.getId());
+                        em.remove(session);
 
-                        pm.currentTransaction().commit();
+                        em.getTransaction().commit();
                 } catch (Exception ex) {
-                        pm.currentTransaction().rollback();
+                        em.getTransaction().rollback();
                         throw new RuntimeException(ex);
                 } finally {
-                        pm.close();
+                        em.close();
                 }
         }
 
         @Override
         public void updateGoodleSession(GoodleSession session) {
-                PersistenceManager pm = getPersistenceManagerFactory()
-                                .getPersistenceManager();
+                EntityManager em = createEntityManagerFactory()
+                                .createEntityManager();
 
                 try {
-                        pm.currentTransaction().begin();
-                        GoodleSession dbSession = pm.getObjectById(GoodleSession.class,
-                                        session.getId());
+                        em.getTransaction().begin();
+                        GoodleSession dbSession = em.find(GoodleSession.class, session.getId());
                         dbSession.setUser(session.getUser());
-                        pm.makePersistent(dbSession);
-                        pm.currentTransaction().commit();
+                        em.persist(dbSession);
+                        em.getTransaction().commit();
                 } catch (Exception ex) {
-                        pm.currentTransaction().rollback();
+                        em.getTransaction().rollback();
                         throw new RuntimeException(ex);
                 } finally {
-                        pm.close();
+                        em.close();
                 }
 
         }
 
         public GoodleSession getSessionByLogin(String login) {
-                PersistenceManager pm = getPersistenceManagerFactory()
-                                .getPersistenceManager();
+                EntityManager em = createEntityManagerFactory()
+                                .createEntityManager();
                 String query = "select from " + GoodleSession.class.getName()
                                 + "where login == " + login;
-                List<GoodleSession> list = (List<GoodleSession>) pm.newQuery(query)
-                                .execute();
+                List<GoodleSession> list = (List<GoodleSession>) em.createQuery(query)
+                                .getResultList();
                 if (list != null) {
                         return list.get(0);
                 } else
@@ -92,12 +90,11 @@ public class GoodleSessionDAOImpl implements GoodleSessionDAO {
         }
 
         public Key getSessionUser(Long id) {
-                PersistenceManager pm = getPersistenceManagerFactory()
-                .getPersistenceManager();
+                EntityManager em = createEntityManagerFactory()
+                .createEntityManager();
 String query = "select from " + GoodleSession.class.getName()
                 + "where id == " + id;
-List<GoodleSession> list = (List<GoodleSession>) pm.newQuery(query)
-                .execute();
+List<GoodleSession> list = (List<GoodleSession>) em.createQuery(query).getResultList();
 if (list != null) {
         return list.get(0).getUser();
 } else

@@ -20,31 +20,31 @@ public class Homework {
 	private Key key;
     public Key getKey() { return key; }
     
-    public String name;
+    private String name;
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     
-    public Text desc;
+    private Text desc;
     public Text getDesc() { return desc; }
     public void setDesc(Text desc) { this.desc = desc; }
     
-    public GUser teacher;
+    private GUser teacher;
     public GUser getTeacher() { return teacher; }
     
-    public Date created = new Date();
+    private Date created = new Date();
     public Date getCreated() { return created; }
     
-    public Date modified;
+    private Date modified;
     public Date getModified() { return modified; }
     
-    public Date deadline;
+    private Date deadline;
     public Date getDeadline() { return deadline; }
     public void setDeadline(Date deadline) { this.deadline = deadline; }
     
-    public List<HomeworkFile> provided = new ArrayList<HomeworkFile>();
+    private List<HomeworkFile> provided = new ArrayList<HomeworkFile>();
     public List<HomeworkFile> getProvided() { return provided; }
     
-    public List<Message> comments = new ArrayList<Message>();
+    private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
     
     public Homework(GUser teacher, String name, Text desc, Date deadline)

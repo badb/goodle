@@ -19,10 +19,10 @@ public class Module {
 	private Key key;
     public Key getKey() { return key; }
     
-    public List<Material> materials;
+    private List<Material> materials;
     public List<Material> getMaterials() { return materials; }
     
-    public List<Message> comments = new ArrayList<Message>();
+    private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
     
     public Module() { materials = new ArrayList<Material>(); }

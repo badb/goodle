@@ -18,17 +18,17 @@ public class HomeworkFile {
 	private Key key;
     public Key getKey() { return key; }
     
-    public GUser author;
+    private GUser author;
     public GUser getAuthor() { return author; }
     
-    public Date created = new Date();
+    private Date created = new Date();
     public Date getCreated() { return created; }
     
-    public Mark mark;
+    private Mark mark;
     public Mark getMark() { return mark; }
     public void setMark(Mark mark) { this.mark = mark; }
     
-    public Link file;
+    private Link file;
     public Link getFile() { return file; }
     
     public HomeworkFile(GUser author, Link file)

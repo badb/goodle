@@ -16,14 +16,14 @@ public class Mark {
 	private Key key;
     public Key getKey() { return key; }
     
-    public int val;
+    private int val;
     public int getVal() { return val; }
     public void setVal(int val) { this.val = val; }
     
-    public GUser teacher;
+    private GUser teacher;
     public GUser getTeacher() { return teacher; }
     
-    public Text comment;
+    private Text comment;
     public Text getComment() { return comment; }
     public void setComment(Text comment) { this.comment = comment; }
     

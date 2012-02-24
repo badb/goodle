@@ -23,7 +23,7 @@ public class Course {
 	private Key key;
     public Key getKey() { return key; }
     
-    public String name;
+    private String name;
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     
@@ -31,32 +31,32 @@ public class Course {
     
     // avatar
     
-    public Text desc;
+    private Text desc;
     public Text getDesc() { return desc; }
     public void setDesc(Text desc) { this.desc = desc; }
     
-    public Link site;
+    private Link site;
     public Link getSite() { return site; }
     public void setSite(Link site) { this.site = site; }
     
-    public Set<GUser> teachers;
+    private Set<GUser> teachers;
     public Set<GUser> getTeachers() { return teachers; }
     
-    public Set<GUser> members;
+    private Set<GUser> members;
     public Set<GUser> getMembers() { return members; }
     
-    public List<Module> modules;
+    private List<Module> modules;
     public List<Module> getModules() { return modules; }
     
-    public Link calendar;
+    private Link calendar;
     public Link getCalendar() { return calendar; }
     
     // ankiety
     
-    public List<Message> messages = new ArrayList<Message>();
+    private List<Message> messages = new ArrayList<Message>();
     public List<Message> getMessages() { return messages; }
 
-    public List<Message> comments = new ArrayList<Message>();
+    private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
     
     public Course(String name, Text desc, Link site, Collection<GUser> teachers, Collection<GUser> members, Link calendar)

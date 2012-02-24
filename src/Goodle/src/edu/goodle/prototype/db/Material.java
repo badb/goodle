@@ -22,19 +22,19 @@ public class Material {
     
     // widoczność
     
-    public GUser author;
+    private GUser author;
     public GUser getAuthor() { return author; }
     
-    public Set<GUser> canEdit;
+    private Set<GUser> canEdit;
     public Set<GUser> getCanEdit() { return canEdit; }
     
-    public Date created = new Date();
+    private Date created = new Date();
     public Date getCreated() { return created; }
     
-    public Date modified;
+    private Date modified;
     public Date getModified() { return modified; }
     
-    public List<Message> comments = new ArrayList<Message>();
+    private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
 
     public Material(GUser author) { this.author = author; }

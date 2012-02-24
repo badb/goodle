@@ -53,7 +53,7 @@ public class GUser {
 	private Set<Course> courses = new HashSet<Course>();
 	public Set<Course> getCourses() { return courses; }
 	
-    public List<Message> messages = new ArrayList<Message>();
+	private List<Message> messages = new ArrayList<Message>();
     public List<Message> getMessages() { return messages; }
 	
     public GUser(String firstName, String lastName, Email email)

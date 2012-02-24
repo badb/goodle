@@ -18,10 +18,10 @@ public class Message {
 	private Key key;
     public Key getKey() { return key; }
     
-    public GUser author;
+    private GUser author;
     public GUser getAuthor() { return author; }
     
-    public Text text;
+    private Text text;
     public Text getText() { return text; }
     public void setText(Text text) 
     {
@@ -29,10 +29,10 @@ public class Message {
     	modified = new Date();
     }
     
-    public Date created = new Date();
+    private Date created = new Date();
     public Date getCreated() { return created; }
     
-    public Date modified;
+    private Date modified;
     public Date getModified() { return modified; }
     
     public Message(Key key, GUser author, Text text)

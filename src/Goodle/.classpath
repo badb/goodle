@@ -8,6 +8,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/selenium-server-standalone-2.16.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/selenium-java-2.16.1.jar"/>
-	<classpathentry kind="lib" path="/home/jedyny/goodle/src/Goodle/mockito-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="src/Goodle/mockito-all-1.9.0.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

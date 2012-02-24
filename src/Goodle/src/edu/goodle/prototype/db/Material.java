@@ -3,6 +3,7 @@ package edu.google.prototype.db;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,9 @@ public class Material {
     
     public GUser author;
     public GUser getAuthor() { return author; }
+    
+    public Set<GUser> canEdit;
+    public Set<GUser> getCanEdit() { return canEdit; }
     
     public Date created = new Date();
     public Date getCreated() { return created; }

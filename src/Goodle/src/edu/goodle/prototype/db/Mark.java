@@ -1,4 +1,4 @@
-package edu.google.prototype.db;
+package edu.goodle.prototype.db;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

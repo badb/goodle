@@ -1,6 +1,7 @@
-package edu.google.prototype.db;
+package edu.goodle.prototype.db;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,9 @@ public class Homework extends Material {
     public void setDeadline(Date deadline) { this.deadline = deadline; }
     
     private List<HomeworkFile> provided = new ArrayList<HomeworkFile>();
-    public List<HomeworkFile> getProvided() { return provided; }
+    public List<HomeworkFile> getProvided() { return Collections.unmodifiableList(provided); }
+    public void addProvided(HomeworkFile file) { provided.add(file); }
+    public void removeProvided(HomeworkFile file) { provided.remove(file); }
     
     public Homework(GUser author, String name, Text desc, Date deadline)
     {

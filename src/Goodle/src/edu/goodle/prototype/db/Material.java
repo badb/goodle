@@ -1,4 +1,4 @@
-package edu.google.prototype.db;
+package edu.goodle.prototype.db;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,8 +27,7 @@ public class Material {
     private GUser author;
     public GUser getAuthor() { return author; }
     
-    private Set<GUser> canEdit;
-    public Set<GUser> getCanEdit() { return canEdit; }
+    // edit
     
     private Date created = new Date();
     public Date getCreated() { return created; }

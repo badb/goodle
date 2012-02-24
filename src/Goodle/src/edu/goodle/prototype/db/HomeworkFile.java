@@ -1,4 +1,4 @@
-package edu.google.prototype.db;
+package edu.goodle.prototype.db;
 
 import java.util.Date;
 

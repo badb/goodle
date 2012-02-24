@@ -1,6 +1,7 @@
-package edu.google.prototype.db;
+package edu.goodle.prototype.db;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,13 +49,19 @@ public class GUser {
 	// Avatar
 	
 	private Set<Course> coursesLed = new HashSet<Course>();
-	public Set<Course> getCoursesLed() { return coursesLed; }
+	public Set<Course> getCoursesLed() { return Collections.unmodifiableSet(coursesLed); }
+	public void addCourseLed(Course course) { coursesLed.add(course); }
+	public void removeCourseLed (Course course) { coursesLed.remove(course); }
 	
 	private Set<Course> courses = new HashSet<Course>();
-	public Set<Course> getCourses() { return courses; }
+	public Set<Course> getCourses() { return Collections.unmodifiableSet(courses); }
+	public void addCourse(Course course) { courses.add(course); }
+	public void removeCourse (Course course) { courses.remove(course); }
 	
 	private List<Message> messages = new ArrayList<Message>();
-    public List<Message> getMessages() { return messages; }
+    public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
+    public void addMessage(Message message) { messages.add(message); }
+    public void removeMessage(Message message) { messages.remove(message); }
 	
     public GUser(String firstName, String lastName, Email email)
     {

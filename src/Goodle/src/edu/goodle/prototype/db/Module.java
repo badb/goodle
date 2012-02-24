@@ -1,7 +1,8 @@
-package edu.google.prototype.db;
+package edu.goodle.prototype.db;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,13 +22,18 @@ public class Module {
     
     private boolean isVisible;
     public boolean getIsVisible() { return isVisible; }
-    public void setIsVisible(boolean isVisibnle) { this.isVisible = isVisible; }
+    public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
     private List<Material> materials;
-    public List<Material> getMaterials() { return materials; }
-    
+    public List<Material> getMaterials() { return Collections.unmodifiableList(materials); }
+    public void addMaterial(Material material) { materials.add(material); }
+    public void removeMaterial(Material material) { materials.remove(material); }
+
+
     private List<Message> comments = new ArrayList<Message>();
-    public List<Message> getComments() { return comments; }
+    public List<Message> getComments() { return Collections.unmodifiableList(comments); }
+    public void addComment(Message comment) { comments.add(comment); }
+    public void removeComment(Message comment) { comments.remove(comment); }
     
     public Module() { materials = new ArrayList<Material>(); }
     public Module(Collection<Material> materials) { this.materials = new ArrayList<Material>(materials); }  

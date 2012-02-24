@@ -20,7 +20,9 @@ public class Material {
 	private Key key;
     public Key getKey() { return key; }
     
-    // widoczność
+    private String name;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
     
     private GUser author;
     public GUser getAuthor() { return author; }
@@ -37,5 +39,9 @@ public class Material {
     private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
 
-    public Material(GUser author) { this.author = author; }
+    public Material(String name, GUser author) 
+    { 
+    	this.name = name;
+    	this.author = author; 
+    }
 }

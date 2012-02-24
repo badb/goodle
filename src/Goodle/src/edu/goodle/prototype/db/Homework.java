@@ -13,29 +13,16 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
 
 @Entity
-public class Homework {
+public class Homework extends Material {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Key key;
     public Key getKey() { return key; }
     
-    private String name;
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    
     private Text desc;
     public Text getDesc() { return desc; }
     public void setDesc(Text desc) { this.desc = desc; }
-    
-    private GUser teacher;
-    public GUser getTeacher() { return teacher; }
-    
-    private Date created = new Date();
-    public Date getCreated() { return created; }
-    
-    private Date modified;
-    public Date getModified() { return modified; }
     
     private Date deadline;
     public Date getDeadline() { return deadline; }
@@ -44,13 +31,9 @@ public class Homework {
     private List<HomeworkFile> provided = new ArrayList<HomeworkFile>();
     public List<HomeworkFile> getProvided() { return provided; }
     
-    private List<Message> comments = new ArrayList<Message>();
-    public List<Message> getComments() { return comments; }
-    
-    public Homework(GUser teacher, String name, Text desc, Date deadline)
+    public Homework(GUser author, String name, Text desc, Date deadline)
     {
-    	this.teacher = teacher;
-    	this.name = name;
+    	super(name, author);
     	this.desc = desc;
     	this.deadline = deadline;
     }

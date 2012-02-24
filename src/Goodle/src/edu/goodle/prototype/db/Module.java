@@ -19,6 +19,10 @@ public class Module {
 	private Key key;
     public Key getKey() { return key; }
     
+    private boolean isVisible;
+    public boolean getIsVisible() { return isVisible; }
+    public void setIsVisible(boolean isVisibnle) { this.isVisible = isVisible; }
+    
     private List<Material> materials;
     public List<Material> getMaterials() { return materials; }
     

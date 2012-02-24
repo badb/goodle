@@ -21,6 +21,18 @@ public class GUser {
 	private Key key;
     public Key getKey() { return key; }
     
+    private String accessTokenKey;
+    public String getAccessTokenKey() { return accessTokenKey; }
+    public void setAccessTokenKey(String token) { accessTokenKey = token; }
+    
+    private String accessTokenSecret;
+    public String getAccessTokenSecret() { return accessTokenSecret; }
+    public void setAccessTokenSecret(String token) { accessTokenSecret = token; }
+    
+    private String requestKey;
+    public String getRequestKey() { return requestKey; }
+    public void setRequestKey(String key) { requestKey = key; }
+    
 	private String firstName;
 	public String getFirstName() { return firstName; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }

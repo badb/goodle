@@ -10,6 +10,7 @@ public class UsosApiResponse {
 
 	public UsosApiResponse(UsosApiResponseStatus status){
 		this.status = status;
+		auth_url= "";
 	}
 
 	public UsosApiResponseStatus getStatus() {

@@ -4,6 +4,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.goodle.prototype.be.UserDB;
 import edu.goodle.prototype.client.GoodleService;
+import edu.goodle.prototype.shared.UsosApiResponseStatus;
+import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
 
 
 @SuppressWarnings("serial")
@@ -22,8 +24,8 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
         }
 
         @Override
-        public String getCourses(String sessionID) {
-                return "This is getCourses(" + sessionID +")";
+        public UsosGetCoursesApiResponse getCourses(String sessionID) {
+                return new UsosGetCoursesApiResponse(UsosApiResponseStatus.AUTH_REQUIRED);
         }
 
         @Override

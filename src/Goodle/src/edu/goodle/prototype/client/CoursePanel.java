@@ -3,14 +3,11 @@ package edu.goodle.prototype.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.LogRecord;
 
 public class CoursePanel extends GoodlePanel{
 	private VerticalPanel coursePanel = new VerticalPanel();

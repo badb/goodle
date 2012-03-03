@@ -2,7 +2,6 @@ package edu.goodle.prototype.server;
 
 import java.util.List;
 
-import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 

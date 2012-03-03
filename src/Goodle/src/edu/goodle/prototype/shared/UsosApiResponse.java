@@ -1,8 +1,11 @@
 package edu.goodle.prototype.shared;
 
-public class UsosApiResponse {
+import java.io.Serializable;
+
+public class UsosApiResponse implements Serializable {
 	private UsosApiResponseStatus status;
 	private String auth_url;
+	protected UsosApiResponse(){}
 	
 	public void setAuth_url(String auth_url) {
 		this.auth_url = auth_url;

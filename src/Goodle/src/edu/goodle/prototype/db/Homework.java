@@ -34,6 +34,8 @@ public class Homework extends Material {
     public void addProvided(HomeworkFile file) { provided.add(file); }
     public void removeProvided(HomeworkFile file) { provided.remove(file); }
     
+    public Homework() { }
+    
     public Homework(GUser author, String name, Text desc, Date deadline)
     {
     	super(name, author);

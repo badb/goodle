@@ -35,6 +35,8 @@ public class Message {
     private Date modified;
     public Date getModified() { return modified; }
     
+    public Message() { }
+    
     public Message(Key key, GUser author, Text text)
     {
     	this.key = key;

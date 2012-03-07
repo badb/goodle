@@ -31,6 +31,8 @@ public class HomeworkFile {
     private Link file;
     public Link getFile() { return file; }
     
+    public HomeworkFile() { }
+    
     public HomeworkFile(GUser author, Link file)
     {
     	this.author = author;

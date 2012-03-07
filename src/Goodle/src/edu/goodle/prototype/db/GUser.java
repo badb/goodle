@@ -62,6 +62,8 @@ public class GUser {
     public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
     public void addMessage(Message message) { messages.add(message); }
     public void removeMessage(Message message) { messages.remove(message); }
+    
+    public GUser() { }
 	
     public GUser(String firstName, String lastName, Email email)
     {

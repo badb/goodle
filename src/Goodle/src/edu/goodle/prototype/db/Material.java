@@ -37,6 +37,8 @@ public class Material {
     
     private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
+    
+    public Material() { }
 
     public Material(String name, GUser author) 
     { 

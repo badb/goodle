@@ -27,6 +27,8 @@ public class Mark {
     public Text getComment() { return comment; }
     public void setComment(Text comment) { this.comment = comment; }
     
+    public Mark() { }
+    
     public Mark(Key key, int val, GUser teacher, Text comment)
     {
     	this.key = key;

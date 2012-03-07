@@ -70,6 +70,8 @@ public class Course {
     public void addComment(Message comment) { comments.add(comment); }
     public void removeComment(Message comment) { comments.remove(comment); }
     
+    public Course() { }
+    
     public Course(String name, Text desc, Link site, Collection<GUser> teachers, Collection<GUser> members, Link calendar)
     {
     	this.name = name;

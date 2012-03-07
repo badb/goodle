@@ -1,4 +1,4 @@
-package edu.goodle.prototype.db.exceptions;
+package edu.goodle.prototype.db;
 
 public class DataModificationFailedException extends Exception 
 {

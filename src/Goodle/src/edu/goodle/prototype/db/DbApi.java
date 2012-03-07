@@ -1,6 +1,7 @@
 package edu.goodle.prototype.db;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,8 +12,6 @@ import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Link;
 import com.google.appengine.api.datastore.Text;
 
-import edu.goodle.prototype.db.exceptions.DataModificationFailedException;
-import edu.goodle.prototype.db.exceptions.EntityCreationFailedException;
 import edu.goodle.prototype.shared.EMF;
 
 public class DbApi {
@@ -21,7 +20,7 @@ public class DbApi {
 	
 	public DbApi() { }
 	
-	public void createUser(String firstName, String lastName, Email email) throws EntityCreationFailedException
+	public void createUser(String firstName, String lastName, Email email) throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
@@ -32,7 +31,7 @@ public class DbApi {
 		catch (Exception e)
 		{
 			String msg = "The creation of the user has failed: " + e.getMessage();
-			throw new EntityCreationFailedException(msg);
+			throw new DataModificationFailedException(msg);
 		}
 		finally { em.close(); }
 	}
@@ -89,7 +88,7 @@ public class DbApi {
 			Collection<GoodleUser> members, 
 			Link calendar
 	)
-		throws EntityCreationFailedException
+		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
@@ -100,7 +99,7 @@ public class DbApi {
 		catch (Exception e)
 		{
 			String msg = "The creation of the course has failed: " + e.getMessage();
-			throw new EntityCreationFailedException(msg);
+			throw new DataModificationFailedException(msg);
 		}
 		finally { em.close(); }
 	}
@@ -426,7 +425,128 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
+	public void addHomeworkToModule(GoodleUser author, String name, Text desc, Date deadline, Module module)
+			throws DataModificationFailedException
+		{
+			EntityManager em = emf.createEntityManager();
+			try
+			{
+				em.getTransaction().begin();
+				module = em.merge(module);
+				Homework homework = new Homework(author, name, desc, deadline);
+				module.addMaterial(homework);
+				em.getTransaction().commit();
+			}
+			catch (Exception e)
+			{
+				String msg = "Adding the homework to the module has failed: " + e.getMessage();
+				throw new DataModificationFailedException(msg);
+			}
+			finally { em.close(); }		
+		}	
+
+	public void removeMaterialFromModule(Material material, Module module)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			module = em.merge(module);
+			material = em.merge(material);
+			module.removeMaterial(material);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "Removing the material from the module has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }		
+	}	
+
+	public void addCommentToMaterial(GoodleUser author, Text text, Material material)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			material = em.merge(material);
+			Message comment = new Message(author, text);
+			material.addComment(comment);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "Adding comment to the material has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }		
+	}
+		
+	public void removeCommentFromMaterial(Message comment, Material material)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			material = em.merge(material);
+			comment = em.merge(comment);
+			material.removeComment(comment);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "Removing comment from the material has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }		
+	}
+	
+	public void addFileToHomework(GoodleUser author, Link file, Homework homework)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			homework = em.merge(homework);
+			HomeworkFile homeworkFile = new HomeworkFile(author, file);
+			homework.addProvided(homeworkFile);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "Adding the file to the material has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }		
+	}
+			
+	public void removeFileFromHomework(HomeworkFile file, Homework homework)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			homework = em.merge(homework);
+			file = em.merge(file);
+			homework.removeProvided(file);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "Removing comment from the material has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }		
+	}	
+	
 	public void modifyMessage(Message message, Text text)
+		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
@@ -443,6 +563,25 @@ public class DbApi {
 		}
 		finally { em.close(); }	
 	}
+	
+	public void modifyMark(Mark mark, int val, Text comment)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			mark = em.merge(mark);
+			mark.setVal(val);
+			mark.setComment(comment);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "The modification of the mark has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }	
 	}
 
 }

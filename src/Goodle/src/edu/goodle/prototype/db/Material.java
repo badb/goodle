@@ -5,10 +5,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -35,8 +38,11 @@ public class Material {
     private Date modified;
     public Date getModified() { return modified; }
     
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return comments; }
+    public void addComment(Message comment) { comments.add(comment); }
+    public void removeComment(Message comment) { comments.remove(comment); }
     
     public Material() { }
 

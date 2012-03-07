@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
@@ -29,6 +31,7 @@ public class Homework extends Material {
     public Date getDeadline() { return deadline; }
     public void setDeadline(Date deadline) { this.deadline = deadline; }
     
+    @OneToMany(cascade=CascadeType.ALL)
     private List<HomeworkFile> provided = new ArrayList<HomeworkFile>();
     public List<HomeworkFile> getProvided() { return Collections.unmodifiableList(provided); }
     public void addProvided(HomeworkFile file) { provided.add(file); }

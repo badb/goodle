@@ -6,15 +6,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Key;
 
 @Entity
+@NamedQuery
+(
+	name = "findUsersByName",
+	query = "SELECT c FROM Course c WHERE c.firstName = :name OR c.lastName = :name"	
+)
+
 public class GUser {
 	
     @Id
@@ -48,16 +59,19 @@ public class GUser {
 	
 	// Avatar
 	
+	@ManyToMany
 	private Set<Course> coursesLed = new HashSet<Course>();
 	public Set<Course> getCoursesLed() { return Collections.unmodifiableSet(coursesLed); }
 	public void addCourseLed(Course course) { coursesLed.add(course); }
 	public void removeCourseLed (Course course) { coursesLed.remove(course); }
 	
+	@ManyToMany
 	private Set<Course> courses = new HashSet<Course>();
 	public Set<Course> getCourses() { return Collections.unmodifiableSet(courses); }
 	public void addCourse(Course course) { courses.add(course); }
 	public void removeCourse (Course course) { courses.remove(course); }
 	
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Message> messages = new ArrayList<Message>();
     public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
     public void addMessage(Message message) { messages.add(message); }

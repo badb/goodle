@@ -18,8 +18,8 @@ public class Message {
 	private Key key;
     public Key getKey() { return key; }
     
-    private GUser author;
-    public GUser getAuthor() { return author; }
+    private GoodleUser author;
+    public GoodleUser getAuthor() { return author; }
     
     private Text text;
     public Text getText() { return text; }
@@ -37,9 +37,8 @@ public class Message {
     
     public Message() { }
     
-    public Message(Key key, GUser author, Text text)
+    public Message(GoodleUser author, Text text)
     {
-    	this.key = key;
     	this.author = author;
     	this.text = text;
     }

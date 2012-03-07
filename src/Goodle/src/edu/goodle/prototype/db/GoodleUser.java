@@ -26,7 +26,7 @@ import com.google.appengine.api.datastore.Key;
 	query = "SELECT c FROM Course c WHERE c.firstName = :name OR c.lastName = :name"	
 )
 
-public class GUser {
+public class GoodleUser {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,9 +77,9 @@ public class GUser {
     public void addMessage(Message message) { messages.add(message); }
     public void removeMessage(Message message) { messages.remove(message); }
     
-    public GUser() { }
+    public GoodleUser() { }
 	
-    public GUser(String firstName, String lastName, Email email)
+    public GoodleUser(String firstName, String lastName, Email email)
     {
     	this.firstName = firstName;
     	this.lastName = lastName;

@@ -39,7 +39,17 @@ public class Module {
     public void removeComment(Message comment) { comments.remove(comment); }
     
     public Module() { materials = new ArrayList<Material>(); }
-    public Module(Collection<Material> materials) { this.materials = new ArrayList<Material>(materials); }  
-    public Module(Module m) { materials = new ArrayList<Material>(m.getMaterials()); }
+    
+    public Module(Collection<Material> materials, boolean isVisible) 
+    { 
+    	this.materials = new ArrayList<Material>(materials); 
+    	this.isVisible = isVisible;
+    }  
+    
+    public Module(Module m, boolean isVisible) 
+    { 
+    	materials = new ArrayList<Material>(m.getMaterials()); 
+    	this.isVisible = isVisible;
+    }
 
 }

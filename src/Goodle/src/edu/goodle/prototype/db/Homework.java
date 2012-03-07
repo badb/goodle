@@ -39,7 +39,7 @@ public class Homework extends Material {
     
     public Homework() { }
     
-    public Homework(GUser author, String name, Text desc, Date deadline)
+    public Homework(GoodleUser author, String name, Text desc, Date deadline)
     {
     	super(name, author);
     	this.desc = desc;

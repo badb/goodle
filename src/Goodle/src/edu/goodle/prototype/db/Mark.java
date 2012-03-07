@@ -20,8 +20,8 @@ public class Mark {
     public int getVal() { return val; }
     public void setVal(int val) { this.val = val; }
     
-    private GUser teacher;
-    public GUser getTeacher() { return teacher; }
+    private GoodleUser teacher;
+    public GoodleUser getTeacher() { return teacher; }
     
     private Text comment;
     public Text getComment() { return comment; }
@@ -29,7 +29,7 @@ public class Mark {
     
     public Mark() { }
     
-    public Mark(Key key, int val, GUser teacher, Text comment)
+    public Mark(Key key, int val, GoodleUser teacher, Text comment)
     {
     	this.key = key;
     	this.val = val;

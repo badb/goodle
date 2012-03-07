@@ -27,8 +27,8 @@ public class Material {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     
-    private GUser author;
-    public GUser getAuthor() { return author; }
+    private GoodleUser author;
+    public GoodleUser getAuthor() { return author; }
     
     // edit
     
@@ -46,7 +46,7 @@ public class Material {
     
     public Material() { }
 
-    public Material(String name, GUser author) 
+    public Material(String name, GoodleUser author) 
     { 
     	this.name = name;
     	this.author = author; 

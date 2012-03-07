@@ -61,16 +61,16 @@ public class Course {
     public void setSite(Link site) { this.site = site; }
     
     @ManyToMany(mappedBy="coursesLed")
-    private Set<GUser> teachers;
-    public Set<GUser> getTeachers() { return Collections.unmodifiableSet(teachers); }
-    public void addTeacher(GUser teacher) { teachers.add(teacher); }
-    public void removeTeacher(GUser teacher) { teachers.remove(teacher); }
+    private Set<GoodleUser> teachers;
+    public Set<GoodleUser> getTeachers() { return Collections.unmodifiableSet(teachers); }
+    public void addTeacher(GoodleUser teacher) { teachers.add(teacher); }
+    public void removeTeacher(GoodleUser teacher) { teachers.remove(teacher); }
     
     @ManyToMany(mappedBy="courses")
-    private Set<GUser> members;
-    public Set<GUser> getMembers() { return Collections.unmodifiableSet(members); }
-    public void addMember(GUser member) { members.add(member); }
-    public void removeMember(GUser member) { members.remove(member); }
+    private Set<GoodleUser> members;
+    public Set<GoodleUser> getMembers() { return Collections.unmodifiableSet(members); }
+    public void addMember(GoodleUser member) { members.add(member); }
+    public void removeMember(GoodleUser member) { members.remove(member); }
     
     @OneToMany
     private List<Module> modules;
@@ -97,13 +97,23 @@ public class Course {
     
     public Course() { }
     
-    public Course(String name, Text desc, Link site, Collection<GUser> teachers, Collection<GUser> members, Link calendar)
+    public Course
+    (
+    		String name, 
+    		String term, 
+    		Text desc, 
+    		Link site, 
+    		Collection<GoodleUser> teachers, 
+    		Collection<GoodleUser> members, 
+    		Link calendar
+    )
     {
     	this.name = name;
+    	this.term = term;
     	this.desc = desc;
     	this.site = site;
-    	this.teachers = new HashSet<GUser>(teachers);
-    	this.members = new HashSet<GUser>(members);
+    	this.teachers = new HashSet<GoodleUser>(teachers);
+    	this.members = new HashSet<GoodleUser>(members);
     	this.modules = new ArrayList<Module>();
     }
     

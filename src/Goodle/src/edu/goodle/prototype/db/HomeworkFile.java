@@ -18,8 +18,8 @@ public class HomeworkFile {
 	private Key key;
     public Key getKey() { return key; }
     
-    private GUser author;
-    public GUser getAuthor() { return author; }
+    private GoodleUser author;
+    public GoodleUser getAuthor() { return author; }
     
     private Date created = new Date();
     public Date getCreated() { return created; }
@@ -33,7 +33,7 @@ public class HomeworkFile {
     
     public HomeworkFile() { }
     
-    public HomeworkFile(GUser author, Link file)
+    public HomeworkFile(GoodleUser author, Link file)
     {
     	this.author = author;
     	this.file = file;

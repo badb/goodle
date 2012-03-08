@@ -1,2 +1,0 @@
-serviceClass: edu.goodle.prototype.client.GoodleService
-path: A9FFB9B06B064730B1C2377BA92408DA.gwt.rpc

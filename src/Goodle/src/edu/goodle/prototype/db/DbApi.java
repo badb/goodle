@@ -20,12 +20,20 @@ public class DbApi {
 	
 	public DbApi() { }
 	
-	public void createUser(String firstName, String lastName, Email email) throws DataModificationFailedException
+	public void createUser
+	(
+			String login, 
+			String password, 
+			String firstName, 
+			String lastName, 
+			Email email
+	) 
+			throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
-			GoodleUser u = new GoodleUser(firstName, lastName, email);
+			GoodleUser u = new GoodleUser(login, password, firstName, lastName, email);
 			em.persist(u);
 		}
 		catch (Exception e)

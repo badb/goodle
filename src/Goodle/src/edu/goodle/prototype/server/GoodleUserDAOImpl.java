@@ -2,101 +2,92 @@ package edu.goodle.prototype.server;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+=======
+import javax.persistence.EntityManager;
+import edu.goodle.prototype.shared.EMF;
+>>>>>>> db
 
-import edu.goodle.prototype.shared.PMF;
 
-
-public class GoodleUserDAOImpl implements GoodleUserDAO {
-
-	public static PersistenceManagerFactory getPersistenceManagerFactory() {
-		return PMF.get();
-	}
+public class GoodleUserDAOImpl implements GoodleUserDAO 
+{
+	static String goodleUser = GoodleUser.class.getName();
 
 	@Override
-	public void addGoodleUser(GoodleUser user) {
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			pm.makePersistent(user);
-		} finally {
-			pm.close();
-		}
+	public void addGoodleUser(GoodleUser user) 
+	{
+		EntityManager em = EMF.get().createEntityManager();
+		try { em.persist(user); } 
+		finally { em.close(); }
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<GoodleUser> listGoodleUser() {
-		PersistenceManager pm = getPersistenceManagerFactory()
-				.getPersistenceManager();
+	public List<GoodleUser> listGoodleUser() 
+	{
+		EntityManager em = EMF.get().createEntityManager();
 		String query = "select from " + GoodleUser.class.getName();
-		return (List<GoodleUser>) pm.newQuery(query).execute();
+		return (List<GoodleUser>) em.createQuery(query).getResultList();
 	}
 
 	@Override
-	public void removeGoodleUser(GoodleUser user) {
-		PersistenceManager pm = getPersistenceManagerFactory()
-				.getPersistenceManager();
-		try {
-			pm.currentTransaction().begin();
-
-			user = pm.getObjectById(GoodleUser.class, user.getKey().getId());
-			pm.deletePersistent(user);
-
-			pm.currentTransaction().commit();
-		} catch (Exception ex) {
-			pm.currentTransaction().rollback();
+	public void removeGoodleUser(GoodleUser user) 
+	{
+		EntityManager em = EMF.get().createEntityManager();
+		try 
+		{
+			em.getTransaction().begin();
+			user = em.find(GoodleUser.class, user.getKey());
+			em.remove(user);
+			em.getTransaction().commit();
+		} 
+		catch (Exception ex) 
+		{
+			em.getTransaction().rollback();
 			throw new RuntimeException(ex);
-		} finally {
-			pm.close();
-		}
-
+		} 
+		finally { em.close(); }
 	}
 
 	@Override
-	public void updateGoodleUser(GoodleUser user) {
-		PersistenceManager pm = getPersistenceManagerFactory()
-		.getPersistenceManager();
-
-		try {
-			pm.currentTransaction().begin();
-			GoodleUser dbuser = pm.getObjectById(GoodleUser.class, user.getKey().getId());
+	public void updateGoodleUser(GoodleUser user) 
+	{
+		EntityManager em = EMF.get().createEntityManager();
+		try 
+		{
+			em.getTransaction().begin();
+			GoodleUser dbuser = em.find(GoodleUser.class, user.getKey());
 			dbuser.setLogin(user.getLogin());
 			dbuser.setPassword(user.getPassword());
 			dbuser.setAccess_token_key(user.getAccess_token_key());
 			dbuser.setAccess_token_secret(user.getAccess_token_secret());
-			pm.makePersistent(dbuser);
-			pm.currentTransaction().commit();
-		} catch (Exception ex) {
-			pm.currentTransaction().rollback();
+			em.persist(dbuser);
+			em.getTransaction().commit();
+		} 
+		catch (Exception ex) 
+		{
+			em.getTransaction().rollback();
 			throw new RuntimeException(ex);
-		} finally {
-			pm.close();
-		}
-
+		} 
+		finally { em.close(); }
 	}
 	
-	
-	public GoodleUser getUserByLogin(String login) {
-		PersistenceManager pm = getPersistenceManagerFactory()
-		.getPersistenceManager();
-		String query = "select from " + GoodleUser.class.getName() + " where login == '" + login + "'";
-
-		List<GoodleUser> list =  listGoodleUser();//(List<GoodleUser>) pm.newQuery(query).execute();
-		if (list != null) {
-			for (GoodleUser goodleUser : list) {
-				if(goodleUser.getLogin().equals(login))
-					return goodleUser;
-			}
-			return null;
-		}
-		else return null;
+	@SuppressWarnings("unchecked")
+	public GoodleUser getUserByLogin(String login) 
+	{
+		EntityManager em = EMF.get().createEntityManager();
+		String query = "SELECT u FROM " + goodleUser + " u WHERE u.login = '" + login + "'";
+		List<GoodleUser> list =  (List<GoodleUser>) em.createQuery(query).getResultList();
+		if (list != null) { return list.get(0); }
+		return null;
 	}
 
 	@Override
-	public GoodleUser getUserByID(Long Id) {
-		PersistenceManager pm = getPersistenceManagerFactory()
-				.getPersistenceManager();
-		return pm.getObjectById(GoodleUser.class, Id);
+	public GoodleUser getUserByID(Long Id) 
+	{
+		EntityManager em = EMF.get().createEntityManager();
+		return em.find(GoodleUser.class, Id);
 	}
 }

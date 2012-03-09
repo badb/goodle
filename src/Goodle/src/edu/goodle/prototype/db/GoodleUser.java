@@ -20,12 +20,19 @@ import com.google.appengine.api.datastore.Email;
 import com.google.appengine.api.datastore.Key;
 
 @Entity
-@NamedQuery
-(
-	name = "findUsersByName",
-	query = "SELECT c FROM Course c WHERE c.firstName = :name OR c.lastName = :name"	
-)
-
+@NamedQueries
+({
+	@NamedQuery
+	(
+			name = "findUsersByName",
+			query = "SELECT u FROM GoodleUser u WHERE u.firstName = :name OR u.lastName = :name"	
+	),
+	@NamedQuery
+	(
+			name = "findUserByLogin",
+			query = "SELECT u FROM GoodleUser u WHERE u.login = :login"
+	)
+})
 public class GoodleUser {
 	
     @Id

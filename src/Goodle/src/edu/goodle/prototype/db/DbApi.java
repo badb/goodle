@@ -86,6 +86,20 @@ public class DbApi {
 		return results;
 	}
 	
+	public GoodleUser findUserByLogin(String login)
+	{
+		GoodleUser result;
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			Query q = em.createNamedQuery("findUserByLogin");
+			q.setParameter("login", login);
+			result = (GoodleUser) q.getSingleResult();
+		}
+		finally { em.close(); }
+		return result;
+	}
+	
 	public void createCourse
 	(
 			String name,

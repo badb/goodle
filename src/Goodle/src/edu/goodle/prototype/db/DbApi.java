@@ -3,9 +3,11 @@ package edu.goodle.prototype.db;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.google.appengine.api.datastore.Email;
@@ -16,9 +18,9 @@ import edu.goodle.prototype.shared.EMF;
 
 public class DbApi {
 	
-	private EntityManagerFactory emf = EMF.get();
+	private EntityManagerFactory emf;
 	
-	public DbApi() { }
+	public DbApi() { emf = EMF.get(); }
 	
 	public void createUser
 	(
@@ -604,6 +606,63 @@ public class DbApi {
 			throw new DataModificationFailedException(msg);
 		}
 		finally { em.close(); }	
+	}
+	
+	// Tymczasowo:
+	
+	public void modifyUser(GoodleUser user) throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try { user = em.merge(user); }
+		catch (Exception e) 
+		{ 
+			String msg = "The modification of the user has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }
+	}
+	
+	public void createSession(GoodleUser user) throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			GoodleSession session = new GoodleSession(user);
+			em.persist(session);
+		}
+		catch (Exception e)
+		{
+			String msg = "The creation of the session has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }
+	}
+	
+	public String loginUser(String login, String password) 
+	{
+		String sessionKey = null;
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			Query q = em.createNamedQuery("loginUser");
+			q.setParameter("login", login);
+			q.setParameter("password", password);
+			GoodleUser user = (GoodleUser) q.getSingleResult();
+			GoodleSession session = new GoodleSession(user);
+			em.persist(session);
+			sessionKey = session.getKey().toString();
+		}
+		catch (NoResultException e)
+		{
+			Logger.getLogger("").severe("Unable to log in: wrong credentials.");
+		}
+		catch (Exception e)
+		{
+			Logger.getLogger("").severe("Unable to log in: " + e.getMessage());
+		}
+		finally { em.close(); }
+		Logger.getLogger("").severe("Session key returned: " + sessionKey);
+		return sessionKey;
 	}
 
 }

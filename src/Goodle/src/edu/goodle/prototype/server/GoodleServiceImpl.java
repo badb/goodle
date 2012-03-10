@@ -2,10 +2,12 @@ package edu.goodle.prototype.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import edu.goodle.prototype.be.UserDB;
 import edu.goodle.prototype.client.GoodleService;
+import edu.goodle.prototype.db.DbApi;
 import edu.goodle.prototype.shared.UsosApiResponseStatus;
 import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
+
+import com.google.appengine.api.datastore.Key;
 
 
 @SuppressWarnings("serial")
@@ -14,14 +16,13 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
                 return new Boolean(false);
         }
 
-        public String loginUser(String userName, String passwd) {
-        	UserDB userdb = new UserDB(new GoodleUserDAOImpl(), new GoodleSessionDAOImpl());
-        	return userdb.loginUser(userName, passwd);
+        public String loginUser(String name, String password) {
+        	DbApi dbApi = new DbApi();
+        	return dbApi.loginUser(name, password);
         }
 
         @Override
-        public void logoutUser(String sessionID) {
-        }
+        public void logoutUser(String sessionID) { }
 
         @Override
         public UsosGetCoursesApiResponse getCourses(String sessionID) {

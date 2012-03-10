@@ -31,6 +31,11 @@ import com.google.appengine.api.datastore.Key;
 	(
 			name = "findUserByLogin",
 			query = "SELECT u FROM GoodleUser u WHERE u.login = :login"
+	),
+	@NamedQuery
+	(
+			name = "loginUser",
+			query = "SELECT u FROM GoodleUser u WHERE u.login = :login AND u.password = :password"
 	)
 })
 public class GoodleUser {

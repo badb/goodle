@@ -2,13 +2,8 @@ package edu.goodle.prototype.server;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-=======
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
->>>>>>> db
 
 import com.google.appengine.api.datastore.Key;
 

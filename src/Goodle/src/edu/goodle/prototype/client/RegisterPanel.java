@@ -19,8 +19,8 @@ public class RegisterPanel extends GoodlePanel {
 	private Button sendButton = new Button("Wyślij");
 	private TextArea reasonTextArea = new TextArea();
 	
-	public RegisterPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		super(goodleService, goodle);
+	public RegisterPanel(GoodleServiceController controller, Goodle goodle) {
+		super(controller, goodle);
 		registerButton.getElement().setId("register_button");
 		panel.add(registerLabel);
 		panel.add(registerButton);

@@ -10,8 +10,8 @@ public class CourseInfoPanel extends GoodlePanel {
 	private Label text = new Label("Tu będzie opis przedmiotu pobrany z USOSa");
 	private Hyperlink link = new Hyperlink("[Więcej]", "[Więcej]");
 	
-	public CourseInfoPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		super(goodleService, goodle);
+	public CourseInfoPanel(GoodleServiceController controller, Goodle goodle) {
+		super(controller, goodle);
 		
 		panel.add(text);
 		panel.add(link);

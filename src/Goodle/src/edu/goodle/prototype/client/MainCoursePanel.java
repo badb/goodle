@@ -8,8 +8,8 @@ public class MainCoursePanel extends GoodlePanel {
 	private VerticalPanel mainPanel = new VerticalPanel();
 	private TabBar bar = new TabBar();
 	
-	public MainCoursePanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		super(goodleService, goodle);
+	public MainCoursePanel(GoodleServiceController controller, Goodle goodle) {
+		super(controller, goodle);
 		bar.addTab("Zajęcia");
 		bar.addTab("Prace domowe");
 		bar.addTab("Ankiety");

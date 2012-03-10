@@ -2,7 +2,6 @@ package edu.goodle.prototype.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -10,14 +9,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import java.util.logging.Logger;
-
 public class LoginPanel extends GoodlePanel{
 
-        private static Logger logger = Logger.getLogger("");
-
-        public LoginPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-                super(goodleService, goodle);
+        public LoginPanel(GoodleServiceController controller, Goodle goodle) {
+                super(controller, goodle);
         }
 
         private VerticalPanel loginPanel = new VerticalPanel();
@@ -44,20 +39,18 @@ public class LoginPanel extends GoodlePanel{
                 loginButton.addClickHandler(new ClickHandler() {
                         public void onClick(ClickEvent event) {
                         		loginPanel.remove(loginFailLabel);
-                                getGoodleService().loginUser(nameField.getText(), 
-                                                passwordField.getText(), new AsyncCallback<String>() {
-                                        public void onFailure(Throwable caught) {
-                                        		loginPanel.add(loginFailLabel);
-                                                logger.severe("Login failed." + caught);
-                                        }
-                                        public void onSuccess(String result) {
-                                                RootPanel.get("goodleLogin").remove(loginPanel);
-                                                loginPanel.remove(loginFailLabel);
-                                                getGoodle().afterLogin(result);
-                                        }
-                                });
-                        }
+                        		getGoodleServiceController().loginUser(nameField.getText(), passwordField.getText());
+                           }
                 });
                 return loginPanel;
         }
+        
+        public void loginFail() {
+    		loginPanel.add(loginFailLabel);
+        }
+        
+        public void afterLogin() {
+            RootPanel.get("goodleLogin").remove(loginPanel);
+        }
+    
 }

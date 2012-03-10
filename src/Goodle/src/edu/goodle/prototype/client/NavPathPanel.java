@@ -9,8 +9,8 @@ public class NavPathPanel extends GoodlePanel {
 	private HorizontalPanel panel = new HorizontalPanel();
 	private Hyperlink link = new Hyperlink("Kursy", "Kursy");
 	
-	public NavPathPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		super(goodleService, goodle);
+	public NavPathPanel(GoodleServiceController controller, Goodle goodle) {
+		super(controller, goodle);
 		panel.add(link);
 	}
 

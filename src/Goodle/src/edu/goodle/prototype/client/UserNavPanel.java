@@ -12,8 +12,8 @@ public class UserNavPanel extends GoodlePanel {
 	private Label name = new Label("Roman | ");
 	private Button logoutButton = new Button(" Wyloguj");
 	
-	public UserNavPanel(GoodleServiceAsync goodleService, final Goodle goodle) {
-		super(goodleService, goodle);
+	public UserNavPanel(GoodleServiceController controller, final Goodle goodle) {
+		super(controller, goodle);
 		panel.add(name);
 		panel.add(logoutButton);
 		

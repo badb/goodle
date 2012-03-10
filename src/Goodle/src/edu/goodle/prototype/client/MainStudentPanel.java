@@ -12,8 +12,8 @@ public class MainStudentPanel extends GoodlePanel {
 	private TabBar bar = new TabBar();
 	private CourseListPanel cp;
 	
-	public MainStudentPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		super(goodleService, goodle);
+	public MainStudentPanel(GoodleServiceController controller, Goodle goodle) {
+		super(controller, goodle);
 		bar.addTab("Kursy");
 		bar.addTab("Ustawienia");
 		bar.addTab("Pomoc");
@@ -27,7 +27,7 @@ public class MainStudentPanel extends GoodlePanel {
 				}
 	    	}
 	    });
-	    cp = new CourseListPanel(goodleService, goodle);
+	    cp = new CourseListPanel(controller, goodle);
 		mainPanel.add(bar);
 		RootPanel.get("page").clear();
 		RootPanel.get("page").add(cp.getPanel("kwa"));

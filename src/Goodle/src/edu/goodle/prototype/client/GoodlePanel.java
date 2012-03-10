@@ -1,19 +1,19 @@
 package edu.goodle.prototype.client;
 
 public abstract class GoodlePanel {
-        private final GoodleServiceAsync goodleService;
+        private final GoodleServiceController controller;
         private final Goodle goodle;
 
-        public GoodlePanel(GoodleServiceAsync goodleService, Goodle goodle) {
+        public GoodlePanel(GoodleServiceController controller, Goodle goodle) {
                 this.goodle = goodle;
-                this.goodleService = goodleService;
+                this.controller = controller;
         }
 
         public Goodle getGoodle() {
                 return goodle;
         }
 
-        public GoodleServiceAsync getGoodleService() {
-                return goodleService;
+        public GoodleServiceController getGoodleServiceController() {
+                return controller;
         }
 }

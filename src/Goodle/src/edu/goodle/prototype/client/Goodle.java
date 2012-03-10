@@ -4,28 +4,27 @@ import java.sql.Date;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
-	private final GoodleServiceAsync goodleService = GWT
-			.create(GoodleService.class);
-	private LoginPanel lp = new LoginPanel(goodleService, this);
-	private MainStudentPanel mp = new MainStudentPanel(goodleService, this);
-	private SearchPanel sp = new SearchPanel(goodleService, this);
-	private UserNavPanel up = new UserNavPanel(goodleService, this); 
-	private NavPathPanel np = new NavPathPanel(goodleService, this);
-	private CourseInfoPanel cp = new CourseInfoPanel(goodleService, this);
-	private CourseListPanel clp = new CourseListPanel(goodleService, this);
-	private MainCoursePanel mcp = new MainCoursePanel(goodleService, this);
-	private RegisterPanel rp = new RegisterPanel(goodleService, this);
+	private GoodleServiceController controller = new GoodleServiceController();
+	private LoginPanel lp = new LoginPanel(controller, this);
+	private MainStudentPanel mp = new MainStudentPanel(controller, this);
+	private SearchPanel sp = new SearchPanel(controller, this);
+	private UserNavPanel up = new UserNavPanel(controller, this); 
+	private NavPathPanel np = new NavPathPanel(controller, this);
+	private CourseInfoPanel cip = new CourseInfoPanel(controller, this);
+	private CoursePanel cp;
+	private CourseListPanel clp = new CourseListPanel(controller, this);
+	private MainCoursePanel mcp = new MainCoursePanel(controller, this);
+	private RegisterPanel rp = new RegisterPanel(controller, this);
+	
 
 	private static Logger logger = Logger.getLogger("");
 	private String initToken = History.getToken();
@@ -39,12 +38,12 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
         DOM.setElementAttribute(
                 DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
 	    String sessionID = Cookies.getCookie("sessionID");
-	    if ( sessionID != null && checkSessionID(sessionID)) {
+//	    if ( sessionID != null && checkSessionID(sessionID)) {
 	    	showNavBar();
 	    	showCourseList();
-	    } else {
-	    	displayLoginBox();
-	    }
+//	    } else {
+//	    	displayLoginBox();
+//	    }
 	}
 	
 	public boolean checkSessionID(String sessionID) {
@@ -80,6 +79,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	}
 	
 	public void afterLogin(String result) {
+		lp.afterLogin();
 		rememberLogin(result);
         DOM.setElementAttribute(
                 DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
@@ -109,24 +109,25 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	}
 	
 	public void changeToCourse(String course) {
+		logger.info("chagneToCourseList");
 		clearPage();
+		cp = new CoursePanel(controller, this, course);
+		controller.getCourseInfo(course);
 		np.addNext(course);
 		RootPanel.get("navpath").add(np.getPanel());
 		RootPanel.get("name").add(new Label(course));
-		RootPanel.get("info").add(cp.getPanel());
-		goodleService.getCourseInfo(getSession(), course, new AsyncCallback<String>() {
-                public void onFailure(Throwable caught) {
-                        logger.severe("isRegistered failed." + caught);
-                }
-                public void onSuccess(String result) {
-                        logger.info("isRegistered:" + result);
-                        if (result.equals("yes")) {
-                    		RootPanel.get("tabs").add(mcp.getPanel());
-                        } else {
-                        	RootPanel.get("page").add(rp.getPanel());
-                        }
-                }
-        });
+		RootPanel.get("tabs").add(mcp.getPanel());
+		RootPanel.get("info").add(cip.getPanel());
+	}
+	
+	public void addCoursePanels(String data) {
+		logger.info("addCoursePanels");
+		loadDataToCoursePanel(data);
+	
+	}
+	
+	public void addRegisterPanel() {
+	   	RootPanel.get("page").add(rp.getPanel());
 	}
 	
 	public void changeToCourseList(String text) {
@@ -138,17 +139,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	}
 
 	public void searchForCourse(final String text) {
-	       goodleService.searchCourse(getSession(), text,
-	                new AsyncCallback<String>() {
-
-	                public void onFailure(Throwable caught) {
-	                        logger.severe("searchCourses failed." + caught);
-	                }
-	                public void onSuccess(String result) {
-	                		changeToCourseList(result);
-	                        logger.info("searchCourses:" + result);
-	                }
-	        });
+		controller.searchCourse(text);
 	}
 
 	@Override
@@ -157,4 +148,12 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 		changeToCourse(event.getValue());
 	}
 
+	public void loadDataToCoursePanel(String data){
+		cp.load(data);
+		RootPanel.get("page").add(cp.getPanel());
+	}
+	
+	public void loginFail() {
+		lp.loginFail();
+	}
 }

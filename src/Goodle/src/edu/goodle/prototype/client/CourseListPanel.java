@@ -5,8 +5,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class CourseListPanel extends GoodlePanel {
     private VerticalPanel coursePanel = new VerticalPanel();
-    public CourseListPanel(GoodleServiceAsync goodleService, Goodle goodle) {
-		super(goodleService, goodle);
+    public CourseListPanel(GoodleServiceController controller, Goodle goodle) {
+		super(controller, goodle);
 	}
 
     public VerticalPanel getPanel(String text) {

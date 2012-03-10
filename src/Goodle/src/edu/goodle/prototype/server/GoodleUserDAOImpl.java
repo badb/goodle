@@ -2,13 +2,8 @@ package edu.goodle.prototype.server;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.jdo.PersistenceManager;
-import javax.jdo.PersistenceManagerFactory;
-=======
 import javax.persistence.EntityManager;
 import edu.goodle.prototype.shared.EMF;
->>>>>>> db
 
 
 public class GoodleUserDAOImpl implements GoodleUserDAO 

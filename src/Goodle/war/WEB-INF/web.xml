@@ -20,4 +20,27 @@
   	<servlet-name>goodleServlet</servlet-name>
   	<url-pattern>/goodle/goodle</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>blobServlet</servlet-name>
+    <servlet-class>edu.goodle.prototype.server.BlobServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>uploadServlet</servlet-name>
+    <servlet-class>edu.goodle.prototype.server.UploadServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>blobServlet</servlet-name>
+    <url-pattern>/goodle/blobservice</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>uploadServlet</servlet-name>
+    <url-pattern>/goodle/uploadservice</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

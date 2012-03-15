@@ -3,6 +3,7 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
   <inherits name='com.google.gwt.logging.Logging'/>
+  <inherits name="com.googlecode.objectify.Objectify" />
   <set-property name="gwt.logging.consoleHandler" value="DISABLED"/>
   <set-property name="gwt.logging.popupHandler" value="DISABLED" />
 
@@ -19,7 +20,13 @@
   <!-- Specify the app entry point class.                         -->
   <entry-point class='edu.goodle.prototype.client.Goodle'></entry-point>
 
+
+	<servlet path='/goodle/blobservice' class='edu.goodle.prototype.server.BlobServiceImpl'/> 
+	<servlet path='/goodle/uploadservice' class='edu.goodle.prototype.server.UploadServiceImpl'/>
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>
 </module>
+
+
+

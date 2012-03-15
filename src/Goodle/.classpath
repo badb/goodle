@@ -3,12 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="war/WEB-INF/lib"/>
 	<classpathentry kind="src" output="test-classes" path="test"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (1)"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/mockito-all-1.9.0.jar"/>
-
 	<classpathentry kind="lib" path="war/WEB-INF/lib/selenium-java-2.16.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/selenium-server-standalone-2.16.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-3.1.jar"/>

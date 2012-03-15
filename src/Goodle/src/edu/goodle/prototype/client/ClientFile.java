@@ -1,7 +1,13 @@
 package edu.goodle.prototype.client;
 
-public class ClientFile {
+import java.io.Serializable;
+
+public class ClientFile implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String url;
 	public String getName() {
@@ -19,10 +25,8 @@ public class ClientFile {
 	
 	
 	
-	public ClientFile(String name, String url) {
+	public ClientFile() {
 		super();
-		this.name = name;
-		this.url = url;
 	}
 	
 	

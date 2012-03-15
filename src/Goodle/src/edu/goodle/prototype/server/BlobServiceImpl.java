@@ -42,7 +42,9 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 
 		long l = Long.parseLong(id);
 		UploadedFile file = ofy.get(UploadedFile.class, l);
-		ClientFile sfile = new ClientFile(file.getName(), file.getUrl());
+		ClientFile sfile = new ClientFile();
+		sfile.setName(file.getName());
+		sfile.setUrl(file.getUrl());
 		return sfile;
 
 	}

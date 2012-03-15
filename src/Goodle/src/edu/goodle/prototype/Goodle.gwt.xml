@@ -21,8 +21,8 @@
   <entry-point class='edu.goodle.prototype.client.Goodle'></entry-point>
 
 
-	<servlet path='/goodle/blobservice' class='edu.goodle.prototype.server.BlobServiceImpl'/> 
-	<servlet path='/goodle/uploadservice' class='edu.goodle.prototype.server.UploadServiceImpl'/>
+	<servlet path='/blobservice' class='edu.goodle.prototype.server.BlobServiceImpl'/> 
+	<servlet path='/uploadservice' class='edu.goodle.prototype.server.UploadServiceImpl'/>
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>

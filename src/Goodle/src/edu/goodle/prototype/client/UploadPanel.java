@@ -22,9 +22,8 @@ public class UploadPanel extends GoodlePanel {
 	// Use an RPC call to the Blob Service to get the blobstore upload url
 	BlobServiceAsync blobService = GWT.create(BlobService.class);
 
-	public UploadPanel(GoodleServiceAsync goodleService, Goodle goodle) {
+	public UploadPanel(GoodleServiceController goodleService, Goodle goodle) {
 		super(goodleService, goodle);
-
 	}
 
 	public VerticalPanel getPanel() {
@@ -79,7 +78,7 @@ public class UploadPanel extends GoodlePanel {
 
 						// pokaż wysłany plik
 
-						getFile(event.getResults().trim());
+						//getFile(event.getResults().trim());
 
 					}
 

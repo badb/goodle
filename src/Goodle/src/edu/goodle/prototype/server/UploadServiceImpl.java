@@ -28,9 +28,9 @@ public class UploadServiceImpl extends HttpServlet {
       .getBlobstoreService();
   Objectify ofy = ObjectifyService.begin();
 
-  static {
-    ObjectifyService.register(UploadedFile.class);
-  }
+  //.static {
+  //  ObjectifyService.register(UploadedFile.class);
+  //}
 
   //Override the doPost method to store the Blob's meta-data
   public void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -41,12 +41,12 @@ public class UploadServiceImpl extends HttpServlet {
 
     //Get the paramters from the request to populate the UploadedFile object
     //TODO umieszczanie danych
-    UploadedFile UploadedFile = new UploadedFile("Name", null, "/goodle/blobservice?blob-key=" + blobKeys.get(0).getKeyString());
+    UploadedFile uploadedFile = new UploadedFile("Name", null, "/goodle/blobservice?blob-key=" + blobKeys.get(0).getKeyString());
 
-    ofy.put(UploadedFile);
+    ofy.put(uploadedFile);
 
     //Redirect recursively to this servlet (calls doGet)
-    res.sendRedirect("/goodle/uploadservice?id=" + UploadedFile.getKey());
+    res.sendRedirect("/goodle/uploadservice?id=" + uploadedFile.getKey());
   }
 
   @Override

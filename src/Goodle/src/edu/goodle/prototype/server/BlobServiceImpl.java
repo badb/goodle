@@ -25,9 +25,9 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 	BlobstoreService blobstoreService = BlobstoreServiceFactory
 			.getBlobstoreService();
 	Objectify ofy = ObjectifyService.begin();
-	static {
-		ObjectifyService.register(UploadedFile.class);
-	}
+	//static {
+	//	ObjectifyService.register(UploadedFile.class);
+	//}
 
 	// Generate a Blobstore Upload URL from the GAE BlobstoreService
 	@Override

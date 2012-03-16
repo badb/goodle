@@ -37,7 +37,7 @@ public class UploadPanel extends GoodlePanel {
 		upload.setName("upload");
 		panel.add(upload);
 
-		Button submit = new Button("Wyślij plik");
+		Button submit = new Button("Submit");
 		submit.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
@@ -74,11 +74,11 @@ public class UploadPanel extends GoodlePanel {
 				.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
 					@Override
 					public void onSubmitComplete(SubmitCompleteEvent event) {
-						info.setText("Sukces!");
+						info.setText("Sukces!" + event);
 
 						// pokaż wysłany plik
 
-						//getFile(event.getResults().trim());
+						getFile(event.getResults().trim());
 
 					}
 

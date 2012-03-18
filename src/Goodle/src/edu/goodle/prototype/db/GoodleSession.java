@@ -17,9 +17,9 @@ public class GoodleSession {
     public Key getKey() { return key; }
     
     @OneToOne
-    private GoodleUser user;
-    public GoodleUser getUser() { return user; }
+    private Key user;
+    public Key getUser() { return user; }
 
-    public GoodleSession(GoodleUser user) { this.user = user; }
+    public GoodleSession(GoodleUser user) { this.user = user.getKey(); }
 
 }

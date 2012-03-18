@@ -76,6 +76,21 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
+	public GoodleUser findUserByKey(Key key)
+	{
+		GoodleUser result;
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			Query q = em.createNamedQuery("findUserByKey");
+			q.setParameter("key", key);
+			result = (GoodleUser) q.getSingleResult();
+		}
+		catch (NoResultException e) { result = null; }
+		finally { em.close(); }
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<GoodleUser> findUsersByName(String name)
 	{
@@ -87,6 +102,7 @@ public class DbApi {
 			q.setParameter("name", name);
 			results = (List<GoodleUser>) q.getResultList();
 		}
+		catch (NoResultException e) { results = null; }
 		finally { em.close(); }
 		return results;
 	}
@@ -101,6 +117,7 @@ public class DbApi {
 			q.setParameter("login", login);
 			result = (GoodleUser) q.getSingleResult();
 		}
+		catch (NoResultException e) { result = null; }
 		finally { em.close(); }
 		return result;
 	}
@@ -205,6 +222,7 @@ public class DbApi {
 			q.setParameter("name", name);
 			results = (List<Course>) q.getResultList();
 		}
+		catch (NoResultException e) { results = null; }
 		finally { em.close(); }
 		return results;
 	}
@@ -220,6 +238,7 @@ public class DbApi {
 			q.setParameter("term", term);
 			results = (List<Course>) q.getResultList();
 		}
+		catch (NoResultException e) { results = null; }
 		finally { em.close(); }
 		return results;
 	}
@@ -679,6 +698,18 @@ public class DbApi {
 	
 	public String loginUser(String login, String password) 
 	{
+		/* Tymczasowo */
+		try
+		{
+			GoodleUser user = findUserByLogin("llama");
+			if (user == null) createUser("llama", "llama", null, null, null);
+		}
+		catch (DataModificationFailedException e)
+		{
+			Logger.getLogger("").severe("Unable to create llama: " + e.getMessage());
+		}
+		
+		/* Tymczasowo-end */
 		String sessionKey = null;
 		EntityManager em = emf.createEntityManager();
 		try
@@ -689,6 +720,7 @@ public class DbApi {
 			GoodleUser user = (GoodleUser) q.getSingleResult();
 			GoodleSession session = new GoodleSession(user);
 			em.persist(session);
+			session = em.merge(session);
 			sessionKey = session.getKey().toString();
 		}
 		catch (NoResultException e)

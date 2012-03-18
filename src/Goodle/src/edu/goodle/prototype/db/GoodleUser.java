@@ -23,6 +23,11 @@ import com.google.appengine.api.datastore.Key;
 ({
 	@NamedQuery
 	(
+			name = "findUserByKey",
+			query = "SELECT u FROM GoodleUser u WHERE u.key = :key"
+	),
+	@NamedQuery
+	(
 			name = "findUsersByName",
 			query = "SELECT u FROM GoodleUser u WHERE u.firstName = :name OR u.lastName = :name"	
 	),

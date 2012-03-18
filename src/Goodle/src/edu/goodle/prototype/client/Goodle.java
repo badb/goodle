@@ -35,21 +35,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	
 	public void onModuleLoad() {
 		
-		/* Tymczasowo */
 		
-		DbApi db = new DbApi();
-		try
-		{
-			logger.severe("Llama llama!");
-			GoodleUser user = db.findUserByLogin("llama");
-			if (user == null) db.createUser("llama", "llama", null, null, null);
-		}
-		catch (DataModificationFailedException e)
-		{
-			logger.severe(e.getMessage());
-		}
-		
-		/* Tymczasowo-end */
 		
 		if (initToken.length() == 0) {
 			History.newItem("main");
@@ -88,6 +74,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	
 	public void displayLoginBox() {
 		clearAll();
+
 		RootPanel.get("goodleLogin").add(lp.getPanel());
 	    DOM.setElementAttribute(
 	                DOM.getElementById("goodleLogin"), "style", "visibility:visible");

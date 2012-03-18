@@ -104,10 +104,10 @@ public class Course {
     public void removeMessage(Message message) { messages.remove(message); }
 
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Message> comments = new ArrayList<Message>();
-    public List<Message> getComments() { return Collections.unmodifiableList(comments); }
-    public void addComment(Message comment) { comments.add(comment); }
-    public void removeComment(Message comment) { comments.remove(comment); }
+    private List<Comment> comments = new ArrayList<Comment>();
+    public List<Comment> getComments() { return Collections.unmodifiableList(comments); }
+    public void addComment(Comment comment) { comments.add(comment); }
+    public void removeComment(Comment comment) { comments.remove(comment); }
     
     public Course() { }
     

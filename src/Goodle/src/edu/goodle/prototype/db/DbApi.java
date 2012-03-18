@@ -251,7 +251,7 @@ public class DbApi {
 		{
 			em.getTransaction().begin();
 			course = em.merge(course);
-			Message comment = new Message(author, text);
+			Comment comment = new Comment(author, text);
 			course.addComment(comment);
 			em.getTransaction().commit();
 		}
@@ -263,7 +263,7 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void removeCommentFromCourse(Message comment, Course course)
+	public void removeCommentFromCourse(Comment comment, Course course)
 			throws DataModificationFailedException
 		{
 			EntityManager em = emf.createEntityManager();
@@ -475,7 +475,7 @@ public class DbApi {
 		{
 			em.getTransaction().begin();
 			module = em.merge(module);
-			Message comment = new Message(author, text);
+			Comment comment = new Comment(author, text);
 			module.addComment(comment);
 			em.getTransaction().commit();
 		}
@@ -487,7 +487,7 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void removeCommentFromModule(Message comment, Module module)
+	public void removeCommentFromModule(Comment comment, Module module)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
@@ -555,7 +555,7 @@ public class DbApi {
 		{
 			em.getTransaction().begin();
 			material = em.merge(material);
-			Message comment = new Message(author, text);
+			Comment comment = new Comment(author, text);
 			material.addComment(comment);
 			em.getTransaction().commit();
 		}
@@ -567,7 +567,7 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 		
-	public void removeCommentFromMaterial(Message comment, Material material)
+	public void removeCommentFromMaterial(Comment comment, Material material)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
@@ -626,6 +626,25 @@ public class DbApi {
 		}
 		finally { em.close(); }		
 	}	
+	
+	public void modifyComment(Comment comment, Text text)
+		throws DataModificationFailedException
+	{
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			em.getTransaction().begin();
+			comment = em.merge(comment);
+			comment.setText(text);
+			em.getTransaction().commit();
+		}
+		catch (Exception e)
+		{
+			String msg = "The modification of the message has failed: " + e.getMessage();
+			throw new DataModificationFailedException(msg);
+		}
+		finally { em.close(); }	
+	}
 	
 	public void modifyMessage(Message message, Text text)
 		throws DataModificationFailedException
@@ -703,6 +722,12 @@ public class DbApi {
 		{
 			GoodleUser user = findUserByLogin("llama");
 			if (user == null) createUser("llama", "llama", null, null, null);
+			//Link l = new Link("www.pizzaro.es");
+			//Text t = new Text("");
+			//createCourse("Historia Inków", "2012L", t, l, new ArrayList<GoodleUser>(), new ArrayList<GoodleUser>(), null);
+			//Course c = findCoursesByName("Historia Inków").get(0);
+			//GoodleUser u = findUserByLogin("llama");
+			//addMemberToCourse(u, c);
 		}
 		catch (DataModificationFailedException e)
 		{

@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,6 +23,11 @@ import com.google.appengine.api.datastore.Text;
 @Entity
 @NamedQueries 
 ({
+	@NamedQuery
+	(
+		name = "findCourseByKey",
+		query = "SELECT c FROM Course c WHERE c.key = :key"
+	),
 	@NamedQuery
 	(
 		name = "findCoursesByName",
@@ -60,17 +64,27 @@ public class Course {
     public Link getSite() { return site; }
     public void setSite(Link site) { this.site = site; }
     
-    @ManyToMany(mappedBy="coursesLed")
-    private Set<GoodleUser> teachers;
-    public Set<GoodleUser> getTeachers() { return Collections.unmodifiableSet(teachers); }
-    public void addTeacher(GoodleUser teacher) { teachers.add(teacher); }
-    public void removeTeacher(GoodleUser teacher) { teachers.remove(teacher); }
+    private Set<Key> teachers;
+    public Set<Key> getTeachers() { return Collections.unmodifiableSet(teachers); }
+    public void addTeacher(GoodleUser teacher) 
+    { 
+    	teachers.add(teacher.getKey()); 
+    }
+    public void removeTeacher(GoodleUser teacher) 
+    { 
+    	teachers.remove(teacher.getKey()); 
+    }
     
-    @ManyToMany(mappedBy="courses")
-    private Set<GoodleUser> members;
-    public Set<GoodleUser> getMembers() { return Collections.unmodifiableSet(members); }
-    public void addMember(GoodleUser member) { members.add(member); }
-    public void removeMember(GoodleUser member) { members.remove(member); }
+    private Set<Key> members;
+    public Set<Key> getMembers() { return Collections.unmodifiableSet(members); }
+    public void addMember(GoodleUser member) 
+    { 
+    	members.add(member.getKey()); 
+    }
+    public void removeMember(GoodleUser member) 
+    { 
+    	members.remove(member.getKey()); 
+    }
     
     @OneToMany
     private List<Module> modules;
@@ -112,9 +126,11 @@ public class Course {
     	this.term = term;
     	this.desc = desc;
     	this.site = site;
-    	this.teachers = new HashSet<GoodleUser>(teachers);
-    	this.members = new HashSet<GoodleUser>(members);
+    	this.teachers = new HashSet<Key>();
     	this.modules = new ArrayList<Module>();
+    	this.members = new HashSet<Key>();
+    	for (GoodleUser t : teachers) { this.teachers.add(t.getKey()); };
+    	for (GoodleUser m : members) { this.members.add(m.getKey()); };
     }
     
 }

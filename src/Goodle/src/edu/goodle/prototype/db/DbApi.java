@@ -1,8 +1,10 @@
 package edu.goodle.prototype.db;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -11,6 +13,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.google.appengine.api.datastore.Email;
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
 import com.google.appengine.api.datastore.Text;
 
@@ -153,6 +156,42 @@ public class DbApi {
 			throw new DataModificationFailedException(msg);
 		}
 		finally { em.close(); }
+	}
+	
+	public List<Course> findUserCourses(GoodleUser user)
+	{
+		List<Course> results = new ArrayList<Course>();
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			Set<Key> courses = user.getCourses();
+			for (Key k : courses)
+			{
+				Query q = em.createNamedQuery("findCoursesByKey");
+				q.setParameter("key", k);
+				results.add((Course) q.getSingleResult());
+			}
+		}
+		finally { em.close(); }
+		return results;
+	}
+	
+	public List<Course> findUserCoursesLed(GoodleUser user)
+	{
+		List<Course> results = new ArrayList<Course>();
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			Set<Key> courses = user.getCoursesLed();
+			for (Key k : courses)
+			{
+				Query q = em.createNamedQuery("findCoursesByKey");
+				q.setParameter("key", k);
+				results.add((Course) q.getSingleResult());
+			}
+		}
+		finally { em.close(); }
+		return results;
 	}
 	
 	@SuppressWarnings("unchecked")

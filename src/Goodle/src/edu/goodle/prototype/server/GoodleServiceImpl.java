@@ -7,9 +7,6 @@ import edu.goodle.prototype.db.DbApi;
 import edu.goodle.prototype.shared.UsosApiResponseStatus;
 import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
 
-import com.google.appengine.api.datastore.Key;
-
-
 @SuppressWarnings("serial")
 public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleService {
         public Boolean authorisePinCode(String sessionID, String PinCode) {

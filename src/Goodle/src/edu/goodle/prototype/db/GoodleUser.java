@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -79,17 +78,24 @@ public class GoodleUser {
 	
 	// Avatar
 	
-	@ManyToMany
-	private Set<Course> coursesLed = new HashSet<Course>();
-	public Set<Course> getCoursesLed() { return Collections.unmodifiableSet(coursesLed); }
-	public void addCourseLed(Course course) { coursesLed.add(course); }
-	public void removeCourseLed (Course course) { coursesLed.remove(course); }
+	private Set<Key> coursesLed = new HashSet<Key>();
+	public Set<Key> getCoursesLed() 
+	{ 
+		return Collections.unmodifiableSet(coursesLed); 
+	}
+	public void addCourseLed(Course course) 
+	{ 
+		coursesLed.add(course.getKey()); 
+	}
+	public void removeCourseLed (Course course) 
+	{ 
+		coursesLed.remove(course.getKey()); 
+	}
 	
-	@ManyToMany
-	private Set<Course> courses = new HashSet<Course>();
-	public Set<Course> getCourses() { return Collections.unmodifiableSet(courses); }
-	public void addCourse(Course course) { courses.add(course); }
-	public void removeCourse (Course course) { courses.remove(course); }
+	private Set<Key> courses = new HashSet<Key>();
+	public Set<Key> getCourses() { return Collections.unmodifiableSet(courses); }
+	public void addCourse(Course course) { courses.add(course.getKey()); }
+	public void removeCourse (Course course) { courses.remove(course.getKey()); }
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Message> messages = new ArrayList<Message>();

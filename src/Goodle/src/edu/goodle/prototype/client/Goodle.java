@@ -12,6 +12,10 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import edu.goodle.prototype.db.DataModificationFailedException;
+import edu.goodle.prototype.db.DbApi;
+import edu.goodle.prototype.db.GoodleUser;
+
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private GoodleServiceController controller = new GoodleServiceController();
 	private LoginPanel lp = new LoginPanel(controller, this);
@@ -30,6 +34,23 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private String initToken = History.getToken();
 	
 	public void onModuleLoad() {
+		
+		/* Tymczasowo */
+		
+		DbApi db = new DbApi();
+		try
+		{
+			logger.severe("Llama llama!");
+			GoodleUser user = db.findUserByLogin("llama");
+			if (user == null) db.createUser("llama", "llama", null, null, null);
+		}
+		catch (DataModificationFailedException e)
+		{
+			logger.severe(e.getMessage());
+		}
+		
+		/* Tymczasowo-end */
+		
 		if (initToken.length() == 0) {
 			History.newItem("main");
 		}

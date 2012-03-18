@@ -38,6 +38,7 @@ public class UploadedFile implements Serializable {
 	
 	public UploadedFile (String name, GoodleUser author, String url) {
 		//TODO
+		this.name = name;
 		this.url = url;
 	}
 

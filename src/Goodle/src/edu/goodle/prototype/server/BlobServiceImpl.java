@@ -35,7 +35,7 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 
 		// Map the UploadURL to the uploadservice which will be called by
 		// submitting the FormPanel
-		return blobstoreService.createUploadUrl("/goodle/uploadservice");
+		return blobstoreService.createUploadUrl("/goodle/uploadservice").replace("julia-laptop", "127.0.0.1");
 	}
 
 	public ClientFile getUploadedFile(String id) {

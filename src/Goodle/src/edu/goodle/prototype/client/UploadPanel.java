@@ -6,18 +6,29 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FileUpload;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 
-import edu.goodle.prototype.db.UploadedFile;
 
 public class UploadPanel extends GoodlePanel {
 	private VerticalPanel panel = new VerticalPanel();
+	private HorizontalPanel formPanel = new HorizontalPanel();
 	final FormPanel uploadForm = new FormPanel();
 	Label info = new Label();
 	FileUpload upload = new FileUpload();
+	Label titleLabel = new Label();
+	final TextBox titleBox = new TextBox();
+
+
+	Button submit = new Button("Submit");
+
+	FlexTable resultsTable = new FlexTable();
 
 	// Use an RPC call to the Blob Service to get the blobstore upload url
 	BlobServiceAsync blobService = GWT.create(BlobService.class);
@@ -27,29 +38,34 @@ public class UploadPanel extends GoodlePanel {
 	}
 
 	public VerticalPanel getPanel() {
-		// FileUpload fu = new FileUpload();
 
-		// panel.add(fu);
-
+		upload.setName("uploadFile");
+		formPanel.add(upload);
+		titleLabel.setText("Podaj tytuł pliku:");
+		formPanel.add(titleLabel);
+		titleBox.setName("title");
+		formPanel.add(titleBox);
+		formPanel.add(submit);
+		panel.add(formPanel);
+		
+		panel.add(info);
+		panel.add(resultsTable);
+		
 		uploadForm.setEncoding(FormPanel.ENCODING_MULTIPART);
 		uploadForm.setMethod(FormPanel.METHOD_POST);
-		
-		upload.setName("upload");
-		panel.add(upload);
 
-		Button submit = new Button("Submit");
+	    uploadForm.setWidget(formPanel);
+	    
+		
 		submit.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-
 				blobService.getBlobStoreUploadUrl(new AsyncCallback<String>() {
-
 					@Override
 					public void onSuccess(String result) {
 						// Set the form action to the newly created
 						// blobstore upload URL
 						uploadForm.setAction(result.toString());
-
 						// Submit the form to complete the upload
 						uploadForm.submit();
 						uploadForm.reset();
@@ -60,21 +76,14 @@ public class UploadPanel extends GoodlePanel {
 						caught.printStackTrace();
 					}
 				});
-
 			}
-
 		});
-		
-
-		panel.add(submit);
-
-		panel.add(info);
 
 		uploadForm
 				.addSubmitCompleteHandler(new FormPanel.SubmitCompleteHandler() {
 					@Override
 					public void onSubmitComplete(SubmitCompleteEvent event) {
-						info.setText("Sukces!" + event);
+						info.setText("Sukces!");
 
 						// pokaż wysłany plik
 
@@ -84,7 +93,7 @@ public class UploadPanel extends GoodlePanel {
 
 				});
 
-		panel.add(uploadForm);
+		RootPanel.get().add(uploadForm);
 		return panel;
 	}
 
@@ -92,13 +101,10 @@ public class UploadPanel extends GoodlePanel {
 
 		// Make another call to the Blob Service to retrieve the meta-data
 		blobService.getUploadedFile(id, new AsyncCallback<ClientFile>() {
-
 			public void onSuccess(ClientFile result) {
 
-				// TODO: pokazanie pliku
 				FileViewPanel fileView = new FileViewPanel(result);
-				panel.add(fileView);
-
+				panel.add(fileView.getPanel());
 			}
 
 			@Override

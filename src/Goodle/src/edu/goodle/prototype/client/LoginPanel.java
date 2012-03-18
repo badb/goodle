@@ -10,13 +10,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class LoginPanel extends GoodlePanel{
-	//TODO:
-	private UploadPanel up;
+
         public LoginPanel(GoodleServiceController controller, Goodle goodle) {
                 super(controller, goodle);
-
-                //TODO tymczasowe:
-                up = new UploadPanel(controller, goodle);
         }
 
         private VerticalPanel loginPanel = new VerticalPanel();
@@ -47,7 +43,7 @@ public class LoginPanel extends GoodlePanel{
                         		getGoodleServiceController().loginUser(nameField.getText(), passwordField.getText());
                            }
                 });
-                loginPanel.add(up.getPanel());
+                
                 return loginPanel;
         }
         

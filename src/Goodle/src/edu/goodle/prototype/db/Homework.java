@@ -16,9 +16,11 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
 
 @Entity
-public class Homework extends Material {
+public class Homework extends Material 
+{
+	private static final long serialVersionUID = 1L;
 	
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Key key;
     public Key getKey() { return key; }

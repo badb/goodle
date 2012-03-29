@@ -1,5 +1,6 @@
 package edu.goodle.prototype.db;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,9 +40,11 @@ import com.google.appengine.api.datastore.Text;
 		query = "SELECT c FROM Course c WHERE c.term = :term"
 	)
 })
-public class Course {
+public class Course implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Key key;
     public Key getKey() { return key; }

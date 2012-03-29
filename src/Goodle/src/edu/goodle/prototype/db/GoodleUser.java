@@ -1,5 +1,6 @@
 package edu.goodle.prototype.db;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,11 +24,6 @@ import com.google.appengine.api.datastore.Key;
 ({
 	@NamedQuery
 	(
-			name = "findUserByKey",
-			query = "SELECT u FROM GoodleUser u WHERE u.key = :key"
-	),
-	@NamedQuery
-	(
 			name = "findUsersByName",
 			query = "SELECT u FROM GoodleUser u WHERE u.firstName = :name OR u.lastName = :name"	
 	),
@@ -38,13 +34,15 @@ import com.google.appengine.api.datastore.Key;
 	),
 	@NamedQuery
 	(
-			name = "loginUser",
+			name = "findUserByLoginAndPassword",
 			query = "SELECT u FROM GoodleUser u WHERE u.login = :login AND u.password = :password"
 	)
 })
-public class GoodleUser {
+public class GoodleUser implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Key key;
     public Key getKey() { return key; }

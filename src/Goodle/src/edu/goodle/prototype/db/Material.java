@@ -1,5 +1,6 @@
 package edu.goodle.prototype.db;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,9 +15,11 @@ import javax.persistence.OneToMany;
 import com.google.appengine.api.datastore.Key;
 
 @Entity
-public class Material {
+public class Material implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Key key;
     public Key getKey() { return key; }

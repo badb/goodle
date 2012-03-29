@@ -51,7 +51,7 @@ public class DbApi {
 	
 	public void modifyUser
 	(
-			GoodleUser user, 
+			Key userKey, 
 			String firstName, 
 			String lastName, 
 			Email email
@@ -62,7 +62,7 @@ public class DbApi {
 		try
 		{
 			em.getTransaction().begin();
-			user = em.merge(user);
+			GoodleUser user = em.find(GoodleUser.class, userKey);
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setEmail(email);
@@ -74,21 +74,6 @@ public class DbApi {
 			throw new DataModificationFailedException(msg);
 		}
 		finally { em.close(); }
-	}
-	
-	public GoodleUser findUserByKey(Key key)
-	{
-		GoodleUser result;
-		EntityManager em = emf.createEntityManager();
-		try
-		{
-			Query q = em.createNamedQuery("findUserByKey");
-			q.setParameter("key", key);
-			result = (GoodleUser) q.getSingleResult();
-		}
-		catch (NoResultException e) { result = null; }
-		finally { em.close(); }
-		return result;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -150,7 +135,7 @@ public class DbApi {
 	
 	public void modifyCourse
 	(
-			Course course,
+			Key courseKey,
 			Text desc, 
 			Link site, 
 			String term
@@ -161,7 +146,7 @@ public class DbApi {
 		try
 		{
 			em.getTransaction().begin();
-			course = em.merge(course);
+			Course course = em.find(Course.class, courseKey);
 			course.setDesc(desc);
 			course.setSite(site);
 			course.setTerm(term);
@@ -175,12 +160,13 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
-	public List<Course> findUserCourses(GoodleUser user)
+	public List<Course> findUserCourses(Key userKey)
 	{
 		List<Course> results = new ArrayList<Course>();
 		EntityManager em = emf.createEntityManager();
 		try
 		{
+			GoodleUser user = em.find(GoodleUser.class, userKey);
 			Set<Key> courses = user.getCourses();
 			for (Key k : courses)
 			{
@@ -193,12 +179,13 @@ public class DbApi {
 		return results;
 	}
 	
-	public List<Course> findUserCoursesLed(GoodleUser user)
+	public List<Course> findUserCoursesLed(Key userKey)
 	{
 		List<Course> results = new ArrayList<Course>();
 		EntityManager em = emf.createEntityManager();
 		try
 		{
+			GoodleUser user = em.find(GoodleUser.class, userKey);
 			Set<Key> courses = user.getCoursesLed();
 			for (Key k : courses)
 			{
@@ -243,13 +230,15 @@ public class DbApi {
 		return results;
 	}
 	
-	public void addCommentToCourse(GoodleUser author, Text text, Course course)
+	public void addCommentToCourse(Key authorKey, Text text, Key courseKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
+			GoodleUser author = em.find(GoodleUser.class, authorKey);
+			Course course = em.find(Course.class, courseKey);
 			course = em.merge(course);
 			Comment comment = new Comment(author, text);
 			course.addComment(comment);
@@ -263,14 +252,14 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void removeCommentFromCourse(Comment comment, Course course)
+	public void removeCommentFromCourse(Comment comment, Key courseKey)
 			throws DataModificationFailedException
 		{
 			EntityManager em = emf.createEntityManager();
 			try
 			{
 				em.getTransaction().begin();
-				course = em.merge(course);
+				Course course = em.find(Course.class, courseKey);
 				comment = em.merge(comment);
 				course.removeComment(comment);
 				em.getTransaction().commit();
@@ -283,14 +272,15 @@ public class DbApi {
 			finally { em.close(); }		
 		}
 	
-	public void addMemberToCourse(GoodleUser member, Course course)
+	public void addMemberToCourse(Key memberKey, Key courseKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			member = em.merge(member);
+			GoodleUser member = em.find(GoodleUser.class, memberKey);
+			Course course = em.find(Course.class, courseKey);
 			course = em.merge(course);
 			member.addCourse(course);
 			course.addMember(member);
@@ -304,15 +294,15 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
-	public void removeMemberFromCourse(GoodleUser member, Course course)
+	public void removeMemberFromCourse(Key memberKey, Key courseKey)
 			throws DataModificationFailedException
 		{
 			EntityManager em = emf.createEntityManager();
 			try
 			{
 				em.getTransaction().begin();
-				member = em.merge(member);
-				course = em.merge(course);
+				GoodleUser member = em.find(GoodleUser.class, memberKey);
+				Course course = em.find(Course.class, courseKey);
 				member.removeCourse(course);
 				course.removeMember(member);
 				em.getTransaction().commit();
@@ -325,14 +315,15 @@ public class DbApi {
 			finally { em.close(); }
 		} 
 	
-	public void addMessageToCourse(GoodleUser author, Text text, Course course)
+	public void addMessageToCourse(Key authorKey, Text text, Key courseKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			course = em.merge(course);
+			GoodleUser author = em.find(GoodleUser.class, authorKey);
+			Course course = em.find(Course.class, courseKey);
 			Message msg = new Message(author, text);
 			course.addMessage(msg);
 			em.getTransaction().commit();
@@ -345,15 +336,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void removeMessageFromCourse(Message message, Course course)
+	public void removeMessageFromCourse(Key messageKey, Key courseKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			course = em.merge(course);
-			message = em.merge(message);
+			Course course = em.find(Course.class, courseKey);
+			Message message = em.find(Message.class, messageKey);
 			course.removeMessage(message);
 			em.getTransaction().commit();
 		}
@@ -365,15 +356,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void addTeacherToCourse(GoodleUser teacher, Course course)
+	public void addTeacherToCourse(Key teacherKey, Key courseKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			teacher = em.merge(teacher);
-			course = em.merge(course);
+			GoodleUser teacher = em.find(GoodleUser.class, teacherKey);
+			Course course = em.find(Course.class, courseKey);
 			teacher.addCourseLed(course);
 			course.addTeacher(teacher);
 			em.getTransaction().commit();
@@ -386,15 +377,15 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
-	public void removeTeacherFromCourse(GoodleUser teacher, Course course)
+	public void removeTeacherFromCourse(Key teacherKey, Key courseKey)
 			throws DataModificationFailedException
 		{
 			EntityManager em = emf.createEntityManager();
 			try
 			{
 				em.getTransaction().begin();
-				teacher = em.merge(teacher);
-				course = em.merge(course);
+				GoodleUser teacher = em.find(GoodleUser.class, teacherKey);
+				Course course = em.find(Course.class, courseKey);
 				teacher.removeCourseLed(course);
 				course.removeTeacher(teacher);
 				em.getTransaction().commit();
@@ -407,14 +398,14 @@ public class DbApi {
 			finally { em.close(); }
 		}
 	
-	public void createModule(Course course, Collection<Material> materials, boolean isVisible)
+	public void createModule(Key courseKey, Collection<Material> materials, boolean isVisible)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			course = em.merge(course);
+			Course course = em.find(Course.class, courseKey);
 			Module module = new Module(materials, isVisible);
 			course.addModule(module);
 			em.getTransaction().commit();
@@ -427,14 +418,14 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
-	public void copyModule(Course course, Module module, boolean isVisible)
+	public void copyModule(Key courseKey, Module module, boolean isVisible)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			course = em.merge(course);
+			Course course = em.find(Course.class, courseKey);
 			Module m = new Module(module, isVisible);
 			course.addModule(m);
 			em.getTransaction().commit();
@@ -447,15 +438,15 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
-	public void removeModule(Course course, Module module)
+	public void removeModule(Key courseKey, Key moduleKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			course = em.merge(course);
-			module = em.merge(module);
+			Course course = em.find(Course.class, courseKey);
+			Module module = em.find(Module.class, moduleKey);
 			course.removeModule(module);
 			em.getTransaction().commit();
 		}
@@ -467,14 +458,15 @@ public class DbApi {
 		finally { em.close(); }
 	}
 	
-	public void addCommentToModule(GoodleUser author, Text text, Module module)
+	public void addCommentToModule(Key authorKey, Text text, Key moduleKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			module = em.merge(module);
+			GoodleUser author = em.find(GoodleUser.class, authorKey);
+			Module module = em.find(Module.class, moduleKey);
 			Comment comment = new Comment(author, text);
 			module.addComment(comment);
 			em.getTransaction().commit();
@@ -487,15 +479,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void removeCommentFromModule(Comment comment, Module module)
+	public void removeCommentFromModule(Key commentKey, Key moduleKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			module = em.merge(module);
-			comment = em.merge(comment);
+			Module module = em.find(Module.class, moduleKey);
+			Comment comment = em.find(Comment.class, commentKey);
 			module.removeComment(comment);
 			em.getTransaction().commit();
 		}
@@ -507,14 +499,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void addHomeworkToModule(GoodleUser author, String name, Text desc, Date deadline, Module module)
+	public void addHomeworkToModule(Key authorKey, String name, Text desc, Date deadline, Key moduleKey)
 			throws DataModificationFailedException
 		{
 			EntityManager em = emf.createEntityManager();
 			try
 			{
 				em.getTransaction().begin();
-				module = em.merge(module);
+				GoodleUser author = em.find(GoodleUser.class, authorKey);
+				Module module = em.find(Module.class, moduleKey);
 				Homework homework = new Homework(author, name, desc, deadline);
 				module.addMaterial(homework);
 				em.getTransaction().commit();
@@ -527,15 +520,15 @@ public class DbApi {
 			finally { em.close(); }		
 		}	
 
-	public void removeMaterialFromModule(Material material, Module module)
+	public void removeMaterialFromModule(Key materialKey, Key moduleKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			module = em.merge(module);
-			material = em.merge(material);
+			Module module = em.find(Module.class, moduleKey);
+			Material material = em.find(Material.class, materialKey);
 			module.removeMaterial(material);
 			em.getTransaction().commit();
 		}
@@ -547,14 +540,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}	
 
-	public void addCommentToMaterial(GoodleUser author, Text text, Material material)
+	public void addCommentToMaterial(Key authorKey, Text text, Key materialKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			material = em.merge(material);
+			GoodleUser author = em.find(GoodleUser.class, authorKey);
+			Material material = em.find(Material.class, materialKey);
 			Comment comment = new Comment(author, text);
 			material.addComment(comment);
 			em.getTransaction().commit();
@@ -567,15 +561,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 		
-	public void removeCommentFromMaterial(Comment comment, Material material)
+	public void removeCommentFromMaterial(Key commentKey, Key materialKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			material = em.merge(material);
-			comment = em.merge(comment);
+			Material material = em.find(Material.class, materialKey);
+			Comment comment = em.find(Comment.class, commentKey);
 			material.removeComment(comment);
 			em.getTransaction().commit();
 		}
@@ -587,14 +581,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 	
-	public void addFileToHomework(GoodleUser author, Link file, Homework homework)
+	public void addFileToHomework(Key authorKey, Link file, Key homeworkKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			homework = em.merge(homework);
+			GoodleUser author = em.find(GoodleUser.class, authorKey);
+			Homework homework = em.find(Homework.class, homeworkKey);
 			HomeworkFile homeworkFile = new HomeworkFile(author, file);
 			homework.addProvided(homeworkFile);
 			em.getTransaction().commit();
@@ -607,15 +602,15 @@ public class DbApi {
 		finally { em.close(); }		
 	}
 			
-	public void removeFileFromHomework(HomeworkFile file, Homework homework)
+	public void removeFileFromHomework(Key fileKey, Key homeworkKey)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			homework = em.merge(homework);
-			file = em.merge(file);
+			Homework homework = em.find(Homework.class, homeworkKey);
+			HomeworkFile file = em.find(HomeworkFile.class, fileKey);
 			homework.removeProvided(file);
 			em.getTransaction().commit();
 		}
@@ -627,14 +622,14 @@ public class DbApi {
 		finally { em.close(); }		
 	}	
 	
-	public void modifyComment(Comment comment, Text text)
+	public void modifyComment(Key commentKey, Text text)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			comment = em.merge(comment);
+			Comment comment = em.find(Comment.class, commentKey);
 			comment.setText(text);
 			em.getTransaction().commit();
 		}
@@ -646,14 +641,14 @@ public class DbApi {
 		finally { em.close(); }	
 	}
 	
-	public void modifyMessage(Message message, Text text)
+	public void modifyMessage(Key messageKey, Text text)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			message = em.merge(message);
+			Message message = em.find(Message.class, messageKey);
 			message.setText(text);
 			em.getTransaction().commit();
 		}
@@ -665,14 +660,14 @@ public class DbApi {
 		finally { em.close(); }	
 	}
 	
-	public void modifyMark(Mark mark, int val, Text comment)
+	public void modifyMark(Key markKey, int val, Text comment)
 		throws DataModificationFailedException
 	{
 		EntityManager em = emf.createEntityManager();
 		try
 		{
 			em.getTransaction().begin();
-			mark = em.merge(mark);
+			Mark mark = em.find(Mark.class, markKey);
 			mark.setVal(val);
 			mark.setComment(comment);
 			em.getTransaction().commit();

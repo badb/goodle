@@ -29,6 +29,13 @@ public class MainStudentPanel extends GoodlePanel {
 	    });
 	    cp = new CourseListPanel(controller, goodle);
 		mainPanel.add(bar);
+		
+
+        //TODO tymczasowe:
+        UploadPanel up = new UploadPanel(controller, goodle);
+        mainPanel.add(up.getPanel());
+        
+        
 		RootPanel.get("page").clear();
 		RootPanel.get("page").add(cp.getPanel("kwa"));
 	}

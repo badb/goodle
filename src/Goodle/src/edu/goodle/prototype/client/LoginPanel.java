@@ -23,6 +23,7 @@ public class LoginPanel extends GoodlePanel{
         private Label nameLabel = new Label("Login");
         private Label passwordLabel = new Label("Hasło");
         final Label loginFailLabel = new Label("Login failed");
+        
 
         public VerticalPanel getPanel() {
         		loginPanel.clear();
@@ -42,6 +43,7 @@ public class LoginPanel extends GoodlePanel{
                         		getGoodleServiceController().loginUser(nameField.getText(), passwordField.getText());
                            }
                 });
+                
                 return loginPanel;
         }
         

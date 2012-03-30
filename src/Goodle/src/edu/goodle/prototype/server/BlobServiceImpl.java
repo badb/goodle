@@ -57,6 +57,9 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 			throws ServletException, IOException {
 
 		BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
+		
+		//TODO ustawienie zapisywania pliku
+		
 		blobstoreService.serve(blobKey, resp);
 
 	}

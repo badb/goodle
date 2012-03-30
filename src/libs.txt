@@ -1,0 +1,7 @@
+http://code.google.com/p/mockito/downloads/detail?name=mockito-all-1.9.0.jar&can=2&q=
+
+http://code.google.com/p/objectify-appengine/downloads/detail?name=objectify-3.1.zip&can=2&q=
+
+http://code.google.com/p/selenium/downloads/detail?name=selenium-server-2.20.0.zip&can=1&q=server
+
+http://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.20.0.jar&can=1&q=server

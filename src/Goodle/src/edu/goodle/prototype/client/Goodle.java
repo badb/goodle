@@ -18,6 +18,7 @@ import edu.goodle.prototype.db.GoodleUser;
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private GoodleServiceController controller = new GoodleServiceController(this);
+	private GoogleAPIController APIcontroller = new GoogleAPIController(this);
 	private LoginPanel lp = new LoginPanel(controller, this);
 	private MainStudentPanel mp = new MainStudentPanel(controller, this);
 	private SearchPanel sp = new SearchPanel(controller, this);
@@ -29,13 +30,12 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private MainCoursePanel mcp = new MainCoursePanel(controller, this);
 	private RegisterPanel rp = new RegisterPanel(controller, this);
 	
-
 	private static Logger logger = Logger.getLogger("");
 	private String initToken = History.getToken();
 	
 	public void onModuleLoad() {
 		
-		
+		APIcontroller.login();
 		
 		if (initToken.length() == 0) {
 			History.newItem("main");
@@ -48,9 +48,9 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 //	    if ( sessionID != null && checkSessionID(sessionID)) {
 	    	showNavBar();
 	    	showCourseList();
-//	    } else {
-//	    	displayLoginBox();
-//	    }
+	//    } else {
+	  //  	displayLoginBox();
+	   // }
 	}
 	
 	public boolean checkSessionID(String sessionID) {
@@ -164,4 +164,5 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	public void loginFail() {
 		lp.loginFail();
 	}
+
 }

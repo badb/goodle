@@ -713,10 +713,16 @@ public class DbApi {
 	public String loginUser(String login, String password) 
 	{
 		/* Tymczasowo */
+		Logger.getLogger("").entering(DbApi.class.getName(), "loginUser");
 		try
 		{
 			GoodleUser user = findUserByLogin("llama");
-			if (user == null) createUser("llama", "llama", null, null, null);
+			if (user == null) 
+			{
+				createUser("llama", "llama", null, null, null);
+				Logger.getLogger("").severe("Llama created.");
+			}
+			else  Logger.getLogger("").severe("Llama found.");
 			//Link l = new Link("www.pizzaro.es");
 			//Text t = new Text("");
 			//createCourse("Historia Inków", "2012L", t, l, new ArrayList<GoodleUser>(), new ArrayList<GoodleUser>(), null);
@@ -734,7 +740,7 @@ public class DbApi {
 		EntityManager em = emf.createEntityManager();
 		try
 		{
-			Query q = em.createNamedQuery("loginUser");
+			Query q = em.createNamedQuery("findUserByLoginAndPassword");
 			q.setParameter("login", login);
 			q.setParameter("password", password);
 			GoodleUser user = (GoodleUser) q.getSingleResult();
@@ -753,6 +759,7 @@ public class DbApi {
 		}
 		finally { em.close(); }
 		Logger.getLogger("").severe("Session key returned: " + sessionKey);
+		Logger.getLogger("").exiting(DbApi.class.getName(), "loginUser");
 		return sessionKey;
 	}
 

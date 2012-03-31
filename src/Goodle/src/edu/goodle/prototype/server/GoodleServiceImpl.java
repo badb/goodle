@@ -1,5 +1,7 @@
 package edu.goodle.prototype.server;
 
+import java.util.logging.Logger;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.goodle.prototype.client.GoodleService;
@@ -13,6 +15,7 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
                 return new Boolean(false);
         }
 
+        @Override
         public String loginUser(String name, String password) {
         	DbApi dbApi = new DbApi();
         	return dbApi.loginUser(name, password);

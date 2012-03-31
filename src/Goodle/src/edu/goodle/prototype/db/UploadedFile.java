@@ -2,11 +2,8 @@ package edu.goodle.prototype.db;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.google.appengine.api.datastore.Key;
 import com.googlecode.objectify.annotation.Entity;
 
 

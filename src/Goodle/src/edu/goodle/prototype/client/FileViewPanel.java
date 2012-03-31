@@ -1,17 +1,15 @@
 package edu.goodle.prototype.client;
 
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 
 public class FileViewPanel {
@@ -36,13 +34,16 @@ public class FileViewPanel {
 		name.setText(file.getName());
 		hpanel.add(name);
 
-		
 		showButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				frame = new Frame("" + file.getUrl());
+				String url = GWT.getHostPageBaseURL() + file.getUrl().substring(1);
+				frame = new Frame("http://docs.google.com/viewer?url=" + url + "&embedded=true");
+		
 				frame.setVisible(true);
+
+				panel.add(frame);
 				
 				showButton.setVisible(false);
 				hideButton.setVisible(true);
@@ -65,17 +66,14 @@ public class FileViewPanel {
 		downloadButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				//TODO właściwe pobieranie plików
-				//to działa dla pdfów na chrome, ale trzeba zmienić tytuł
-				Window.open(file.getUrl(), "_self", "");
 				
+				Window.open(file.getUrl(), "_self", "");
 				
 			}
 
 		});
 		hpanel.add(downloadButton);
 		panel.add(hpanel);
-		panel.add(frame);
 		return panel;
 
 	}

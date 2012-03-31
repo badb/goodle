@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.gwt.core.client.impl.AsyncFragmentLoader.Logger;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -59,5 +58,7 @@ public class UploadServiceImpl extends HttpServlet {
     resp.getWriter().println(id);
 
   }
+  
+  
 
 }

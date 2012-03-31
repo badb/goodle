@@ -17,7 +17,7 @@ import edu.goodle.prototype.db.DbApi;
 import edu.goodle.prototype.db.GoodleUser;
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
-	private GoodleServiceController controller = new GoodleServiceController();
+	private GoodleServiceController controller = new GoodleServiceController(this);
 	private LoginPanel lp = new LoginPanel(controller, this);
 	private MainStudentPanel mp = new MainStudentPanel(controller, this);
 	private SearchPanel sp = new SearchPanel(controller, this);

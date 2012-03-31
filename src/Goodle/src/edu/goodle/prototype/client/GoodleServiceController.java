@@ -12,9 +12,8 @@ public class GoodleServiceController {
 	private static Logger logger = Logger.getLogger("");
 	private Goodle goodle;
 	
-	public void GoodleServiceContorller(Goodle goodle) {
-		this.goodle = goodle;
-	}
+	public GoodleServiceController() { };
+	public GoodleServiceController(Goodle goodle) { this.goodle = goodle; }
 	
 	void getCourseInfo (String course) {	
 		goodleService.getCourseInfo(getSession(), course, new AsyncCallback<String>() {
@@ -49,15 +48,23 @@ public class GoodleServiceController {
 	}
 	
 	void loginUser (String name, String password) {
-	    goodleService.loginUser(name, password, new AsyncCallback<String>() {
-		    public void onFailure(Throwable caught) {
-		    		goodle.loginFail();
-		            logger.severe("Login failed." + caught);
-		    }
-		    public void onSuccess(String result) {
-		            goodle.afterLogin(result);
-		    }
-	    });
+		Logger.getLogger("").severe("Service controller wchodzi.");
+		AsyncCallback<String> callback = new AsyncCallback<String>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+	            Logger.getLogger("").severe("Login failed." + caught);
+	    		goodle.loginFail();
+
+			}
+			public void onSuccess(String result) 
+			{	
+				Logger.getLogger("").severe("Success.");
+	            goodle.afterLogin(result);
+			}
+		};
+	    goodleService.loginUser(name, password, callback);
+
 	}
 	
 	void getAllCourses() {

@@ -5,6 +5,7 @@
   <inherits name='com.google.gwt.logging.Logging'/>
   <inherits name="com.googlecode.objectify.Objectify" />
   <inherits name="com.google.api.gwt.oauth2.OAuth2" />
+  <inherits name="com.google.api.gwt.services.Calendar" />
   <set-property name="gwt.logging.consoleHandler" value="DISABLED"/>
   <set-property name="gwt.logging.popupHandler" value="DISABLED" />
 

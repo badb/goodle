@@ -30,11 +30,10 @@ public class ServicesManager {
 		{
 			public void onFailure(Throwable caught) 
 			{
-	            Logger.getLogger("").severe("Wyszukiwanie nie powiodło się: " + caught);
+				goodle.actionFailed();
 			}
 			public void onSuccess(Collection<Course> result) 
 			{	
-				Logger.getLogger("").severe("Wyszukiwanie zakończone sukcesem.");
 	            goodle.showCoursesFound(result);
 			}
 		};

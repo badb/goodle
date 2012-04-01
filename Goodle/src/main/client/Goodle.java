@@ -2,6 +2,7 @@ package main.client;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Logger;
 
 import main.client.panels.CoursePanel;
@@ -39,6 +40,8 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private GoodlePanel middlePanel;
 	private RightPanel rightPanel = new RightPanel(manager);
 	
+	private Label actionLabel = new Label("");
+	
 /*	private LoginPanel lp = new LoginPanel(manager);
 	private MainStudentPanel mp = new MainStudentPanel(manager, this);
 	private SearchPanel sp = new SearchPanel(manager, this);
@@ -72,6 +75,8 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 		mainPanel.add(topPanel);
 		mainPanel.add(contentPanel);
 		
+		mainPanel.add(actionLabel);
+		
 		RootPanel.get().add(mainPanel);
 		
 	/*	
@@ -91,11 +96,17 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	    } */
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void showCoursesFound(Collection<Course> courses)
 	{
-		middlePanel = new ResultListPanel(manager);
+		actionLabel.setText("Courses found");
+		List<Course> list = (List<Course>) courses;
+		contentPanel.add(new ResultListPanel(manager, list));
+		//Logger.getLogger("").severe("Courses found.");
+		//middlePanel = new ResultListPanel(manager);
 	}
 	
+	public void actionFailed() { actionLabel.setText("Operacja nie powiodła się"); }
 	/*
 	
 	public boolean checkSessionID(String sessionID) {

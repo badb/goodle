@@ -1,7 +1,6 @@
 package main.client.panels;
 
 import main.client.services.ServicesManager;
-import main.shared.AsyncSuggestOracle;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,13 +11,13 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.TextBox;
 
 
 public class TopPanel extends GoodlePanel
 {
 	private HorizontalPanel mainPanel = new HorizontalPanel();
-	private SuggestBox searchBox;
+	private TextBox searchBox;
 	private Button searchButton = new Button("Szukaj");
 	private Image userAvatar = new Image();
 	private Label userLogin = new Label();
@@ -28,8 +27,8 @@ public class TopPanel extends GoodlePanel
 	{ 
 		super(manager);
 		
-		AsyncSuggestOracle oracle = new AsyncSuggestOracle();
-		searchBox = new SuggestBox(oracle);
+		//AsyncSuggestOracle oracle = new AsyncSuggestOracle();
+		searchBox = new TextBox();
 		
 	    searchBox.addKeyPressHandler(new KeyPressHandler() 
 	    {

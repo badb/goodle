@@ -1,5 +1,6 @@
 package main.server;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,8 +21,6 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 	private static final long serialVersionUID = 1L;
 	
 	private static EntityManagerFactory emf = EMF.get();
-	
-	public CourseServiceImpl() { };
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -33,7 +32,7 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		{
 			Query q = em.createNamedQuery("findCoursesByName");
 			q.setParameter("name", name);
-			results = (Collection<Course>) q.getResultList();
+			results = new ArrayList<Course> (q.getResultList());
 		}
 		catch (NoResultException e) { results = null; }
 		finally { em.close(); }

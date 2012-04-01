@@ -1,1 +1,0 @@
-package edu.mimuw.goodle.client;

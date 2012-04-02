@@ -24,7 +24,7 @@ public class AsyncSuggestOracle extends SuggestOracle
     public void requestSuggestions(Request request, Callback callback) 
 	{
 		String name = request.getQuery();
-		courseService.findCoursesByName(name, new CourseSuggestCallback(request, callback));
+		//courseService.findCoursesByName(name, new CourseSuggestCallback(request, callback));
     }
 
     class CourseSuggestCallback implements AsyncCallback<Collection<Course>> 

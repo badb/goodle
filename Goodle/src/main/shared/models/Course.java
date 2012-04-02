@@ -26,13 +26,13 @@ import com.google.appengine.api.datastore.Text;
 ({
 	@NamedQuery
 	(
-		name = "findCourseByKey",
-		query = "SELECT c FROM Course c WHERE c.key = :key"
+		name = "findCoursesByName",
+		query = "SELECT c FROM Course c WHERE c.name = :name"	
 	),
 	@NamedQuery
 	(
-		name = "findCoursesByName",
-		query = "SELECT c FROM Course c WHERE c.name = :name"	
+		name = "findCoursesDescByName",
+		query = "SELECT c.key, c.name, c.desc FROM Course c WHERE c.name = :name"
 	),
 	@NamedQuery
 	(	

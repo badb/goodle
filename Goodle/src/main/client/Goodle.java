@@ -13,6 +13,7 @@ import main.client.panels.ResultListPanel;
 import main.client.panels.RightPanel;
 import main.client.panels.TopPanel;
 import main.client.services.ServicesManager;
+import main.client.utils.CourseShortDesc;
 import main.server.DbApi;
 import main.shared.models.Course;
 import main.shared.models.DataModificationFailedException;
@@ -97,10 +98,10 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void showCoursesFound(Collection<Course> courses)
+	public void showCoursesFound(Collection<CourseShortDesc> courses)
 	{
 		actionLabel.setText("Courses found");
-		List<Course> list = (List<Course>) courses;
+		List<CourseShortDesc> list = (List<CourseShortDesc>) courses;
 		contentPanel.add(new ResultListPanel(manager, list));
 		//Logger.getLogger("").severe("Courses found.");
 		//middlePanel = new ResultListPanel(manager);

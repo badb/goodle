@@ -2,6 +2,7 @@ package main.client.services;
 
 import java.util.Collection;
 
+import main.client.utils.CourseShortDesc;
 import main.shared.models.Course;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -9,6 +10,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface CourseServiceAsync 
 {
-	public void findCoursesByName(String name, AsyncCallback<Collection<Course>> callback);
+	public void findCoursesDescByName
+	(
+			String name, 
+			AsyncCallback<Collection<CourseShortDesc>> callback
+	);
 
 }

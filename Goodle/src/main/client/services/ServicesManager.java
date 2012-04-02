@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import main.client.Goodle;
 import main.client.GoodleService;
 import main.client.GoodleServiceAsync;
+import main.client.utils.CourseShortDesc;
 import main.shared.models.Course;
 
 import com.google.gwt.core.client.GWT;
@@ -26,18 +27,19 @@ public class ServicesManager {
 	
 	public void findCoursesByName(String name)
 	{
-		AsyncCallback<Collection<Course>> callback = new AsyncCallback<Collection<Course>>()
+		AsyncCallback<Collection<CourseShortDesc>> callback = 
+				new AsyncCallback<Collection<CourseShortDesc>>()
 		{
 			public void onFailure(Throwable caught) 
 			{
 				goodle.actionFailed();
 			}
-			public void onSuccess(Collection<Course> result) 
+			public void onSuccess(Collection<CourseShortDesc> result) 
 			{	
 	            goodle.showCoursesFound(result);
 			}
 		};
-	    courseService.findCoursesByName(name, callback);
+	    courseService.findCoursesDescByName(name, callback);
 		
 	}
 	

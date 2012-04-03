@@ -36,7 +36,7 @@ public class DbApi {
 	private EntityManagerFactory emf;
 	
 	public DbApi() { emf = EMF.get(); }
-	
+	/*
 	public void createUser
 	(
 			String login, 
@@ -724,7 +724,7 @@ public class DbApi {
 	
 	public String loginUser(String login, String password) 
 	{
-		/* Tymczasowo */
+		Tymczasowo
 		try
 		{
 			GoodleUser user = findUserByLogin("llama");
@@ -746,7 +746,6 @@ public class DbApi {
 			Logger.getLogger("").severe("Unable to create llama: " + e.getMessage());
 		}
 		
-		/* Tymczasowo-end */
 		String sessionKey = null;
 		EntityManager em = emf.createEntityManager();
 		try
@@ -771,6 +770,6 @@ public class DbApi {
 		finally { em.close(); }
 		Logger.getLogger("").severe("Session key returned: " + sessionKey);
 		return sessionKey;
-	}
+	} */
 
 }

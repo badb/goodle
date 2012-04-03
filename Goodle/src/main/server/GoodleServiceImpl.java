@@ -18,7 +18,7 @@ public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleSer
         @Override
         public String loginUser(String name, String password) {
         	DbApi dbApi = new DbApi();
-        	return dbApi.loginUser(name, password);
+        	return null; /* dbApi.loginUser(name, password); */
         }
 
         @Override

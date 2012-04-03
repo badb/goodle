@@ -25,6 +25,13 @@ public class ServicesManager {
 	public ServicesManager() { };
 	public ServicesManager(Goodle goodle) { this.goodle = goodle; }
 	
+	public void showCreateCoursePanel() { goodle.createCourse(); }
+	
+	public void createCourse(String name, String desc)
+	{
+		
+	}
+	
 	public void findCoursesByName(String name)
 	{
 		AsyncCallback<Collection<CourseShortDesc>> callback = 

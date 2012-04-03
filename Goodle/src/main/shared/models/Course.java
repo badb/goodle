@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
-import com.google.appengine.api.datastore.Text;
 
 @Entity
 @NamedQueries 
@@ -59,13 +58,9 @@ public class Course implements Serializable
     
     // avatar
     
-    private Text desc;
-    public Text getDesc() { return desc; }
-    public void setDesc(Text desc) { this.desc = desc; }
-    
-    private Link site;
-    public Link getSite() { return site; }
-    public void setSite(Link site) { this.site = site; }
+    private String desc;
+    public String getDesc() { return desc; }
+    public void setDesc(String desc) { this.desc = desc; }
     
     private Set<Key> teachers;
     public Set<Key> getTeachers() { return Collections.unmodifiableSet(teachers); }
@@ -105,12 +100,6 @@ public class Course implements Serializable
     public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
     public void addMessage(Message message) { messages.add(message); }
     public void removeMessage(Message message) { messages.remove(message); }
-
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<Comment>();
-    public List<Comment> getComments() { return Collections.unmodifiableList(comments); }
-    public void addComment(Comment comment) { comments.add(comment); }
-    public void removeComment(Comment comment) { comments.remove(comment); }
     
     public Course() { }
     
@@ -118,8 +107,7 @@ public class Course implements Serializable
     (
     		String name, 
     		String term, 
-    		Text desc, 
-    		Link site, 
+    		String desc, 
     		Collection<GoodleUser> teachers, 
     		Collection<GoodleUser> members, 
     		Link calendar
@@ -127,8 +115,7 @@ public class Course implements Serializable
     {
     	this.name = name;
     	this.term = term;
-    	this.desc = desc;
-    	this.site = site;
+    	this.desc = desc;;
     	this.teachers = new HashSet<Key>();
     	this.modules = new ArrayList<Module>();
     	this.members = new HashSet<Key>();

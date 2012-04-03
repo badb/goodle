@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import main.client.panels.CoursePanel;
+import main.client.panels.CreateCoursePanel;
 import main.client.panels.EmptyPanel;
 import main.client.panels.GoodlePanel;
 import main.client.panels.LeftPanel;
@@ -30,6 +31,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
@@ -61,12 +63,13 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	
 	public void onModuleLoad() 
 	{
-		logger.severe("Loading module...");
+		mainPanel.getElement().setId("mainPanel");
+		topPanel.getElement().setId("topPanel");
+		leftPanel.getElement().setId("leftPanel");
+		middlePanel.getElement().setId("middlePanel");
+		rightPanel.getElement().setId("rightPanel");
 		
-		/* */
-		//middlePanel = new CoursePanel(manager, c);
-		 /* */;
-		 
+		
 		middlePanel = new EmptyPanel(manager);
 		
 		contentPanel.add(leftPanel);
@@ -97,17 +100,24 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	    } */
 	}
 	
-	@SuppressWarnings("unchecked")
+	public void createCourse() { loadContent(new CreateCoursePanel(manager)); }
+	
 	public void showCoursesFound(Collection<CourseShortDesc> courses)
 	{
 		actionLabel.setText("Courses found");
 		List<CourseShortDesc> list = (List<CourseShortDesc>) courses;
-		contentPanel.add(new ResultListPanel(manager, list));
+		loadContent(new ResultListPanel(manager, list));
 		//Logger.getLogger("").severe("Courses found.");
 		//middlePanel = new ResultListPanel(manager);
 	}
 	
 	public void actionFailed() { actionLabel.setText("Operacja nie powiodła się"); }
+	
+	public void loadContent(Widget w)
+	{
+		contentPanel.remove(1);
+		contentPanel.insert(w, 1);
+	}
 	/*
 	
 	public boolean checkSessionID(String sessionID) {

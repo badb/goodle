@@ -59,7 +59,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	
 	public void clearPage() {
 		RootPanel.get("tabs").clear();
-		RootPanel.get("page").clear();
+		RootPanel.get	("page").clear();
 		np.clear();
 		RootPanel.get("navpath").clear();
 		RootPanel.get("info").clear();

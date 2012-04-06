@@ -2,10 +2,7 @@ package main.server;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +12,6 @@ import javax.persistence.Query;
 import main.client.services.CourseService;
 import main.client.utils.CourseShortDesc;
 import main.shared.EMF;
-import main.shared.models.Comment;
 import main.shared.models.Course;
 import main.shared.models.DataModificationFailedException;
 import main.shared.models.GoodleSession;
@@ -44,8 +40,6 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 			String name,
 			String term,
 			String desc, 
-			Collection<GoodleUser> teachers, 
-			Collection<GoodleUser> members, 
 			Link calendar
 	)
 		throws DataModificationFailedException
@@ -53,7 +47,7 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		EntityManager em = emf.createEntityManager();
 		try
 		{
-			Course c = new Course(name, term, desc, teachers, members, calendar);
+			Course c = new Course(name, term, desc, calendar);
 			em.persist(c);
 		}
 		catch (Exception e)

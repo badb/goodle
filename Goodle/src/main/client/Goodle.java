@@ -63,14 +63,14 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	
 	public void onModuleLoad() 
 	{
+		middlePanel = new EmptyPanel(manager);
+		
 		mainPanel.getElement().setId("mainPanel");
 		topPanel.getElement().setId("topPanel");
 		leftPanel.getElement().setId("leftPanel");
 		middlePanel.getElement().setId("middlePanel");
 		rightPanel.getElement().setId("rightPanel");
-		
-		
-		middlePanel = new EmptyPanel(manager);
+		contentPanel.getElement().setId("contentPanel");
 		
 		contentPanel.add(leftPanel);
 		contentPanel.add(middlePanel);
@@ -116,6 +116,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	public void loadContent(Widget w)
 	{
 		contentPanel.remove(1);
+		w.getElement().setId("middlePanel");
 		contentPanel.insert(w, 1);
 	}
 	/*

@@ -13,9 +13,9 @@ public class CourseCell extends AbstractCell<CourseShortDesc>
 	{
 	      @SafeHtmlTemplates.Template
 	      (
-	    		  "<div class = \"{0}\">" +
-	    		  "<h1>{1}</h1>" +
-	    		  "<p>{2}</p>" +
+	    		  "<div class = \"courseCell\" key = \"{0}\">" +
+	    				  "<div class = \"courseCellName\">{1}</div>" +
+	    				  "<div class = \"courseCellDesc\">{2}</div>" +
 	    		  "</div>"
 	      )
 	      SafeHtml cell(Key key, String title, String desc);

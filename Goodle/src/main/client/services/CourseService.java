@@ -21,8 +21,6 @@ public interface CourseService extends RemoteService
 			String name,
 			String term,
 			String desc, 
-			Collection<GoodleUser> teachers, 
-			Collection<GoodleUser> members, 
 			Link calendar
 	) throws DataModificationFailedException;
 	

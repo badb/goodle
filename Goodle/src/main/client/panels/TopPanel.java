@@ -17,18 +17,25 @@ import com.google.gwt.user.client.ui.TextBox;
 public class TopPanel extends GoodlePanel
 {
 	private HorizontalPanel mainPanel = new HorizontalPanel();
-	private TextBox searchBox;
+	private TextBox searchBox = new TextBox();
 	private Button searchButton = new Button("Szukaj");
 	private Image userAvatar = new Image();
-	private Label userLogin = new Label();
+	private Label userLogin = new Label("Hermiona Granger");
 	private Button logOutButton = new Button("X");
 	
 	public TopPanel(final ServicesManager manager) 
 	{ 
 		super(manager);
 		
+		searchBox.getElement().setId("searchBox");
+		searchButton.getElement().setId("searchButton");
+		userAvatar.getElement().setId("userAvatar");
+		userLogin.getElement().setId("userLogin");
+		logOutButton.getElement().setId("logOutButton");
+		
 		//AsyncSuggestOracle oracle = new AsyncSuggestOracle();
-		searchBox = new TextBox();
+		
+		searchBox.getElement().setAttribute("placeholder", "Szukaj kursu");
 		
 	    searchBox.addKeyPressHandler(new KeyPressHandler() 
 	    {

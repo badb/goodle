@@ -244,4 +244,65 @@ h2 {
 #register_button {
 	margin: 0px 0px 0px 20px;
 }
+
+/* TUTAJ */
+
+#mainPanel 
+{ 
+	width: 100%
+}
+
+#topPanel 
+{
+	border-bottom: #9FB6CD solid 1px;
+	height: 70px;
+	padding-bottom: 20px;
+	padding-left: 35px;
+	padding-right: 35px;
+	padding-top: 20px;
+	position: fixed;
+	top: 0;
+	width: 100%
+}
+
+#searchBox
+{
+	height: 25px;
+	margin: 0px;
+	padding: 0;
+	position: relative;
+	
+}
+
+#contentPanel
+{
+	position: relative;
+	top: 70px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 960px;
+
+}
+
+#leftPanel 
+{ 
+	width: 150px;
+	padding-right: 30px;
+	padding-top: 15px;
+}
+
+#middlePanel 
+{ 
+	border-bottom: #9FB6CD solid 1px;
+	border-left: #9FB6CD solid 1px;
+	border-right: #9FB6CD solid 1px;
+	padding-top: 20px;
+	width: 630px;
+}
+
+#rightPanel 
+{
+	padding-left: 15px;
+	padding-top: 15px;
+	width: 150px;	
 }

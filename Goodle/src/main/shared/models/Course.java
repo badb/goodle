@@ -62,7 +62,7 @@ public class Course implements Serializable
     public String getDesc() { return desc; }
     public void setDesc(String desc) { this.desc = desc; }
     
-    private Set<Key> teachers;
+    private Set<Key> teachers = new HashSet<Key>();
     public Set<Key> getTeachers() { return Collections.unmodifiableSet(teachers); }
     public void addTeacher(GoodleUser teacher) 
     { 
@@ -73,7 +73,7 @@ public class Course implements Serializable
     	teachers.remove(teacher.getKey()); 
     }
     
-    private Set<Key> members;
+    private Set<Key> members = new HashSet<Key>();
     public Set<Key> getMembers() { return Collections.unmodifiableSet(members); }
     public void addMember(GoodleUser member) 
     { 
@@ -85,7 +85,7 @@ public class Course implements Serializable
     }
     
     @OneToMany
-    private List<Module> modules;
+    private List<Module> modules = new ArrayList<Module>();
     public List<Module> getModules() { return Collections.unmodifiableList(modules); }
     public void addModule(Module module) { modules.add(module); }
     public void removeModule(Module module) { modules.remove(module); }
@@ -108,19 +108,13 @@ public class Course implements Serializable
     		String name, 
     		String term, 
     		String desc, 
-    		Collection<GoodleUser> teachers, 
-    		Collection<GoodleUser> members, 
     		Link calendar
     )
     {
     	this.name = name;
     	this.term = term;
-    	this.desc = desc;;
-    	this.teachers = new HashSet<Key>();
-    	this.modules = new ArrayList<Module>();
-    	this.members = new HashSet<Key>();
-    	for (GoodleUser t : teachers) { this.teachers.add(t.getKey()); };
-    	for (GoodleUser m : members) { this.members.add(m.getKey()); };
+    	this.desc = desc;
+    	this.calendar = calendar;
     }
     
 }

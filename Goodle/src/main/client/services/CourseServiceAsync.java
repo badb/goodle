@@ -19,11 +19,9 @@ public interface CourseServiceAsync
 			String name,
 			String term,
 			String desc, 
-			Collection<GoodleUser> teachers, 
-			Collection<GoodleUser> members, 
 			Link calendar,
 			AsyncCallback<Void> callback
-	) throws DataModificationFailedException;
+	); 
 	
 	public void findCoursesDescByName
 	(

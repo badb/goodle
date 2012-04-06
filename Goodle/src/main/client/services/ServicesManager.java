@@ -1,5 +1,6 @@
 package main.client.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -8,6 +9,8 @@ import main.client.GoodleService;
 import main.client.GoodleServiceAsync;
 import main.client.utils.CourseShortDesc;
 import main.shared.models.Course;
+import main.shared.models.DataModificationFailedException;
+import main.shared.models.GoodleUser;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Cookies;
@@ -29,7 +32,15 @@ public class ServicesManager {
 	
 	public void createCourse(String name, String desc)
 	{
-		
+		AsyncCallback<Void> callback = new AsyncCallback<Void>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				goodle.actionFailed();
+			}
+			public void onSuccess(Void v) {	}
+		};
+	    courseService.createCourse(name, "2012L", desc, null, callback);		
 	}
 	
 	public void findCoursesByName(String name)

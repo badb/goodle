@@ -1,18 +1,19 @@
 package main.client.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Logger;
 
-import main.client.Goodle;
 import main.client.GoodleService;
 import main.client.GoodleServiceAsync;
+import main.client.events.CourseCreatedEvent;
+import main.client.events.CourseViewRequestedEvent;
+import main.client.events.CoursesFoundEvent;
 import main.client.utils.CourseShortDesc;
 import main.shared.models.Course;
-import main.shared.models.DataModificationFailedException;
-import main.shared.models.GoodleUser;
 
+import com.google.appengine.api.datastore.Key;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -20,79 +21,54 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class ServicesManager {
 	
 	private final GoodleServiceAsync goodleService = GWT.create(GoodleService.class);
-	private static Logger logger = Logger.getLogger("");
-	private Goodle goodle;
 	
 	private final CourseServiceAsync courseService = GWT.create(CourseService.class);
+	private SimpleEventBus eventBus;
 	
-	public ServicesManager() { };
-	public ServicesManager(Goodle goodle) { this.goodle = goodle; }
-	
-	
-	public void showCreateCoursePanel() { goodle.createCourse(); }
-	
+	public ServicesManager() { }
+	public ServicesManager(SimpleEventBus eventBus) { this.eventBus = eventBus; };	
+		
 	public void createCourse(String name, String desc)
 	{
-		AsyncCallback<Void> callback = new AsyncCallback<Void>()
+		AsyncCallback<Course> callback = new AsyncCallback<Course>()
 		{
-			public void onFailure(Throwable caught) 
-			{
-				goodle.actionFailed();
+			public void onFailure(Throwable caught) { }
+			public void onSuccess(Course c) 
+			{	
+				eventBus.fireEvent(new CourseCreatedEvent(c));
 			}
-			public void onSuccess(Void v) {	}
 		};
 	    courseService.createCourse(name, "2012L", desc, null, callback);		
 	}
 	
+	public void findCourseByKey(Key key) 
+	{
+		AsyncCallback<Course> callback = new AsyncCallback<Course>()
+		{
+			public void onFailure(Throwable caught) { }
+			public void onSuccess(Course c) 
+			{	
+				eventBus.fireEvent(new CourseViewRequestedEvent(c));
+			}
+		};
+	    courseService.findCourseByKey(key, callback);			
+	}
+	
 	public void findCoursesByName(String name)
 	{
-		AsyncCallback<Collection<CourseShortDesc>> callback = 
-				new AsyncCallback<Collection<CourseShortDesc>>()
+		AsyncCallback<ArrayList<CourseShortDesc>> callback = 
+				new AsyncCallback<ArrayList<CourseShortDesc>>()
 		{
-			public void onFailure(Throwable caught) 
-			{
-				goodle.actionFailed();
-			}
-			public void onSuccess(Collection<CourseShortDesc> result) 
+			public void onFailure(Throwable caught) { }
+			public void onSuccess(ArrayList<CourseShortDesc> result) 
 			{	
-	            goodle.showCoursesFound(result);
+	            eventBus.fireEvent(new CoursesFoundEvent(result));
 			}
 		};
 	    courseService.findCoursesDescByName(name, callback);
 		
 	}
 	
-	void getCourseInfo (String course) {	
-		goodleService.getCourseInfo(getSession(), course, new AsyncCallback<String>() {
-		        public void onFailure(Throwable caught) {
-		        	logger.severe("loadCourseInfo fail: " + caught);
-		        }
-		        public void onSuccess(String result) {
-		        	logger.info("loadCourseInfo: ok" + result);
-		        	/* tu tak na prawde jakies konkretne pole sprawdza */
-		//                if (result.equals("yes")) {
-		                	//goodle.addCoursePanels(result);
-		                	logger.info("after goodle.addCoursepanels");
-		 //               } else {
-		   //             	goodle.addRegisterPanel();
-		    //            }
-		        }
-		});
-	}
-	
-	void searchCourse (String text) {
-	    goodleService.searchCourse(getSession(), text,
-	            new AsyncCallback<String>() {
-	
-	            public void onFailure(Throwable caught) {
-	                    logger.severe("searchCourses failed." + caught);
-	            }
-	            public void onSuccess(String result) {
-	            		//goodle.changeToCourseList(result);
-	                    logger.info("searchCourses:" + result);
-	            }
-	    });
-	}
 	
 	void loginUser (String name, String password) {
 		Logger.getLogger("").severe("Service controller wchodzi.");
@@ -118,10 +94,8 @@ public class ServicesManager {
 	    goodleService.getAllCourses(getSession(),
 	            new AsyncCallback<String>() {
 	            public void onFailure(Throwable caught) {
-	                    logger.severe("GetAllCourses failed." + caught);
 	            }
 	            public void onSuccess(String result) {
-	                    logger.info("GetAllCourses:" + result);
 	            }
 	    });
 	}

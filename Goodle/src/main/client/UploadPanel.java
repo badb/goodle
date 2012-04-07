@@ -1,26 +1,27 @@
 package main.client;
 
-import main.client.panels.GoodlePanel;
 import main.client.services.ServicesManager;
+import main.client.widgets.GoodleWidget;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 
 
 
-public class UploadPanel extends GoodlePanel {
+public class UploadPanel extends GoodleWidget {
 	private VerticalPanel panel = new VerticalPanel();
 	private HorizontalPanel formPanel = new HorizontalPanel();
 	final FormPanel uploadForm = new FormPanel();
@@ -37,8 +38,8 @@ public class UploadPanel extends GoodlePanel {
 	// Use an RPC call to the Blob Service to get the blobstore upload url
 	BlobServiceAsync blobService = GWT.create(BlobService.class);
 
-	public UploadPanel(ServicesManager goodleService) {
-		super(goodleService);
+	public UploadPanel(ServicesManager manager, SimpleEventBus eventBus) {
+		super(manager, eventBus);
 	}
 
 	public VerticalPanel getPanel() {

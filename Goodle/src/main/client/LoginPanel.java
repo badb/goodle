@@ -1,10 +1,11 @@
 package main.client;
 
-import main.client.panels.GoodlePanel;
 import main.client.services.ServicesManager;
+import main.client.widgets.GoodleWidget;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -13,10 +14,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 
-public class LoginPanel extends GoodlePanel{
+public class LoginPanel extends GoodleWidget{
 
-        public LoginPanel(ServicesManager controller) {
-                super(controller);
+        public LoginPanel(ServicesManager manager, SimpleEventBus eventBus) {
+                super(manager, eventBus);
         }
 
         private VerticalPanel loginPanel = new VerticalPanel();

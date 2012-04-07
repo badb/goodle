@@ -1,10 +1,11 @@
 package main.client;
 
-import main.client.panels.GoodlePanel;
 import main.client.services.ServicesManager;
+import main.client.widgets.GoodleWidget;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -12,7 +13,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 
-public class RegisterPanel extends GoodlePanel {
+public class RegisterPanel extends GoodleWidget {
 
 	private HorizontalPanel panel = new HorizontalPanel();
 	private VerticalPanel formPanel = new VerticalPanel();
@@ -23,8 +24,8 @@ public class RegisterPanel extends GoodlePanel {
 	private Button sendButton = new Button("Wyślij");
 	private TextArea reasonTextArea = new TextArea();
 	
-	public RegisterPanel(ServicesManager controller) {
-		super(controller);
+	public RegisterPanel(ServicesManager manager, SimpleEventBus eventBus) {
+		super(manager, eventBus);
 		registerButton.getElement().setId("register_button");
 		panel.add(registerLabel);
 		panel.add(registerButton);

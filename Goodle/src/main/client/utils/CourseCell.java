@@ -37,10 +37,7 @@ public class CourseCell extends AbstractCell<CourseShortDesc>
     	ValueUpdater<CourseShortDesc> valueUpdater
     ) 
     {
-    	if ("click".equals(event.getType()))
-    	{
-    		
-    	}
+    	if ("click".equals(event.getType())) { valueUpdater.update(value); }
     }
     
 	@Override

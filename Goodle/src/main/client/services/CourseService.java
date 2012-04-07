@@ -1,11 +1,10 @@
 package main.client.services;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import main.client.utils.CourseShortDesc;
 import main.shared.models.Course;
 import main.shared.models.DataModificationFailedException;
-import main.shared.models.GoodleUser;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
@@ -16,7 +15,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath(value = "course")
 public interface CourseService extends RemoteService
 {
-	public void createCourse
+	public Course createCourse
 	(
 			String name,
 			String term,
@@ -24,7 +23,9 @@ public interface CourseService extends RemoteService
 			Link calendar
 	) throws DataModificationFailedException;
 	
-	public Collection<CourseShortDesc> findCoursesDescByName(String name);
+	public Course findCourseByKey(Key key);
+	
+	public ArrayList<CourseShortDesc> findCoursesDescByName(String name);
 	
 	public void modifyCourse
 	(

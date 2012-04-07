@@ -1,49 +1,27 @@
 package main.client;
 
-import java.sql.Date;
-import java.util.Collection;
-import java.util.List;
-import java.util.logging.Logger;
-
-import main.client.panels.CoursePanel;
-import main.client.panels.CreateCoursePanel;
-import main.client.panels.EmptyPanel;
-import main.client.panels.GoodlePanel;
-import main.client.panels.LeftPanel;
-import main.client.panels.ResultListPanel;
-import main.client.panels.RightPanel;
-import main.client.panels.TopPanel;
 import main.client.services.ServicesManager;
-import main.client.utils.CourseShortDesc;
-import main.server.DbApi;
-import main.shared.models.Course;
-import main.shared.models.DataModificationFailedException;
-import main.shared.models.GoodleUser;
-
-import com.google.appengine.api.datastore.Text;
+import main.client.widgets.ContentPanel;
+import main.client.widgets.LeftPanel;
+import main.client.widgets.TopPanel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.History;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
-	private ServicesManager manager = new ServicesManager(this);
+	private SimpleEventBus eventBus = new SimpleEventBus();
+	private ServicesManager manager = new ServicesManager(eventBus);
 	private VerticalPanel mainPanel = new VerticalPanel();
-	private TopPanel topPanel = new TopPanel(manager);
-	private HorizontalPanel contentPanel = new HorizontalPanel();
-	private LeftPanel leftPanel = new LeftPanel(manager);
-	private GoodlePanel middlePanel;
-	private RightPanel rightPanel = new RightPanel(manager);
+	private TopPanel topPanel = new TopPanel(manager, eventBus);
+	private HorizontalPanel bodyPanel = new HorizontalPanel();
+	private LeftPanel leftPanel = new LeftPanel(manager, eventBus);
+	private ContentPanel contentPanel = new ContentPanel(manager, eventBus);
 	
-	private Label actionLabel = new Label("");
 	
 /*	private LoginPanel lp = new LoginPanel(manager);
 	private MainStudentPanel mp = new MainStudentPanel(manager, this);
@@ -51,36 +29,20 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	private UserNavPanel up = new UserNavPanel(manager, this); 
 	private NavPathPanel np = new NavPathPanel(manager, this);
 	private CourseInfoPanel cip = new CourseInfoPanel(manager, this);
-	private CoursePanel cp;
+	private CourseViewPanel cp;
 	private CourseListPanel clp = new CourseListPanel(manager, this);
 	private MainCoursePanel mcp = new MainCoursePanel(manager, this);
 	private RegisterPanel rp = new RegisterPanel(manager, this); */
 
-	
 
-	private static Logger logger = Logger.getLogger("");
 	//private String initToken = History.getToken();
 	
 	public void onModuleLoad() 
-	{
-		middlePanel = new EmptyPanel(manager);
-		
-		mainPanel.getElement().setId("mainPanel");
-		topPanel.getElement().setId("topPanel");
-		leftPanel.getElement().setId("leftPanel");
-		middlePanel.getElement().setId("middlePanel");
-		rightPanel.getElement().setId("rightPanel");
-		contentPanel.getElement().setId("contentPanel");
-		
-		contentPanel.add(leftPanel);
-		contentPanel.add(middlePanel);
-		contentPanel.add(rightPanel);
-		
+	{				
+		bodyPanel.add(leftPanel);
+		bodyPanel.add(contentPanel);
 		mainPanel.add(topPanel);
-		mainPanel.add(contentPanel);
-		
-		mainPanel.add(actionLabel);
-		
+		mainPanel.add(bodyPanel);		
 		RootPanel.get().add(mainPanel);
 		
 	/*	
@@ -100,25 +62,6 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	    } */
 	}
 	
-	public void createCourse() { loadContent(new CreateCoursePanel(manager)); }
-	
-	public void showCoursesFound(Collection<CourseShortDesc> courses)
-	{
-		actionLabel.setText("Courses found");
-		List<CourseShortDesc> list = (List<CourseShortDesc>) courses;
-		loadContent(new ResultListPanel(manager, list));
-		//Logger.getLogger("").severe("Courses found.");
-		//middlePanel = new ResultListPanel(manager);
-	}
-	
-	public void actionFailed() { actionLabel.setText("Operacja nie powiodła się"); }
-	
-	public void loadContent(Widget w)
-	{
-		contentPanel.remove(1);
-		w.getElement().setId("middlePanel");
-		contentPanel.insert(w, 1);
-	}
 	/*
 	
 	public boolean checkSessionID(String sessionID) {
@@ -187,7 +130,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
 	public void changeToCourse(String course) {
 		logger.info("chagneToCourseList");
 		clearPage();
-		cp = new CoursePanel(manager, this, course);
+		cp = new CourseViewPanel(manager, this, course);
 		manager.getCourseInfo(course);
 		np.addNext(course);
 		RootPanel.get("navpath").add(np.getPanel());

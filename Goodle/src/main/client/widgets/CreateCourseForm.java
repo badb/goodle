@@ -1,29 +1,25 @@
-package main.client.panels;
+package main.client.widgets;
 
 import main.client.services.ServicesManager;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class CreateCoursePanel extends GoodlePanel
+public class CreateCourseForm extends GoodleWidget
 {
 	private VerticalPanel mainPanel = new VerticalPanel();
 	private TextBox courseNameBox = new TextBox();
 	private TextArea courseDescBox = new TextArea();
-	private Button applyButton = new Button();
+	private Button applyButton = new Button("Zapisz");
 	
-	public CreateCoursePanel(final ServicesManager manager)
+	public CreateCourseForm(final ServicesManager manager, SimpleEventBus eventBus)
 	{
-		super(manager);
+		super(manager, eventBus);
 		
 		courseNameBox.getElement().setAttribute("placeholder", "Nazwa kursu");
 		courseDescBox.getElement().setAttribute("placeholder", "Krótki opis kursu");

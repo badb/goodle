@@ -1,11 +1,10 @@
 package main.client.services;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import main.client.utils.CourseShortDesc;
 import main.shared.models.Course;
 import main.shared.models.DataModificationFailedException;
-import main.shared.models.GoodleUser;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
@@ -20,13 +19,15 @@ public interface CourseServiceAsync
 			String term,
 			String desc, 
 			Link calendar,
-			AsyncCallback<Void> callback
+			AsyncCallback<Course> callback
 	); 
+	
+	public void findCourseByKey(Key key, AsyncCallback<Course> callback);
 	
 	public void findCoursesDescByName
 	(
 			String name, 
-			AsyncCallback<Collection<CourseShortDesc>> callback
+			AsyncCallback<ArrayList<CourseShortDesc>> callback
 	);
 	public void modifyCourse
 	(

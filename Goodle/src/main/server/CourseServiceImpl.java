@@ -2,7 +2,6 @@ package main.server;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,18 +13,9 @@ import main.client.utils.CourseShortDesc;
 import main.shared.EMF;
 import main.shared.models.Course;
 import main.shared.models.DataModificationFailedException;
-import main.shared.models.GoodleSession;
-import main.shared.models.GoodleUser;
-import main.shared.models.Homework;
-import main.shared.models.HomeworkFile;
-import main.shared.models.Mark;
-import main.shared.models.Material;
-import main.shared.models.Message;
-import main.shared.models.Module;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
-import com.google.appengine.api.datastore.Text;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -35,7 +25,7 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 	
 	private static EntityManagerFactory emf = EMF.get();
 	
-	public void createCourse
+	public Course createCourse
 	(
 			String name,
 			String term,
@@ -44,10 +34,10 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 	)
 		throws DataModificationFailedException
 	{
+		Course c = new Course(name, term, desc, calendar);
 		EntityManager em = emf.createEntityManager();
 		try
 		{
-			Course c = new Course(name, term, desc, calendar);
 			em.persist(c);
 		}
 		catch (Exception e)
@@ -56,11 +46,25 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 			throw new DataModificationFailedException(msg);
 		}
 		finally { em.close(); }
+		return c;
+	}
+	
+	public Course findCourseByKey(Key key)
+	{
+		Course c = null;
+		EntityManager em = emf.createEntityManager();
+		try
+		{
+			c = em.find(Course.class, key);
+		}
+		catch (NoResultException e) { }
+		finally { em.close(); }
+		return c;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<CourseShortDesc> findCoursesDescByName(String name) 
+	public ArrayList<CourseShortDesc> findCoursesDescByName(String name) 
 	{
 		ArrayList<CourseShortDesc> results = new ArrayList<CourseShortDesc>();
 		EntityManager em = emf.createEntityManager();
@@ -68,7 +72,7 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 		{		
 			Query q = em.createNamedQuery("findCoursesDescByName");
 			q.setParameter("name", name);
-			List<Object[]> objects = (List<Object[]>) q.getResultList();
+			Collection<Object[]> objects = (Collection<Object[]>) q.getResultList();
 			for (Object[] o : objects)
 			{
 				Key key = (Key) o[0];

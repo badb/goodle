@@ -13,14 +13,18 @@ public class CourseShortDesc implements Serializable
 	private String name;
 	public String getName() { return name; }
 	
+	private String term;
+	public String getTerm() { return term; }
+	
 	private String desc;
 	public String getDesc() { return desc; }
 	
 	public CourseShortDesc() { };
-	public CourseShortDesc(Key key, String name, String desc)
+	public CourseShortDesc(Key key, String name, String term, String desc)
 	{
 		this.key = key;
 		this.name = name;
+		this.term = term;
 		this.desc = desc;
 	}
  

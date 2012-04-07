@@ -73,8 +73,9 @@ public class CourseServiceImpl extends RemoteServiceServlet implements CourseSer
 			{
 				Key key = (Key) o[0];
 				String courseName = (String) o[1];
-				String desc = (String) o[2];
-				results.add(new CourseShortDesc(key, courseName, desc));
+				String term = (String) o[2];
+				String desc = (String) o[3];
+				results.add(new CourseShortDesc(key, courseName, term, desc));
 			}
 		}
 		catch (NoResultException e) { results = null; }

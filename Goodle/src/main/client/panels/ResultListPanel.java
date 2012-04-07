@@ -24,6 +24,7 @@ public class ResultListPanel extends GoodlePanel
 	public ResultListPanel(ServicesManager manager, List<CourseShortDesc> courses) 
 	{ 
 		super(manager); 
+		
 		if (courses.isEmpty()) 
 		{
 			String none = "Nie udało się odnaleźć kursów pasujących " +

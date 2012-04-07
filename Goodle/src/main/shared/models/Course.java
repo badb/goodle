@@ -31,7 +31,7 @@ import com.google.appengine.api.datastore.Link;
 	@NamedQuery
 	(
 		name = "findCoursesDescByName",
-		query = "SELECT c.key, c.name, c.desc FROM Course c WHERE c.name = :name"
+		query = "SELECT c.key, c.name, c.term, c.desc FROM Course c WHERE c.name = :name"
 	),
 	@NamedQuery
 	(	

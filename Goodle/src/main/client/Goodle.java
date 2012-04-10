@@ -1,65 +1,65 @@
 package main.client;
 
-import main.client.services.ServicesManager;
-import main.client.widgets.ContentPanel;
-import main.client.widgets.LeftPanel;
-import main.client.widgets.TopPanel;
+import main.client.mapper.AppPlaceHistoryMapper;
+import main.client.mapper.ContentPanelActivityMapper;
+import main.client.place.CreateCoursePlace;
+import main.client.ui.SearchCourseView;
+import main.client.ui.UserCoursesView;
+
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.SimpleEventBus;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.web.bindery.event.shared.EventBus;
 
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
-	private SimpleEventBus eventBus = new SimpleEventBus();
-	private ServicesManager manager = new ServicesManager(eventBus);
-	private VerticalPanel mainPanel = new VerticalPanel();
-	private TopPanel topPanel = new TopPanel(manager, eventBus);
-	private HorizontalPanel bodyPanel = new HorizontalPanel();
-	private LeftPanel leftPanel = new LeftPanel(manager, eventBus);
-	private ContentPanel contentPanel = new ContentPanel(manager, eventBus);
 	
-	
-/*	private LoginPanel lp = new LoginPanel(manager);
-	private MainStudentPanel mp = new MainStudentPanel(manager, this);
-	private SearchPanel sp = new SearchPanel(manager, this);
-	private UserNavPanel up = new UserNavPanel(manager, this); 
-	private NavPathPanel np = new NavPathPanel(manager, this);
-	private CourseInfoPanel cip = new CourseInfoPanel(manager, this);
-	private CourseViewPanel cp;
-	private CourseListPanel clp = new CourseListPanel(manager, this);
-	private MainCoursePanel mcp = new MainCoursePanel(manager, this);
-	private RegisterPanel rp = new RegisterPanel(manager, this); */
+	interface Binder extends UiBinder<DockLayoutPanel, Goodle> { }
+    
+    private static final Binder binder = GWT.create(Binder.class);
+    
+    @UiField SearchCourseView topPanel;
+    @UiField UserCoursesView leftPanel;
+    @UiField SimpleLayoutPanel contentPanel;
+    
+    private Place defaultPlace = new CreateCoursePlace();
 
-
-	//private String initToken = History.getToken();
-	
 	public void onModuleLoad() 
 	{				
-		bodyPanel.add(leftPanel);
-		bodyPanel.add(contentPanel);
-		mainPanel.add(topPanel);
-		mainPanel.add(bodyPanel);		
-		RootPanel.get().add(mainPanel);
+		DockLayoutPanel outer = binder.createAndBindUi(this);
 		
-	/*	
-	(	if (initToken.length() == 0) {
-			History.newItem("main");
-		}
-		History.addValueChangeHandler(this);
+		ClientFactory clientFactory = GWT.create(ClientFactory.class);
+		EventBus eventBus = clientFactory.getEventBus();
+		PlaceController placeController = clientFactory.getPlaceController();
+		
+		clientFactory.initializeRequestFactory();
+		
+		ActivityMapper contentPanelActivityMapper = new ContentPanelActivityMapper(clientFactory);
+		ActivityManager contentPanelActivityManager = new ActivityManager(contentPanelActivityMapper, eventBus);
+		contentPanelActivityManager.setDisplay(contentPanel);
 
-        DOM.setElementAttribute(
-                DOM.getElementById("goodleLogin"), "style", "visibility:hidden");
-	    String sessionID = Cookies.getCookie("sessionID");
-	    if ( sessionID != null && checkSessionID(sessionID)) {
-	    	showNavBar();
-	    	showCourseList();	   
-	    	} else {
-	    	displayLoginBox();
-	    } */
+        AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
+        PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
+        historyHandler.register(placeController, eventBus, defaultPlace);
+        
+        topPanel.setClientFactory(clientFactory);
+        leftPanel.setClientFactory(clientFactory);
+        
+        RootLayoutPanel.get().add(outer);
+        
+        historyHandler.handleCurrentHistory();
+		
 	}
 	
 	/*

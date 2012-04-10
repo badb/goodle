@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='goodle'>
-  <!-- Inherit the core Web Toolkit stuff.                        -->
-  <inherits name='com.google.gwt.user.User'/>
-  <inherits name='com.google.gwt.logging.Logging'/>
-  <inherits name="com.googlecode.objectify.Objectify" />
-  <set-property name="gwt.logging.consoleHandler" value="DISABLED"/>
-  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.google.gwt.logging.Logging' />
+	<set-property name="gwt.logging.consoleHandler" value="DISABLED" />
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
 
 
-  <!-- Inherit the default GWT style sheet.  You can change       -->
-  <!-- the theme of your GWT application by uncommenting          -->
-  <!-- any one of the following lines.                            -->
-   <inherits name='com.google.gwt.user.theme.standard.StandardResources'/> 
-  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
-  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+	<!-- Inherit the default GWT style sheet. You can change -->
+	<!-- the theme of your GWT application by uncommenting -->
+	<!-- any one of the following lines. -->
+	<inherits name='com.google.gwt.user.theme.standard.StandardResources' />
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
 
-  <!-- Other module inherits                                      -->
+	<!-- Other module inherits -->
+	<inherits name="com.google.gwt.activity.Activity" />
+	<inherits name="com.google.gwt.place.Place" />
+	<inherits name="com.googlecode.objectify.Objectify" />
+	<inherits name='com.google.web.bindery.requestfactory.RequestFactory' />
 
-  <!-- Specify the app entry point class.                         -->
-  <entry-point class='main.client.Goodle'></entry-point>
+	<!-- Use ClientFactoryImpl by default -->
+	<replace-with class="main.client.ClientFactoryImpl">
+		<when-type-is class="main.client.ClientFactory" />
+	</replace-with>
 
-
-	<servlet path='/blobservice' class='main.server.BlobServiceImpl'/> 
-	<servlet path='/uploadservice' class='main.server.UploadServiceImpl'/>
-  <!-- Specify the paths for translatable code                    -->
-  <source path='client'/>
-  <source path='shared'/>
+	<!-- Specify the app entry point class. -->
+	<entry-point class='main.client.Goodle'></entry-point>
+	
+	<!-- Specify the paths for translatable code -->
+	<source path='client' />
+	<source path='shared' />
+	
+	<set-property name="user.agent" value="safari" />
 </module>
 
 

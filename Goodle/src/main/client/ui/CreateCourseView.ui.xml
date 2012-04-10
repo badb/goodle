@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+			 
+	<g:VerticalPanel>
+		<g:TextBox ui:field="courseNameBox" />
+		<g:TextArea ui:field="courseDescBox" />
+		<g:Button ui:field="saveButton" text="Zatwierdź" />
+	</g:VerticalPanel>
+			 
+</ui:UiBinder>

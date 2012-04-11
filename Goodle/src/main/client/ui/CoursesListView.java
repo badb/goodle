@@ -23,58 +23,59 @@ public class CoursesListView extends Composite
 	private static CoursesListViewUiBinder uiBinder = GWT.create(CoursesListViewUiBinder.class);
 
 	interface CoursesListViewUiBinder extends UiBinder<Widget, CoursesListView> { }
-	
+
 	@UiField Label infoLabel;
 	@UiField(provided=true) 
 	CellList<CourseProxy> coursesList;
 	private ClientFactory clientFactory;
-	
+
 	public CoursesListView()
 	{
 		initList();
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-	
+
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	
+
 	private void initList()
 	{
 		coursesList = new CellList<CourseProxy>(new CourseCell());
 		ValueUpdater<CourseProxy> updater = new ValueUpdater<CourseProxy>()
-		{
+				{
 			public void update(CourseProxy value) 
 			{
 				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString()));
 			}
-		};
-		coursesList.setValueUpdater(updater);
+				};
+				coursesList.setValueUpdater(updater);
 	}
-	
+
 	public void clear()
 	{
 		infoLabel.setText("");
 	}
-	
+
 	public void findCoursesByName(String name) 
 	{
 		if (clientFactory != null)
 		{
-			 clientFactory.getRequestFactory().courseRequest().findCoursesByName(name).fire
-			 (
-				new Receiver<List<CourseProxy>>()
-				{
-					@Override
-					public void onSuccess(List<CourseProxy> response)
+			infoLabel.setText("Trwa wyszukiwanie...");
+			clientFactory.getRequestFactory().courseRequest().findCoursesByName(name).fire
+			(
+					new Receiver<List<CourseProxy>>()
 					{
-						if (response.isEmpty())
+						@Override
+						public void onSuccess(List<CourseProxy> response)
 						{
-							infoLabel.setText("Nie odnaleziono kursów pasujących " +
-									"do podanych kryteriów wyszukiwania");
+							if (response.isEmpty())
+							{
+								infoLabel.setText("Nie odnaleziono kursów pasujących " +
+										"do podanych kryteriów wyszukiwania");
+							}
+							coursesList.setRowData(response);
 						}
-						coursesList.setRowData(response);
 					}
-				}
-			 );
+			);
 		}
 	}
 

@@ -1,7 +1,6 @@
 package main.client.ui;
 
 import main.client.ClientFactory;
-import main.client.place.CoursePlace;
 import main.shared.CourseProxy;
 import main.shared.CourseRequest;
 
@@ -12,11 +11,11 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
-import com.google.web.bindery.requestfactory.shared.Request;
 
 
 public class CreateCourseView extends Composite 
@@ -27,15 +26,32 @@ public class CreateCourseView extends Composite
 
 	@UiField TextBox courseNameBox;
 	@UiField TextArea courseDescBox;
+	@UiField ListBox courseYearBox;
+	@UiField ListBox courseTermBox;
+	//@UiField (provided=true) CellList<GoodleUserProxy> teacherList;
+	//@UiField (provided=true) CellList<GoodleUserProxy> memberList;
 	@UiField Button saveButton;
 	private ClientFactory clientFactory;
 	
 	public CreateCourseView() 
 	{
+		initCourseYearBox();
+		initUserLists();
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
+	
+	
+	private void initCourseYearBox()
+	{
+		
+	}
+	
+	private void initUserLists()
+	{
+		
+	}
 	
 	public void clear()
 	{

@@ -3,7 +3,7 @@ package main.client;
 import main.client.mapper.AppPlaceHistoryMapper;
 import main.client.mapper.ContentPanelActivityMapper;
 import main.client.place.CreateCoursePlace;
-import main.client.ui.SearchCourseView;
+import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
 
 import com.google.gwt.activity.shared.ActivityManager;
@@ -29,7 +29,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
     
     private static final Binder binder = GWT.create(Binder.class);
     
-    @UiField SearchCourseView topPanel;
+    @UiField TopView topPanel;
     @UiField UserCoursesView leftPanel;
     @UiField SimpleLayoutPanel contentPanel;
     

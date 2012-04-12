@@ -2,11 +2,22 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
 			 xmlns:my="urn:import:main.client.ui">
-	
+	<ui:style>
+ 		.topPanel {
+	     	max-width: 1100px;
+	     	width: 1100px;
+      		margin: 0 auto;
+			background-color: #efefef;
+    	    border-bottom: 1px solid #c9c9c9;
+      	    box-shadow: 0 0 15px 0 #ccc;
+         	margin-left:20px;
+        	margin-right:20px;
+		}
+	</ui:style> 
  
 	<g:DockLayoutPanel unit="PX">
 		<g:north size="75">
-			<my:SearchCourseView ui:field="topPanel" />
+			<my:TopView styleName='{style.topPanel}' ui:field="topPanel" />
 		</g:north>
 		<g:west size="300">
 			<my:UserCoursesView ui:field="leftPanel" />

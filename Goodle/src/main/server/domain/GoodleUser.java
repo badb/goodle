@@ -22,7 +22,6 @@ import javax.persistence.Query;
 import javax.persistence.Version;
 
 import com.google.appengine.api.datastore.Email;
-import com.google.appengine.api.datastore.Key;
 
 @Entity
 @NamedQueries
@@ -164,7 +163,7 @@ public class GoodleUser implements Serializable
     }
     
     @SuppressWarnings("unchecked")
-    public static List<GoodleUser> findGoodleUserByName(String name)
+    public static List<GoodleUser> findGoodleUsersByName(String name)
     {
     	EntityManager em = entityManager();
     	try

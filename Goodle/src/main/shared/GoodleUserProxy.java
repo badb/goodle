@@ -11,6 +11,6 @@ public interface GoodleUserProxy extends EntityProxy
 	Long getId();
 	String getFirstName();
 	String getLastName();
-	String setFirstName();
-	String setLastName();
+	void setFirstName(String firstName);
+	void setLastName(String lastName);
 }

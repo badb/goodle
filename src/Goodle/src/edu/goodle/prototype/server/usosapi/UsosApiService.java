@@ -42,11 +42,7 @@ public class UsosApiService {
 	private String scope = null;
 	private OAuthConsumer consumer =null;
 	private OAuthProvider provider = null;
-//	
-//            "https://www.google.com/accounts/OAuthGetRequestToken?scope="
-//                    + URLEncoder.encode(scope, "utf-8"),
-//            "https://www.google.com/accounts/OAuthGetAccessToken",
-//            "https://www.google.com/accounts/OAuthAuthorizeToken?hd=default");
+
 
 	public UsosGetCoursesApiResponse getAllUserCourses(GoodleUser user) {
 		UsosGetCoursesApiResponse response = null;
@@ -139,7 +135,7 @@ public class UsosApiService {
 		baseUrlSecure = "https://apps.usos.edu.pl/";
 		scope = "studies|offline_access";
 		consumer = 
-				new DefaultOAuthConsumer("zMmu5V4B5VWcj6h89ccq", "CF3M6SjVRwhuM3DpwfjTHppTUSDHQFTTr6pyQRMZ");
+				new DefaultOAuthConsumer("", "");
 		provider = new DefaultOAuthProvider(
 				baseUrlSecure+ "services/oauth/request_token" ,
 				baseUrlSecure + "services/oauth/access_token",

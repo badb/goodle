@@ -5,6 +5,10 @@
 	<g:VerticalPanel>
 		<g:Label ui:field="courseName" />
 		<g:Label ui:field="courseDesc" />
+		<g:HorizontalPanel>
+			<g:Button ui:field="moduleButton" text="Lista modułów"></g:Button>
+			<g:Button ui:field="infoButton" text="Informacje o kursie"></g:Button>
+		</g:HorizontalPanel>
 	</g:VerticalPanel>
 
 </ui:UiBinder>

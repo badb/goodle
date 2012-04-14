@@ -4,8 +4,11 @@ import main.client.ClientFactory;
 import main.shared.CourseProxy;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -20,6 +23,9 @@ public class CourseView extends Composite
 	
 	@UiField Label courseName;
 	@UiField Label courseDesc;
+	@UiField Button moduleButton;
+	@UiField Button infoButton;
+	
 	private ClientFactory clientFactory;
 	private CourseProxy course;
 
@@ -48,5 +54,10 @@ public class CourseView extends Composite
 				}
 			);
 		}
+	}
+	
+	@UiHandler("moduleButton")
+	void handleClick(ClickEvent e) {
+	    infoButton.setText("Kliknięto moduły");
 	}
 }

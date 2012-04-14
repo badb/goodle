@@ -27,8 +27,8 @@ public class GoodleSession implements Serializable
     public Key getKey() { return key; }
     
     @OneToOne
-    private Key user;
-    public Key getUser() { return user; }
+    private Long user;
+    public Long getUser() { return user; }
 
     public GoodleSession(GoodleUser user) { this.user = user.getId(); }
 

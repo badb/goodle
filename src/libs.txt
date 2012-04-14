@@ -5,3 +5,7 @@ http://code.google.com/p/objectify-appengine/downloads/detail?name=objectify-3.1
 http://code.google.com/p/selenium/downloads/detail?name=selenium-server-2.20.0.zip&can=1&q=server
 
 http://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.20.0.jar&can=1&q=server
+
+http://code.google.com/p/oauth-signpost/downloads/detail?name=signpost-core-1.2.1.2.jar&can=2&q=
+
+http://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.1-release.zip&can=2&q=

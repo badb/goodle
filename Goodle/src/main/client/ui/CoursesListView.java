@@ -72,6 +72,7 @@ public class CoursesListView extends Composite
 								infoLabel.setText("Nie odnaleziono kursów pasujących " +
 										"do podanych kryteriów wyszukiwania");
 							}
+							else infoLabel.setText("");
 							coursesList.setRowData(response);
 						}
 					}

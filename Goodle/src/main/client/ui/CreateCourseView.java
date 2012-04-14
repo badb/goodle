@@ -35,9 +35,12 @@ public class CreateCourseView extends Composite
 	
 	public CreateCourseView() 
 	{
-		initCourseYearBox();
 		initUserLists();
 		initWidget(uiBinder.createAndBindUi(this));
+		courseYearBox.addItem("2012");
+		courseYearBox.addItem("2013");
+		courseYearBox.setSelectedIndex(0);
+		courseTermBox.setSelectedIndex(0);
 	}
 
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
@@ -48,10 +51,7 @@ public class CreateCourseView extends Composite
 		
 	}
 	
-	private void initUserLists()
-	{
-		
-	}
+	private void initUserLists() { }
 	
 	public void clear()
 	{
@@ -64,11 +64,15 @@ public class CreateCourseView extends Composite
 	{
 		if (clientFactory != null)
 		{
+			String name = courseNameBox.getText();
+			String term = courseYearBox.getValue(courseYearBox.getSelectedIndex());
+			term += courseTermBox.getValue(courseTermBox.getSelectedIndex());
+			String desc = courseDescBox.getText();
 			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
 			final CourseProxy course = request.create(CourseProxy.class);
-			course.setName(courseNameBox.getText());
-			course.setTerm("2012L");
-			course.setDesc(courseDescBox.getText());
+			course.setName(name);
+			course.setTerm(term);
+			course.setDesc(desc);
 			request.persist().using(course).fire(new Receiver<Void>()
 			{
 				@Override

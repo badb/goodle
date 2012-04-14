@@ -21,8 +21,6 @@ import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
-
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
 
 @Entity
@@ -31,12 +29,7 @@ import com.google.appengine.api.datastore.Link;
 	@NamedQuery
 	(
 		name = "findCoursesByName",
-		query = "SELECT c FROM Course c WHERE c.name = :name"	
-	),
-	@NamedQuery
-	(
-		name = "findCoursesDescByName",
-		query = "SELECT c FROM Course c WHERE c.name = :name"
+		query = "SELECT c FROM Course c WHERE c.name LIKE :name"	
 	),
 	@NamedQuery
 	(	
@@ -64,9 +57,9 @@ public class Course
     @NotNull
     private String desc;
     
-    private Set<Key> teachers = new HashSet<Key>();
+    private Set<Long> teachers = new HashSet<Long>();
 
-    private Set<Key> members = new HashSet<Key>();
+    private Set<Long> members = new HashSet<Long>();
     
     @OneToMany
     private List<Module> modules = new ArrayList<Module>();
@@ -90,9 +83,9 @@ public class Course
     
     public String getDesc() { return desc; }
     
-    public Set<Key> getTeachers() { return Collections.unmodifiableSet(teachers); }
+    public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
     
-    public Set<Key> getMembers() { return Collections.unmodifiableSet(members); }
+    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
     
     public List<Module> getModules() { return Collections.unmodifiableList(modules); }
     
@@ -167,8 +160,8 @@ public class Course
     	try
     	{		
 
-    		Query q = em.createNamedQuery("findCoursesDescByName");
-    		q.setParameter("name", name);
+    		Query q = em.createNamedQuery("findCoursesByName");
+    		q.setParameter("name", name + "%");
     		List<Course> list = q.getResultList();
     		list.size(); /* force it to materialize */ 
     		return list;

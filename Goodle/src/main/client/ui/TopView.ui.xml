@@ -4,33 +4,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
-	<ui:style>
-		.logo {
-	 		vertical-align: middle;
-			max-heigth: 75px;
-			width: auto;
-		}
-		.searchBox {
-			height: 40px;
-			margin: 20px 20px 20px 20px;
-			padding: 0;
-			position: relative;	
-		}
-		.searchButton {
-			height: 40px;
-			margin: 20px 20px 20px 20px;
-		}
-		.userImage {
-			margin: 20px 20px 20px 20px;
-		}
-		.userName {
-			margin: 25px 0px 20px 0px;
-		}
-		.logoutButton {
-			height: 40px;
-			margin: 20px 20px 20px 20px;
-		}
-	</ui:style>
+	<ui:style src="../../../css/Goodle.css"/>
 	
 	<g:HorizontalPanel>
 		<g:Image ui:field="goodleLogo" 

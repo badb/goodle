@@ -21,16 +21,6 @@ body {
         margin-right:20px;
 }
 
-#logo {
-        background-color: white;
-        border-bottom: 1px solid #c9c9c9;
-}
-
-#logo h1 {
-        /* display: none; */
-        text-shadow: #cde6ff 0 0 10px;
-}
-
 h1 {
         font-size: 40px;
 }
@@ -123,10 +113,6 @@ h2 {
 #page a {
 	text-decoration: none;
 	line-height: 10px;
-}
-
-#name {
-	font-size: 38px;
 }
 
 #info {
@@ -232,46 +218,11 @@ h2 {
 .gwt-SuggestBoxPopup .item-selected {
     background-color: #c9c9c9;
 }
-
-#logout_button {
-	background: none;
-	background-color:transparent;
-	border:none;
-	padding: 0px 30px 0px 0px;
-	text-decoration:none;
-}
-
-#register_button {
-	margin: 0px 0px 0px 20px;
-}
-
 /* TUTAJ */
 
 #mainPanel 
 { 
 	width: 100%
-}
-
-#topPanel 
-{
-	border-bottom: #9FB6CD solid 1px;
-	height: 70px;
-	padding-bottom: 20px;
-	padding-left: 35px;
-	padding-right: 35px;
-	padding-top: 20px;
-	position: fixed;
-	top: 0;
-	width: 100%
-}
-
-#searchBox
-{
-	height: 25px;
-	margin: 0px;
-	padding: 0;
-	position: relative;
-	
 }
 
 #contentPanel
@@ -305,4 +256,46 @@ h2 {
 	padding-left: 15px;
 	padding-top: 15px;
 	width: 150px;	
+}
+
+/* GOODLE VIEW */
+
+.topPanel {
+	max-width: 1100px;
+	width: 1100px;
+    margin: 0 auto;
+	background-color: #efefef;
+    border-bottom: 1px solid #c9c9c9;
+    box-shadow: 0 0 15px 0 #ccc;
+    margin-left:20px;
+    margin-right:20px;
+}
+
+/* TOP VIEW */
+
+.logo {
+	vertical-align: middle;
+	max-heigth: 75px;
+	width: auto;
+}
+.searchBox {
+	height: 40px;
+	margin: 20px 20px 20px 20px;
+	padding: 0;
+	position: relative;	
+}
+.searchButton {
+	height: 40px;
+	margin: 20px 20px 20px 20px;
+}
+.userImage {
+	margin: 20px 20px 20px 20px;
+}
+.userName {
+	margin: 25px 0px 20px 0px;
+	font-size: 20px;
+}
+.logoutButton {
+	height: 40px;
+	margin: 20px 20px 20px 20px;
 }

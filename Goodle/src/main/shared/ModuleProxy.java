@@ -8,7 +8,7 @@ import com.google.web.bindery.requestfactory.shared.ProxyFor;
 @ProxyFor(Module.class)
 public interface ModuleProxy extends EntityProxy 
 {
-	Long getId();
+	//Long getId();
 	String getDescription();
 	void setDescription(String description);
 	

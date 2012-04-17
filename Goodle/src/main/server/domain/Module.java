@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
+import com.google.appengine.api.datastore.Key;
+
 
 @Entity
 public class Module implements Serializable 
@@ -26,8 +28,8 @@ public class Module implements Serializable
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Long id;
-    public Long getId() { return id; }
+	private Key id;
+    public Key getId() { return id; }
     
     @Version
     @Column(name="version")
@@ -80,7 +82,7 @@ public class Module implements Serializable
     	finally { em.close(); }
     }
     
-    public static Module findModule(Long id) {
+    public static Module findModule(Key id) {
         if (id == null) { return null; }
         EntityManager em = entityManager();
         try 

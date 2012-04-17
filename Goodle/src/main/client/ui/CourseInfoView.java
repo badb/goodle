@@ -13,24 +13,20 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
 
-public class CourseView extends Composite
+public class CourseInfoView extends Composite
 {
 	private static CourseViewUiBinder uiBinder = GWT.create(CourseViewUiBinder.class);
 
-	interface CourseViewUiBinder extends UiBinder<Widget, CourseView> { }
+	interface CourseViewUiBinder extends UiBinder<Widget, CourseInfoView> { }
 	
-	@UiField Label courseName;
-	@UiField Label courseDesc;
-	//@UiField LazyPanel moduleListPanel;
-	@UiField TabLayoutPanel tabPanel;
-	//@UiField Label infoLabel;
+	@UiField Label courseInfo;
 	
 	
 	private ClientFactory clientFactory;
 	private CourseProxy course;
 	private String selectedTab;
 
-	public CourseView()
+	public CourseInfoView()
 	{
 		/*tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
 			@Override
@@ -59,8 +55,7 @@ public class CourseView extends Composite
 					public void onSuccess(CourseProxy response)
 					{
 						course = response;
-						courseName.setText(course.getName());
-						courseDesc.setText(course.getDesc());
+						courseInfo.setText(course.getDesc());
 						//String id = course.getModuleIds().get(0);
 						//moduleListPanel.add(clientFactory.getModuleListView);
 					}

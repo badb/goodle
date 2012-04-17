@@ -1,5 +1,6 @@
 package main.shared;
 
+
 import main.server.domain.Course;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
@@ -12,6 +13,7 @@ public interface CourseProxy extends EntityProxy
 	String getName();
 	String getTerm();
 	String getDesc();
+	//List<String> getModuleIds();
 	void setName(String name);
 	void setTerm(String term);
 	void setDesc(String desc);

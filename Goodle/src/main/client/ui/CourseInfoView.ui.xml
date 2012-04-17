@@ -1,10 +1,11 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
->
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
 	<g:VerticalPanel>
-		<g:Label>Lista modułów:</g:Label>
-		<!-- c:CellList ui:field="moduleList" /> -->
+		<g:Label ui:field="courseInfo" />
+		
+		
 	</g:VerticalPanel>
 
 </ui:UiBinder>

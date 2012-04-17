@@ -1,14 +1,24 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<!-- xmlns:my="urn:import:main.client.ui"  -->
 
 	<g:VerticalPanel>
 		<g:Label ui:field="courseName" />
 		<g:Label ui:field="courseDesc" />
-		<g:HorizontalPanel>
-			<g:Button ui:field="moduleButton" text="Lista modułów"></g:Button>
-			<g:Button ui:field="infoButton" text="Informacje o kursie"></g:Button>
-		</g:HorizontalPanel>
+		<g:TabLayoutPanel barUnit="PX" barHeight="30" width="100px" ui:field="tabPanel">
+	    	<g:tab>
+	    		<g:header>Lista modułów</g:header>
+	    		<g:SimplePanel ui:field="modulePanel">
+	    			
+	    		</g:SimplePanel>
+	    	</g:tab>
+			<g:tab>
+				<g:header>Informacje o kursie</g:header>
+				<g:SimplePanel ui:field="infoLabel"/>
+			</g:tab>
+		</g:TabLayoutPanel>
+		
 	</g:VerticalPanel>
 
 </ui:UiBinder>

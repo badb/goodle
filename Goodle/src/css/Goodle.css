@@ -7,6 +7,10 @@ body {
         padding:0;
 }
 
+.header {
+	font-size: 50;
+}
+
 /* GOODLE VIEW */
 
 .topPanel {
@@ -65,9 +69,8 @@ body {
 	 border-left: 1px solid #c9c9c9;
 	 border-right: 1px solid #c9c9c9;
 	 margin-bottom: 0px;
-	 padding-top: 5px;
-	 padding-left: 15px;
-	 padding-right: 80px;
+	 padding-left: 3px;
+	 padding-right: 20px;
 	 float:right;
 }
 
@@ -86,9 +89,26 @@ body {
 }
 
 /* CREATE COURSE VIEW */
-.tab
-{
-	padding: 10px;
-	color: red;
-	border: 1px solid;
+.blabel {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 15px;
+}
+
+.mlabel {
+	font-weight: bold;
+}
+
+.slabel {
+	margin-left: 20px;
+}
+
+.courseBox {
+	width: 250px;
+}
+
+.courseDescBox {
+	width: 250px;
+	height: 100px;
+}
 }

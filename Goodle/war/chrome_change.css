@@ -1140,13 +1140,3 @@ td.datePickerMonth {
   cursor: default;
   background: #bcbcbc;
 }
-
-.gwt-SplitLayoutPanel-HDragger {
-  background: white url(images/splitPanelThumb.png) center center no-repeat;
-  cursor: col-resize;
-}
-
-.gwt-SplitLayoutPanel-VDragger {
-  background: white url(images/splitPanelThumb.png) center center no-repeat;
-  cursor: row-resize;
-}

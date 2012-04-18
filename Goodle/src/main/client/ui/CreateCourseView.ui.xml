@@ -4,14 +4,13 @@
 			 xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
 			 
 	<ui:style src="../../../css/Goodle.css"/>
-			 
 	<g:TabLayoutPanel barUnit="PX" barHeight="20" ui:field="tabPanel">	
 	    <g:tab>
 	        <g:header>Utwórz nowy kurs</g:header>
 	        <g:VerticalPanel>
-	        <g:Label text="Nazwa kursu:" />
+	        <g:Label text="Nazwa kursu:" styleName="{style.blabel}"/>
 	        <g:HorizontalPanel>
-	            <g:TextBox ui:field="courseNameBox" />    
+	            <g:TextBox ui:field="courseNameBox" styleName="{style.courseBox}" />    
 	            <g:ListBox ui:field="courseYearBox" />
 	            <g:ListBox ui:field="courseTermBox">
 	                <g:item value="Z">Z</g:item>
@@ -19,29 +18,28 @@
 	                <g:item value=""></g:item>
 	            </g:ListBox>
 	        </g:HorizontalPanel>
-			<g:Label text="Opis kursu:"/>
-			<g:TextArea ui:field="courseDescBox" />
-			<g:Label text="Prowadzący:" />
+			<g:Label text="Opis kursu:" styleName="{style.blabel}"/>
+			<g:TextArea ui:field="courseDescBox" styleName="{style.courseDescBox}"/>
+			<g:Label text="Prowadzący:" styleName="{style.blabel}"/>
 			<!-- <c:CellList ui:field="teacherList" /> -->
-			<g:Label text="Kursanci:" />
+			<g:Label text="Kursanci:" styleName="{style.blabel}"/>
 		    <!--  <c:CellTree ui:field="memberList" />  -->
-			<g:Label text="Sposób rejestracji:" />
-			<g:RadioButton ui:name="regMethod" ui:text="Otwarty" />
-			<g:Label text="Wszyscy mogą się zarejestrować." />
-			<g:RadioButton ui:name="regMethod" ui:text="Za zgodą prowadzącego" />
-			<g:Label text="Prowadzący dostanie wiadomość z prośbą o rejestrację" />
-			<g:RadioButton ui:name="regMethod" ui:text="Zabezpiecznony hasłem" />
+			<g:Label text="Sposób rejestracji:" styleName="{style.blabel}"/>
+			<g:RadioButton ui:name="regMethod" ui:text="Otwarty" styleName="{style.mlabel}"/>
+			<g:Label text="Wszyscy mogą się zarejestrować." styleName="{style.slabel}"/>
+			<g:RadioButton ui:name="regMethod" ui:text="Za zgodą prowadzącego" styleName="{style.mlabel}"/>
+			<g:Label text="Prowadzący dostanie wiadomość z prośbą o rejestrację" styleName="{style.slabel}"/>
+			<g:RadioButton ui:name="regMethod" ui:text="Zabezpieczony hasłem" styleName="{style.mlabel}"/>
 			<g:HorizontalPanel>
-				<g:Label text="Rejestracja tylko po podaniu hasła" />		   
+				<g:Label text="Rejestracja tylko po podaniu hasła" styleName="{style.slabel}"/>		   
 			    <g:TextBox ui:field="coursePassword" />
 			</g:HorizontalPanel>	
 			<g:Button ui:field="saveButton" text="Zatwierdź" />
 			</g:VerticalPanel>
 	    </g:tab>
-	    <g:tab ui:field="tab2">
+	    <g:tab>
 	        <g:header >Pobierz kurs z USOS</g:header>
 	        <g:Label text="Pobierz kurs..." />
 	    </g:tab>
-	</g:TabLayoutPanel>
-			 
+	</g:TabLayoutPanel>		 
 </ui:UiBinder>

@@ -3,7 +3,9 @@
 			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
 			 xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
 			 
-	<g:TabLayoutPanel barUnit="PX" barHeight="20">
+	<ui:style src="../../../css/Goodle.css"/>
+			 
+	<g:TabLayoutPanel barUnit="PX" barHeight="20" ui:field="tabPanel">	
 	    <g:tab>
 	        <g:header>Utwórz nowy kurs</g:header>
 	        <g:VerticalPanel>
@@ -17,7 +19,7 @@
 	                <g:item value=""></g:item>
 	            </g:ListBox>
 	        </g:HorizontalPanel>
-			<g:Label text="Opis kursu:" />
+			<g:Label text="Opis kursu:"/>
 			<g:TextArea ui:field="courseDescBox" />
 			<g:Label text="Prowadzący:" />
 			<!-- <c:CellList ui:field="teacherList" /> -->
@@ -36,8 +38,8 @@
 			<g:Button ui:field="saveButton" text="Zatwierdź" />
 			</g:VerticalPanel>
 	    </g:tab>
-	    <g:tab>
-	        <g:header>Pobierz kurs z USOS</g:header>
+	    <g:tab ui:field="tab2">
+	        <g:header >Pobierz kurs z USOS</g:header>
 	        <g:Label text="Pobierz kurs..." />
 	    </g:tab>
 	</g:TabLayoutPanel>

@@ -6,252 +6,16 @@ body {
         margin:0;
         padding:0;
 }
-h1 {
-        font-size: 40px;
-}
-
-h2 {
-        font-size: 32px;
-        padding: 0;
-        margin: 0;
-}
-
-
-#goodleLogin td {
-        padding: 5px;
-}
-
-#banner {
-		margin:auto;
-        float:center;
-}
-
-#goodleLogin {
-        padding:20px;
-        margin: auto;
-        margin-top: 30px;
-        width:30%;
-        height:50%;
-        background-color: #e8e8e8 ;
-        border: 2px solid grey;
-        border-radius: 5px;
-        float:center;
-        visibility:hidden;
-}
-
-#user_nav {
-        float: right;
-        margin: 6px 0;
-}
-
-#user_nav td {
-	padding-left: 5px;
-}
-
-#search input {
-        font-size: 14px;
-        background-color: white;
-        border: 1px solid #c9c9c9;
-        color: #8f8f8f;
-        width: 212px;
-        margin: 6px 0;
-        padding: 0 4px;
-}
-
-#navpath {
-        padding: 0 0 10px 0;
-}
-
-#navpath td {
-		padding: 3px;
-}
-
-#navpath a {
-        font-size: 12px;
-        text-decoration: none;
-}
-
-
-
-#course_name {
-        text-align: center;
-        font-size: 200%;
-        font-weight: bold;
-}
-
-#course_info td {
-        padding: 10px;
-}
-
-#course_info {
-        position:absolute;
-        left: 25px;
-        padding:10px;
-        margin:auto;
-}
-
-#page {
-	padding: 25px 0 0 0;
-	line-height: 20px;
-}
-
-#page a {
-	text-decoration: none;
-	line-height: 10px;
-}
-
-#info {
-	padding: 5px 0 10px 0;
-}
-
-#info td {
-	padding: 5px;
-}
-
-.gwt-TextBox {
-        width: 200px;
-}
-
-.gwt-PasswordTextBox {
-        width: 200px;
-}
-
-.gwt-Button {
-    padding: 5px 10px;
-    display: inline;
-    background: #efefef url('img/button.png') repeat-x bottom;
-    border: none;
-    color: #000;
-    cursor: pointer;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-     text-shadow: 1px 1px #fff;
-}
-
-.gwt-Button:hover {
-    background-position: 0 -48px;
-}
-    
-.gwt-Button:active {
-    background-position: 0 top;
-    position: relative;
-    top: 1px;
-    padding: 6px 10px 4px;
-}
-
-
-.tabs {
-        background-image: url('img/tabbar.png');
-        background-repeat: repeat-x;
-        background-position: top;
-        width: 900px;
-}
-
-.get-TabBar {
-        background-image: url('img/tabbar.png');
-        background-repeat: repeat-x;
-        background-position: top;
-}
-.gwt-TabBarFirst-wrapper {
-        background-image: url('img/tabbar_left.png');
-        background-repeat: no-repeat;
-        background-position: top left;
-        padding-left: 18px;
-}
-
-.gwt-TabBarFirst {
-		background-image: url('img/tabbar.png');
-        background-repeat: repeat-x;
-        background-position: top;
-}
-
-.gwt-TabBarItem-wrapper {
-        background-image: url('img/tabbar_right.png');
-        background-repeat: no-repeat;
-        background-position: top right;
-        height: 37px;
-        margin: 0; padding: 0;
-}
-
-.gwt-TabBarItem-wrapper-selected {
-		font-weight: bold;
-}
-
-.gwt-TabBarItem {
-	    background-image: url('img/tabbar.png');
-        background-repeat: repeat-x;
-        background-position: top;
-        display: block;
-        float: left;
-        height: 21px;
-        padding: 8px 16px;
-        color: black;
-        border-right: 1px solid #c9c9c9;    
-}
-
-.gwt-Label {
-	paddin: 10px;
-}
-
-.gwt-SuggestBoxPopup {
-	background-color:white;
-	border: 1px black solid;
-	min-width: 212px;
-}
-
-.gwt-SuggestBoxPopup .item-selected {
-    background-color: #c9c9c9;
-}
-/* TUTAJ */
-
-#mainPanel 
-{ 
-	width: 100%
-}
-
-#contentPanel
-{
-	position: relative;
-	top: 70px;
-	margin-right: auto;
-	margin-left: auto;
-	width: 960px;
-
-}
-
-#leftPanel 
-{ 
-	width: 150px;
-	padding-right: 30px;
-	padding-top: 15px;
-}
-
-#middlePanel 
-{ 
-	border-bottom: #9FB6CD solid 1px;
-	border-left: #9FB6CD solid 1px;
-	border-right: #9FB6CD solid 1px;
-	padding-top: 20px;
-	width: 630px;
-}
-
-#rightPanel 
-{
-	padding-left: 15px;
-	padding-top: 15px;
-	width: 150px;	
-}
 
 /* GOODLE VIEW */
 
 .topPanel {
 	position:relative;
 	max-height: 37px;
-	width:100%;
+	width: 100%;
 	padding: 0;
 	height: 37px;
-    margin-top;
+    margin-top: 0;
     background-image: url('https://lh4.googleusercontent.com/-cI_uBJD5pO0/T4lGlzmDcZI/AAAAAAAAAMA/J8aU1jGqmg8/s800/tabbar.jpg');
     background-repeat: repeat-x;
     background-position: top;
@@ -266,8 +30,8 @@ h2 {
 }
 
 .contentPanel {
-    padding-top: 10px;
-    margin-top: 10px;
+   margin: 30px;
+   padding-top: 30px; 
 }
 
 .rightPanel {
@@ -304,6 +68,7 @@ h2 {
 	 padding-top: 5px;
 	 padding-left: 15px;
 	 padding-right: 80px;
+	 float:right;
 }
 
 .userImage {
@@ -318,4 +83,12 @@ h2 {
 .logoutButton {
 	height: 20px;
 	margin: 7px 20px 5px 20px;
+}
+
+/* CREATE COURSE VIEW */
+.tab
+{
+	padding: 10px;
+	color: red;
+	border: 1px solid;
 }

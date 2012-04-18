@@ -12,6 +12,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -24,6 +25,7 @@ public class CreateCourseView extends Composite
 
 	interface CreateCourseViewUiBinder extends UiBinder<Widget, CreateCourseView> { }
 
+	@UiField TabLayoutPanel tabPanel;
 	@UiField TextBox courseNameBox;
 	@UiField TextArea courseDescBox;
 	@UiField ListBox courseYearBox;

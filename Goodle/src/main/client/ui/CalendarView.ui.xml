@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style src="../../../css/Goodle.css"/>
+			
+	<g:VerticalPanel>
+		<g:Frame url="https://www.google.com/calendar/embed?src=p4rgengkkpjkeufkfc8ib2d828%40group.calendar.google.com" styleName="{style.calendar}"> </g:Frame>
+		<g:Button ui:field="createEventButton" text="Dodaj wydarzenie" />
+	</g:VerticalPanel> 
+		 
+</ui:UiBinder>

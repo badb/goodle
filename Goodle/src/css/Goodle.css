@@ -16,7 +16,9 @@ body {
 .topPanel {
 	position:relative;
 	max-height: 37px;
-	width: 100%;
+	width: 98%;
+	margin-left: auto;
+	margin-right: auto;
 	padding: 0;
 	height: 37px;
     margin-top: 0;
@@ -28,20 +30,22 @@ body {
 }
 
 .leftPanel {
-	width: 250px;
+	width: 230px;
     padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 0px;
+    margin: 40px 10px 10px 15px;
+ 
 }
 
 .contentPanel {
-   margin: 30px;
+   margin: 10px;
    padding-top: 30px; 
 }
 
 .rightPanel {
 	width: 250px;
     padding: 10px 10px 10px 10px;
-    margin: 10px 0px 10px 10px;
+    margin: 40px 15px 10px 10px;
+   
  }
 
 
@@ -100,7 +104,7 @@ body {
 }
 
 .slabel {
-	margin-left: 20px;
+	padding-left: 50px;
 }
 
 .courseBox {
@@ -111,4 +115,16 @@ body {
 	width: 250px;
 	height: 100px;
 }
+
+/* USER COURSE VIEW */ 
+.createButton {
+	height: 30px;
+	width: 100px;
+}
+
+/* CALENDAR VIEW */
+.calendar {
+	height: 250px;
+	width: 250px;
+	margin-bottom: 10px;
 }

@@ -26,13 +26,13 @@ public class CoursePlace extends Place
 	public static class Tokenizer implements PlaceTokenizer<CoursePlace>
 	{
 		@Override
-		public String getToken(CoursePlace place) { return place.getCourseId()+":" +place.getTabId(); }
+		public String getToken(CoursePlace place) { return place.getCourseId() + ":" + place.getTabId(); }
 		
 		@Override 
 		public CoursePlace getPlace(String token) { 
 			String [] ids = token.split(":");
 			if (ids.length < 2) {
-				return new CoursePlace(ids[0], "1");
+				return new CoursePlace(ids[0], "0");
 			}
 			return new CoursePlace(ids[0], ids[1]); 
 		}

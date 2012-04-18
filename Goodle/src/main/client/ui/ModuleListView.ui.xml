@@ -2,9 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 >
-	<g:VerticalPanel>
-		<g:Label>Lista modułów:</g:Label>
+	<g:FlowPanel>
+		<g:Label>Tu będzie lista modułów:</g:Label>
 		<!-- c:CellList ui:field="moduleList" /> -->
-	</g:VerticalPanel>
+	</g:FlowPanel>
 
 </ui:UiBinder>

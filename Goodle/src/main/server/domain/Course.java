@@ -2,138 +2,185 @@ package main.server.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Link;
-import com.google.appengine.api.datastore.Text;
 
 @Entity
 @NamedQueries 
 ({
-	@NamedQuery
-	(
-		name = "findCourseByKey",
-		query = "SELECT c FROM Course c WHERE c.key = :key"
-	),
-	@NamedQuery
-	(
-		name = "findCoursesByName",
-		query = "SELECT c FROM Course c WHERE c.name = :name"	
-	),
-	@NamedQuery
-	(	
-		name = "findCoursesByTerm",
-		query = "SELECT c FROM Course c WHERE c.term = :term"
-	)
+        @NamedQuery
+        (
+                name = "findCoursesByName",
+                query = "SELECT c FROM Course c WHERE c.name LIKE :name"        
+        ),
+        @NamedQuery
+        (       
+                name = "findCoursesByTerm",
+                query = "SELECT c FROM Course c WHERE c.term = :term"
+        )
 })
 public class Course implements Serializable
-{
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Key key;
-    public Key getKey() { return key; }
+{       
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
+
+        @Id
+        @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+        private Long id;
     
+    @Version
+    @Column(name="version")
+    private Integer version;
+   
+    @NotNull
     private String name;
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    
+
+    @NotNull
     private String term;
-    public String getTerm() { return term; }
-    public void setTerm(String term) { this.term = term; }
     
-    // avatar
+    @NotNull
+    private String desc;
     
-    private Text desc;
-    public Text getDesc() { return desc; }
-    public void setDesc(Text desc) { this.desc = desc; }
-    
-    private Link site;
-    public Link getSite() { return site; }
-    public void setSite(Link site) { this.site = site; }
-    
-    private Set<Key> teachers;
-    public Set<Key> getTeachers() { return Collections.unmodifiableSet(teachers); }
-    public void addTeacher(GoodleUser teacher) 
-    { 
-    	teachers.add(teacher.getKey()); 
-    }
-    public void removeTeacher(GoodleUser teacher) 
-    { 
-    	teachers.remove(teacher.getKey()); 
-    }
-    
-    private Set<Key> members;
-    public Set<Key> getMembers() { return Collections.unmodifiableSet(members); }
-    public void addMember(GoodleUser member) 
-    { 
-    	members.add(member.getKey()); 
-    }
-    public void removeMember(GoodleUser member) 
-    { 
-    	members.remove(member.getKey()); 
-    }
+    private Set<Long> teachers = new HashSet<Long>();
+
+    private Set<Long> members = new HashSet<Long>();
     
     @OneToMany
-    private List<Module> modules;
-    public List<Module> getModules() { return Collections.unmodifiableList(modules); }
-    public void addModule(Module module) { modules.add(module); }
-    public void removeModule(Module module) { modules.remove(module); }
+    private List<Module> modules = new ArrayList<Module>();
     
     private Link calendar;
-    public Link getCalendar() { return calendar; }
-    
-    // ankiety
     
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();
-    public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
-    public void addMessage(Message message) { messages.add(message); }
-    public void removeMessage(Message message) { messages.remove(message); }
+    
+    public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
+    
+    /* Getters and setters */
+    
+    public Long getId() { return id; }
+    
+    public Integer getVersion() { return version; }
+    
+    public String getName() { return name; }
+    
+    public String getTerm() { return term; }
+    
+    public String getDesc() { return desc; }
+    
+    public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
+    
+    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
+    
+    public List<Module> getModules() { return Collections.unmodifiableList(modules); }
+    
+    public List<String> getModuleIds() { 
+        List<String> modIDs = Collections.emptyList();
+        for (Module mod:modules) {
+                modIDs.add(mod.getId().toString());
+        }
+        return modIDs; 
+    }
 
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<Comment>();
-    public List<Comment> getComments() { return Collections.unmodifiableList(comments); }
-    public void addComment(Comment comment) { comments.add(comment); }
-    public void removeComment(Comment comment) { comments.remove(comment); }
+    public Link getCalendar() { return calendar; }
     
-    public Course() { }
+    public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
     
-    public Course
-    (
-    		String name, 
-    		String term, 
-    		Text desc, 
-    		Link site, 
-    		Collection<GoodleUser> teachers, 
-    		Collection<GoodleUser> members, 
-    		Link calendar
-    )
+    public void setVersion(Integer version) { this.version = version; }
+    
+    public void setName(String name) { this.name = name; }
+    
+    public void setTerm(String term) { this.term = term; }
+    
+    public void setDesc(String desc) { this.desc = desc; }
+    
+    public void setCalendar(Link calendar) { this.calendar = calendar; }
+    
+    /* Collections methods */
+    
+    public void addTeacher(GoodleUser teacher) { teachers.add(teacher.getId()); } 
+
+    public void removeTeacher(GoodleUser teacher) { teachers.remove(teacher.getId()); }
+
+    public void addMember(GoodleUser member) { members.add(member.getId()); }
+
+    public void removeMember(GoodleUser member) { members.remove(member.getId()); }
+    
+    public void addModule(Module module) { modules.add(module); }
+    
+    public void removeModule(Module module) { modules.remove(module); }
+    
+    public void addMessage(Message message) { messages.add(message); }
+    
+    public void removeMessage(Message message) { messages.remove(message); }
+    
+    /* Db methods */
+    
+    public void persist() 
     {
-    	this.name = name;
-    	this.term = term;
-    	this.desc = desc;
-    	this.site = site;
-    	this.teachers = new HashSet<Key>();
-    	this.modules = new ArrayList<Module>();
-    	this.members = new HashSet<Key>();
-    	for (GoodleUser t : teachers) { this.teachers.add(t.getKey()); };
-    	for (GoodleUser m : members) { this.members.add(m.getKey()); };
+        EntityManager em = entityManager();
+        try { em.persist(this); }
+        finally { em.close(); }
     }
     
+    public void remove()
+    {
+        EntityManager em = entityManager();
+        try 
+        {
+                Course attached = em.find(Course.class, this.id);
+                em.remove(attached); 
+        }
+        finally { em.close(); }
+    }
+    
+    public static Course findCourse(Long id) 
+    {
+        if (id == null) { return null; }
+        EntityManager em = entityManager();
+        try 
+        {
+            Course c = em.find(Course.class, id);
+            return c;
+        }
+        finally { em.close(); }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static List<Course> findCoursesByName(String name)
+    {
+        EntityManager em = entityManager();
+        try
+        {               
+
+                Query q = em.createNamedQuery("findCoursesByName");
+                q.setParameter("name", name + "%");
+                List<Course> list = q.getResultList();
+                list.size(); /* force it to materialize */ 
+                return list;
+        }
+        catch (NoResultException e) { return null; }
+        finally { em.close(); }
+    }
 }

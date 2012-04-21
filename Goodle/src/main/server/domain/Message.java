@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 
 import com.google.appengine.api.datastore.Text;
 
+
 @Entity
 public class Message extends AbstractMessage 
 {

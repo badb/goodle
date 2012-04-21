@@ -11,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Text;
 
+
 @MappedSuperclass
 public abstract class AbstractMessage implements Serializable
 {

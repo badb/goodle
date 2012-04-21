@@ -6,10 +6,10 @@
 	<ui:style src="../../css/Goodle.css"/>
  
 	<g:DockLayoutPanel unit="PX">
-		<g:north size="40">
+		<g:north size="50">
 			<my:TopView styleName='{style.topPanel}' ui:field="topPanel" />
 		</g:north>
-		<g:west size="250">
+		<g:west size="260">
 			<my:UserCoursesView styleName='{style.leftPanel}' ui:field="leftPanel" />
 		</g:west>
 		<g:center size="500">

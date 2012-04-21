@@ -4,12 +4,12 @@
 	<ui:style src="../../../css/Goodle.css"/>		
 			
 	<g:StackLayoutPanel ui:field="userPanel">
-	<g:stack>
-    	<g:header size='20'>Profil</g:header>
+	<g:stack >
+    	<g:header size='40' style="{style.stack}">Profil</g:header>
     	<g:Label>able</g:Label>
 	</g:stack>
 	<g:stack>
-		<g:header size='20'>Administracja</g:header>
+		<g:header size='40'>Administracja</g:header>
 			<g:Button ui:field="createCourseButton" text="Stwórz kurs" styleName="{style.createButton}"/>
 	</g:stack>
 	</g:StackLayoutPanel>

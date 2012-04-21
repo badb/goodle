@@ -5,7 +5,7 @@
 			
 	<g:VerticalPanel>
 		<g:Frame url="https://www.google.com/calendar/embed?src=p4rgengkkpjkeufkfc8ib2d828%40group.calendar.google.com" styleName="{style.calendar}"> </g:Frame>
-		<g:Button ui:field="createEventButton" text="Dodaj wydarzenie" />
+		<g:Button ui:field="createEventButton" text="Dodaj wydarzenie"	/>
 	</g:VerticalPanel> 
 		 
 </ui:UiBinder>

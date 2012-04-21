@@ -5,6 +5,13 @@ package edu.goodle.prototype.be;
 
 import static org.junit.Assert.*;
 
+import main.server.domain.DbApi;
+import main.server.domain.GoodleUser;
+import main.server.usosapi.UsosApiService;
+import main.shared.UsosApiResponseStatus;
+import main.shared.UsosGetCoursesApiResponse;
+import main.shared.UsosSearchCourseResponse;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,12 +22,6 @@ import org.mockito.stubbing.Answer;
 
 import com.google.appengine.api.datastore.Email;
 
-import edu.goodle.prototype.db.DbApi;
-import edu.goodle.prototype.db.GoodleUser;
-import edu.goodle.prototype.server.usosapi.UsosApiService;
-import edu.goodle.prototype.shared.UsosApiResponseStatus;
-import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
-import edu.goodle.prototype.shared.UsosSearchCourseResponse;
 import static org.mockito.Mockito.*;
 
 public class UsosApiShould {

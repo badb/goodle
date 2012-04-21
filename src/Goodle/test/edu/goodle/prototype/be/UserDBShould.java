@@ -3,10 +3,11 @@ package edu.goodle.prototype.be;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import main.server.domain.DbApi;
+import main.server.domain.GoodleUser;
+
 import org.junit.Test;
 
-import edu.goodle.prototype.db.DbApi;
-import edu.goodle.prototype.db.GoodleUser;
 
 public class UserDBShould {
 	private DbApi dbApi;

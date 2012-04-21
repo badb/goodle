@@ -19,6 +19,15 @@
 	                <g:item value=""></g:item>
 	            </g:ListBox>
 	        </g:HorizontalPanel>
+			<g:RadioButton ui:field="regMethod1" ui:name="regMethod" ui:text="Otwarty" />
+			<g:Label text="Wszyscy mogą się zarejestrować." />
+			<g:RadioButton ui:field="regMethod2" ui:name="regMethod" ui:text="Prośba" />
+			<g:Label text="Prowadzący dostanie wiadomość z prośbą o rejestrację" />
+			<g:RadioButton ui:field="regMethod3" ui:name="regMethod" ui:text="Hasło" />
+			<g:HorizontalPanel>
+				<g:Label text="Rejestracja tylko po podaniu hasła" />		   
+			    <g:TextBox ui:field="coursePasswordBox" />
+=======
 			<g:Label text="Opis kursu:" styleName="{style.blabel}"/>
 			<g:TextArea ui:field="courseDescBox" styleName="{style.courseDescBox}"/>
 			<g:Label text="Sposób rejestracji:" styleName="{style.blabel}"/>
@@ -30,6 +39,7 @@
 			<g:HorizontalPanel>
 				<g:Label text="Rejestracja tylko po podaniu hasła" styleName="{style.slabel}"/>		   
 			    <g:TextBox ui:field="coursePassword" />
+>>>>>>> 1311821d618da924d4787910932624cb5ff05876
 			</g:HorizontalPanel>	
 			<g:Button ui:field="saveButton" text="Zatwierdź" />
 			</g:VerticalPanel>

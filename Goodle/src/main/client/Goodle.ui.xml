@@ -6,15 +6,19 @@
 	<ui:style src="../../css/Goodle.css"/>
  
 	<g:DockLayoutPanel unit="PX">
-		<g:north size="75">
+		<g:north size="50">
 			<my:TopView styleName='{style.topPanel}' ui:field="topPanel" />
 		</g:north>
-		<g:west size="300">
-			<my:UserCoursesView ui:field="leftPanel" />
+		<g:west size="260">
+			<my:UserCoursesView styleName='{style.leftPanel}' ui:field="leftPanel" />
 		</g:west>
-		<g:center>
-			<g:SimpleLayoutPanel ui:field="contentPanel" />
+		<g:center size="500">
+			<g:SimpleLayoutPanel styleName='{style.contentPanel}' ui:field="contentPanel" />
 		</g:center>
+		<g:east size="300">
+			<my:CalendarView styleName='{style.rightPanel}' ui:field="rightPanel" />
+		</g:east>
 	</g:DockLayoutPanel>
+			 
 			 
 </ui:UiBinder>

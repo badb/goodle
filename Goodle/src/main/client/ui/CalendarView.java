@@ -10,29 +10,26 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.StackLayoutPanel;
-import com.google.gwt.user.client.ui.StackPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class UserCoursesView extends Composite 
+public class CalendarView extends Composite 
 {
 
-	private static UserCoursesViewUiBinder uiBinder = GWT.create(UserCoursesViewUiBinder.class);
+	private static CalendarViewUiBinder uiBinder = GWT.create(CalendarViewUiBinder.class);
 	
-	interface UserCoursesViewUiBinder extends UiBinder<Widget, UserCoursesView> { }
-	
-	@UiField StackLayoutPanel userPanel;
-	@UiField Button createCourseButton;
+	interface CalendarViewUiBinder extends UiBinder<Widget, CalendarView> { }
+	 
+	@UiField Button createEventButton;
 	private ClientFactory clientFactory;
 	
-	public UserCoursesView()
+	public CalendarView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 	
-	@UiHandler("createCourseButton")
+	@UiHandler("createEventButton")
 	void onCreateCourseButtonClicked(ClickEvent event)
 	{
 		if (clientFactory != null)

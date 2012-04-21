@@ -12,12 +12,15 @@ public class CourseActivity extends AbstractActivity
 {
 	private ClientFactory clientFactory;
 	private String courseId;
+	private String tabId;
 	
 	public CourseActivity(ClientFactory clientFactory, CoursePlace place)
 	{
 		this.clientFactory = clientFactory;
 		this.courseId = place.getCourseId();
+		this.tabId = place.getTabId();
 	}
+
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) 
@@ -25,6 +28,8 @@ public class CourseActivity extends AbstractActivity
 		CourseView view = clientFactory.getCourseView();
 		view.setClientFactory(clientFactory);
 		view.getCourse(courseId);
+		view.setSelectedTab(tabId);
+		
 		panel.setWidget(view.asWidget());
 	}
 }

@@ -45,7 +45,7 @@ public class CoursesListView extends Composite
 				{
 			public void update(CourseProxy value) 
 			{
-				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString()));
+				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString(), "0"));
 			}
 				};
 				coursesList.setValueUpdater(updater);

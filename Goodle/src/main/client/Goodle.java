@@ -5,6 +5,7 @@ import main.client.mapper.ContentPanelActivityMapper;
 import main.client.place.CreateCoursePlace;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
+import main.client.ui.CalendarView;
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -32,6 +33,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
     @UiField TopView topPanel;
     @UiField UserCoursesView leftPanel;
     @UiField SimpleLayoutPanel contentPanel;
+    @UiField CalendarView rightPanel;
     
     private Place defaultPlace = new CreateCoursePlace();
 
@@ -55,6 +57,7 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
         
         topPanel.setClientFactory(clientFactory);
         leftPanel.setClientFactory(clientFactory);
+        rightPanel.setClientFactory(clientFactory);
         
         RootLayoutPanel.get().add(outer);
         

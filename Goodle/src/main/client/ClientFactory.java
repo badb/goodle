@@ -1,8 +1,11 @@
 package main.client;
 
+import main.client.ui.CourseInfoView;
 import main.client.ui.CourseView;
 import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
+import main.client.ui.ModuleWidget;
+import main.client.ui.ModulesTabView;
 import main.shared.GoodleRequestFactory;
 
 import com.google.gwt.place.shared.PlaceController;
@@ -17,4 +20,6 @@ public interface ClientFactory
 	CoursesListView getCoursesListView();
 	CourseView getCourseView();
 	CreateCourseView getCreateCourseView();
+	CourseInfoView getCourseInfoView();
+	ModulesTabView getModulesTabView();
 }

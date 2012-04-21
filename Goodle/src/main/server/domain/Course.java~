@@ -22,33 +22,35 @@ import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import main.shared.RegMethod;
+
 import com.google.appengine.api.datastore.Link;
 
 @Entity
 @NamedQueries 
 ({
-        @NamedQuery
-        (
-                name = "findCoursesByName",
-                query = "SELECT c FROM Course c WHERE c.name LIKE :name"        
-        ),
-        @NamedQuery
-        (       
-                name = "findCoursesByTerm",
-                query = "SELECT c FROM Course c WHERE c.term = :term"
-        )
+	@NamedQuery
+	(
+		name = "findCoursesByName",
+		query = "SELECT c FROM Course c WHERE c.name LIKE :name"	
+	),
+	@NamedQuery
+	(	
+		name = "findCoursesByTerm",
+		query = "SELECT c FROM Course c WHERE c.term = :term"
+	)
 })
 public class Course implements Serializable
-{       
-        /**
-         * 
-         */
-        private static final long serialVersionUID = 1L;
+{	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-        @Id
-        @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-        private Long id;
+	@Id
+	@Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)	
+	private Long id;
     
     @Version
     @Column(name="version")
@@ -62,6 +64,11 @@ public class Course implements Serializable
     
     @NotNull
     private String desc;
+    
+    private RegMethod regMethod;
+    
+    @NotNull
+    private String password;
     
     private Set<Long> teachers = new HashSet<Long>();
 
@@ -89,6 +96,10 @@ public class Course implements Serializable
     
     public String getDesc() { return desc; }
     
+    public RegMethod getRegMethod() { return regMethod; }
+    
+    public String getPassword() { return password; }
+    
     public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
     
     public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
@@ -96,11 +107,11 @@ public class Course implements Serializable
     public List<Module> getModules() { return Collections.unmodifiableList(modules); }
     
     public List<String> getModuleIds() { 
-        List<String> modIDs = Collections.emptyList();
-        for (Module mod:modules) {
-                modIDs.add(mod.getId().toString());
-        }
-        return modIDs; 
+    	List<String> modIDs = Collections.emptyList();
+    	for (Module mod:modules) {
+    		modIDs.add(mod.getId().toString());
+    	}
+    	return modIDs; 
     }
 
     public Link getCalendar() { return calendar; }
@@ -114,6 +125,10 @@ public class Course implements Serializable
     public void setTerm(String term) { this.term = term; }
     
     public void setDesc(String desc) { this.desc = desc; }
+    
+    public void setRegMethod(RegMethod regMethod) { this.regMethod = regMethod; }
+    
+    public void setPassword(String password) { this.password = password; }
     
     public void setCalendar(Link calendar) { this.calendar = calendar; }
     
@@ -137,22 +152,26 @@ public class Course implements Serializable
     
     /* Db methods */
     
-    public void persist() 
+    public Long persist() 
     {
-        EntityManager em = entityManager();
-        try { em.persist(this); }
-        finally { em.close(); }
+    	EntityManager em = entityManager();
+    	try 
+    	{ 
+    		em.persist(this); 
+    		return this.id;
+    	}
+    	finally { em.close(); }
     }
     
     public void remove()
     {
-        EntityManager em = entityManager();
-        try 
-        {
-                Course attached = em.find(Course.class, this.id);
-                em.remove(attached); 
-        }
-        finally { em.close(); }
+    	EntityManager em = entityManager();
+    	try 
+    	{
+    		Course attached = em.find(Course.class, this.id);
+    		em.remove(attached); 
+    	}
+    	finally { em.close(); }
     }
     
     public static Course findCourse(Long id) 
@@ -170,18 +189,18 @@ public class Course implements Serializable
     @SuppressWarnings("unchecked")
     public static List<Course> findCoursesByName(String name)
     {
-        EntityManager em = entityManager();
-        try
-        {               
+    	EntityManager em = entityManager();
+    	try
+    	{		
 
-                Query q = em.createNamedQuery("findCoursesByName");
-                q.setParameter("name", name + "%");
-                List<Course> list = q.getResultList();
-                list.size(); /* force it to materialize */ 
-                return list;
-        }
-        catch (NoResultException e) { return null; }
-        finally { em.close(); }
+    		Query q = em.createNamedQuery("findCoursesByName");
+    		q.setParameter("name", name + "%");
+    		List<Course> list = q.getResultList();
+    		list.size(); /* force it to materialize */ 
+    		return list;
+    	}
+    	catch (NoResultException e) { return null; }
+    	finally { em.close(); }
     }
 }
    

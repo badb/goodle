@@ -13,6 +13,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -22,10 +23,11 @@ public class TopView extends Composite
 	private static TopViewUiBinder uiBinder = GWT.create(TopViewUiBinder.class);
 	
 	interface TopViewUiBinder extends UiBinder<Widget, TopView> { }
-	@UiField Image goodleLogo;
+	@UiField Label goodleLogo;
 	@UiField TextBox searchBox;
 	@UiField Button searchButton;
 	@UiField Image userImage;
+	@UiField Label userName;
 	@UiField Button logoutButton;
 	private ClientFactory clientFactory;
 	

@@ -24,7 +24,7 @@ public class CourseView extends Composite
 	
 	@UiField Label courseName;
 	@UiField Label courseDesc;
-	//@UiField ModuleListView moduleListView;
+	@UiField ModulesTabView modulesTabView;
 
 	@UiField CourseInfoView courseInfoView;
 	@UiField TabLayoutPanel tabPanel;
@@ -58,7 +58,8 @@ public class CourseView extends Composite
 						tabPanel.getTabWidget(0).setVisible(true);
 						tabPanel.getTabWidget(1).setVisible(true);
 						//String id = course.getModuleIds().get(0);
-						//moduleListView = clientFactory.getModuleListView();
+						modulesTabView = clientFactory.getModulesTabView();
+						modulesTabView.setCourse(course);
 						
 						
 						courseInfoView = clientFactory.getCourseInfoView();
@@ -73,11 +74,7 @@ public class CourseView extends Composite
 	}
 
 	public void setSelectedTab(String tabId) {
-		this.selectedTab = tabId;
-		tabPanel.getTabWidget(new Integer(selectedTab)).getParent().setVisible(true);
-		tabPanel.getTabWidget(0).setVisible(true);
-		tabPanel.getTabWidget(1).setVisible(true);
-		
+		this.selectedTab = tabId;		
 		tabPanel.selectTab(new Integer(selectedTab).intValue());
 	}
 	

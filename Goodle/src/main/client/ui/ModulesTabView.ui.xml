@@ -3,8 +3,9 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 >
 	<g:FlowPanel>
-		<g:Label>Tu będzie lista modułów:</g:Label>
+		<g:Label ui:field="infoLabel">Tu będzie lista modułów:</g:Label>
 		<!-- c:CellList ui:field="moduleList" /> -->
+		<g:FlexTable ui:field="modulesTable"></g:FlexTable>
 	</g:FlowPanel>
 
 </ui:UiBinder>

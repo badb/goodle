@@ -1,5 +1,6 @@
 package main.server.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,8 +38,13 @@ import com.google.appengine.api.datastore.Link;
 		query = "SELECT c FROM Course c WHERE c.term = :term"
 	)
 })
-public class Course 
+public class Course implements Serializable
 {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
@@ -89,6 +95,14 @@ public class Course
     
     public List<Module> getModules() { return Collections.unmodifiableList(modules); }
     
+    public List<String> getModuleIds() { 
+    	List<String> modIDs = Collections.emptyList();
+    	for (Module mod:modules) {
+    		modIDs.add(mod.getId().toString());
+    	}
+    	return modIDs; 
+    }
+
     public Link getCalendar() { return calendar; }
     
     public List<Message> getMessages() { return Collections.unmodifiableList(messages); }

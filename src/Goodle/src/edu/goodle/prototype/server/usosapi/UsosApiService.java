@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
@@ -21,14 +23,15 @@ import com.google.gson.GsonBuilder;
 import edu.goodle.prototype.db.DataModificationFailedException;
 import edu.goodle.prototype.db.DbApi;
 import edu.goodle.prototype.db.GoodleUser;
-import edu.goodle.prototype.shared.LongCourseDescription;
-import edu.goodle.prototype.shared.UsosApiResponseStatus;
-import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
-import edu.goodle.prototype.shared.UsosSearchCourseResponse;
+import edu.goodle.prototype.shared.usosapi.LongCourseDescription;
+import edu.goodle.prototype.shared.usosapi.UsosApiResponseStatus;
+import edu.goodle.prototype.shared.usosapi.UsosGetCoursesApiResponse;
+import edu.goodle.prototype.shared.usosapi.UsosSearchCourseResponse;
 
 
 public class UsosApiService {
 	public enum RequestStatus{ OK, FAILED};
+	private final static Logger LOGGER = Logger.getLogger(UsosApiService.class .getName());
 	public UsosApiService(DbApi db){
 		init(db);
 	}
@@ -50,32 +53,36 @@ public class UsosApiService {
 			if (userHasUsosData(user)) {
 				String request = "request";
 				String result = makeAuthorisedRequest(user, request);
-				if (getResultStatus(result) != RequestStatus.OK) {
-					clearUsosData(user);
-					response = new UsosGetCoursesApiResponse(
-							UsosApiResponseStatus.AUTH_REQUIRED);
 
-					response.setAuth_url(saveRequestTokenAndReturnAuthURL(user));
+				response = new UsosGetCoursesApiResponse(
+						UsosApiResponseStatus.AUTH_REQUIRED);
 
-				} else {
-					return createGetCoursesResponse(result);
-				}
+				return createGetCoursesResponse(result);
+
 			} else {
 				response = new UsosGetCoursesApiResponse(
 						UsosApiResponseStatus.AUTH_REQUIRED);
 				response.setAuth_url(saveRequestTokenAndReturnAuthURL(user));
 			}
-		} catch (OAuthException e) {
+		} catch (Exception e){
+			clearUsosData(user);
 			response = new UsosGetCoursesApiResponse(UsosApiResponseStatus.FAILED);
-			System.out.print(e.toString());
+			LOGGER.log(Level.SEVERE, "Error getAllUserCourses for user: " + user.getLogin() +"\n" + e.toString());
+		}
+		/*catch (OAuthException e) {
+			clearUsosData(user);
+			response = new UsosGetCoursesApiResponse(UsosApiResponseStatus.FAILED);
+			LOGGER.log(Level.SEVERE, "Error getAllUserCourses for user: " + user.getLogin() +"\n" + e.toString());
 		} catch (DataModificationFailedException e) {
+			clearUsosData(user);
 			response = new UsosGetCoursesApiResponse(UsosApiResponseStatus.FAILED);
 			System.out.print(e.toString());
 		} catch (IOException e) {
+			clearUsosData(user);
 			response = new UsosGetCoursesApiResponse(UsosApiResponseStatus.FAILED);
 			System.out.print(e.toString());
 		}
-
+*/
 		return response;
 	}
 
@@ -96,20 +103,19 @@ public class UsosApiService {
 	    	return null;
 	    	
 	    }else{
-	    	return conn.getResponseMessage();
+	    	return getResponse(conn);
 	    }
 	}
 
-	private RequestStatus getResultStatus(String result) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void clearUsosData(GoodleUser user) throws DataModificationFailedException {
+	private void clearUsosData(GoodleUser user){
+		try{
 		user.setAccessTokenKey(null);
 		user.setAccessTokenSecret(null);
 		user.setRequestKey(null);
 		db.modifyUser(user);
+		}catch (DataModificationFailedException e) {
+			LOGGER.log(Level.SEVERE, "Failed to clearUsosData for User: " + user.getLogin());
+		}
 		
 	}
 
@@ -162,18 +168,10 @@ public class UsosApiService {
 						+ request.getResponseCode() + " "
 						+ request.getResponseMessage());
 			}
-			BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			StringBuilder stringBuilder = new StringBuilder();
-
-		      String line = null;
-		      while ((line = reader.readLine()) != null)
-		      {
-		        stringBuilder.append(line + "\n");
-		      }
 		       
 		    
 		
-			String response = stringBuilder.toString();
+			String response = getResponse(request);
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LongCourseDescription.class, new LongCourseDeserializer())
 					.create();
@@ -188,5 +186,17 @@ public class UsosApiService {
 
 		}
 		
+	}
+	private String getResponse(HttpURLConnection request)
+			throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		StringBuilder stringBuilder = new StringBuilder();
+
+		  String line = null;
+		  while ((line = reader.readLine()) != null)
+		  {
+		    stringBuilder.append(line + "\n");
+		  }
+		return stringBuilder.toString();
 	}
 }

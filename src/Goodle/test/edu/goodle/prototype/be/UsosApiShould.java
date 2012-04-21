@@ -18,9 +18,9 @@ import com.google.appengine.api.datastore.Email;
 import edu.goodle.prototype.db.DbApi;
 import edu.goodle.prototype.db.GoodleUser;
 import edu.goodle.prototype.server.usosapi.UsosApiService;
-import edu.goodle.prototype.shared.UsosApiResponseStatus;
-import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
-import edu.goodle.prototype.shared.UsosSearchCourseResponse;
+import edu.goodle.prototype.shared.usosapi.UsosApiResponseStatus;
+import edu.goodle.prototype.shared.usosapi.UsosGetCoursesApiResponse;
+import edu.goodle.prototype.shared.usosapi.UsosSearchCourseResponse;
 import static org.mockito.Mockito.*;
 
 public class UsosApiShould {
@@ -63,7 +63,6 @@ public class UsosApiShould {
 	}
 	@Test
 	public void searchCourseByID() {
-		userInDB = new GoodleUser("janke", "test", "Janek", "Janke", new Email("lhoirt@gmail.com")); 
 		
 		UsosSearchCourseResponse r = service.searchCourseByID("1000-212bMD");
 		

@@ -1,4 +1,4 @@
-package edu.goodle.prototype.shared;
+package edu.goodle.prototype.shared.usosapi;
 
 public enum UsosApiResponseStatus {
 	OK, AUTH_REQUIRED, FAILED

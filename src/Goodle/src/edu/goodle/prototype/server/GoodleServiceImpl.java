@@ -6,8 +6,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.goodle.prototype.client.GoodleService;
 import edu.goodle.prototype.db.DbApi;
-import edu.goodle.prototype.shared.UsosApiResponseStatus;
-import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
+import edu.goodle.prototype.shared.usosapi.UsosApiResponseStatus;
+import edu.goodle.prototype.shared.usosapi.UsosGetCoursesApiResponse;
 
 @SuppressWarnings("serial")
 public class GoodleServiceImpl extends RemoteServiceServlet implements GoodleService {

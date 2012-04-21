@@ -3,7 +3,7 @@ package edu.goodle.prototype.client;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
+import edu.goodle.prototype.shared.usosapi.UsosGetCoursesApiResponse;
 
 @RemoteServiceRelativePath("goodle")
 

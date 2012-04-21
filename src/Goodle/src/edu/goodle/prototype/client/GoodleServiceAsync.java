@@ -2,7 +2,7 @@ package edu.goodle.prototype.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import edu.goodle.prototype.shared.UsosGetCoursesApiResponse;
+import edu.goodle.prototype.shared.usosapi.UsosGetCoursesApiResponse;
 
 public interface GoodleServiceAsync {
 

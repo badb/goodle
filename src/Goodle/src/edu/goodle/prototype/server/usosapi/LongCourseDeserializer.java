@@ -8,7 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import edu.goodle.prototype.shared.LongCourseDescription;
+import edu.goodle.prototype.shared.usosapi.LongCourseDescription;
 
 public class LongCourseDeserializer implements JsonDeserializer<LongCourseDescription> {
 	private String getPolishValue(JsonObject json) throws JsonParseException {

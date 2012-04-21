@@ -1,7 +1,0 @@
-# local files (logs, etc) #
-.gwt/*
-.settings/*
-gwt-unitCache/*
-*.cache.html
-*.gwt.rpc
-war/goodle/goodle.nocache.js

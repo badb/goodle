@@ -12,7 +12,11 @@ public interface CourseProxy extends EntityProxy
 	String getName();
 	String getTerm();
 	String getDesc();
+	RegMethod getRegMethod();
+	String getPassword();
 	void setName(String name);
 	void setTerm(String term);
 	void setDesc(String desc);
+	void setRegMethod(RegMethod regMethod);
+	void setPassword(String password);
 }

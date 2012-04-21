@@ -21,6 +21,8 @@ import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import main.shared.RegMethod;
+
 import com.google.appengine.api.datastore.Link;
 
 @Entity
@@ -57,6 +59,11 @@ public class Course
     @NotNull
     private String desc;
     
+    private RegMethod regMethod;
+    
+    @NotNull
+    private String password;
+    
     private Set<Long> teachers = new HashSet<Long>();
 
     private Set<Long> members = new HashSet<Long>();
@@ -83,6 +90,10 @@ public class Course
     
     public String getDesc() { return desc; }
     
+    public RegMethod getRegMethod() { return regMethod; }
+    
+    public String getPassword() { return password; }
+    
     public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
     
     public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
@@ -100,6 +111,10 @@ public class Course
     public void setTerm(String term) { this.term = term; }
     
     public void setDesc(String desc) { this.desc = desc; }
+    
+    public void setRegMethod(RegMethod regMethod) { this.regMethod = regMethod; }
+    
+    public void setPassword(String password) { this.password = password; }
     
     public void setCalendar(Link calendar) { this.calendar = calendar; }
     
@@ -123,10 +138,14 @@ public class Course
     
     /* Db methods */
     
-    public void persist() 
+    public Long persist() 
     {
     	EntityManager em = entityManager();
-    	try { em.persist(this); }
+    	try 
+    	{ 
+    		em.persist(this); 
+    		return this.id;
+    	}
     	finally { em.close(); }
     }
     

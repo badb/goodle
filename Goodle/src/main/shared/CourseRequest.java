@@ -12,8 +12,7 @@ import com.google.web.bindery.requestfactory.shared.Service;
 @Service(Course.class)
 public interface CourseRequest extends RequestContext 
 {
-	InstanceRequest<CourseProxy, Void> persist();
+	InstanceRequest<CourseProxy, Long> persist();
 	Request<CourseProxy> findCourse(Long id);
 	Request<List<CourseProxy>> findCoursesByName(String name);
-
 }

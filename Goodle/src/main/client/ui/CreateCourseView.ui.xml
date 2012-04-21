@@ -1,7 +1,8 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
-			 xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
+			 xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+			 xmlns:my="urn:import:main.client.util">
 			 
 	<g:TabLayoutPanel barUnit="PX" barHeight="20">
 	    <g:tab>
@@ -19,19 +20,15 @@
 	        </g:HorizontalPanel>
 			<g:Label text="Opis kursu:" />
 			<g:TextArea ui:field="courseDescBox" />
-			<g:Label text="Prowadzący:" />
-			<!-- <c:CellList ui:field="teacherList" /> -->
-			<g:Label text="Kursanci:" />
-		    <!--  <c:CellTree ui:field="memberList" />  -->
 			<g:Label text="Sposób rejestracji:" />
-			<g:RadioButton ui:name="regMethod" ui:text="Otwarty" />
+			<g:RadioButton ui:field="regMethod1" ui:name="regMethod" ui:text="Otwarty" />
 			<g:Label text="Wszyscy mogą się zarejestrować." />
-			<g:RadioButton ui:name="regMethod" ui:text="Za zgodą prowadzącego" />
+			<g:RadioButton ui:field="regMethod2" ui:name="regMethod" ui:text="Prośba" />
 			<g:Label text="Prowadzący dostanie wiadomość z prośbą o rejestrację" />
-			<g:RadioButton ui:name="regMethod" ui:text="Zabezpiecznony hasłem" />
+			<g:RadioButton ui:field="regMethod3" ui:name="regMethod" ui:text="Hasło" />
 			<g:HorizontalPanel>
 				<g:Label text="Rejestracja tylko po podaniu hasła" />		   
-			    <g:TextBox ui:field="coursePassword" />
+			    <g:TextBox ui:field="coursePasswordBox" />
 			</g:HorizontalPanel>	
 			<g:Button ui:field="saveButton" text="Zatwierdź" />
 			</g:VerticalPanel>

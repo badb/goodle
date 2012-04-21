@@ -1,1 +1,11 @@
+gwt-unitCache/*
+.apt_generated/*
+.gwt/*
+.settings/*
+Goodle.launch
 .classpath
+.factorypath
+.project
+
+
+

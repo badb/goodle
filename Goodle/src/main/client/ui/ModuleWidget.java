@@ -1,6 +1,5 @@
 package main.client.ui;
 
-import main.client.ui.ModulesTabView.ModulesTabUiBinder;
 import main.shared.ModuleProxy;
 
 

@@ -1,7 +1,7 @@
 package main.client.ui;
 
 import main.client.ClientFactory;
-import main.shared.CourseProxy;
+import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

@@ -3,8 +3,8 @@ package main.client.ui;
 import java.util.List;
 
 import main.client.ClientFactory;
-import main.shared.CourseProxy;
-import main.shared.ModuleProxy;
+import main.shared.proxy.CourseProxy;
+import main.shared.proxy.ModuleProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

@@ -2,9 +2,9 @@ package main.client.ui;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.shared.CourseProxy;
-import main.shared.CourseRequest;
 import main.shared.RegMethod;
+import main.shared.proxy.CourseProxy;
+import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

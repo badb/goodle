@@ -2,7 +2,7 @@ package main.client.ui;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.shared.CourseProxy;
+import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;

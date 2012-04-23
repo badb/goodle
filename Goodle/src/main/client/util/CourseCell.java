@@ -1,6 +1,6 @@
 package main.client.util;
 
-import main.shared.CourseProxy;
+import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;

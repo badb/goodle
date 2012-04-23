@@ -1,4 +1,4 @@
-package main.shared;
+package main.shared.proxy;
 
 import java.util.List;
 

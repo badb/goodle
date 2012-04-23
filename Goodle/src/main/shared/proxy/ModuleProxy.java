@@ -1,4 +1,4 @@
-package main.shared;
+package main.shared.proxy;
 
 import main.server.domain.Module;
 

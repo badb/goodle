@@ -1,6 +1,6 @@
 package main.client.ui;
 
-import main.shared.ModuleProxy;
+import main.shared.proxy.ModuleProxy;
 
 
 import com.google.gwt.core.client.GWT;

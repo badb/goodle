@@ -6,7 +6,7 @@ import main.client.ClientFactory;
 import main.client.place.CoursePlace;
 import main.client.ui.CoursesListView.CoursesListViewUiBinder;
 import main.client.util.CourseCell;
-import main.shared.CourseProxy;
+import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;

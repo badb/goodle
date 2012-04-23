@@ -2,7 +2,7 @@ package main.client.util;
 
 import java.util.ArrayList;
 
-import main.shared.GoodleUserProxy;
+import main.shared.proxy.GoodleUserProxy;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.FieldUpdater;

@@ -1,10 +1,11 @@
-package main.shared;
+package main.shared.proxy;
 
 
 import java.util.List;
 
 import main.server.domain.Course;
 import main.server.domain.Module;
+import main.shared.RegMethod;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;

@@ -9,19 +9,36 @@ import java.net.URLEncoder;
 import java.util.Vector;
 
 import main.client.ClientFactory;
-import main.server.domain.DataModificationFailedException;
 import main.server.domain.GoodleUser;
-import main.shared.LongCourseDescription;
+import main.shared.LongCourseDesc;
 import main.shared.usos.UsosGetCoursesResponse;
 import main.shared.usos.UsosResponseStatus;
 import main.shared.usos.UsosSearchCourseResponse;
+import oauth.signpost.OAuth;
+import oauth.signpost.OAuthConsumer;
+import oauth.signpost.OAuthProvider;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthProvider;
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthNotAuthorizedException;
 
 import com.google.appengine.tools.admin.OAuth2ServerConnection.OAuthException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class UsosApiService 
 {	
-	public enum RequestStatus{ OK, FAILED };
-
+	public enum RequestStatus { OK, FAILED };
+	
+	private ClientFactory clientFactory;
+	private String baseUrl;
+	private String baseUrlSecure;
+	private String scope;
+	private OAuthConsumer consumer;
+	private OAuthProvider provider;
+	
 	public UsosApiService(ClientFactory clientFactory)
 	{
 		this.clientFactory = clientFactory;
@@ -30,20 +47,12 @@ public class UsosApiService
 		scope = "studies|offline_access";
 		consumer = new DefaultOAuthConsumer("", "");
 		provider = new DefaultOAuthProvider
-				(
-						baseUrlSecure + "services/oauth/request_token" ,
-						baseUrlSecure + "services/oauth/access_token",
-						baseUrl + "services/oauth/authorize"
-						);
+		(
+			baseUrlSecure + "services/oauth/request_token" ,
+			baseUrlSecure + "services/oauth/access_token",
+			baseUrl + "services/oauth/authorize"
+		);
 	}
-
-	private ClientFactory clientFactory;
-	private String baseUrl;
-	private String baseUrlSecure;
-	private String scope;
-	private OAuthConsumer consumer;
-	private OAuthProvider provider;
-
 
 	public UsosGetCoursesResponse getAllUserCourses(GoodleUser user) 
 	{
@@ -52,15 +61,14 @@ public class UsosApiService
 		{
 			if (userHasUsosData(user)) 
 			{
-				String request = "request";
-				String result = makeAuthorisedRequest(user, request);
+				String result = makeAuthorisedRequest(user, "request");
 				if (getResultStatus(result) != RequestStatus.OK) 
 				{
 					clearUsosData(user);
 					response = new UsosGetCoursesResponse(UsosResponseStatus.AUTH_REQUIRED);
 					response.setAuthUrl(saveRequestTokenAndReturnAuthURL(user));
 				} 
-				else return createGetCoursesResponse(result);
+				else response = createGetCoursesResponse(result);
 			} 
 			else 
 			{
@@ -68,22 +76,11 @@ public class UsosApiService
 				response.setAuthUrl(saveRequestTokenAndReturnAuthURL(user));
 			}
 		} 
-		catch (OAuthException e) 
+		catch (Exception e) 
 		{
 			response = new UsosGetCoursesResponse(UsosResponseStatus.FAILED);
 			System.out.print(e.toString());
 		} 
-		catch (DataModificationFailedException e)
-		{
-			response = new UsosGetCoursesResponse(UsosResponseStatus.FAILED);
-			System.out.print(e.toString());
-		} 
-		catch (IOException e) 
-		{
-			response = new UsosGetCoursesResponse(UsosResponseStatus.FAILED);
-			System.out.print(e.toString());
-		}
-
 		return response;
 	}
 
@@ -93,20 +90,24 @@ public class UsosApiService
 		return null;
 	}
 
-	private String makeAuthorisedRequest(GoodleUser user, String request) throws IOException, OAuthException 
+	private String makeAuthorisedRequest(GoodleUser user, String request) 
+			throws 
+				IOException, 
+				OAuthMessageSignerException, 
+				OAuthExpectationFailedException, 
+				OAuthCommunicationException 
 	{
 		URL url = new URL(request);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 		consumer.sign(conn);
 		conn.connect();
-
-		if(conn.getResponseCode() != 200)
+		if (conn.getResponseCode() != 200)
 		{
 			// TODO Throw proper Excception
 			return null;
 		}
-		else return conn.getResponseMessage();
+		return conn.getResponseMessage();
 	}
 
 	private RequestStatus getResultStatus(String result) 
@@ -115,7 +116,7 @@ public class UsosApiService
 		return null;
 	}
 
-	private void clearUsosData(GoodleUser user) throws DataModificationFailedException 
+	private void clearUsosData(GoodleUser user)
 	{
 		// TODO Dostosować do RequestFactory
 	}
@@ -126,7 +127,8 @@ public class UsosApiService
 				user.getAccessTokenSecret() == null || user.getAccessTokenSecret().equals(""));
 	}
 
-	private String saveRequestTokenAndReturnAuthURL(GoodleUser user) throws OAuthException, DataModificationFailedException 
+	private String saveRequestTokenAndReturnAuthURL(GoodleUser user) 
+			throws OAuthException, OAuthMessageSignerException, OAuthNotAuthorizedException, OAuthExpectationFailedException, OAuthCommunicationException
 	{
 		String authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
 
@@ -167,10 +169,9 @@ public class UsosApiService
 			}
 			String response = stringBuilder.toString();
 			GsonBuilder gsonBuilder = new GsonBuilder();
-			.registerTypeAdapter(LongCourseDescription.class, new LongCourseDeserializer())
-			.create();
-			Vector<LongCourseDescription> v = new Vector<LongCourseDescription>();
-			v.add(gson.fromJson(response, LongCourseDescription.class));
+			Gson gson = gsonBuilder.registerTypeAdapter(LongCourseDesc.class, new LongCourseDeserializer()).create();
+			Vector<LongCourseDesc> v = new Vector<LongCourseDesc>();
+			v.add(gson.fromJson(response, LongCourseDesc.class));
 			UsosSearchCourseResponse toRet = new UsosSearchCourseResponse(UsosResponseStatus.OK);
 			toRet.setCourses(v);
 			return toRet;
@@ -178,8 +179,7 @@ public class UsosApiService
 		catch (Exception e) 
 		{
 			System.out.println(e);
-			return new UsosSearchCourseResponse(UsosApiResponseStatus.FAILED);
-
+			return new UsosSearchCourseResponse(UsosResponseStatus.FAILED);
 		}
 	}
 }

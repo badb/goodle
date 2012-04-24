@@ -18,6 +18,8 @@ import javax.persistence.Version;
 
 import com.google.appengine.api.datastore.Key;
 
+import main.server.domain.EMF;
+
 
 @Entity
 public class Module implements Serializable 

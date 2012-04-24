@@ -29,7 +29,7 @@
 			<g:RadioButton ui:field="regMethod3" ui:name="regMethod" ui:text="Zabezpieczony hasłem" styleName="{style.mlabel}"/>
 			<g:HorizontalPanel>
 				<g:Label text="Rejestracja tylko po podaniu hasła" styleName="{style.slabel}"/>		   
-			    <g:TextBox ui:field="coursePassword" />
+			    <g:TextBox ui:field="coursePasswordBox" />
 			</g:HorizontalPanel>	
 			<g:Button ui:field="saveButton" text="Zatwierdź" />
 			</g:VerticalPanel>

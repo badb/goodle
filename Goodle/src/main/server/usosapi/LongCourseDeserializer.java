@@ -10,7 +10,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-
 public class LongCourseDeserializer implements JsonDeserializer<LongCourseDesc> 
 {
 	@Override
@@ -30,48 +29,45 @@ public class LongCourseDeserializer implements JsonDeserializer<LongCourseDesc>
 		result.setHomepageUrl(getString(json, "homepage_url"));
 		result.setProfileUrl(getString(json, "profile_url"));
 		result.setIsConducted(getBoolean(json, "is_currently_conducted"));
-		result.setDescription(getPolishString(json, "description"));
+		result.setDesc(getPolishString(json, "description"));
 		result.setBibliography(getPolishString(json, "bibliography"));		
 		return result;
 	}
 	
 	private String getPolishValue(JsonObject json) throws JsonParseException 
 	{
-		if (!json.has("pl")) 
+		if (json.has("pl")) 
 		{
-			throw new JsonParseException(parseExceptionMsg("pl", json));
+			return json.get("pl").getAsString(); 
 		}
-		return json.get("pl").getAsString(); 
+		throw new JsonParseException(parseExceptionMsg("pl", json));
 	}
 	
 	private String getString(JsonObject json, String key)
 	{
-		if (!json.has(key))
+		if (json.has(key))
 		{
-			throw new JsonParseException(parseExceptionMsg(key, json));	
+			return !json.get(key).isJsonNull() ? json.get(key).getAsString() : null;		
 		} 
-		else 
-		{
-			return !json.get(key).isJsonNull() ? json.get(key).getAsString() : null;
-		}
+		throw new JsonParseException(parseExceptionMsg(key, json));	
 	}
 	
 	private String getPolishString(JsonObject json, String key)
 	{
 		if (json.has(key))
 		{
-			throw new JsonParseException(parseExceptionMsg(key, json)); 
+			return getPolishValue(json.get(key).getAsJsonObject());		 
 		}
-		return getPolishValue(json.get(key).getAsJsonObject());
+		throw new JsonParseException(parseExceptionMsg(key, json));
 	}
 	
 	private Boolean getBoolean(JsonObject json, String key)
 	{
-		if (!json.has(key)) 
+		if (json.has(key)) 
 		{
-			throw new JsonParseException(parseExceptionMsg(key, json));
+			return json.get(key).getAsBoolean();	
 		}
-		return json.get(key).getAsBoolean();
+		throw new JsonParseException(parseExceptionMsg(key, json));
 	}
 
 	private String parseExceptionMsg(String param, JsonObject json)

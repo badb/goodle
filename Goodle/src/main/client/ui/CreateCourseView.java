@@ -78,7 +78,7 @@ public class CreateCourseView extends Composite
 				@Override
 				public void onSuccess(Long id)
 				{
-					clientFactory.getPlaceController().goTo(new CoursePlace(id.toString()));
+					clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "1"));
 				}
 			});
 		}

@@ -1,11 +1,11 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
->
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
 	<g:FlowPanel>
 		<g:Label ui:field="infoLabel">Tu będzie lista modułów:</g:Label>
-		<!-- c:CellList ui:field="moduleList" /> -->
-		<g:FlexTable ui:field="modulesTable"></g:FlexTable>
+		<g:Button ui:field="addModuleButton" text="Dodaj moduł" />
+		<g:FlexTable ui:field="modulesTable" />
 	</g:FlowPanel>
 
 </ui:UiBinder>

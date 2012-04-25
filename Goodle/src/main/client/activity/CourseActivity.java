@@ -20,16 +20,14 @@ public class CourseActivity extends AbstractActivity
 		this.courseId = place.getCourseId();
 		this.tabId = place.getTabId();
 	}
-
-
+	
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) 
 	{
 		CourseView view = clientFactory.getCourseView();
 		view.setClientFactory(clientFactory);
 		view.getCourse(courseId);
-		view.setSelectedTab(tabId);
-		
+		view.setSelectedTab(tabId);	
 		panel.setWidget(view.asWidget());
 	}
 }

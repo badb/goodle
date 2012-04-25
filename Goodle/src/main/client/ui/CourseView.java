@@ -39,7 +39,11 @@ public class CourseView extends Composite
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
+	public void setClientFactory(ClientFactory clientFactory) 
+	{ 
+		this.clientFactory = clientFactory; 
+		modulesTabView.setClientFactory(clientFactory);
+	}
 	
 	public void getCourse(String courseId)
 	{
@@ -59,9 +63,7 @@ public class CourseView extends Composite
 						tabPanel.getTabWidget(1).setVisible(true);
 						//String id = course.getModuleIds().get(0);
 						modulesTabView = clientFactory.getModulesTabView();
-						modulesTabView.setCourse(course);
-						
-						
+						modulesTabView.setCourse(course);		
 						courseInfoView = clientFactory.getCourseInfoView();
 					}
 				}

@@ -4,7 +4,6 @@ import java.util.List;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.client.ui.CoursesListView.CoursesListViewUiBinder;
 import main.client.util.CourseCell;
 import main.shared.proxy.CourseProxy;
 

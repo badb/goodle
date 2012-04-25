@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import main.client.ClientFactory;
 import main.server.domain.GoodleUser;
+import main.server.domain.UsosInfo;
 import main.shared.LongCourseDesc;
 import main.shared.usos.UsosGetCoursesResponse;
 import main.shared.usos.UsosResponseStatus;
@@ -39,9 +40,8 @@ public class UsosApiService
 	private OAuthConsumer consumer;
 	private OAuthProvider provider;
 	
-	public UsosApiService(ClientFactory clientFactory)
+	public UsosApiService()
 	{
-		this.clientFactory = clientFactory;
 		baseUrl = "http://apps.usos.edu.pl/";
 		baseUrlSecure = "https://apps.usos.edu.pl/";
 		scope = "studies|offline_access";
@@ -123,8 +123,9 @@ public class UsosApiService
 
 	private boolean userHasUsosData(GoodleUser user) 
 	{
-		return (user.getAccessTokenKey() == null || user.getAccessTokenKey().equals("") ||
-				user.getAccessTokenSecret() == null || user.getAccessTokenSecret().equals(""));
+		UsosInfo info = user.getUsosInfo();
+		return (info.getAccessTokenKey() == null || info.getAccessTokenKey().equals("") ||
+				info.getAccessTokenSecret() == null || info.getAccessTokenSecret().equals(""));
 	}
 
 	private String saveRequestTokenAndReturnAuthURL(GoodleUser user) 
@@ -136,7 +137,7 @@ public class UsosApiService
 		// TODO dostosować do RequestFactory
 		//user.setRequestKey(consumer.getToken());
 		//user.setAccessTokenSecret(consumer.getTokenSecret());// todo - this information to other field
-		//db.modifyUser(user);
+
 		return authUrl;
 	}
 

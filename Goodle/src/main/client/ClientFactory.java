@@ -4,7 +4,7 @@ import main.client.ui.CourseInfoView;
 import main.client.ui.CourseView;
 import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
-import main.client.ui.ModuleWidget;
+import main.client.ui.ModuleView;
 import main.client.ui.ModulesTabView;
 import main.shared.GoodleRequestFactory;
 

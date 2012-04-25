@@ -4,7 +4,7 @@ import main.client.ui.CourseInfoView;
 import main.client.ui.CourseView;
 import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
-import main.client.ui.ModuleWidget;
+import main.client.ui.ModuleView;
 import main.client.ui.ModulesTabView;
 import main.shared.GoodleRequestFactory;
 
@@ -22,7 +22,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private static final CourseInfoView courseInfoView = new CourseInfoView();
 	private static final CreateCourseView createCourseView = new CreateCourseView();
 	private static final ModulesTabView modulesTabView = new ModulesTabView();
-	//private static final ModuleWidget moduleWidget = new ModuleWidget();
+	//private static final ModuleView moduleWidget = new ModuleView();
 	
 	@Override
 	public SimpleEventBus getEventBus() { return eventBus; }
@@ -56,7 +56,7 @@ public class ClientFactoryImpl implements ClientFactory
 	}
 
 	/*@Override
-	public ModuleWidget getModuleWidget() {
+	public ModuleView getModuleWidget() {
 		return moduleWidget;
 	}*/
 }

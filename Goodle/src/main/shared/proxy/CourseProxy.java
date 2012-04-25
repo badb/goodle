@@ -18,8 +18,8 @@ public interface CourseProxy extends EntityProxy
 	String getDesc();
 	RegMethod getRegMethod();
 	String getPassword();
-	//List<String> getModuleIds();
-	List<ModuleProxy> getModules();
+	List<Long> getModules();
+	
 	void setName(String name);
 	void setTerm(String term);
 	void setDesc(String desc);

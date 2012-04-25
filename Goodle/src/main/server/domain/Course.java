@@ -42,15 +42,15 @@ import com.google.appengine.api.datastore.Link;
 })
 public class Course implements Serializable
 {       
-        /**
-         * 
-         */
-        private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-        @Id
-        @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-        private Long id;
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private Long id;
     
     @Version
     @Column(name="version")
@@ -75,8 +75,7 @@ public class Course implements Serializable
 
     private Set<Long> members = new HashSet<Long>();
     
-    @OneToMany
-    private List<Module> modules = new ArrayList<Module>();
+    private List<Long> modules = new ArrayList<Long>();
     
     private Link calendar;
     
@@ -105,14 +104,7 @@ public class Course implements Serializable
     
     public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
     
-    public List<Module> getModules() { return Collections.unmodifiableList(modules); }
-    
-    public List<String> getModuleIds() 
-    { 
-        List<String> modIDs = Collections.emptyList();
-        for (Module mod : modules) modIDs.add(mod.getId().toString());
-        return modIDs; 
-    }
+    public List<Long> getModules() { return Collections.unmodifiableList(modules); }
 
     public Link getCalendar() { return calendar; }
     
@@ -142,9 +134,9 @@ public class Course implements Serializable
 
     public void removeMember(GoodleUser member) { members.remove(member.getId()); }
     
-    public void addModule(Module module) { modules.add(module); }
+    public void addModule(Module module) { modules.add(module.getId()); }
     
-    public void removeModule(Module module) { modules.remove(module); }
+    public void removeModule(Module module) { modules.remove(module.getId()); }
     
     public void addMessage(Message message) { messages.add(message); }
     

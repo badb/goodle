@@ -49,11 +49,7 @@ public class GoodleUser implements Serializable
 	@Column(name="version")
 	private Integer version;
 
-	private String accessTokenKey;
-
-	private String accessTokenSecret;
-
-	private String requestId;
+	private UsosInfo usosInfo;
 
 	private String login;
 
@@ -78,11 +74,7 @@ public class GoodleUser implements Serializable
 
 	public Integer getVersion() { return version; }
 
-	public String getAccessTokenKey() { return accessTokenKey; }
-
-	public String getAccessTokenSecret() { return accessTokenSecret; }
-
-	public String getRequestId() { return requestId; }
+	public UsosInfo getUsosInfo() { return usosInfo; }
 
 	public String getLogin() { return login; }
 
@@ -99,12 +91,6 @@ public class GoodleUser implements Serializable
 	public Set<Long> getCoursesAttended() { return Collections.unmodifiableSet(coursesAttended); }
 
 	public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
-
-	public void setAccessTokenKey(String token) { accessTokenKey = token; }
-
-	public void setAccessTokenSecret(String token) { accessTokenSecret = token; }
-
-	public void setRequestId(String requestId) { this.requestId = requestId; }
 
 	public void setLogin(String login) { this.login = login; }
 

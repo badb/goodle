@@ -2,7 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
 			 xmlns:c="urn:import:com.google.gwt.user.cellview.client"
-			 xmlns:my="urn:import:main.client.util">
+			 xmlns:my="urn:import:src.main.client.util">
 			 
 	<ui:style src="../../../css/Goodle.css"/>
 	<g:TabLayoutPanel barUnit="PX" barHeight="50" ui:field="tabPanel">	

@@ -1,0 +1,148 @@
+body {
+		font-family: Helvetica, "DejaVu Sans", sans-serif;
+		font-size: 14px;
+		background-color: white;
+		color: black;
+        margin:0;
+        padding:0;
+}
+
+.header {
+	font-size: 50;
+}
+
+/* GOODLE VIEW */
+
+.topPanel {
+	position:relative;
+	max-height: 50px;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	height: 50px;
+    margin-top: 0;
+    background-image: url('https://lh4.googleusercontent.com/-cI_uBJD5pO0/T4lGlzmDcZI/AAAAAAAAAMA/J8aU1jGqmg8/s800/tabbar.jpg');
+    background-repeat: repeat-x;
+    background-position: top;
+    box-shadow: 0 0 15px 0 #ccc;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.leftPanel {
+	width: 230px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 40px;
+    margin-left: 40px;
+ 
+}
+
+.contentPanel {
+   margin-left: 10px;
+   margin-right: 10px;
+   margin-top: 20px; 
+}
+
+.rightPanel {
+	width: 250px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 40px;
+    margin-right: 40px;
+ }
+
+
+/* TOP VIEW */
+
+.logo {
+	margin-top: 10px;
+	font-size: 25px;
+	color: #404040;
+	text-shadow: #303030 1px -1px 1px;
+	text-align:center;
+}
+.searchBox {
+	height: 20px;
+	width: 250px;
+	margin-top: 10px;
+	padding: 0;
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.searchButton {
+	height: 25px;
+	width: 75px;
+	margin-top: 10px;
+	margin-left: 20px;
+	
+}
+.userBox {
+	 border-left: 1px solid #c9c9c9;
+	 border-right: 1px solid #c9c9c9;
+	 padding-left: 10px;
+	 padding-right: 10px;
+	 margin-right: 10px;
+	 float:right;
+	 height: 50px;
+}
+
+.userImage {
+	height: 25px;
+	width: 25px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.userName {
+	margin-top: 15px;
+	margin-right: 10px;
+	font-size: 16px;
+}
+.logoutButton {
+	height: 25px;
+	width: 75px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+/* CREATE COURSE VIEW */
+.blabel {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 15px;
+}
+
+.mlabel {
+	font-weight: bold;
+}
+
+.slabel {
+	padding-left: 50px;
+}
+
+.courseBox {
+	width: 250px;
+}
+
+.courseDescBox {
+	width: 250px;
+	height: 100px;
+}
+
+/* USER COURSE VIEW */ 
+.createButton {
+	height: 30px;
+	width: 100px;
+}
+
+.stack {
+	background: red;
+	border-bottom: 1px solid #bbbbbb;
+}
+
+/* CALENDAR VIEW */
+.calendar {
+	height: 250px;
+	width: 250px;
+	margin-bottom: 10px;
+}

@@ -1,3 +1,0 @@
-Do konfiguracji Run, do zakładki VM arguments trzeba dodać:
--Dappengine.user.timezone.impl=UTC 
-"-Dcomputername=nazwa_komputera"

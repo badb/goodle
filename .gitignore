@@ -1,6 +1,19 @@
-# Compiled Source #
+# Ignore everything #
 
-*.class
-*.jar
-*.pyc
+*
+
+# Whitelist directories #
+
+!*/
+
+# Track these files #
+
+!praca.tex
+!Goodle/.project
+!Goodle/src/*
+!Goodle/war/Goodle.html
+!Goodle/war/WEB-INF/appengine-web.xml
+!Goodle/war/WEB-INF/web.xml
+!Goodle/war/WEB-INF/classes/META-INF/persistence.xml
+
 

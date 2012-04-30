@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:style src="../../../css/Goodle.css"/>
+	
+	<g:HorizontalPanel>
+		<g:Label
+			styleName='{style.logo}' 
+			ui:field="goodleLogo" 
+			text="Goodle" 
+		/>
+		<g:HorizontalPanel>
+			<g:TextBox styleName='{style.searchBox}' ui:field="searchBox"/>
+			<g:Button  styleName='{style.searchButton}' ui:field="searchButton" text="Szukaj" />
+		</g:HorizontalPanel>
+		<g:HorizontalPanel styleName='{style.userBox}'>
+		 	<g:Image
+		 		styleName='{style.userImage}' 
+		 		ui:field="userImage"
+		 		url="http://userserve-ak.last.fm/serve/34s/66112340.jpg"
+		 	/>
+		 	<g:Label
+		 		styleName='{style.userName}' 
+		 		ui:field="userName" text="Hermiona Granger"/>
+		</g:HorizontalPanel>
+		<g:Image
+			ui:field="tabbar"
+			url="https://lh6.googleusercontent.com/-i4xGmMwV_zE/T4k1ojX2rQI/AAAAAAAAAL0/gRLz7zFfUUE/s800/tabbar.png"
+		/>
+		<g:Button styleName='{style.logoutButton}' ui:field="logoutButton" text="Logout" />
+	</g:HorizontalPanel>
+
+</ui:UiBinder>

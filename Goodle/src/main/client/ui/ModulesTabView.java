@@ -53,6 +53,8 @@ public class ModulesTabView  extends Composite
 		modulesTable.clear();
 		List<Long> ids = course.getModules();
 		
+		if(!ids.isEmpty()){
+		
 		clientFactory.getRequestFactory().moduleRequest().findModules(ids).fire
 		(
 			new Receiver<List<ModuleProxy>>()
@@ -73,6 +75,7 @@ public class ModulesTabView  extends Composite
 				}
 			}
 		);
+		}
 	}
 	
 	@UiHandler("addModuleButton")

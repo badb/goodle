@@ -1,5 +1,8 @@
 package main.client.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseProxy;
@@ -14,6 +17,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class CourseView extends Composite
@@ -65,6 +69,13 @@ public class CourseView extends Composite
 						modulesTabView = clientFactory.getModulesTabView();
 						modulesTabView.setCourse(course);		
 						courseInfoView = clientFactory.getCourseInfoView();
+					}
+					@Override
+					public void onFailure(ServerFailure error){
+						Logger logger = Logger.getLogger("Goodle.Log");
+					    logger.log(Level.SEVERE, error.getMessage());
+					    logger.log(Level.SEVERE, error.getStackTraceString());
+					    logger.log(Level.SEVERE, error.getExceptionType());
 					}
 				}
 			);

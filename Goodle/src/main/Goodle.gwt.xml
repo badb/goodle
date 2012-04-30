@@ -36,14 +36,7 @@
     <source path="client" />
     <source path="shared" />
 
-    <set-property name="user.agent" value="safari" />
+    <set-property name="user.agent" value="gecko1_8" />
 
-    <servlet
-        class="main.server.BlobServiceImpl"
-        path="/blobservice" />
-
-    <servlet
-        class="main.server.UploadServiceImpl"
-        path="/uploadservice" />
     <!-- Specify the paths for translatable code -->
 </module>

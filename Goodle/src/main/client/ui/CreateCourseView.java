@@ -1,5 +1,8 @@
 package main.client.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
 import main.shared.RegMethod;
@@ -20,6 +23,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class CreateCourseView extends Composite 
@@ -76,7 +80,14 @@ public class CreateCourseView extends Composite
 				@Override
 				public void onSuccess(Long id)
 				{
-					clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "1"));
+						clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "1"));
+				}
+				@Override
+				public void onFailure(ServerFailure error){
+					Logger logger = Logger.getLogger("Goodle.Log");
+				    logger.log(Level.SEVERE, error.getMessage());
+				    logger.log(Level.SEVERE, error.getStackTraceString());
+				    logger.log(Level.SEVERE, error.getExceptionType());
 				}
 			});
 		}

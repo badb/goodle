@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,10 +72,13 @@ public class Course implements Serializable
     @NotNull
     private String password;
     
+    @Basic
     private Set<Long> teachers = new HashSet<Long>();
-
+    
+    @Basic
     private Set<Long> members = new HashSet<Long>();
     
+    @Basic
     private List<Long> modules = new ArrayList<Long>();
     
     private Link calendar;
@@ -150,9 +154,11 @@ public class Course implements Serializable
         try 
         { 
         	em.persist(this);
+        	em.refresh(this);
         	return this.id;
         }
         finally { em.close(); }
+        
     }
     
     public void remove()

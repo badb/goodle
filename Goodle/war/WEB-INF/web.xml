@@ -14,6 +14,23 @@
 		<servlet-name>requestFactoryServlet</servlet-name>
 		<url-pattern>/gwtRequest</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>uploadServiceImpl</servlet-name>
+  		<servlet-class>main.server.UploadServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadServiceImpl</servlet-name>
+		<url-pattern>/goodle/uploadservice</url-pattern>
+	</servlet-mapping>
+         
+	<servlet>
+		<servlet-name>blobServiceImpl</servlet-name>
+		<servlet-class>main.server.BlobServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>blobServiceImpl</servlet-name>
+		<url-pattern>/goodle/blobservice</url-pattern>
+	</servlet-mapping>
 
 
 	<!-- Default page to serve -->

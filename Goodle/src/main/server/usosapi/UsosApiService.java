@@ -141,7 +141,7 @@ public class UsosApiService
 		return authUrl;
 	}
 
-	public UsosSearchCourseResponse searchCourseByID(String usosCourseID) 
+	public UsosSearchCourseResponse getCourseByID(String usosCourseID) 
 	{
 		try 
 		{
@@ -161,14 +161,7 @@ public class UsosApiService
 					+ request.getResponseMessage()
 				);
 			}
-			BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			StringBuilder stringBuilder = new StringBuilder();
-			String line = null;
-			while ((line = reader.readLine()) != null)
-			{
-				stringBuilder.append(line + "\n");
-			}
-			String response = stringBuilder.toString();
+			String response = createResponse(request);
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.registerTypeAdapter(LongCourseDesc.class, new LongCourseDeserializer()).create();
 			Vector<LongCourseDesc> v = new Vector<LongCourseDesc>();
@@ -182,5 +175,17 @@ public class UsosApiService
 			System.out.println(e);
 			return new UsosSearchCourseResponse(UsosResponseStatus.FAILED);
 		}
+	}
+
+	private String createResponse(HttpURLConnection request) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		StringBuilder stringBuilder = new StringBuilder();
+		String line = null;
+		while ((line = reader.readLine()) != null)
+		{
+			stringBuilder.append(line + "\n");
+		}
+		String response = stringBuilder.toString();
+		return response;
 	}
 }

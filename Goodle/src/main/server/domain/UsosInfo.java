@@ -18,6 +18,6 @@ public class UsosInfo
 
 	public void setAccessTokenSecret(String token) { accessTokenSecret = token; }
 
-	public void setRequestId(String requestKey) { this.requestKey = requestId; }
+	public void setRequestId(String requestKey) { this.requestKey = requestKey; }
 
 }

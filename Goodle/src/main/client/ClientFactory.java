@@ -7,6 +7,7 @@ import main.client.ui.CreateCourseView;
 import main.client.ui.ModuleView;
 import main.client.ui.ModulesTabView;
 import main.shared.GoodleRequestFactory;
+import main.shared.proxy.GoodleUserProxy;
 
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -22,4 +23,6 @@ public interface ClientFactory
 	CreateCourseView getCreateCourseView();
 	CourseInfoView getCourseInfoView();
 	ModulesTabView getModulesTabView();
+	void setCurrentUser(GoodleUserProxy userProxy);
+	GoodleUserProxy getCurrrentUser();
 }

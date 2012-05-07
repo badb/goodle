@@ -15,5 +15,7 @@ public interface GoodleUserRequest extends RequestContext
 	InstanceRequest<GoodleUserProxy, Void> persist();
 	Request<GoodleUserProxy> findGoodleUser(Long id);
 	Request<List<GoodleUserProxy>> findGoodleUsersByName(String name);
-
+	Request<GoodleUserProxy> getCurrentUser();
+	Request<String> getLoginUrl(String destination);
+	Request<String> getLogoutUrl(String destination);
 }

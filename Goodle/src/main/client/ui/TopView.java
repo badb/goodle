@@ -10,12 +10,14 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
 
 
 public class TopView extends Composite
@@ -36,7 +38,13 @@ public class TopView extends Composite
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
+	public void setClientFactory(ClientFactory clientFactory) { 
+		this.clientFactory = clientFactory;
+	}
+	
+	public void setUserName(String name){
+		userName.setText(name);
+	}
 	
 	@UiHandler("searchBox")
 	void onEnterPressed(KeyPressEvent event)
@@ -56,6 +64,18 @@ public class TopView extends Composite
 			String token = searchBox.getText();
 			clientFactory.getPlaceController().goTo(new FindCoursesByNamePlace(token));
 		}
+	}
+	
+	@UiHandler("logoutButton")
+	void onLogoutButtonClicked(ClickEvent event){
+		clientFactory.getRequestFactory().goodleUserRequest().getLogoutUrl(Window.Location.getHref()).fire(
+				new Receiver <String>(){
+					@Override
+					public void onSuccess(String response)
+					{
+						Window.Location.assign(response);
+					}
+					});
 	}
 }
 

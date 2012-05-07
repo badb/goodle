@@ -1,11 +1,16 @@
 package main.client;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.mapper.AppPlaceHistoryMapper;
 import main.client.mapper.ContentPanelActivityMapper;
 import main.client.place.CreateCoursePlace;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
 import main.client.ui.CalendarView;
+import main.shared.proxy.CourseProxy;
+import main.shared.proxy.GoodleUserProxy;
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -18,10 +23,13 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class Goodle implements EntryPoint, ValueChangeHandler<String> {
@@ -36,16 +44,45 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
     @UiField CalendarView rightPanel;
     
     private Place defaultPlace = new CreateCoursePlace();
+    private ClientFactory clientFactory = null;
 
 	public void onModuleLoad() 
-	{				
+	{		
+		clientFactory = GWT.create(ClientFactory.class);		
+		clientFactory.initializeRequestFactory();		
+		clientFactory.getRequestFactory().goodleUserRequest().getCurrentUser().fire(
+				new Receiver<GoodleUserProxy>()
+				{
+					@Override
+					public void onSuccess(GoodleUserProxy response)
+					{
+						if (response != null){
+							clientFactory.setCurrentUser(response);
+							whenUserLogged();
+						} else {
+							clientFactory.getRequestFactory().goodleUserRequest().getLoginUrl(Window.Location.getHref()).fire(
+									new Receiver <String>(){
+										@Override
+										public void onSuccess(String response)
+											{Window.Location.assign(response);}
+									}
+							);							
+						}						
+					}
+					@Override
+					public void onFailure(ServerFailure error){
+						Logger logger = Logger.getLogger("Goodle.Log");
+					    logger.log(Level.SEVERE, error.getMessage());
+					    logger.log(Level.SEVERE, error.getStackTraceString());
+					    logger.log(Level.SEVERE, error.getExceptionType());
+					}
+				});		
+	}
+	
+	public void whenUserLogged(){
 		DockLayoutPanel outer = binder.createAndBindUi(this);
-		
-		ClientFactory clientFactory = GWT.create(ClientFactory.class);
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
-		
-		clientFactory.initializeRequestFactory();
 		
 		ActivityMapper contentPanelActivityMapper = new ContentPanelActivityMapper(clientFactory);
 		ActivityManager contentPanelActivityManager = new ActivityManager(contentPanelActivityMapper, eventBus);
@@ -56,13 +93,13 @@ public class Goodle implements EntryPoint, ValueChangeHandler<String> {
         historyHandler.register(placeController, eventBus, defaultPlace);
         
         topPanel.setClientFactory(clientFactory);
+        topPanel.setUserName(clientFactory.getCurrrentUser().getFirstName() + " " + clientFactory.getCurrrentUser().getLastName());
         leftPanel.setClientFactory(clientFactory);
         rightPanel.setClientFactory(clientFactory);
         
         RootLayoutPanel.get().add(outer);
         
         historyHandler.handleCurrentHistory();
-		
 	}
 	
 	/*

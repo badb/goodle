@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +24,10 @@ import javax.persistence.Query;
 import javax.persistence.Version;
 
 import com.google.appengine.api.datastore.Email;
+import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.api.users.UserService;
 
 @Entity
 @NamedQueries
@@ -35,6 +41,11 @@ import com.google.appengine.api.datastore.Email;
 	(
 		name = "findUserByLogin",
 		query = "SELECT u FROM GoodleUser u WHERE u.login = :login"
+	),
+	@NamedQuery
+	(
+		name = "findUserByEMail",
+		query = "SELECT u FROM GoodleUser u WHERE u.email = :email"
 	)
 })
 public class GoodleUser implements Serializable
@@ -164,5 +175,54 @@ public class GoodleUser implements Serializable
 		catch (NoResultException e) { return null; }
 		finally { em.close(); }
 	}
-
+	
+	public static GoodleUser getCurrentUser(){
+		Logger logger = Logger.getLogger("goodle");
+		logger.log(Level.FINE, "getGoodleUser()");
+		UserService service = UserServiceFactory.getUserService();
+		if(service.isUserLoggedIn()){
+			logger.log(Level.FINE, "User is logged in Google");
+			User user = service.getCurrentUser();
+			EntityManager em = entityManager();
+			GoodleUser toRet = null;
+			try
+			{
+				Query q = em.createNamedQuery("findUserByEMail");
+				q.setParameter("email", user.getEmail());
+				q.setMaxResults(1);
+				toRet = (GoodleUser) q.getSingleResult();
+				return toRet;
+			}
+			catch (NoResultException e) {				
+			    logger.log(Level.WARNING, "User is logged In, but doesn't exist in our database, Creating New User");
+			    GoodleUser goodleUser = new GoodleUser();
+			    Email email = new Email(user.getEmail());
+			    goodleUser.setEmail(email);
+			    goodleUser.setLogin(user.getEmail());
+			    goodleUser.persist();			    
+			    return goodleUser;
+			}
+			finally { em.close(); }			
+		} else {
+			return null;
+		}
+	}
+	
+	public static String getLoginUrl(String destination){
+		UserService service = UserServiceFactory.getUserService();
+		if(service.isUserLoggedIn()){
+			return null;
+		}else {
+			return service.createLoginURL(destination);
+		}
+	}
+	
+	public static String getLogoutUrl(String destination){
+		UserService service = UserServiceFactory.getUserService();
+		if(service.isUserLoggedIn()){
+			return service.createLogoutURL(destination);
+		}else {
+			return null;
+		}
+	}
 }

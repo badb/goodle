@@ -24,7 +24,6 @@ import javax.persistence.Query;
 import javax.persistence.Version;
 
 import com.google.appengine.api.datastore.Email;
-import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.users.UserService;

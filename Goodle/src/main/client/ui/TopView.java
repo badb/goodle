@@ -38,13 +38,9 @@ public class TopView extends Composite
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setClientFactory(ClientFactory clientFactory) { 
-		this.clientFactory = clientFactory;
-	}
+	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 	
-	public void setUserName(String name){
-		userName.setText(name);
-	}
+	public void setUserName(String name) { userName.setText(name); }
 	
 	@UiHandler("searchBox")
 	void onEnterPressed(KeyPressEvent event)

@@ -4,7 +4,6 @@ import main.client.ui.CourseInfoView;
 import main.client.ui.CourseView;
 import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
-import main.client.ui.ModuleView;
 import main.client.ui.ModulesTabView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -24,5 +23,5 @@ public interface ClientFactory
 	CourseInfoView getCourseInfoView();
 	ModulesTabView getModulesTabView();
 	void setCurrentUser(GoodleUserProxy userProxy);
-	GoodleUserProxy getCurrrentUser();
+	GoodleUserProxy getCurrentUser();
 }

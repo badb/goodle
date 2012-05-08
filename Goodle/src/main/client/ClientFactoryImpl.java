@@ -4,7 +4,6 @@ import main.client.ui.CourseInfoView;
 import main.client.ui.CourseView;
 import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
-import main.client.ui.ModuleView;
 import main.client.ui.ModulesTabView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -23,7 +22,6 @@ public class ClientFactoryImpl implements ClientFactory
 	private static final CourseInfoView courseInfoView = new CourseInfoView();
 	private static final CreateCourseView createCourseView = new CreateCourseView();
 	private static final ModulesTabView modulesTabView = new ModulesTabView();
-	//private static final ModuleView moduleWidget = new ModuleView();
 	
 	private static GoodleUserProxy currentUserProxy = null;
 	
@@ -49,27 +47,14 @@ public class ClientFactoryImpl implements ClientFactory
 	public void initializeRequestFactory() { requestFactory.initialize(eventBus); }
 
 	@Override
-	public ModulesTabView getModulesTabView() {
-		return modulesTabView;
-	}
+	public ModulesTabView getModulesTabView() { return modulesTabView; }
 	
 	@Override
-	public CourseInfoView getCourseInfoView() {
-		return courseInfoView;
-	}
+	public CourseInfoView getCourseInfoView() { return courseInfoView; }
 
 	@Override
-	public void setCurrentUser(GoodleUserProxy userProxy) {
-		this.currentUserProxy = userProxy;
-	}
+	public void setCurrentUser(GoodleUserProxy userProxy) { currentUserProxy = userProxy; }
 
 	@Override
-	public GoodleUserProxy getCurrrentUser() {
-		return this.currentUserProxy;
-	}
-
-	/*@Override
-	public ModuleView getModuleWidget() {
-		return moduleWidget;
-	}*/
+	public GoodleUserProxy getCurrentUser() { return currentUserProxy; }
 }

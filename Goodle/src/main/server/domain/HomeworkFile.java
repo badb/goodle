@@ -1,44 +1,25 @@
 package main.server.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EntityManager;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.Link;
-
+@SuppressWarnings("serial")
 @Entity
-public class HomeworkFile implements Serializable 
+public class HomeworkFile extends UploadedFile 
 {
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Key key;
-    public Key getKey() { return key; }
-    
-    private GoodleUser author;
-    public GoodleUser getAuthor() { return author; }
-    
-    private Date created = new Date();
-    public Date getCreated() { return created; }
-    
     private Mark mark;
     public Mark getMark() { return mark; }
     public void setMark(Mark mark) { this.mark = mark; }
     
-    private Link file;
-    public Link getFile() { return file; }
-    
-    public HomeworkFile() { }
-    
-    public HomeworkFile(GoodleUser author, Link file)
+    public static HomeworkFile findHomeworkFile(Long id)
     {
-    	this.author = author;
-    	this.file = file;
+    	if (id == null) { return null; }
+    	EntityManager em = entityManager();
+    	try 
+    	{
+    		HomeworkFile f = em.find(HomeworkFile.class, id);
+    		return f;
+    	}
+    	finally { em.close(); }
     }
 }

@@ -18,18 +18,18 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
 
-public class CoursesListView extends Composite
+public class CourseListView extends Composite
 {
-	private static CoursesListViewUiBinder uiBinder = GWT.create(CoursesListViewUiBinder.class);
+	private static CourseListViewUiBinder uiBinder = GWT.create(CourseListViewUiBinder.class);
 
-	interface CoursesListViewUiBinder extends UiBinder<Widget, CoursesListView> { }
+	interface CourseListViewUiBinder extends UiBinder<Widget, CourseListView> { }
 
 	@UiField Label infoLabel;
 	@UiField(provided=true) 
 	CellList<CourseProxy> coursesList;
 	private ClientFactory clientFactory;
 
-	public CoursesListView()
+	public CourseListView()
 	{
 		initList();
 		initWidget(uiBinder.createAndBindUi(this));

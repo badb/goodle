@@ -7,6 +7,7 @@ import main.client.mapper.AppPlaceHistoryMapper;
 import main.client.mapper.ContentPanelActivityMapper;
 import main.client.place.CreateCoursePlace;
 import main.client.ui.CalendarView;
+import main.client.ui.FooterView;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
 import main.shared.proxy.GoodleUserProxy;
@@ -40,6 +41,7 @@ public class Goodle implements EntryPoint
     @UiField UserCoursesView leftPanel;
     @UiField SimpleLayoutPanel contentPanel;
     @UiField CalendarView rightPanel;
+    @UiField FooterView footer;
     
     private Place defaultPlace = new CreateCoursePlace();
     private ClientFactory clientFactory = null;
@@ -101,6 +103,7 @@ public class Goodle implements EntryPoint
         topPanel.setUserName(clientFactory.getCurrentUser().getLogin());
         leftPanel.setClientFactory(clientFactory);
         rightPanel.setClientFactory(clientFactory);
+        footer.setClientFactory(clientFactory);
         
         RootLayoutPanel.get().add(outer);
         

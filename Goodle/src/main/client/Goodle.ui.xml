@@ -18,6 +18,9 @@
 		<g:east size="300">
 			<my:CalendarView styleName='{style.rightPanel}' ui:field="rightPanel" />
 		</g:east>
+		<g:south size="50">
+		    <my:FooterView ui:field="footer" />
+		</g:south>
 	</g:DockLayoutPanel>
 			 
 			 

@@ -2,16 +2,10 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style src="../../../css/Goodle.css"/>		
-			
-	<g:StackLayoutPanel ui:field="userPanel">
-	<g:stack >
-    	<g:header size='40' style="{style.stack}">Profil</g:header>
-    	<g:Label>able</g:Label>
-	</g:stack>
-	<g:stack>
-		<g:header size='40'>Administracja</g:header>
-			<g:Button ui:field="createCourseButton" text="Stwórz kurs" styleName="{style.createButton}"/>
-	</g:stack>
-	</g:StackLayoutPanel>
-		 
+	
+	
+	<g:VerticalPanel>
+		<g:Button ui:field="createCourseButton" text="Stwórz kurs" styleName="{style.createButton}"/>
+	</g:VerticalPanel>		
+	 
 </ui:UiBinder>

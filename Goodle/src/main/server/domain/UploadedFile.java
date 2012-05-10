@@ -1,58 +1,40 @@
 package main.server.domain;
 
-import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.Id;
+import javax.persistence.EntityManager;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 import com.googlecode.objectify.annotation.Entity;
 
-
+@SuppressWarnings("serial")
 @Entity
-public class UploadedFile implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
-	@Id
-	public Long key;
+public class UploadedFile extends Material
+{
+	@NotBlank
+	@URL
 	private String url;
-	private String name;
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
-	public UploadedFile() {
-		super();
-		
+	public String getUrl() { return url; }
+	public void setUrl(String url) 
+	{ 
+		if (this.url != url)
+		{
+			this.url = url;
+			modified = new Date();
+		}
 	}
 	
-	public UploadedFile (String name, GoodleUser author, String url) {
-		//TODO
-		this.name = name;
-		this.url = url;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setKey(Long key) {
-		this.key = key;
-	}
-	
- 	public Long getKey() {
-		return key;
-	}
-	
+    public static UploadedFile findUploadedFile(Long id) 
+    {
+    	if (id == null) { return null; }
+    	EntityManager em = entityManager();
+    	try 
+    	{
+    		UploadedFile f = em.find(UploadedFile.class, id);
+    		return f;
+    	}
+    	finally { em.close(); }
+    }
 }

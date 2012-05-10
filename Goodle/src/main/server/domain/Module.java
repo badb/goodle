@@ -14,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @SuppressWarnings("serial")
@@ -32,13 +35,20 @@ public class Module implements Serializable
 	public Integer getVersion() { return version; }
 	public void setVersion(Integer version) { this.version = version; }
 	
+	@NotBlank
     private String title;	
-    public String getTitle() {return title;	}
-	public void setTitle(String title) {this.title = title; }
+    public String getTitle() { return title; }
+	public void setTitle(String title) { this.title = title; }
 	
-    private String desc;	
-    public String getDesc() {return desc;	}
-	public void setDesc(String desc) {this.desc = desc; }
+	@NotNull
+	private GoodleUser author;
+	public GoodleUser getAuthor() { return author; }
+	public void setAuthor(GoodleUser author) { this.author = author; }
+	
+	@NotNull
+    private String text;	
+    public String getText() { return text; }
+	public void setText(String text) {this.text = text; }
     
     private boolean isVisible;
     public boolean getIsVisible() { return isVisible; }
@@ -51,10 +61,10 @@ public class Module implements Serializable
     public void removeMaterial(Material material) { materials.remove(material); }
 
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<Comment>();
-    public List<Comment> getComments() { return Collections.unmodifiableList(comments); }
-    public void addComment(Comment comment) { comments.add(comment); }
-    public void removeComment(Comment comment) { comments.remove(comment); }
+    private List<Message> comments = new ArrayList<Message>();
+    public List<Message> getComments() { return Collections.unmodifiableList(comments); }
+    public void addComment(Message comment) { comments.add(comment); }
+    public void removeComment(Message comment) { comments.remove(comment); }
 
     public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
     
@@ -63,6 +73,17 @@ public class Module implements Serializable
     	EntityManager em = entityManager();
     	try { em.persist(this); }
     	finally { em.close(); }
+    }
+    
+    public void remove()
+    {
+        EntityManager em = entityManager();
+        try 
+        {
+        	Module attached = em.find(Module.class, this.id);
+        	em.remove(attached); 
+        }
+        finally { em.close(); }
     }
     
     public static Module findModule(Long id) 

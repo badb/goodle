@@ -19,10 +19,9 @@ public class CourseCell extends AbstractCell<CourseProxy>
               (
                           "<div class = \"courseCell\" key = \"{0}\">" +
                                           "<div class = \"courseCellName\">{1} ({2})</div>" +
-                                          "<div class = \"courseCellDesc\">{3}</div>" +
                           "</div>"
               )
-              SafeHtml cell(String key, String name, String term, String desc);
+              SafeHtml cell(String key, String name, String term);
         }
         
     private static Templates templates = GWT.create(Templates.class);
@@ -49,8 +48,7 @@ public class CourseCell extends AbstractCell<CourseProxy>
                 String id = value.getId().toString();
                 String name = value.getName();
                 String term = value.getTerm();
-                String desc = value.getDesc();
-                SafeHtml rendered = templates.cell(id, name, term, desc);
+                SafeHtml rendered = templates.cell(id, name, term);
                 sb.append(rendered);
         }
 }

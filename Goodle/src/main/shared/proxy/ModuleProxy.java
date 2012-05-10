@@ -1,5 +1,7 @@
 package main.shared.proxy;
 
+import java.util.List;
+
 import main.server.domain.Module;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
@@ -10,7 +12,14 @@ public interface ModuleProxy extends EntityProxy
 {
 	Long getId();
 	String getTitle();
-	String getDesc();
+	GoodleUserProxy getAuthor();
+	String getText();
+	boolean getIsVisible();
+	List<MessageProxy> getComments();
+	List<MaterialProxy> getMaterials();
+	
 	void setTitle(String title);
-	void setDesc(String desc);	
+	void setAuthor(GoodleUserProxy author);
+	void setText(String text);
+	void setIsVisible(boolean isVisible);
 }

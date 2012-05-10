@@ -12,7 +12,7 @@
 	            <g:header>Lista modułów...</g:header>
 	            <my:MyLazyPanel>
 	                    <!-- <g:Label>Tutaj będzie lista modułów</g:Label> -->
-	            <my:ModulesTabView ui:field="modulesTabView" width="200px"></my:ModulesTabView>
+	            <my:CourseModulesView ui:field="courseModulesView" width="200px" />
 	            
 	            </my:MyLazyPanel>
 	    	</g:tab>

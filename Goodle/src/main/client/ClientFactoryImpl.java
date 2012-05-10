@@ -1,10 +1,15 @@
 package main.client;
 
+import main.client.ui.CourseFormsView;
+import main.client.ui.CourseGroupsView;
 import main.client.ui.CourseInfoView;
+import main.client.ui.CourseListView;
+import main.client.ui.CourseMembersView;
+import main.client.ui.CourseModulesView;
 import main.client.ui.CourseView;
-import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
-import main.client.ui.ModulesTabView;
+import main.client.ui.UserMainPageView;
+import main.client.ui.UserProfileView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
 
@@ -17,40 +22,141 @@ public class ClientFactoryImpl implements ClientFactory
 	private static final SimpleEventBus eventBus = new SimpleEventBus();
 	private static final PlaceController placeController = new PlaceController(eventBus);
 	private static final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
-	private static final CoursesListView coursesListView = new CoursesListView();
-	private static final CourseView courseView = new CourseView();
-	private static final CourseInfoView courseInfoView = new CourseInfoView();
-	private static final CreateCourseView createCourseView = new CreateCourseView();
-	private static final ModulesTabView modulesTabView = new ModulesTabView();
-	
-	private static GoodleUserProxy currentUserProxy = null;
-	
+
+	private static CourseFormsView courseFormsView;
+	private static CourseGroupsView courseGroupsView;
+	private static CourseInfoView courseInfoView;
+	private static CourseListView courseListView;
+	private static CourseMembersView courseMembersView;
+	private static CourseModulesView courseModulesView;
+	private static CourseView courseView;
+	private static CreateCourseView createCourseView;
+	private static UserMainPageView userMainPageView;
+	private static UserProfileView userProfileView;
+
+	private static GoodleUserProxy currentUserProxy;
+
 	@Override
 	public SimpleEventBus getEventBus() { return eventBus; }
 
 	@Override
 	public PlaceController getPlaceController() { return placeController; }
-	
+
 	@Override
 	public GoodleRequestFactory getRequestFactory() { return requestFactory; }
 
 	@Override
-	public CoursesListView getCoursesListView() { return coursesListView; }
+	public CourseFormsView getCourseFormsView() 
+	{
+		if (courseFormsView == null) 
+		{
+			courseFormsView = new CourseFormsView();
+			courseFormsView.setClientFactory(this);
+		}
+		return courseFormsView; 
+	}
 
 	@Override
-	public CourseView getCourseView() { return courseView; }
+	public CourseGroupsView getCourseGroupsView() 
+	{
+		if (courseGroupsView == null) 
+		{
+			courseGroupsView = new CourseGroupsView();
+			courseGroupsView.setClientFactory(this);
+		}
+		return courseGroupsView; 
+	}
 
 	@Override
-	public CreateCourseView getCreateCourseView() { return createCourseView; }
-	
+	public CourseInfoView getCourseInfoView() 
+	{
+		if (courseInfoView == null) 
+		{
+			courseInfoView = new CourseInfoView();
+			courseInfoView.setClientFactory(this);
+		}
+		return courseInfoView; 
+	}
+
+	@Override
+	public CourseListView getCourseListView() 
+	{
+		if (courseListView == null) 
+		{
+			courseListView = new CourseListView();
+			courseListView.setClientFactory(this);
+		}
+		return courseListView; 
+	}
+
+	@Override
+	public CourseMembersView getCourseMembersView() 
+	{
+		if (courseMembersView == null) 
+		{
+			courseMembersView = new CourseMembersView();
+			courseMembersView.setClientFactory(this);
+		}
+		return courseMembersView; 
+	}
+
+	@Override
+	public CourseModulesView getCourseModulesView() 
+	{
+		if (courseModulesView == null) 
+		{
+			courseModulesView = new CourseModulesView();
+			courseModulesView.setClientFactory(this);
+		}
+		return courseModulesView; 
+	}
+
+	@Override
+	public CourseView getCourseView() 
+	{
+		if (courseView == null) 
+		{
+			courseView = new CourseView();
+			courseView.setClientFactory(this);
+		}
+		return courseView; 
+	}
+
+	@Override
+	public CreateCourseView getCreateCourseView() 
+	{
+		if (createCourseView == null) 
+		{
+			createCourseView = new CreateCourseView();
+			createCourseView.setClientFactory(this);
+		}
+		return createCourseView; 
+	}
+
+	@Override
+	public UserMainPageView getUserMainPageView() 
+	{
+		if (userMainPageView == null) 
+		{
+			userMainPageView = new UserMainPageView();
+			userMainPageView.setClientFactory(this);
+		}
+		return userMainPageView; 
+	}
+
+	@Override
+	public UserProfileView getUserProfileView() 
+	{
+		if (userProfileView == null)
+		{
+			userProfileView = new UserProfileView();
+			userProfileView.setClientFactory(this);
+		}
+		return userProfileView; 
+	}
+
 	@Override
 	public void initializeRequestFactory() { requestFactory.initialize(eventBus); }
-
-	@Override
-	public ModulesTabView getModulesTabView() { return modulesTabView; }
-	
-	@Override
-	public CourseInfoView getCourseInfoView() { return courseInfoView; }
 
 	@Override
 	public void setCurrentUser(GoodleUserProxy userProxy) { currentUserProxy = userProxy; }

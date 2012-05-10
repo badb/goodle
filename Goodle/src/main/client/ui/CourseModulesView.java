@@ -18,11 +18,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class ModulesTabView  extends Composite
+public class CourseModulesView  extends Composite
 {
-	private static ModulesTabUiBinder uiBinder = GWT.create(ModulesTabUiBinder.class);
+	private static CourseModulesViewUiBinder uiBinder = GWT.create(CourseModulesViewUiBinder.class);
 
-	interface ModulesTabUiBinder extends UiBinder<Widget, ModulesTabView> { }
+	interface CourseModulesViewUiBinder extends UiBinder<Widget, CourseModulesView> { }
 
 	@UiField Label infoLabel;
 	@UiField Button addModuleButton;
@@ -32,7 +32,7 @@ public class ModulesTabView  extends Composite
 	
 	private ClientFactory clientFactory;
 
-	public ModulesTabView()
+	public CourseModulesView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
@@ -88,7 +88,7 @@ public class ModulesTabView  extends Composite
 	    ModuleView view = new ModuleView();
 	    ModuleProxy m = clientFactory.getRequestFactory().moduleRequest().create(ModuleProxy.class);
 	    m.setTitle("Nowy moduł " + rows.toString());
-	    m.setDesc("");
+	    m.setText("");
 	    view.setModule(m);
 	    
 	    modulesTable.setWidget(rows, 0, view);

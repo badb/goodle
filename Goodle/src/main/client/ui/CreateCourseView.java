@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.shared.RegMethod;
+import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 
@@ -72,9 +72,9 @@ public class CreateCourseView extends Composite
 			final CourseProxy course = request.create(CourseProxy.class);
 			course.setName(getCourseName());
 			course.setTerm(getCourseTerm());
-			course.setDesc(getCourseDesc());
-			course.setRegMethod(getCourseRegMethod());
-			course.setPassword(getCoursePassword());
+			course.setDescription(getCourseDesc());
+			course.setJoinMethod(getCourseRegMethod());
+			course.setKey(getCoursePassword());
 			request.persist().using(course).fire(new Receiver<Long>()
 			{
 				@Override
@@ -113,11 +113,11 @@ public class CreateCourseView extends Composite
 	
 	private String getCourseDesc() { return courseDescBox.getText(); }
 	
-	private RegMethod getCourseRegMethod()
+	private JoinMethod getCourseRegMethod()
 	{
-		if (regMethod1.getValue()) return RegMethod.OPEN;
-		else if (regMethod1.getValue()) return RegMethod.ASK;
-		else return RegMethod.KEY;
+		if (regMethod1.getValue()) return JoinMethod.OPEN;
+		else if (regMethod1.getValue()) return JoinMethod.ASK;
+		else return JoinMethod.KEY;
 	}
 	
 	private String getCoursePassword() { return coursePasswordBox.getText(); }

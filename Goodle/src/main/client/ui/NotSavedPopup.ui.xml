@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<!-- <g:PopupPanel> -->
+		<g:VerticalPanel>
+		<g:Label>Nie zapisano zmian, zapisać?</g:Label>
+		<g:Button  ui:field="savePopupButton">Zapisz zmiany</g:Button>
+		<g:Button>Odrzuć</g:Button>
+		</g:VerticalPanel>
+	<!-- </g:PopupPanel> -->
+</ui:UiBinder> 

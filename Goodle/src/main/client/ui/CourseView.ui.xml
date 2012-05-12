@@ -6,17 +6,26 @@
 
         <g:FlowPanel>
 	        <g:Label ui:field="courseName" />
+	        <g:Label ui:field="courseDesc" />
+	        <g:Button ui:field="editButton">Edytuj kurs</g:Button>
+	        <g:Button ui:field="saveButton" visible="false">Zapisz zmiany</g:Button>
+	        <g:Button ui:field="cancelButton" visible="false">Zakończ edycję</g:Button>
+	        
+
 	        <g:TabLayoutPanel barUnit="PX" barHeight="50" ui:field="tabPanel">
+
 	     	<g:tab>
 				<g:header>Informacje</g:header>
 				<my:MyLazyPanel>         
             		<my:CourseInfoView ui:field="courseInfoView"/>
             	</my:MyLazyPanel>
             </g:tab>
+
 	        <g:tab>
 	            <g:header>Moduły</g:header>
 	            <my:MyLazyPanel>
-	            	<my:CourseModulesView ui:field="courseModulesView" width="200px" />            
+	            	<my:CourseModulesView ui:field="courseModulesView" width="200px" />
+
 	            </my:MyLazyPanel>
 	    	</g:tab>
 	    	<g:tab>

@@ -3,7 +3,10 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 
 	<g:FlowPanel>
-		<g:Label ui:field="courseInfo">Tu będzie informacja o kursie</g:Label>		
+		<g:DeckLayoutPanel ui:field="deckPanel">
+			<g:Label ui:field="courseInfo">Tu będzie informacja o kursie</g:Label>		
+			<g:TextArea ui:field="courseInfoEdit">Edycja informacji</g:TextArea>
+		</g:DeckLayoutPanel>
 		
 	</g:FlowPanel>
 

@@ -21,9 +21,8 @@ public interface CourseProxy extends EntityProxy
 	JoinMethod getJoinMethod();
 	String getKey();
 	String getCalendar();
-	Set<Long> getTeachers();
-	Set<Long> getMembers();
-	List<Long> getModules();
+	Set<Long> getCoordinators();
+	List<Long> getGroups();
 	List<MessageProxy> getMessages();
 	
 	void setName(String name);

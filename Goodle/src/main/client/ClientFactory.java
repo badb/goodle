@@ -1,11 +1,6 @@
 package main.client;
 
-import main.client.ui.CourseFormsView;
-import main.client.ui.CourseGroupsView;
-import main.client.ui.CourseInfoView;
 import main.client.ui.CourseListView;
-import main.client.ui.CourseMembersView;
-import main.client.ui.CourseModulesView;
 import main.client.ui.CourseView;
 import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
@@ -23,12 +18,7 @@ public interface ClientFactory
 	void initializeRequestFactory();
 	GoodleRequestFactory getRequestFactory();
 	
-	CourseFormsView getCourseFormsView();
-	CourseGroupsView getCourseGroupsView();
-	CourseInfoView getCourseInfoView();
 	CourseListView getCourseListView();
-	CourseMembersView getCourseMembersView();
-	CourseModulesView getCourseModulesView();
 	CourseView getCourseView();
 	CreateCourseView getCreateCourseView();
 	UserMainPageView getUserMainPageView();

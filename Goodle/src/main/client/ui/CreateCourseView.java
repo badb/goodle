@@ -80,7 +80,7 @@ public class CreateCourseView extends Composite
 				@Override
 				public void onSuccess(Long id)
 				{
-						clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "1"));
+						clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "-1", "1"));
 				}
 				@Override
 				public void onFailure(ServerFailure error){
@@ -121,4 +121,6 @@ public class CreateCourseView extends Composite
 	}
 	
 	private String getCoursePassword() { return coursePasswordBox.getText(); }
+	
+	
 }

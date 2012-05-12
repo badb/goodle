@@ -12,12 +12,14 @@ public class CourseActivity extends AbstractActivity
 {
 	private ClientFactory clientFactory;
 	private String courseId;
+	private String groupId;
 	private String tabId;
 	
 	public CourseActivity(ClientFactory clientFactory, CoursePlace place)
 	{
 		this.clientFactory = clientFactory;
 		this.courseId = place.getCourseId();
+		this.groupId = place.getGroupId();
 		this.tabId = place.getTabId();
 	}
 	
@@ -26,6 +28,7 @@ public class CourseActivity extends AbstractActivity
 	{
 		CourseView view = clientFactory.getCourseView();
 		view.getCourse(courseId);
+		view.getGroup(groupId);
 		view.setSelectedTab(tabId);	
 		panel.setWidget(view.asWidget());
 	}

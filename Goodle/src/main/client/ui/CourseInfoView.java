@@ -1,6 +1,7 @@
 package main.client.ui;
 
 import main.client.ClientFactory;
+import main.shared.proxy.CourseGroupProxy;
 import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -22,34 +23,25 @@ public class CourseInfoView extends Composite
 	
 	
 	private ClientFactory clientFactory;
+	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
+	
 	private CourseProxy course;
+	public void setCourse(CourseProxy course) 
+	{
+		this.course = course;
+		// TODO set course description
+	}
+
+	private CourseGroupProxy group;
+	public void setGroup(CourseGroupProxy group) 
+	{
+		this.group = group;
+		// TODO set group description
+	}
 
 	public CourseInfoView()
 	{
 		
 		initWidget(uiBinder.createAndBindUi(this));
-	}
-
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	
-	public void getCourse(String courseId)
-	{
-		if (clientFactory != null)
-		{
-			clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
-			(
-				new Receiver<CourseProxy>()
-				{
-					@Override
-					public void onSuccess(CourseProxy response)
-					{
-						course = response;
-						//courseInfo.setText(course.getDesc());
-					}
-				}
-			);
-		}
-	}
-
-	
+	}	
 }

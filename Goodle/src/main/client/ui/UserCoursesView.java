@@ -59,7 +59,7 @@ public class UserCoursesView extends Composite
 				{
 					createCourseButton.setEnabled(true);
 					clientFactory.getCourseView().setCourse(course);
-					clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "1"));
+					clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "-1", "1"));
 				}
 				@Override
 				public void onFailure(ServerFailure error){

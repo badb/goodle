@@ -93,24 +93,18 @@ public class Course implements Serializable
     private String calendar;
     public String getCalendar() { return calendar; }
     public void setCalendar(String calendar) { this.calendar = calendar; }
+
+    @Basic
+    private Set<Long> coordinators = new HashSet<Long>();
+    public Set<Long> getCoordinators() { return Collections.unmodifiableSet(coordinators); }
+    public void addCoordinator(Long id) { coordinators.add(id); }
+    public void removeCoordinator(Long id) { coordinators.remove(id); }
     
     @Basic
-    private Set<Long> teachers = new HashSet<Long>();
-    public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
-    public void addTeacher(GoodleUser teacher) { teachers.add(teacher.getId()); } 
-    public void removeTeacher(GoodleUser teacher) { teachers.remove(teacher.getId()); }
-    
-    @Basic
-    private Set<Long> members = new HashSet<Long>();
-    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
-    public void addMember(GoodleUser member) { members.add(member.getId()); }
-    public void removeMember(GoodleUser member) { members.remove(member.getId()); }
-    
-    @Basic
-    private List<Long> modules = new ArrayList<Long>();
-    public List<Long> getModules() { return Collections.unmodifiableList(modules); }
-    public void addModule(Module module) { modules.add(module.getId()); }
-    public void removeModule(Module module) { modules.remove(module.getId()); }
+    private List<Long> groups = new ArrayList<Long>();
+    public List<Long> getGroups() { return Collections.unmodifiableList(groups); }
+    public void addGroup(Long id) { groups.add(id); }
+    public void removeGroup(Long id) { groups.remove(id); }
        
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();

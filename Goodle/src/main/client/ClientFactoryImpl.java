@@ -1,11 +1,6 @@
 package main.client;
 
-import main.client.ui.CourseFormsView;
-import main.client.ui.CourseGroupsView;
-import main.client.ui.CourseInfoView;
 import main.client.ui.CourseListView;
-import main.client.ui.CourseMembersView;
-import main.client.ui.CourseModulesView;
 import main.client.ui.CourseView;
 import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
@@ -23,12 +18,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private static final PlaceController placeController = new PlaceController(eventBus);
 	private static final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
 
-	private static CourseFormsView courseFormsView;
-	private static CourseGroupsView courseGroupsView;
-	private static CourseInfoView courseInfoView;
 	private static CourseListView courseListView;
-	private static CourseMembersView courseMembersView;
-	private static CourseModulesView courseModulesView;
 	private static CourseView courseView;
 	private static CreateCourseView createCourseView;
 	private static UserMainPageView userMainPageView;
@@ -46,39 +36,6 @@ public class ClientFactoryImpl implements ClientFactory
 	public GoodleRequestFactory getRequestFactory() { return requestFactory; }
 
 	@Override
-	public CourseFormsView getCourseFormsView() 
-	{
-		if (courseFormsView == null) 
-		{
-			courseFormsView = new CourseFormsView();
-			courseFormsView.setClientFactory(this);
-		}
-		return courseFormsView; 
-	}
-
-	@Override
-	public CourseGroupsView getCourseGroupsView() 
-	{
-		if (courseGroupsView == null) 
-		{
-			courseGroupsView = new CourseGroupsView();
-			courseGroupsView.setClientFactory(this);
-		}
-		return courseGroupsView; 
-	}
-
-	@Override
-	public CourseInfoView getCourseInfoView() 
-	{
-		if (courseInfoView == null) 
-		{
-			courseInfoView = new CourseInfoView();
-			courseInfoView.setClientFactory(this);
-		}
-		return courseInfoView; 
-	}
-
-	@Override
 	public CourseListView getCourseListView() 
 	{
 		if (courseListView == null) 
@@ -87,28 +44,6 @@ public class ClientFactoryImpl implements ClientFactory
 			courseListView.setClientFactory(this);
 		}
 		return courseListView; 
-	}
-
-	@Override
-	public CourseMembersView getCourseMembersView() 
-	{
-		if (courseMembersView == null) 
-		{
-			courseMembersView = new CourseMembersView();
-			courseMembersView.setClientFactory(this);
-		}
-		return courseMembersView; 
-	}
-
-	@Override
-	public CourseModulesView getCourseModulesView() 
-	{
-		if (courseModulesView == null) 
-		{
-			courseModulesView = new CourseModulesView();
-			courseModulesView.setClientFactory(this);
-		}
-		return courseModulesView; 
 	}
 
 	@Override

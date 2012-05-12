@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,10 +24,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Version;
 
-import com.google.appengine.api.datastore.Email;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @Entity
 @NamedQueries
@@ -54,79 +57,62 @@ public class GoodleUser implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	public Long getId() { return id; }
 
 	@Version
 	@Column(name="version")
 	private Integer version;
+	public Integer getVersion() { return version; }
 
 	private UsosInfo usosInfo;
+	public UsosInfo getUsosInfo() { return usosInfo; }
 
+	@NotBlank
 	private String login;
+	public String getLogin() { return login; }
+	public void setLogin(String login) { this.login = login; }
 
-	private String password;
-
+	@NotBlank
 	private String firstName;
+	public String getFirstName() { return firstName; }
+	public void setFirstName(String firstName) { this.firstName = firstName; }
 
+	@NotBlank
 	private String lastName;
+	public String getLastName() { return lastName; }
+	public void setLastName(String lastName) { this.lastName = lastName; }
 
-	private Email email;
+	@Email
+	private String email;
+	public String getEmail() { return email; }
+	public void setEmail(String email) { this.email = email; }
 
+	@Basic
 	private Set<Long> coursesLed = new HashSet<Long>();
+	public Set<Long> getCoursesLed() { return Collections.unmodifiableSet(coursesLed); }
+	public void addCourseLed(Course course) { coursesLed.add(course.getId()); }
+	public void removeCourseLed (Course course) { coursesLed.remove(course.getId()); }
 
+	@Basic
 	private Set<Long> coursesAttended = new HashSet<Long>();
+	public Set<Long> getCoursesAttended() { return Collections.unmodifiableSet(coursesAttended); }
+	public void addCourseAttended(Course course) { coursesAttended.add(course.getId()); }
+	public void removeCourseAttended(Course course) { coursesAttended.remove(course.getId()); }
 
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<Message> messages = new ArrayList<Message>();
+	public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
+	public void addMessage(Message message) { messages.add(message); }
+	public void removeMessage(Message message) { messages.remove(message); }
+	
+	@Basic
+	private Set<String> flags = new HashSet<String>();
+	public Set<String> getFlags() { return Collections.unmodifiableSet(flags); }
+	public void addFlag(String flag) { flags.add(flag); }
+	public boolean hasFlag(String flag) { return flags.contains(flag); }
+	public void removeFlag(String flag) { flags.remove(flag); }
 
 	public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
-
-	public Long getId() { return id; }
-
-	public Integer getVersion() { return version; }
-
-	public UsosInfo getUsosInfo() { return usosInfo; }
-
-	public String getLogin() { return login; }
-
-	public String getPassword() { return password; }
-
-	public String getFirstName() { return firstName; }
-
-	public String getLastName() { return lastName; }
-
-	public Email getEmail() { return email; }
-
-	public Set<Long> getCoursesLed() { return Collections.unmodifiableSet(coursesLed); }
-
-	public Set<Long> getCoursesAttended() { return Collections.unmodifiableSet(coursesAttended); }
-
-	public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
-
-	public void setLogin(String login) { this.login = login; }
-
-	public void setPassword(String password) { this.password = password; }
-
-	public void setFirstName(String firstName) { this.firstName = firstName; }
-
-	public void setLastName(String lastName) { this.lastName = lastName; }
-
-	public void setEmail(Email email) { this.email = email; }
-
-	/* Collections methods */
-
-	public void addCourseLed(Course course) { coursesLed.add(course.getId()); }
-
-	public void removeCourseLed (Course course) { coursesLed.remove(course.getId()); }
-
-	public void addCourseAttended(Course course) { coursesAttended.add(course.getId()); }
-
-	public void removeCourseAttended(Course course) { coursesAttended.remove(course.getId()); }
-
-	public void addMessage(Message message) { messages.add(message); }
-
-	public void removeMessage(Message message) { messages.remove(message); }
-
-	/* Db methods */
 
 	public void persist() 
 	{
@@ -175,12 +161,16 @@ public class GoodleUser implements Serializable
 		finally { em.close(); }
 	}
 	
-	public static GoodleUser getCurrentUser(){
+	public static GoodleUser getCurrentUser()
+	{
 		Logger logger = Logger.getLogger("goodle");
 		logger.log(Level.FINE, "getGoodleUser()");
+		
 		UserService service = UserServiceFactory.getUserService();
-		if(service.isUserLoggedIn()){
+		if (service.isUserLoggedIn())
+		{
 			logger.log(Level.FINE, "User is logged in Google");
+			
 			User user = service.getCurrentUser();
 			EntityManager em = entityManager();
 			GoodleUser toRet = null;
@@ -192,36 +182,32 @@ public class GoodleUser implements Serializable
 				toRet = (GoodleUser) q.getSingleResult();
 				return toRet;
 			}
-			catch (NoResultException e) {				
+			catch (NoResultException e) 
+			{				
 			    logger.log(Level.WARNING, "User is logged In, but doesn't exist in our database, Creating New User");
+			    
 			    GoodleUser goodleUser = new GoodleUser();
-			    Email email = new Email(user.getEmail());
-			    goodleUser.setEmail(email);
+			    goodleUser.setEmail(user.getEmail());
 			    goodleUser.setLogin(user.getEmail());
 			    goodleUser.persist();			    
 			    return goodleUser;
 			}
 			finally { em.close(); }			
-		} else {
-			return null;
 		}
+		return null;
 	}
 	
-	public static String getLoginUrl(String destination){
+	public static String getLoginUrl(String destination)
+	{
 		UserService service = UserServiceFactory.getUserService();
-		if(service.isUserLoggedIn()){
-			return null;
-		}else {
-			return service.createLoginURL(destination);
-		}
+		if (!service.isUserLoggedIn()) return service.createLoginURL(destination);
+		return null;
 	}
 	
-	public static String getLogoutUrl(String destination){
+	public static String getLogoutUrl(String destination)
+	{
 		UserService service = UserServiceFactory.getUserService();
-		if(service.isUserLoggedIn()){
-			return service.createLogoutURL(destination);
-		}else {
-			return null;
-		}
+		if (service.isUserLoggedIn()) return service.createLogoutURL(destination);
+		return null;
 	}
 }

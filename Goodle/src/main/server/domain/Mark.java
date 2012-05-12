@@ -6,40 +6,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-import com.google.appengine.api.datastore.Text;
-import com.google.appengine.api.datastore.Key;
-
+@SuppressWarnings("serial")
 @Entity
-public class Mark implements Serializable 
+public class Mark implements Serializable
 {
-	
-	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Key key;
-    public Key getKey() { return key; }
+	private Long id;
+    public Long getId() { return id; }
     
     private int val;
     public int getVal() { return val; }
     public void setVal(int val) { this.val = val; }
     
+    @NotNull
     private GoodleUser teacher;
     public GoodleUser getTeacher() { return teacher; }
+    public void setTeacher(GoodleUser teacher) { this.teacher = teacher; }
     
-    private Text comment;
-    public Text getComment() { return comment; }
-    public void setComment(Text comment) { this.comment = comment; }
-    
-    public Mark() { }
-    
-    public Mark(Key key, int val, GoodleUser teacher, Text comment)
-    {
-    	this.key = key;
-    	this.val = val;
-    	this.teacher = teacher;
-    	this.comment = comment;
-    }
-    
+    @NotNull
+    private String comment;
+    public String getComment() { return comment; }
+    public void setComment(String comment) { this.comment = comment; }
 }

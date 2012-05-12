@@ -43,7 +43,7 @@ public class ModuleView extends Composite {
 	{ 
 		this.module = module; 
 		titleView.setText(module.getTitle());
-		descView.setText(module.getDesc());
+		descView.setText(module.getText());
 	}
 	
 	@UiHandler("titleView")

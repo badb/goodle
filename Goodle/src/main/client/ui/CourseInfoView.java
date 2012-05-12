@@ -14,9 +14,9 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 
 public class CourseInfoView extends Composite
 {
-	private static CourseViewUiBinder uiBinder = GWT.create(CourseViewUiBinder.class);
+	private static CourseInfoViewUiBinder uiBinder = GWT.create(CourseInfoViewUiBinder.class);
 
-	interface CourseViewUiBinder extends UiBinder<Widget, CourseInfoView> { }
+	interface CourseInfoViewUiBinder extends UiBinder<Widget, CourseInfoView> { }
 	
 	@UiField Label courseInfo;
 	

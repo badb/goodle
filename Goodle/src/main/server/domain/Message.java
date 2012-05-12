@@ -1,18 +1,37 @@
 package main.server.domain;
 
-import javax.persistence.Entity;
+import java.io.Serializable;
+import java.util.Date;
 
-import com.google.appengine.api.datastore.Text;
+import javax.persistence.Basic;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 
-@Entity
-public class Message extends AbstractMessage 
-{
-
-	private static final long serialVersionUID = 1L;
-
-	public Message() { super(); }
+@SuppressWarnings("serial")
+public class Message implements Serializable
+{	
+    @NotNull
+    private GoodleUser author;
+    public GoodleUser getAuthor() { return author; }
+    public void setAuthor(GoodleUser author) { this.author = author; }
     
-    public Message(GoodleUser author, Text text) { super(author, text); }
-    
+    @NotNull
+    private String text;
+    public String getText() { return text; }
+    public void setText(String text) 
+    {
+    	this.text = text;
+    	modified = new Date();
+    }
+
+    @Basic
+    @Past
+    private Date created = new Date();
+    public Date getCreated() { return created; }
+
+    @Basic
+    @Past
+    private Date modified = new Date();
+    public Date getModified() { return modified; }
 }

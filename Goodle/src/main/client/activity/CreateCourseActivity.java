@@ -20,7 +20,6 @@ public class CreateCourseActivity extends AbstractActivity
 	public void start(AcceptsOneWidget panel, EventBus eventBus) 
 	{
 		CreateCourseView view = clientFactory.getCreateCourseView();
-		view.setClientFactory(clientFactory);
 		view.clear();
 		panel.setWidget(view.asWidget());
 	}

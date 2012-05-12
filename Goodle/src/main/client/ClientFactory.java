@@ -1,10 +1,15 @@
 package main.client;
 
+import main.client.ui.CourseFormsView;
+import main.client.ui.CourseGroupsView;
 import main.client.ui.CourseInfoView;
+import main.client.ui.CourseListView;
+import main.client.ui.CourseMembersView;
+import main.client.ui.CourseModulesView;
 import main.client.ui.CourseView;
-import main.client.ui.CoursesListView;
 import main.client.ui.CreateCourseView;
-import main.client.ui.ModulesTabView;
+import main.client.ui.UserMainPageView;
+import main.client.ui.UserProfileView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
 
@@ -17,11 +22,18 @@ public interface ClientFactory
 	PlaceController getPlaceController();
 	void initializeRequestFactory();
 	GoodleRequestFactory getRequestFactory();
-	CoursesListView getCoursesListView();
+	
+	CourseFormsView getCourseFormsView();
+	CourseGroupsView getCourseGroupsView();
+	CourseInfoView getCourseInfoView();
+	CourseListView getCourseListView();
+	CourseMembersView getCourseMembersView();
+	CourseModulesView getCourseModulesView();
 	CourseView getCourseView();
 	CreateCourseView getCreateCourseView();
-	CourseInfoView getCourseInfoView();
-	ModulesTabView getModulesTabView();
+	UserMainPageView getUserMainPageView();
+	UserProfileView getUserProfileView();
+	
 	void setCurrentUser(GoodleUserProxy userProxy);
 	GoodleUserProxy getCurrentUser();
 }

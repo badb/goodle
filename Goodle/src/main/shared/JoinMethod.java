@@ -1,6 +1,6 @@
 package main.shared;
 
-public enum RegMethod 
+public enum JoinMethod 
 {
 	OPEN,
 	ASK,

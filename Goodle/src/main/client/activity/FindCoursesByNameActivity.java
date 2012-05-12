@@ -2,7 +2,7 @@ package main.client.activity;
 
 import main.client.ClientFactory;
 import main.client.place.FindCoursesByNamePlace;
-import main.client.ui.CoursesListView;
+import main.client.ui.CourseListView;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -22,8 +22,7 @@ public class FindCoursesByNameActivity extends AbstractActivity
 	@Override
 	public void start(final AcceptsOneWidget panel, EventBus eventBus) 
 	{
-		CoursesListView view = clientFactory.getCoursesListView();
-		view.setClientFactory(clientFactory);
+		CourseListView view = clientFactory.getCourseListView();
 		view.clear();
 		view.findCoursesByName(name);
 		panel.setWidget(view.asWidget());

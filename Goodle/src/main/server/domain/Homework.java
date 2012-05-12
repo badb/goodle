@@ -5,47 +5,49 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EntityManager;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.Text;
-
+@SuppressWarnings("serial")
 @Entity
 public class Homework extends Material 
 {
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Key key;
-    public Key getKey() { return key; }
+	@NotNull
+    private String text;
+    public String getText() { return text; }
+    public void setText(String text) { this.text = text; }
     
-    private Text desc;
-    public Text getDesc() { return desc; }
-    public void setDesc(Text desc) { this.desc = desc; }
-    
+    @Basic
     private Date deadline;
     public Date getDeadline() { return deadline; }
-    public void setDeadline(Date deadline) { this.deadline = deadline; }
+    public void setDeadline(Date deadline) 
+    { 
+    	if (this.deadline != deadline)
+    	{
+    		this.deadline = deadline; 
+    		modified = new Date();
+    	}
+    }
     
     @OneToMany(cascade=CascadeType.ALL)
-    private List<HomeworkFile> provided = new ArrayList<HomeworkFile>();
-    public List<HomeworkFile> getProvided() { return Collections.unmodifiableList(provided); }
-    public void addProvided(HomeworkFile file) { provided.add(file); }
-    public void removeProvided(HomeworkFile file) { provided.remove(file); }
+    private List<Long> solutions = new ArrayList<Long>();
+    public List<Long> getSolutions() { return Collections.unmodifiableList(solutions); }
+    public void addSolution(HomeworkFile file) { solutions.add(file.getId()); }
+    public void removeSolution(HomeworkFile file) { solutions.remove(file.getId()); }
     
-    public Homework() { }
-    
-    public Homework(GoodleUser author, String name, Text desc, Date deadline)
+    public static Homework findHomework(Long id) 
     {
-    	super(name, author);
-    	this.desc = desc;
-    	this.deadline = deadline;
+    	if (id == null) { return null; }
+    	EntityManager em = entityManager();
+    	try 
+    	{
+    		Homework h = em.find(Homework.class, id);
+    		return h;
+    	}
+    	finally { em.close(); }
     }
-
 }

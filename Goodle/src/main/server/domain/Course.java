@@ -22,11 +22,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import main.shared.RegMethod;
+import main.shared.JoinMethod;
 
-import com.google.appengine.api.datastore.Link;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
+@SuppressWarnings("serial")
 @Entity
 @NamedQueries 
 ({
@@ -43,110 +46,79 @@ import com.google.appengine.api.datastore.Link;
 })
 public class Course implements Serializable
 {       
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@Column(name="id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+    public Long getId() { return id; }
     
     @Version
     @Column(name="version")
     private Integer version;
-   
-    @NotNull
+    public Integer getVersion() { return version; }
+    public void setVersion(Integer version) { this.version = version; }
+    
+    @NotBlank
     private String name;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    @NotNull
+    @NotBlank
+    @Pattern(regexp = "\\d{4}[LZ]?")
     private String term;
+    public String getTerm() { return term; }
+    public void setTerm(String term) { this.term = term; }
     
     @NotNull
-    private String desc;
+    private String description;
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    
+    @NotNull
+    private String bibliography;
+    public String getBibliography() { return bibliography; }
+    public void setBibliography(String bibliography) { this.bibliography = bibliography; }
     
     @NotNull 
-    private RegMethod regMethod;
+    private JoinMethod joinMethod;
+    public JoinMethod getJoinMethod() { return joinMethod; }
+    public void setJoinMethod(JoinMethod joinMethod) { this.joinMethod = joinMethod; }
     
-    @NotNull
-    private String password;
+    private String key;
+    public String getKey() { return key; }
+    public void setKey(String key) { this.key = key; }
+    
+    @NotBlank
+    @URL
+    private String calendar;
+    public String getCalendar() { return calendar; }
+    public void setCalendar(String calendar) { this.calendar = calendar; }
     
     @Basic
     private Set<Long> teachers = new HashSet<Long>();
+    public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
+    public void addTeacher(GoodleUser teacher) { teachers.add(teacher.getId()); } 
+    public void removeTeacher(GoodleUser teacher) { teachers.remove(teacher.getId()); }
     
     @Basic
     private Set<Long> members = new HashSet<Long>();
+    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
+    public void addMember(GoodleUser member) { members.add(member.getId()); }
+    public void removeMember(GoodleUser member) { members.remove(member.getId()); }
     
     @Basic
     private List<Long> modules = new ArrayList<Long>();
-    
-    private Link calendar;
-    
+    public List<Long> getModules() { return Collections.unmodifiableList(modules); }
+    public void addModule(Module module) { modules.add(module.getId()); }
+    public void removeModule(Module module) { modules.remove(module.getId()); }
+       
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();
-    
-    public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
-    
-    /* Getters and setters */
-    
-    public Long getId() { return id; }
-    
-    public Integer getVersion() { return version; }
-    
-    public String getName() { return name; }
-    
-    public String getTerm() { return term; }
-    
-    public String getDesc() { return desc; }
-    
-    public RegMethod getRegMethod() { return regMethod; }
-    
-    public String getPassword() { return password; }
-    
-    public Set<Long> getTeachers() { return Collections.unmodifiableSet(teachers); }
-    
-    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
-    
-    public List<Long> getModules() { return Collections.unmodifiableList(modules); }
-
-    public Link getCalendar() { return calendar; }
-    
     public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
-    
-    public void setVersion(Integer version) { this.version = version; }
-    
-    public void setName(String name) { this.name = name; }
-    
-    public void setTerm(String term) { this.term = term; }
-    
-    public void setDesc(String desc) { this.desc = desc; }
-    
-    public void setRegMethod(RegMethod regMethod) { this.regMethod = regMethod; }
-    
-    public void setPassword(String password) { this.password = password; }
-    
-    public void setCalendar(Link calendar) { this.calendar = calendar; }
-    
-    /* Collections methods */
-    
-    public void addTeacher(GoodleUser teacher) { teachers.add(teacher.getId()); } 
-
-    public void removeTeacher(GoodleUser teacher) { teachers.remove(teacher.getId()); }
-
-    public void addMember(GoodleUser member) { members.add(member.getId()); }
-
-    public void removeMember(GoodleUser member) { members.remove(member.getId()); }
-    
-    public void addModule(Module module) { modules.add(module.getId()); }
-    
-    public void removeModule(Module module) { modules.remove(module.getId()); }
-    
     public void addMessage(Message message) { messages.add(message); }
-    
     public void removeMessage(Message message) { messages.remove(message); }
     
-    /* Db methods */
+    public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
     
     public Long persist() 
     {
@@ -158,7 +130,6 @@ public class Course implements Serializable
         	return this.id;
         }
         finally { em.close(); }
-        
     }
     
     public void remove()

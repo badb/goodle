@@ -6,12 +6,15 @@ import java.util.logging.Logger;
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseProxy;
+import main.shared.proxy.ModuleProxy;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
@@ -28,6 +31,9 @@ public class CourseView extends Composite
 	
 	@UiField Label courseName;
 	@UiField Label courseDesc;
+	@UiField Button editButton;
+	@UiField Button saveButton;
+	@UiField Button cancelButton;
 	@UiField CourseModulesView courseModulesView;
 
 	@UiField CourseInfoView courseInfoView;
@@ -37,6 +43,8 @@ public class CourseView extends Composite
 	private ClientFactory clientFactory;
 	private CourseProxy course;
 	private String selectedTab;
+	
+	private boolean editing;
 
 	public CourseView()
 	{
@@ -67,8 +75,10 @@ public class CourseView extends Composite
 						tabPanel.getTabWidget(1).setVisible(true);
 						//String id = course.getModuleIds().get(0);
 						courseModulesView = clientFactory.getCourseModulesView();
+						courseModulesView.setClientFactory(clientFactory);
 						courseModulesView.setCourse(course);		
 						courseInfoView = clientFactory.getCourseInfoView();
+						courseInfoView.setClientFactory(clientFactory);
 					}
 					@Override
 					public void onFailure(ServerFailure error){
@@ -99,12 +109,43 @@ public class CourseView extends Composite
 	public void onSelection(SelectionEvent<Integer> event) {
 		Integer tabNumber = event.getSelectedItem();
 		selectedTab = tabNumber.toString();
-
+		
 		String courseId = course.getId().toString();
 		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, selectedTab));
 	}
+	
+	
+	@UiHandler("editButton")
+	void onEditButtonClick(ClickEvent event)
+	{	
+			editButton.setVisible(false);
+			saveButton.setVisible(true);
+			cancelButton.setVisible(true);
+		
+	}
+	
+	@UiHandler("saveButton")
+	void onSaveButtonClick(ClickEvent event)
+	{	
+		//TODO zapisać zmiany w bazie danych
+		
+	}
+	
+	
+	@UiHandler("cancelButton")
+	void onCancelButtonClick(ClickEvent event)
+	{	
+		//TODO spytać o niezapisane dane
+		
+
+		editButton.setVisible(true);
+		saveButton.setVisible(false);
+		cancelButton.setVisible(false);
+		
+	}
 
     public void onModuleLoad() {
+    	//TODO sprawdzenie prawa do edycji modułu
         tabPanel.selectTab(new Integer(selectedTab).intValue());
         tabPanel.getTabWidget(new Integer(selectedTab)).getParent().setVisible(true);
 		tabPanel.getTabWidget(0).setVisible(true);

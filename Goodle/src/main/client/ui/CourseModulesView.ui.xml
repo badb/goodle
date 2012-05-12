@@ -4,7 +4,7 @@
 	
 	<g:FlowPanel>
 		<g:Label ui:field="infoLabel">Tu będzie lista modułów:</g:Label>
-		<g:Button ui:field="addModuleButton" text="Dodaj moduł" />
+		<g:Button ui:field="addModuleButton" text="Dodaj moduł"/>
 		<g:FlexTable ui:field="modulesTable" />
 	</g:FlowPanel>
 

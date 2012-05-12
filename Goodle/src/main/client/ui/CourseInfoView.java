@@ -7,7 +7,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DeckLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
@@ -19,10 +21,13 @@ public class CourseInfoView extends Composite
 	interface CourseInfoViewUiBinder extends UiBinder<Widget, CourseInfoView> { }
 	
 	@UiField Label courseInfo;
+	@UiField DeckLayoutPanel deckPanel;
+	@UiField TextArea courseInfoEdit;
 	
 	
 	private ClientFactory clientFactory;
 	private CourseProxy course;
+	private boolean editing;
 
 	public CourseInfoView()
 	{
@@ -45,10 +50,21 @@ public class CourseInfoView extends Composite
 					{
 						course = response;
 						//courseInfo.setText(course.getDesc());
+						deckPanel.showWidget(courseInfo);
 					}
 				}
 			);
 		}
+	}
+
+	public void stopEditing() {
+		//TODO ustawienie odpowiedniego opisu
+		deckPanel.showWidget(courseInfo);
+	}
+
+	public void startEditing() {
+		courseInfoEdit.setText(courseInfo.getText());
+		deckPanel.showWidget(courseInfoEdit);
 	}
 
 	

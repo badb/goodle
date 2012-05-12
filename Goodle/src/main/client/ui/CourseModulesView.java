@@ -31,6 +31,7 @@ public class CourseModulesView  extends Composite
 	private CourseProxy course;
 	
 	private ClientFactory clientFactory;
+	private Boolean editing;
 
 	public CourseModulesView()
 	{
@@ -65,6 +66,7 @@ public class CourseModulesView  extends Composite
 					for (ModuleProxy m : result)
 					{
 						ModuleView view = new ModuleView();
+						view.setClientFactory(clientFactory);
 					    view.setModule(m);
 					    
 						int rows = modulesTable.getRowCount();
@@ -93,4 +95,8 @@ public class CourseModulesView  extends Composite
 	    
 	    modulesTable.setWidget(rows, 0, view);
 	}
+
+	
+	
+	
 }

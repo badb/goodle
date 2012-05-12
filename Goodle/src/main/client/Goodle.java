@@ -21,7 +21,6 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
@@ -57,22 +56,8 @@ public class Goodle implements EntryPoint
 				@Override
 				public void onSuccess(GoodleUserProxy response)
 				{
-					if (response != null) 
-					{
-						clientFactory.setCurrentUser(response);
-						whenUserLogged();
-					} 
-					else 
-					{
-						clientFactory.getRequestFactory().goodleUserRequest().getLoginUrl(Window.Location.getHref()).fire
-						(
-							new Receiver <String>()
-							{
-								@Override
-								public void onSuccess(String response) { Window.Location.assign(response); }
-							}
-						);							
-					}						
+					clientFactory.setCurrentUser(response);
+					whenUserLogged();
 				}
 				@Override
 				public void onFailure(ServerFailure error)

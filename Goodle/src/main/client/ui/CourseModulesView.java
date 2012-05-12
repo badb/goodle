@@ -3,7 +3,7 @@ package main.client.ui;
 import java.util.List;
 
 import main.client.ClientFactory;
-import main.shared.proxy.CourseProxy;
+import main.shared.proxy.CourseGroupProxy;
 import main.shared.proxy.ModuleProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -28,23 +28,22 @@ public class CourseModulesView  extends Composite
 	@UiField Button addModuleButton;
 	@UiField FlexTable modulesTable;
 
-	private CourseProxy course;
+	private CourseGroupProxy group;
 	
 	private ClientFactory clientFactory;
-	private Boolean editing;
+
+	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 
 	public CourseModulesView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 	
-	public void setCourse(CourseProxy course) 
+	public void setGroup(CourseGroupProxy group) 
 	{
-		if (!course.equals(this.course))
+		if (!group.equals(this.group))
 		{
-			this.course = course;
+			this.group = group;
 			loadModules();
 		}
 	}
@@ -52,7 +51,7 @@ public class CourseModulesView  extends Composite
 	private void loadModules()
 	{
 		modulesTable.clear();
-		List<Long> ids = course.getModules();
+		List<Long> ids = group.getModules();
 		
 		if(!ids.isEmpty()){
 		

@@ -12,10 +12,10 @@ import com.google.web.bindery.requestfactory.shared.Service;
 @Service(Course.class)
 public interface CourseRequest extends RequestContext 
 {
-	InstanceRequest<CourseProxy, Void> addTeacher(GoodleUserProxy teacher);
-	InstanceRequest<CourseProxy, Void> removeTeacher(GoodleUserProxy teacher);
-	InstanceRequest<CourseProxy, Void> addModule(ModuleProxy module);
-	InstanceRequest<CourseProxy, Void> removeModule(ModuleProxy module);
+	InstanceRequest<CourseProxy, Void> addCoordinator(Long id);
+	InstanceRequest<CourseProxy, Void> removeCoordinator(Long id);
+	InstanceRequest<CourseProxy, Void> addGroup(Long id);
+	InstanceRequest<CourseProxy, Void> removeGroup(Long id);
 	InstanceRequest<CourseProxy, Void> addMessage(MessageProxy message);
 	InstanceRequest<CourseProxy, Void> removeMessage(MessageProxy message);
 	

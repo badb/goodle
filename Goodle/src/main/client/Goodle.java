@@ -55,22 +55,8 @@ public class Goodle implements EntryPoint
 				@Override
 				public void onSuccess(GoodleUserProxy response)
 				{
-					if (response != null) 
-					{
-						clientFactory.setCurrentUser(response);
-						whenUserLogged();
-					} 
-					else 
-					{
-						clientFactory.getRequestFactory().goodleUserRequest().getLoginUrl(Window.Location.getHref()).fire
-						(
-							new Receiver <String>()
-							{
-								@Override
-								public void onSuccess(String response) { Window.Location.assign(response); }
-							}
-						);							
-					}						
+					clientFactory.setCurrentUser(response);
+					whenUserLogged();
 				}
 				@Override
 				public void onFailure(ServerFailure error)

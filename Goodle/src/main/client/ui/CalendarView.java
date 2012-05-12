@@ -20,6 +20,7 @@ public class CalendarView extends Composite
 	interface CalendarViewUiBinder extends UiBinder<Widget, CalendarView> { }
 	 
 	@UiField Button createEventButton;
+	@UiField Button hideRightButton;
 	private ClientFactory clientFactory;
 	
 	public CalendarView()

@@ -35,7 +35,7 @@
 			</g:VerticalPanel>
 	    </g:tab>
 	    <g:tab>
-	        <g:header >Pobierz kurs z USOS</g:header>
+	        <g:header >Importuj</g:header>
 	        <g:Label text="Pobierz kurs..." />
 	    </g:tab>
 	</g:TabLayoutPanel>		 

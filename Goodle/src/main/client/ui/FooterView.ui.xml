@@ -4,6 +4,6 @@
         xmlns:my="urn:import:main.client.ui"
 >
 
-    <g:HTMLPanel />
+    <g:HTMLPanel/>
 
 </ui:UiBinder>

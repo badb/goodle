@@ -1053,9 +1053,12 @@ td.datePickerMonth {
 }
 
 .gwt-TabLayoutPanel {
+		width: 100%;
+	height: 100%;
 }
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelTabs {
-}
+	margin-left: 20px;
+	}
 .gwt-TabLayoutPanelContentContainer {
   border-color: #bcbcbc;
   border-style: solid;
@@ -1068,17 +1071,16 @@ td.datePickerMonth {
 	-moz-box-shadow: inset 0 0 2px 2px #bcbcbc;
 	-webkit-box-shadow: inset0 0 2px 2px #bcbcbc;
 	box-shadow: inset 0 0 2px 2px #bcbcbc;
-	min-height: 550px;
-	min-width: 400px;
+	overflow:auto;
 }
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelContent {
   overflow: hidden;
   margin: 15px;
 }
 .gwt-TabLayoutPanel .gwt-TabLayoutPanelTab {
-  margin-left: 20px;
+  margin-left: 10px;
   padding: 5px;
-  width: 150px;
+  width: 125px;
   cursor: pointer;
   cursor: hand;
   color: black;

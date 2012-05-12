@@ -11,45 +11,54 @@ body {
 	font-size: 50;
 }
 
-/* GOODLE VIEW */
-
-.topPanel {
-	position:relative;
-	max-height: 50px;
+.mainPanelStyle {
+	postion: relative;
 	width: 95%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 0;
 	padding: 0;
+}
+
+/* GOODLE VIEW */
+
+.topPanel {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
 	height: 50px;
-    margin-top: 0;
     background-image: url('https://lh4.googleusercontent.com/-cI_uBJD5pO0/T4lGlzmDcZI/AAAAAAAAAMA/J8aU1jGqmg8/s800/tabbar.jpg');
     background-repeat: repeat-x;
     background-position: top;
     box-shadow: 0 0 15px 0 #ccc;
-    border-bottom: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;    
+    /*border: 1px solid green;*/
 }
 
 .leftPanel {
-	width: 230px;
+	margin-top: 20px;
+	width: 200px;
+	height: 95%;
     padding: 10px 10px 10px 10px;
-    margin-top: 40px;
-    margin-left: 40px;
- 
+   /* border: 1px solid red; */
 }
 
 .contentPanel {
-   margin-left: 10px;
-   margin-right: 10px;
    margin-top: 20px; 
+   padding: 10px 10px 10px 10px;
+  /* border: 1px solid blue;*/
+   height: 95%;
+   width:95%;
 }
 
 .rightPanel {
-	width: 250px;
+	margin-top: 20px;
+	width: 200px;
+	height: 95%;
     padding: 10px 10px 10px 10px;
-    margin-top: 40px;
-    margin-right: 40px;
+   /* border: 1px solid orange; */
  }
-
 
 /* TOP VIEW */
 
@@ -145,4 +154,9 @@ body {
 	height: 250px;
 	width: 250px;
 	margin-bottom: 10px;
+}
+
+.hideButton {
+	width: 1px;
+	height: 100%;
 }

@@ -5,20 +5,20 @@
 			 
 	<ui:style src="../../css/Goodle.css"/>
  
-	<g:DockLayoutPanel unit="PX">
+	<g:DockLayoutPanel unit="PX" styleName='{style.mainPanelStyle}'>
 		<g:north size="50">
 			<my:TopView styleName='{style.topPanel}' ui:field="topPanel" />
 		</g:north>
-		<g:west size="260">
+		<g:west size="200">
 			<my:UserCoursesView styleName='{style.leftPanel}' ui:field="leftPanel" />
 		</g:west>
 		<g:center size="500">
 			<g:SimpleLayoutPanel styleName='{style.contentPanel}' ui:field="contentPanel" />
 		</g:center>
-		<g:east size="300">
+		<g:east size="200">
 			<my:CalendarView styleName='{style.rightPanel}' ui:field="rightPanel" />
 		</g:east>
-		<g:south size="50">
+		<g:south size="5">
 		    <my:FooterView ui:field="footer" />
 		</g:south>
 	</g:DockLayoutPanel>

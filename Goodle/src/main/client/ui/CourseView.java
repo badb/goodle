@@ -90,14 +90,20 @@ public class CourseView extends Composite
 					public void onSuccess(CourseProxy response)
 					{
 						course = response;
+						if (course == null) {
+							//TODO lepsza obsługa braku kursu
+							Logger logger = Logger.getLogger("Goodle.Log");
+						    logger.log(Level.SEVERE, "nie ma takiego kursu");
+							return;
+						}
 						courseName.setText(course.getName());
 
 						courseDesc.setText(course.getDescription());
 						tabPanel.getTabWidget(0).setVisible(true);
 						tabPanel.getTabWidget(1).setVisible(true);
 						//String id = course.getModuleIds().get(0);
-						courseModulesView.setClientFactory(clientFactory);
-						courseInfoView.setClientFactory(clientFactory);
+						//courseModulesView.setClientFactory(clientFactory);
+						//courseInfoView.setClientFactory(clientFactory);
 
 						courseInfoView.setCourse(course);
 						courseGroupsView.setCourse(course);
@@ -127,6 +133,12 @@ public class CourseView extends Composite
 					public void onSuccess(CourseGroupProxy response)
 					{
 						group = response;
+						if (group == null) {
+							//TODO lepsza obsługa braku grupy
+							Logger logger = Logger.getLogger("Goodle.Log");
+						    logger.log(Level.SEVERE, "group null");
+							return;
+						}
 						courseInfoView.setGroup(group);
 						courseModulesView.setGroup(group);
 						courseGroupsView.setGroup(group);
@@ -149,7 +161,8 @@ public class CourseView extends Composite
 		Integer tabNumber = event.getSelectedItem();
 		selectedTab = tabNumber.toString();
 		
-		String courseId = course.getId().toString();
+		
+		String courseId = ( course == null ? "-1" : course.getId().toString());
 		String groupId = ( group == null ? "-1" : group.getId().toString() );
 		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, selectedTab));
 	}

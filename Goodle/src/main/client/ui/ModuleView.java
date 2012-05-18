@@ -87,7 +87,7 @@ public class ModuleView extends Composite {
 	@UiHandler("focusPanel")
 	void onFocusPanelFocus(FocusEvent event) {
 
-		if (clientFactory.getCurrentUser().equals(module.getAuthor())) {
+		//if (clientFactory.getCurrentUser().equals(module.getAuthor())) {
 
 			editButton.setVisible(false);
 			editPanel.setVisible(true);
@@ -97,12 +97,12 @@ public class ModuleView extends Composite {
 			titleDeckPanel.showWidget(1);
 			descDeckPanel.showWidget(1);
 			showHideBox.setValue(visible);
-		}
+		//}
 	}
 
 	@UiHandler("focusPanel")
 	void onFocusPanelBlur(BlurEvent event) {
-		if (clientFactory.getCurrentUser().equals(module.getAuthor())) {
+		//if (clientFactory.getCurrentUser().equals(module.getAuthor())) {
 
 			editButton.setVisible(true);
 			editPanel.setVisible(false);
@@ -112,7 +112,7 @@ public class ModuleView extends Composite {
 
 			if (isChanged())
 				saveData();
-		}
+		//}
 	}
 
 	private boolean isChanged() {

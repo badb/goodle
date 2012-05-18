@@ -87,6 +87,8 @@ public class CourseModulesView  extends Composite
 		modulesTable.insertCell(rows, 0);
 		
 	    ModuleView view = new ModuleView();
+		view.setClientFactory(clientFactory);
+
 	    ModuleProxy m = clientFactory.getRequestFactory().moduleRequest().create(ModuleProxy.class);
 	    m.setTitle("Nowy moduł " + rows.toString());
 	    m.setText("");

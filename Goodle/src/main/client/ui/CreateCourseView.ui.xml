@@ -6,7 +6,14 @@
 			 
 	<ui:style src="../../../css/Goodle.css"/>
 		<g:VerticalPanel styleName="{style.mainView}">
-	        <g:Label>Utwórz nowy kurs</g:Label>
+			<g:HorizontalPanel styleName="{style.tabBefore}">
+			<g:HorizontalPanel styleName="{style.tabs}">
+				<g:SimplePanel styleName="{style.tabBegin}"/>
+	        <g:Label styleName="{style.tab}">Utwórz nowy kurs</g:Label>
+	        <g:Label ui:field="importLabel" styleName="{style.tab}">Importuj</g:Label>
+	        </g:HorizontalPanel>
+	        <g:SimplePanel styleName="{style.tabEnd}"/>
+	        </g:HorizontalPanel>
 	        <g:VerticalPanel styleName="{style.insideMainView}">
 	        <g:Label text="Nazwa kursu:" styleName="{style.blabel}"/>
 	        <g:HorizontalPanel>

@@ -42,6 +42,58 @@
 	min-width: 650px;
 }
 
+.tabs {
+	padding: 0;
+	height: 37px;
+	width: 100%;
+	position: relative;
+	float: left;
+	background-image: url('https://lh6.googleusercontent.com/-i4xGmMwV_zE/T4k1ojX2rQI/AAAAAAAAAL0/gRLz7zFfUUE/s800/tabbar.png');
+	background-repeat: repeat-x;
+	background-position: top right;
+}
+
+
+.tabBefore {
+	position: relative;
+	width: 100%;
+	height: 37px;
+	margin: 0;
+	padding: 0;
+}
+
+.tab {
+	text-align: center;
+	padding: 8px 20px;
+	font-weight: bold;
+	float: left;
+	height: 100%;
+	cursor: pointer;
+}
+
+.tab:hover {
+	text-decoration: underline;
+}
+
+.tabBegin {
+	background-image: url('https://lh6.googleusercontent.com/-z6HDekZqbO4/T7fE4am59BI/AAAAAAAAAOM/dJsfGkMop3w/s800/tabbar_left.png');
+	background-repeat: no-repeat;
+	background-position: top right;
+	height: 37px;
+	width: 19px;
+	margin: 0;
+	padding: 0;
+}
+
+.tabEnd {
+	background-image: url('https://lh5.googleusercontent.com/-sygsOy75Tos/T7fE5y4iOlI/AAAAAAAAAOU/IrzLLP7TVrg/s800/tabbar_right.png');
+	background-repeat: no-repeat;
+	background-position: top right;
+	height: 37px;
+	width: 19px;
+	margin: 0;
+	padding: 0;
+}
 
 /* GOODLE VIEW */
 

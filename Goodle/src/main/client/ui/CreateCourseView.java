@@ -16,6 +16,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
@@ -29,7 +30,7 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 public class CreateCourseView extends Composite 
 {
 	private static CreateCourseViewUiBinder uiBinder = GWT.create(CreateCourseViewUiBinder.class);
-
+	
 	interface CreateCourseViewUiBinder extends UiBinder<Widget, CreateCourseView> { }
 
 	@UiField TextBox courseNameBox;
@@ -41,6 +42,7 @@ public class CreateCourseView extends Composite
 	@UiField RadioButton regMethod3;
 	@UiField TextBox coursePasswordBox;
 	@UiField Button saveButton;
+	@UiField Label importLabel;
 	private ClientFactory clientFactory;
 	
 	public CreateCourseView() 
@@ -91,6 +93,9 @@ public class CreateCourseView extends Composite
 			});
 		}
 	}
+	
+	@UiHandler("importLabel")
+	void showImport(ClickEvent event) {coursePasswordBox.setEnabled(true);}
 	
 	@UiHandler("regMethod1")
 	void onRegMethod1Selected(ClickEvent event) { coursePasswordBox.setEnabled(false); }

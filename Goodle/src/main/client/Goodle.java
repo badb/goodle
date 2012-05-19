@@ -23,7 +23,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimpleLayoutPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
@@ -32,7 +35,7 @@ import com.google.web.bindery.requestfactory.shared.ServerFailure;
 public class Goodle implements EntryPoint 
 {
 	
-	interface Binder extends UiBinder<DockLayoutPanel, Goodle> { }
+	interface Binder extends UiBinder<ScrollPanel, Goodle> { }
     
     private static final Binder binder = GWT.create(Binder.class);
     
@@ -40,8 +43,7 @@ public class Goodle implements EntryPoint
     @UiField UserCoursesView leftPanel;
     @UiField SimpleLayoutPanel contentPanel;
     @UiField CalendarView rightPanel;
-    @UiField FooterView footer;
-    
+        
     private Place defaultPlace = new CreateCoursePlace();
     private ClientFactory clientFactory = null;
 
@@ -72,7 +74,7 @@ public class Goodle implements EntryPoint
 	
 	public void whenUserLogged()
 	{
-		DockLayoutPanel outer = binder.createAndBindUi(this);
+		ScrollPanel outer = binder.createAndBindUi(this);
 		EventBus eventBus = clientFactory.getEventBus();
 		PlaceController placeController = clientFactory.getPlaceController();
 		
@@ -88,7 +90,6 @@ public class Goodle implements EntryPoint
         topPanel.setUserName(clientFactory.getCurrentUser().getLogin());
         leftPanel.setClientFactory(clientFactory);
         rightPanel.setClientFactory(clientFactory);
-        footer.setClientFactory(clientFactory);
         
         RootLayoutPanel.get().add(outer);
         

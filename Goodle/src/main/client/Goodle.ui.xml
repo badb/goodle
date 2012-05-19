@@ -9,7 +9,7 @@
 			<my:TopView styleName='{style.topPanel}' ui:field="topPanel" />
 		<g:HorizontalPanel styleName='{style.mainUnderTopPanelStyle}'>
 			<my:UserCoursesView styleName='{style.leftPanel}' ui:field="leftPanel" />
-			<g:SimpleLayoutPanel styleName='{style.contentPanel}' ui:field="contentPanel" />
+			<g:SimplePanel styleName='{style.contentPanel}' ui:field="contentPanel" />
 			<my:CalendarView styleName='{style.rightPanel}' ui:field="rightPanel" />
 		</g:HorizontalPanel>
 	</g:VerticalPanel>

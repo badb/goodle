@@ -5,11 +5,9 @@
 			 xmlns:my="urn:import:main.client.util">
 			 
 	<ui:style src="../../../css/Goodle.css"/>
-	<g:TabLayoutPanel barUnit="PX" barHeight="50" ui:field="tabPanel">	
-	    <g:tab>
-	        <g:header>Utwórz nowy kurs</g:header>
-	    
-	        <g:VerticalPanel styleName="{style.resizable}">
+		<g:VerticalPanel styleName="{style.mainView}">
+	        <g:Label>Utwórz nowy kurs</g:Label>
+	        <g:VerticalPanel>
 	        <g:Label text="Nazwa kursu:" styleName="{style.blabel}"/>
 	        <g:HorizontalPanel>
 	            <g:TextBox ui:field="courseNameBox" styleName="{style.courseBox}" />    
@@ -34,14 +32,6 @@
 			</g:HorizontalPanel>	
 			<g:Button ui:field="saveButton" text="Zatwierdź" />
 			</g:VerticalPanel>
-			
-	    </g:tab>
-	    <g:tab>
-	        <g:header>Importuj</g:header>
-	        <g:VerticalPanel>
-	        <g:Label text="Pobierz kurs..." />
-	        </g:VerticalPanel>
-	    </g:tab>
-	</g:TabLayoutPanel>		
+	</g:VerticalPanel>		
 </ui:UiBinder>
 

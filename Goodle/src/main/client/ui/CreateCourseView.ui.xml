@@ -7,7 +7,7 @@
 	<ui:style src="../../../css/Goodle.css"/>
 		<g:VerticalPanel styleName="{style.mainView}">
 	        <g:Label>Utwórz nowy kurs</g:Label>
-	        <g:VerticalPanel>
+	        <g:VerticalPanel styleName="{style.insideMainView}">
 	        <g:Label text="Nazwa kursu:" styleName="{style.blabel}"/>
 	        <g:HorizontalPanel>
 	            <g:TextBox ui:field="courseNameBox" styleName="{style.courseBox}" />    

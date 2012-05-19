@@ -16,12 +16,13 @@
 }
 
 .mainUnderTopPanelStyle {
+	background: white;
 	postion: absolute;
 	width: 100%;
 	height: 100%;
+	margin-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 5px;
 	padding: 0;
 	overflow-x: auto;
 	overflow-y: auto;
@@ -34,6 +35,13 @@
 	padding: 5px;
 	/*border: 2px solid magenta;*/
 }
+
+.insideMainView {
+	vertical-align: top;
+	padding: 10px;
+	min-width: 650px;
+}
+
 
 /* GOODLE VIEW */
 
@@ -56,6 +64,7 @@
 	float: left;
 	position: relative;
     padding: 10px 10px 10px 10px;
+    border-right: 1px solid #c9c9c9;
  /*  border: 1px solid red; */
 }
 
@@ -68,10 +77,11 @@
 
 .rightPanel {
 	width: 200px;
-	height: 100%;
+	height: 600px;
     padding: 10px 10px 10px 10px;
     position:relative;
     float: right;
+    border-left: 1px solid #c9c9c9;
    /* border: 1px solid orange; */
  }
 

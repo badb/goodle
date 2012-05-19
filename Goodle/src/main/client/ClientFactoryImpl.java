@@ -2,6 +2,7 @@ package main.client;
 
 import main.client.ui.CourseListView;
 import main.client.ui.CourseView;
+import main.client.ui.CreateCourseImportView;
 import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
 import main.client.ui.UserProfileView;
@@ -21,6 +22,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private static CourseListView courseListView;
 	private static CourseView courseView;
 	private static CreateCourseView createCourseView;
+	private static CreateCourseImportView createCourseImportView;
 	private static UserMainPageView userMainPageView;
 	private static UserProfileView userProfileView;
 
@@ -68,6 +70,17 @@ public class ClientFactoryImpl implements ClientFactory
 		return createCourseView; 
 	}
 
+	@Override
+	public CreateCourseImportView getCreateCourseImportView() 
+	{
+		if (createCourseImportView == null) 
+		{
+			createCourseImportView = new CreateCourseImportView();
+			createCourseImportView.setClientFactory(this);
+		}
+		return createCourseImportView; 
+	}
+	
 	@Override
 	public UserMainPageView getUserMainPageView() 
 	{

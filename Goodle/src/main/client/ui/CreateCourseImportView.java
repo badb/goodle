@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.client.place.CreateCourseImportPlace;
 import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
@@ -29,11 +28,11 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
-public class CreateCourseView extends Composite 
+public class CreateCourseImportView extends Composite 
 {
-	private static CreateCourseViewUiBinder uiBinder = GWT.create(CreateCourseViewUiBinder.class);
+	private static CreateCourseImportViewUiBinder uiBinder = GWT.create(CreateCourseImportViewUiBinder.class);
 	
-	interface CreateCourseViewUiBinder extends UiBinder<Widget, CreateCourseView> { }
+	interface CreateCourseImportViewUiBinder extends UiBinder<Widget, CreateCourseImportView> { }
 
 	@UiField TextBox courseNameBox;
 	@UiField TextArea courseDescBox;
@@ -49,7 +48,7 @@ public class CreateCourseView extends Composite
 	
 	private ClientFactory clientFactory;
 	
-	public CreateCourseView() 
+	public CreateCourseImportView() 
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 		coursePasswordBox.setEnabled(false);
@@ -97,9 +96,6 @@ public class CreateCourseView extends Composite
 			});
 		}
 	}
-	
-	@UiHandler("importLabel")
-	void showImport(ClickEvent event) {clientFactory.getPlaceController().goTo(new CreateCourseImportPlace());}
 	
 	@UiHandler("regMethod1")
 	void onRegMethod1Selected(ClickEvent event) { coursePasswordBox.setEnabled(false); }

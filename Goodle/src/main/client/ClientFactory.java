@@ -2,6 +2,7 @@ package main.client;
 
 import main.client.ui.CourseListView;
 import main.client.ui.CourseView;
+import main.client.ui.CreateCourseImportView;
 import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
 import main.client.ui.UserProfileView;
@@ -21,6 +22,7 @@ public interface ClientFactory
 	CourseListView getCourseListView();
 	CourseView getCourseView();
 	CreateCourseView getCreateCourseView();
+	CreateCourseImportView getCreateCourseImportView();
 	UserMainPageView getUserMainPageView();
 	UserProfileView getUserProfileView();
 	

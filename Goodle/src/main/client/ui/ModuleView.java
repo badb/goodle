@@ -1,14 +1,13 @@
 package main.client.ui;
 
 
+
 import main.client.ClientFactory;
 import main.shared.proxy.ModuleProxy;
 import main.shared.proxy.ModuleRequest;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -16,7 +15,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckLayoutPanel;
-import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -53,15 +51,16 @@ public class ModuleView extends Composite {
 	@UiField
 	CheckBox showHideBox;
 	NotSavedPopup popup;
-	@UiField
-	FocusPanel focusPanel;
 
 	private ClientFactory clientFactory;
+	private ModuleRequest request;
+	private boolean isEdited = false;
 
 	public ModuleView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		titleView.setText("Nowy moduł");
 		descView.setText("Opis");
+		
 		titleDeckPanel.showWidget(0);
 		titleDeckPanel.setVisible(true);
 		descDeckPanel.showWidget(0);
@@ -77,43 +76,54 @@ public class ModuleView extends Composite {
 	}
 
 	public void setModule(ModuleProxy module) {
-		this.module = module;
+
 		titleView.setText(module.getTitle());
 		descView.setText(module.getText());
 		visible = module.getIsVisible();
 
 	}
+	
+	public boolean getIsEdited() {
+		return isEdited;
+	}
+	
+	
+	public void showEdit() {
+		//if (clientFactory.getCurrentUser().getId().equals(module.getAuthor().getId())) {
 
-	@UiHandler("focusPanel")
-	void onFocusPanelFocus(FocusEvent event) {
-
-		//if (clientFactory.getCurrentUser().equals(module.getAuthor())) {
-
-			editButton.setVisible(false);
-			editPanel.setVisible(true);
-
-			titleEdit.setText(titleView.getText());
-			descEdit.setText(descView.getText());
-			titleDeckPanel.showWidget(1);
-			descDeckPanel.showWidget(1);
-			showHideBox.setValue(visible);
+		if (!isEdited) {
+		isEdited = true;
+		editButton.setVisible(false);
+		editPanel.setVisible(true);
+		titleEdit.setText(titleView.getText());
+		descEdit.setText(descView.getText());
+		titleDeckPanel.showWidget(1);
+		descDeckPanel.showWidget(1);
+		showHideBox.setValue(visible);
+	
+		}
 		//}
 	}
 
-	@UiHandler("focusPanel")
-	void onFocusPanelBlur(BlurEvent event) {
-		//if (clientFactory.getCurrentUser().equals(module.getAuthor())) {
+	
+	public void hideEdit() {
+		//if (clientFactory.getCurrentUser().getId().equals(module.getAuthor().getId())) {
 
-			editButton.setVisible(true);
-			editPanel.setVisible(false);
+		if (isEdited) {
+			//if (isChanged())
+			//	saveData();
+		    
+			isEdited = false;
+		editButton.setVisible(true);
+		editPanel.setVisible(false);
 
-			titleDeckPanel.showWidget(0);
-			descDeckPanel.showWidget(0);
-
-			if (isChanged())
-				saveData();
+		titleDeckPanel.showWidget(0);
+		descDeckPanel.showWidget(0);
+		}
 		//}
 	}
+
+
 
 	private boolean isChanged() {
 		return (visible != showHideBox.getValue())
@@ -123,19 +133,20 @@ public class ModuleView extends Composite {
 
 	@UiHandler("cancelButton")
 	void onCancelButtonClicked(ClickEvent event) {
-		focusPanel.fireEvent(new BlurEvent() {
-		});
+		hideEdit();
+		event.stopPropagation();
 	}
 
 	@UiHandler("saveButton")
 	void onSaveButtonClicked(ClickEvent event) {
-		if (isChanged())
-			saveData();
-		focusPanel.fireEvent(new BlurEvent() {
-		});
+		//if (isChanged())
+		//	saveData();
+		hideEdit();
+		event.stopPropagation();
 	}
 
 	private void saveData() {
+
 		titleView.setText(titleEdit.getText());
 		descView.setText(descEdit.getText());
 		module.setTitle(titleEdit.getText());
@@ -143,9 +154,7 @@ public class ModuleView extends Composite {
 		visible = showHideBox.getValue();
 		module.setIsVisible(visible);
 		
-		ModuleRequest request = clientFactory.getRequestFactory()
-				.moduleRequest();
-		request.persist().using(module).fire();
+
 	}
 
 }

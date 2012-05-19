@@ -160,7 +160,7 @@ public class CourseView extends Composite
 	public void onSelection(SelectionEvent<Integer> event) {
 		Integer tabNumber = event.getSelectedItem();
 		selectedTab = tabNumber.toString();
-		
+		courseModulesView.stopEditing();
 		
 		String courseId = ( course == null ? "-1" : course.getId().toString());
 		String groupId = ( group == null ? "-1" : group.getId().toString() );

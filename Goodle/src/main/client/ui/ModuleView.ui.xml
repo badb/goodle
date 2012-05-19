@@ -2,7 +2,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 >
-	<g:FocusPanel ui:field="focusPanel">
 	<g:VerticalPanel width="100%">
 		<g:Button ui:field="editButton">Edytuj moduł</g:Button>
 		
@@ -24,6 +23,5 @@
 
 		
 	</g:VerticalPanel>
-	</g:FocusPanel>
 
 </ui:UiBinder>

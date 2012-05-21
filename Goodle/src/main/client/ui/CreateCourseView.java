@@ -32,7 +32,6 @@ public class CreateCourseView extends Composite
 
 	interface CreateCourseViewUiBinder extends UiBinder<Widget, CreateCourseView> { }
 
-	@UiField TabLayoutPanel tabPanel;
 	@UiField TextBox courseNameBox;
 	@UiField TextArea courseDescBox;
 	@UiField ListBox courseYearBox;

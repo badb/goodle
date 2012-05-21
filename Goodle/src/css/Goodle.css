@@ -1,24 +1,47 @@
-body {
-		font-family: Helvetica, "DejaVu Sans", sans-serif;
-		font-size: 14px;
-		background-color: white;
-		color: black;
-        margin:0;
-        padding:0;
-}
-
 .header {
 	font-size: 50;
 }
 
 .mainPanelStyle {
-	postion: relative;
+	postion: absolute;
 	width: 95%;
+	height: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0;
 	padding: 0;
+	overflow-x: auto;
+	overflow-y: auto;
+/*	border: 2px solid black;*/
 }
+
+.mainUnderTopPanelStyle {
+	background: white;
+	postion: absolute;
+	width: 100%;
+	height: 100%;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	overflow-x: auto;
+	overflow-y: auto;
+/*	border: 2px solid orange;*/
+}
+
+.mainView {
+	height: 100%;
+	width: 100%;
+	padding: 5px;
+	/*border: 2px solid magenta;*/
+}
+
+.insideMainView {
+	vertical-align: top;
+	padding: 10px;
+	min-width: 650px;
+}
+
 
 /* GOODLE VIEW */
 
@@ -26,37 +49,39 @@ body {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 50px;
 	height: 50px;
     background-image: url('https://lh4.googleusercontent.com/-cI_uBJD5pO0/T4lGlzmDcZI/AAAAAAAAAMA/J8aU1jGqmg8/s800/tabbar.jpg');
     background-repeat: repeat-x;
     background-position: top;
     box-shadow: 0 0 15px 0 #ccc;
     border-bottom: 1px solid #c9c9c9;    
-    /*border: 1px solid green;*/
+/*    border: 1px solid green;*/
 }
 
 .leftPanel {
-	margin-top: 20px;
 	width: 200px;
-	height: 95%;
+	height: 100%;
+	float: left;
+	position: relative;
     padding: 10px 10px 10px 10px;
-   /* border: 1px solid red; */
+    border-right: 1px solid #c9c9c9;
+ /*  border: 1px solid red; */
 }
 
-.contentPanel {
-   margin-top: 20px; 
+.contentPanel { 
    padding: 10px 10px 10px 10px;
   /* border: 1px solid blue;*/
-   height: 95%;
-   width:95%;
+     min-width: 650px;
+  height: 100%;
 }
 
 .rightPanel {
-	margin-top: 20px;
 	width: 200px;
-	height: 95%;
+	height: 600px;
     padding: 10px 10px 10px 10px;
+    position:relative;
+    float: right;
+    border-left: 1px solid #c9c9c9;
    /* border: 1px solid orange; */
  }
 
@@ -115,6 +140,12 @@ body {
 }
 
 /* CREATE COURSE VIEW */
+.resizable {
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	position:absolute;
+}
 .blabel {
 	font-size: 16px;
 	font-weight: bold;

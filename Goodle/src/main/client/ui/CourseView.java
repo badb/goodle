@@ -36,24 +36,11 @@ public class CourseView extends Composite
 	@UiField Button saveButton;
 	@UiField Button cancelButton;
 
-	@UiField TabLayoutPanel tabPanel;
-	
-	@UiField CourseInfoView courseInfoView;
-	@UiField CourseModulesView courseModulesView;	
-	@UiField CourseGroupsView courseGroupsView;
-	@UiField CourseMembersView courseMembersView;
-	@UiField CourseFormsView courseFormsView;
-	//@UiField Label infoLabel;
 	
 	private ClientFactory clientFactory;
 	public void setClientFactory(ClientFactory clientFactory) 
 	{ 
 		this.clientFactory = clientFactory;
-		courseInfoView.setClientFactory(clientFactory);
-		courseModulesView.setClientFactory(clientFactory);
-		courseGroupsView.setClientFactory(clientFactory);
-		courseMembersView.setClientFactory(clientFactory);
-		courseFormsView.setClientFactory(clientFactory);
 	}
 	
 	private CourseProxy course;
@@ -65,14 +52,6 @@ public class CourseView extends Composite
 	public void setGroup(CourseGroupProxy group) { this.group = group; }	
 	
 	private String selectedTab;
-
-	public String getSelectedTab() { return selectedTab; }
-	public void setSelectedTab(String tabId) 
-	{
-		this.selectedTab = tabId;		
-		tabPanel.selectTab(new Integer(selectedTab).intValue());
-	}
-
 	public CourseView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
@@ -99,14 +78,10 @@ public class CourseView extends Composite
 						courseName.setText(course.getName());
 
 						courseDesc.setText(course.getDescription());
-						tabPanel.getTabWidget(0).setVisible(true);
-						tabPanel.getTabWidget(1).setVisible(true);
 						//String id = course.getModuleIds().get(0);
 						//courseModulesView.setClientFactory(clientFactory);
 						//courseInfoView.setClientFactory(clientFactory);
 
-						courseInfoView.setCourse(course);
-						courseGroupsView.setCourse(course);
 
 					}
 					@Override
@@ -139,9 +114,6 @@ public class CourseView extends Composite
 						    logger.log(Level.SEVERE, "group null");
 							return;
 						}
-						courseInfoView.setGroup(group);
-						courseModulesView.setGroup(group);
-						courseGroupsView.setGroup(group);
 					}
 					@Override
 					public void onFailure(ServerFailure error)
@@ -155,18 +127,7 @@ public class CourseView extends Composite
 			);
 		}		
 	}
-	
-	@UiHandler("tabPanel")
-	public void onSelection(SelectionEvent<Integer> event) {
-		Integer tabNumber = event.getSelectedItem();
-		selectedTab = tabNumber.toString();
-		courseModulesView.stopEditing();
 		
-		String courseId = ( course == null ? "-1" : course.getId().toString());
-		String groupId = ( group == null ? "-1" : group.getId().toString() );
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, selectedTab));
-	}
-	
 	
 	@UiHandler("editButton")
 	void onEditButtonClick(ClickEvent event)
@@ -196,14 +157,5 @@ public class CourseView extends Composite
 		cancelButton.setVisible(false);
 		
 	}
-
-    public void onModuleLoad() {
-    	//TODO sprawdzenie prawa do edycji modułu
-        tabPanel.selectTab(new Integer(selectedTab).intValue());
-        tabPanel.getTabWidget(new Integer(selectedTab)).getParent().setVisible(true);
-		tabPanel.getTabWidget(0).setVisible(true);
-		tabPanel.getTabWidget(1).setVisible(true);
-    }
-
 	
 }

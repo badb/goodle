@@ -23,7 +23,7 @@
 	        <g:SimplePanel styleName="{style.tabEnd}"/>
 	        </g:HorizontalPanel>
 	        <my:MyLazyPanel>
-	        <my:CourseInfoView ui:field="courseInfoView" />
+	        <my:CourseFormsView ui:field="courseFormsView" />
 	        </my:MyLazyPanel>
 	</g:FlowPanel>
 </ui:UiBinder>

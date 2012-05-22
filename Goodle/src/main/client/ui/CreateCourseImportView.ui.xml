@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
+			 xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+			 xmlns:my="urn:import:main.client.util">
+			 
+	<ui:style src="../../../css/Goodle.css"/>
+		<g:VerticalPanel styleName="{style.mainView}">
+			<g:HorizontalPanel styleName="{style.tabBefore}">
+			<g:HorizontalPanel styleName="{style.tabs}">
+				<g:SimplePanel styleName="{style.tabBegin}"/>
+	        <g:Label ui:field="createLabel" styleName="{style.tab}">Utwórz nowy kurs</g:Label>
+	        <g:Label ui:field="importLabel" styleName="{style.tab}">Importuj</g:Label>
+	        </g:HorizontalPanel>
+	        <g:SimplePanel styleName="{style.tabEnd}"/>
+	        </g:HorizontalPanel>
+	        <g:VerticalPanel ui:field="createView" styleName="{style.insideMainView}">
+	        <g:Label text="Pobierz kurs..." styleName="{style.blabel}"/>
+			</g:VerticalPanel>
+	</g:VerticalPanel>		
+</ui:UiBinder>
+

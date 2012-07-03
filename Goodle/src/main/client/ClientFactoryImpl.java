@@ -1,7 +1,14 @@
 package main.client;
 
+import main.client.ui.CourseFormsView;
+import main.client.ui.CourseGroupsView;
+import main.client.ui.CourseInfoView;
 import main.client.ui.CourseListView;
+import main.client.ui.CourseMembersView;
+import main.client.ui.CourseModulesView;
 import main.client.ui.CourseView;
+import main.client.ui.CourseInfoView;
+import main.client.ui.CourseGroupsView;
 import main.client.ui.CreateCourseImportView;
 import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
@@ -21,6 +28,11 @@ public class ClientFactoryImpl implements ClientFactory
 
 	private static CourseListView courseListView;
 	private static CourseView courseView;
+	private static CourseInfoView courseInfoView;
+	private static CourseModulesView courseModulesView;
+	private static CourseGroupsView courseGroupsView;
+	private static CourseMembersView courseMembersView;
+	private static CourseFormsView courseFormsView;
 	private static CreateCourseView createCourseView;
 	private static CreateCourseImportView createCourseImportView;
 	private static UserMainPageView userMainPageView;
@@ -58,7 +70,7 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return courseView; 
 	}
-
+	
 	@Override
 	public CreateCourseView getCreateCourseView() 
 	{
@@ -70,6 +82,59 @@ public class ClientFactoryImpl implements ClientFactory
 		return createCourseView; 
 	}
 
+	@Override
+	public CourseInfoView getCourseInfoView() 
+	{
+		if (courseInfoView == null) 
+		{
+			courseInfoView = new CourseInfoView();
+			courseInfoView.setClientFactory(this);
+		}
+		return courseInfoView; 
+	}
+
+	@Override
+	public CourseModulesView getCourseModulesView() 
+	{
+		if (courseModulesView == null) 
+		{
+			courseModulesView = new CourseModulesView();
+			courseModulesView.setClientFactory(this);
+		}
+		return courseModulesView; 
+	}
+
+	
+	@Override
+	public CourseGroupsView getCourseGroupsView() 
+	{
+		if (courseGroupsView == null) 
+		{
+			courseGroupsView = new CourseGroupsView();
+			courseGroupsView.setClientFactory(this);
+		}
+		return courseGroupsView; 
+	}
+	
+	public CourseMembersView getCourseMembersView() 
+	{
+		if (courseMembersView == null) 
+		{
+			courseMembersView = new CourseMembersView();
+			courseMembersView.setClientFactory(this);
+		}
+		return courseMembersView; 
+	}
+	
+	public CourseFormsView getCourseFormsView() 
+	{
+		if (courseFormsView == null) 
+		{
+			courseFormsView = new CourseFormsView();
+			courseFormsView.setClientFactory(this);
+		}
+		return courseFormsView; 
+	}
 	@Override
 	public CreateCourseImportView getCreateCourseImportView() 
 	{

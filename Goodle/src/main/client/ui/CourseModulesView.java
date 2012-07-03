@@ -3,6 +3,7 @@ package main.client.ui;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.client.place.CoursePlace;
 import main.shared.proxy.CourseGroupProxy;
 import main.shared.proxy.ModuleProxy;
 
@@ -26,7 +27,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CourseModulesView  extends Composite
+public class CourseModulesView  extends CourseViewAbstract
 {
 	private static CourseModulesViewUiBinder uiBinder = GWT.create(CourseModulesViewUiBinder.class);
 
@@ -155,6 +156,40 @@ public class CourseModulesView  extends Composite
 		}
 
 		currentEdited = null;
+	}
+	@UiHandler("infoLabel")
+	void showInfo(ClickEvent event) {
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "0"));
+	}
+	
+	@UiHandler("moduleLabel")
+	void showModules(ClickEvent event) {
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
+	}
+	
+	@UiHandler("groupLabel")
+	void showGroup(ClickEvent event) {
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "2"));
+	}
+	
+	@UiHandler("membersLabel")
+	void showMembers(ClickEvent event) {
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "3"));
+	}
+	
+	@UiHandler("formsLabel")
+	void showForms(ClickEvent event) {
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
 	}
 	
 	

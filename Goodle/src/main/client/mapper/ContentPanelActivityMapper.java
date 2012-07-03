@@ -33,7 +33,7 @@ public class ContentPanelActivityMapper implements ActivityMapper
 		if (place instanceof CoursePlace) 
 		{
 			return new CourseActivity(clientFactory, (CoursePlace) place);
-		}
+		}		
 		else if (place instanceof CreateCoursePlace) 
 		{
 			return new CreateCourseActivity(clientFactory);

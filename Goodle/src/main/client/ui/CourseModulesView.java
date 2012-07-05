@@ -37,12 +37,8 @@ public class CourseModulesView  extends CourseViewAbstract
 	@UiField Button addModuleButton;
 	@UiField FlexTable modulesTable;
 	private CourseGroupProxy group;
-	
-	private ClientFactory clientFactory;
-	
+		
 	private ModuleView currentEdited = null;
-
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 
 	public CourseModulesView()
 	{
@@ -66,7 +62,7 @@ public class CourseModulesView  extends CourseViewAbstract
 		
 		if(!ids.isEmpty()){
 		
-		clientFactory.getRequestFactory().moduleRequest().findModules(ids).fire
+		getClientFactory().getRequestFactory().moduleRequest().findModules(ids).fire
 		(
 			new Receiver<List<ModuleProxy>>()
 			{
@@ -76,7 +72,7 @@ public class CourseModulesView  extends CourseViewAbstract
 					for (ModuleProxy m : result)
 					{
 						ModuleView view = new ModuleView();
-						view.setClientFactory(clientFactory);
+						view.setClientFactory(getClientFactory());
 					    view.setModule(m);
 					    
 						int rows = modulesTable.getRowCount();
@@ -98,12 +94,12 @@ public class CourseModulesView  extends CourseViewAbstract
 		modulesTable.insertCell(rows, 0);
 		
 	    ModuleView view = new ModuleView();
-		view.setClientFactory(clientFactory);
+		view.setClientFactory(getClientFactory());
 
-	    ModuleProxy m = clientFactory.getRequestFactory().moduleRequest().create(ModuleProxy.class);
+	    ModuleProxy m = getClientFactory().getRequestFactory().moduleRequest().create(ModuleProxy.class);
 	    m.setTitle("Nowy moduł " + rows.toString());
 	    m.setText("");
-	    m.setAuthor(clientFactory.getCurrentUser());
+	    m.setAuthor(getClientFactory().getCurrentUser());
 	    view.setModule(m);
 	    
 	    modulesTable.setWidget(rows, 0, view);
@@ -154,43 +150,49 @@ public class CourseModulesView  extends CourseViewAbstract
 		if (currentEdited != null) {
 			currentEdited.hideEdit();
 		}
-
+		
 		currentEdited = null;
 	}
 	@UiHandler("infoLabel")
 	void showInfo(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "0"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "0"));
 	}
 	
 	@UiHandler("moduleLabel")
 	void showModules(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
 	}
 	
 	@UiHandler("groupLabel")
 	void showGroup(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "2"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "2"));
 	}
 	
 	@UiHandler("membersLabel")
 	void showMembers(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "3"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "3"));
 	}
 	
 	@UiHandler("formsLabel")
 	void showForms(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
 	}
 	
+	protected void setCourseName(String name) {
+		courseName.setText(name);
+	}
 	
+	protected void setCourseDesc(String desc) {
+		courseDesc.setText(desc);
+	}
 }

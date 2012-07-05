@@ -2,6 +2,7 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
         xmlns:g="urn:import:com.google.gwt.user.client.ui"
         xmlns:my="urn:import:main.client.ui"
+        xmlns:c="urn:import:com.google.gwt.user.cellview.client"
 >
 	<ui:style src="../../../css/Goodle.css"/>
 
@@ -22,6 +23,9 @@
 	       	        </g:HorizontalPanel>
 	        <g:SimplePanel styleName="{style.tabEnd}"/>
 	        </g:HorizontalPanel>
-	            <g:HTMLPanel />
+	<g:VerticalPanel>
+		<g:Label ui:field="infoGroupLabel" />
+		<c:CellList ui:field="groupList" />
+	</g:VerticalPanel>
 	</g:FlowPanel>
 </ui:UiBinder>

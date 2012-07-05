@@ -51,6 +51,10 @@ public class CourseViewAbstract extends Composite
 		this.clientFactory = clientFactory;
 	}
 	
+	public ClientFactory getClientFactory() {
+		return clientFactory;
+	}
+ 	
 	protected CourseProxy course;
 	public CourseProxy getCourse() { return course; }	
 	public void setCourse(CourseProxy course) { this.course = course; }
@@ -61,6 +65,14 @@ public class CourseViewAbstract extends Composite
 		
 	private String selectedTab;
 
+	protected void setCourseName(String name) {
+		courseName.setText(name);
+	}
+
+	protected void setCourseDesc(String desc) {
+		courseDesc.setText(desc);
+	}
+	
 	public void getCourse(String courseId)
  	{
 		if (clientFactory != null)
@@ -79,9 +91,8 @@ public class CourseViewAbstract extends Composite
 						    logger.log(Level.SEVERE, "nie ma takiego kursu");
 							return;
 						}
-						courseName.setText(course.getName());
-
-						courseDesc.setText(course.getDescription());
+					    setCourseName(course.getName());
+					    setCourseDesc(course.getDescription());
 						//String id = course.getModuleIds().get(0);
 		//				courseModulesView.setClientFactory(clientFactory);
 		//				courseInfoView.setClientFactory(clientFactory);
@@ -97,6 +108,9 @@ public class CourseViewAbstract extends Composite
 					}
 				}
 			);
+		} else {
+			Logger logger = Logger.getLogger("Goodle.Log");
+		    logger.log(Level.SEVERE, "nie ma clientFactory");
 		}
 	}
 	
@@ -131,14 +145,6 @@ public class CourseViewAbstract extends Composite
 			);
 		}		
 	}
-		
-/*	@UiHandler("moduleLabel")
-	void showModules(ClickEvent event) {
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupsId, 2));
-	}*/
-	
 	
 	@UiHandler("editButton")
 	void onEditButtonClick(ClickEvent event)

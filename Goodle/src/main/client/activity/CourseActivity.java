@@ -40,6 +40,7 @@ public class CourseActivity extends AbstractActivity
 			panel.setWidget(infoView.asWidget());
 		} else if (tabId.equals("1")) {
 			CourseModulesView modulesView = clientFactory.getCourseModulesView();
+			modulesView.setClientFactory(clientFactory);
 			modulesView.getCourse(courseId);
 			modulesView.getGroup(groupId);
 			modulesView.setSelectedTab(tabId);

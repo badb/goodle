@@ -1,6 +1,5 @@
 package main.client.ui;
 
-import main.client.ClientFactory;
 import main.client.place.CoursePlace;
 import main.client.ui.CourseMembersView.CourseMembersViewUiBinder;
 
@@ -33,48 +32,52 @@ public class CourseMembersView extends CourseViewAbstract
 
 	interface CourseMembersViewUiBinder extends UiBinder<Widget, CourseMembersView> { }
 	
-	private ClientFactory clientFactory;
 	
 	public CourseMembersView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
-	
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	
+		
 	@UiHandler("infoLabel")
 	void showInfo(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "0"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "0"));
 	}
 	
 	@UiHandler("moduleLabel")
 	void showModules(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
 	}
 	
 	@UiHandler("groupLabel")
 	void showGroup(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "2"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "2"));
 	}
 	
 	@UiHandler("membersLabel")
 	void showMembers(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "3"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "3"));
 	}
 	
 	@UiHandler("formsLabel")
 	void showForms(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
 		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
+		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
 	}
 	
+	protected void setCourseName(String name) {
+		courseName.setText(name);
+	}
+	
+	protected void setCourseDesc(String desc) {
+		courseDesc.setText(desc);
+	}
 }

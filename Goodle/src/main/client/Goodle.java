@@ -22,6 +22,7 @@ import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -44,7 +45,7 @@ public class Goodle implements EntryPoint
     @UiField UserCoursesView leftPanel;
     @UiField SimplePanel contentPanel;
     @UiField CalendarView rightPanel;
-        
+            
     private Place defaultPlace = new CreateCoursePlace();
     private ClientFactory clientFactory = null;
 

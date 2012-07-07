@@ -122,4 +122,34 @@ public class CourseInfoView extends CourseViewAbstract
 		getClientFactory().getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
 	}
 	
+	@UiHandler("editButton")
+	void onEditButtonClick(ClickEvent event)
+	{	
+			editButton.setVisible(false);
+			saveButton.setVisible(true);
+			cancelButton.setVisible(true);
+		
+	}
+	
+	@UiHandler("saveButton")
+	void onSaveButtonClick(ClickEvent event)
+	{	
+		//TODO zapisać zmiany w bazie danych
+		
+	}
+	
+	
+	@UiHandler("cancelButton")
+	void onCancelButtonClick(ClickEvent event)
+	{	
+		//TODO spytać o niezapisane dane
+		
+
+		editButton.setVisible(true);
+		saveButton.setVisible(false);
+		cancelButton.setVisible(false);
+		
+	}
+
+	
 }

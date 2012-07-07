@@ -3,7 +3,6 @@ package main.client.ui;
 import java.util.List;
 
 import main.client.ClientFactory;
-import main.client.place.CoursePlace;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.ModuleProxy;
 
@@ -19,7 +18,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 

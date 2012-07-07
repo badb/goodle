@@ -13,6 +13,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -28,14 +29,22 @@ public class TopView extends Composite
 	@UiField Label goodleLogo;
 	@UiField TextBox searchBox;
 	@UiField Button searchButton;
+	@UiField HorizontalPanel userBox;
 	@UiField Image userImage;
 	@UiField Label userName;
 	@UiField Button logoutButton;
+	@UiField HorizontalPanel horizontalPanel;
 	private ClientFactory clientFactory;
 	
 	public TopView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
+		horizontalPanel.setCellWidth(goodleLogo, "200px");
+		horizontalPanel.setCellWidth(userBox, "250px");
+		horizontalPanel.setCellWidth(logoutButton, "46px");
+		Image img = new Image("http://picol.org/images/icons/files/png/64/logout_64.png");
+		img.setPixelSize(20, 20);
+		logoutButton.getElement().appendChild(img.getElement());
 	}
 	
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }

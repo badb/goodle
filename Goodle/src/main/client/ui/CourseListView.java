@@ -41,12 +41,12 @@ public class CourseListView extends Composite
 	{
 		coursesList = new CellList<CourseProxy>(new CourseCell());
 		ValueUpdater<CourseProxy> updater = new ValueUpdater<CourseProxy>()
-				{
+		{
 			public void update(CourseProxy value) 
 			{
-				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString(), "-1", "0"));
+				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString(), "0"));
 			}
-				};
+		};
 				coursesList.setValueUpdater(updater);
 	}
 

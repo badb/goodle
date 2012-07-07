@@ -40,36 +40,32 @@ public class UserCoursesView extends Composite
 	@UiHandler("createCourseButton")
 	void onCreateCourseButtonClicked(ClickEvent event)
 	{
-		if (clientFactory != null)
+		createCourseButton.setEnabled(false);
+
+		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+		final CourseProxy course = request.create(CourseProxy.class);
+
+		course.setName("Nowy kurs");
+		course.setTerm("2012L");
+		course.setJoinMethod(JoinMethod.OPEN);
+
+		request.persist().using(course).fire(new Receiver<Long>()
 		{
-			createCourseButton.setEnabled(false);
-			
-			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
-			final CourseProxy course = request.create(CourseProxy.class);
-			
-			course.setName("Nowy kurs");
-			course.setTerm("2012L");
-			course.setJoinMethod(JoinMethod.OPEN);
-	
-			
-			request.persist().using(course).fire(new Receiver<Long>()
+			@Override
+			public void onSuccess(Long id)
 			{
-				@Override
-				public void onSuccess(Long id)
-				{
-					createCourseButton.setEnabled(true);
-					clientFactory.getCourseView().setCourse(course);
-					clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "-1", "1"));
-				}
-				@Override
-				public void onFailure(ServerFailure error){
-					Logger logger = Logger.getLogger("Goodle.Log");
-				    logger.log(Level.SEVERE, error.getMessage());
-				    logger.log(Level.SEVERE, error.getStackTraceString());
-				    logger.log(Level.SEVERE, error.getExceptionType());
-				}
-			});
-		}
+				createCourseButton.setEnabled(true);
+				clientFactory.getCourseView().setCourse(course);
+				clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "modules"));
+			}
+			@Override
+			public void onFailure(ServerFailure error){
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, error.getMessage());
+				logger.log(Level.SEVERE, error.getStackTraceString());
+				logger.log(Level.SEVERE, error.getExceptionType());
+			}
+		});
 	}
 
 }

@@ -8,19 +8,15 @@ public class CoursePlace extends Place
 	private String courseId;
 	public String getCourseId() { return courseId; }
 	
-	private String groupId;
-	public String getGroupId() { return groupId; }
-	
-	private String tabId;
-	public String getTabId() { return tabId; }
+	private String viewName;
+	public String getViewName() { return viewName; }
 
-	public void setTabId(String tabId) { this.tabId = tabId; }
+	public void setViewName(String viewName) { this.viewName = viewName; }
 
-	public CoursePlace(String courseId, String groupId, String tabId) 
+	public CoursePlace(String courseId, String viewName) 
 	{ 
 		this.courseId = courseId;
-		this.groupId = groupId;
-		this.tabId = tabId;
+		this.viewName = viewName;
 	}
 	
 	public static class Tokenizer implements PlaceTokenizer<CoursePlace>
@@ -28,13 +24,13 @@ public class CoursePlace extends Place
 		@Override
 		public String getToken(CoursePlace place) 
 		{ 
-			return place.getCourseId() + ":" + place.getGroupId() + ":" + place.getTabId(); 
+			return place.getCourseId() + ":" + place.getViewName(); 
 		}
 		
 		@Override 
 		public CoursePlace getPlace(String token) { 
 			String [] ids = token.split(":");
-			return new CoursePlace(ids[0], ids[1], ids[2]); 
+			return new CoursePlace(ids[0], ids[1]); 
 		}
 	}
 }

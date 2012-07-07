@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+        xmlns:g="urn:import:com.google.gwt.user.client.ui"
+        xmlns:my="urn:import:main.client.ui"
+>
+
+    <ui:style src="../../../css/Goodle.css"/>
+
+	<g:HorizontalPanel styleName="{style.tabBefore}">
+      	<g:HorizontalPanel styleName="{style.tabs}">
+        <g:SimplePanel styleName="{style.tabBegin}"/>
+            <g:Label ui:field="infoLabel" styleName="{style.tab}">Informacje</g:Label>
+            <g:Label ui:field="modulesLabel" styleName="{style.tab}">Moduły</g:Label>
+            <g:Label ui:field="membersLabel" styleName="{style.tab}">Uczestnicy</g:Label>
+        </g:HorizontalPanel>
+    	<g:SimplePanel styleName="{style.tabEnd}"/>
+	</g:HorizontalPanel>
+
+</ui:UiBinder>

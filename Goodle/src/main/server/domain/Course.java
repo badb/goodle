@@ -101,10 +101,16 @@ public class Course implements Serializable
     public void removeCoordinator(Long id) { coordinators.remove(id); }
     
     @Basic
-    private List<Long> groups = new ArrayList<Long>();
-    public List<Long> getGroups() { return Collections.unmodifiableList(groups); }
-    public void addGroup(Long id) { groups.add(id); }
-    public void removeGroup(Long id) { groups.remove(id); }
+    private Set<Long> members = new HashSet<Long>();
+    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
+    public void addMember(Long id) { members.add(id); }
+    public void removeMember(Long id) { members.remove(id); }
+    
+    @Basic
+    private List<Long> modules = new ArrayList<Long>();
+    public List<Long> getModules() { return Collections.unmodifiableList(modules); }
+    public void addModule(Long id) { modules.add(id); }
+    public void removeModule(Long id) { modules.remove(id); }
        
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();

@@ -1,6 +1,5 @@
 package main.shared;
 
-import main.shared.proxy.CourseGroupRequest;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.GoodleUserRequest;
 import main.shared.proxy.HomeworkFileRequest;
@@ -15,7 +14,6 @@ public interface GoodleRequestFactory extends RequestFactory
 {
 	GoodleUserRequest goodleUserRequest();
 	CourseRequest courseRequest();
-	CourseGroupRequest courseGroupRequest();
 	HomeworkFileRequest homeworkFileRequest();
 	HomeworkRequest homeworkRequest();
 	MaterialRequest materialRequest();

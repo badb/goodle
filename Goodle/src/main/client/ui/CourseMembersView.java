@@ -64,7 +64,7 @@ public class CourseMembersView extends Composite
 	}
 
 	public void addMembers(Set<Long> members) {
-		  membersList.setSelectionModel(selectionModel,
+		membersList.setSelectionModel(selectionModel,
 		       DefaultSelectionEventManager.<GoodleUserProxy> createCheckboxManager());
 		Column <GoodleUserProxy, Boolean> checkColumn = 
 				new Column <GoodleUserProxy, Boolean> (new CheckboxCell(true, false))	{
@@ -119,7 +119,22 @@ public class CourseMembersView extends Composite
 		for(Iterator<GoodleUserProxy> it = membersUserProxies.iterator(); it.hasNext();) {
 			final GoodleUserProxy user = it.next();
 			if (selectionModel.isSelected(user)) {
-				request.removeMember(user.getId()).using(course).fire();
+				request.removeMember(user.getId()).using(course).fire(
+						new Receiver<Void>() {			
+							@Override
+							public void onFailure(ServerFailure error) {
+								Logger logger = Logger.getLogger("Goodle.Log");
+								logger.log(Level.SEVERE, error.getMessage());
+								logger.log(Level.SEVERE, error.getStackTraceString());
+								logger.log(Level.SEVERE, error.getExceptionType());
+							}
+
+							@Override
+							public void onSuccess(Void response) {
+								Logger logger = Logger.getLogger("Goodle.Log");
+								logger.log(Level.INFO, "usunieto uzytkownika " + user.getId() + " z kursu");
+							}
+				});
 			}
 		}
 	}

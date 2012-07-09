@@ -1,5 +1,7 @@
 package main.client.ui;
 
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -88,7 +90,17 @@ public class CourseView extends Composite
 		}
 		else if (selectedView.equals("members")) 
 		{ 
-			currentView.setWidget(clientFactory.getCourseMembersView()); 
+			CourseMembersView courseMembersView = clientFactory.getCourseMembersView();
+			if (course != null) {
+				courseMembersView.setClientFactory(clientFactory);
+				courseMembersView.setCourse(course);
+				Set<Long> members = course.getMembers();
+				courseMembersView.addMembers(members);
+			} else {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, "CourseProxy is null");
+			}
+			currentView.setWidget(courseMembersView); 
 		}
 		else 
 		{ 

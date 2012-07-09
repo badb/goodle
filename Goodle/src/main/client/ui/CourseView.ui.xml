@@ -9,7 +9,7 @@
 		<g:Label ui:field="courseName" />
 		<g:Label ui:field="courseDesc" />
 		<my:CourseMenuView ui:field="courseMenu" />
-		<g:SimplePanel ui:field="currentView" />
+		<g:SimplePanel ui:field="currentView" styleName="{style.courseCurrentView}"/>
 	</g:FlowPanel>
 	
 </ui:UiBinder>

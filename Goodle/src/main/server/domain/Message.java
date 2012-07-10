@@ -15,7 +15,7 @@ public class Message implements Serializable
     private GoodleUser author;
     public GoodleUser getAuthor() { return author; }
     public void setAuthor(GoodleUser author) { this.author = author; }
-    
+   
     @NotNull
     private String text;
     public String getText() { return text; }

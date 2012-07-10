@@ -42,21 +42,14 @@ public class UserCoursesView extends Composite
 	{
 		createCourseButton.setEnabled(false);
 
-		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
-		final CourseProxy course = request.create(CourseProxy.class);
-
-		course.setName("Nowy kurs");
-		course.setTerm("2012L");
-		course.setJoinMethod(JoinMethod.OPEN);
-
-		request.persist().using(course).fire(new Receiver<Long>()
+		clientFactory.getRequestFactory().courseRequest().newCourse().fire(new Receiver<CourseProxy>()
 		{
 			@Override
-			public void onSuccess(Long id)
+			public void onSuccess(CourseProxy c)
 			{
 				createCourseButton.setEnabled(true);
-				clientFactory.getCourseView().setCourse(course);
-				clientFactory.getPlaceController().goTo(new CoursePlace(id.toString(), "modules"));
+				clientFactory.getCourseView().setCourse(c);
+				clientFactory.getPlaceController().goTo(new CoursePlace(c.getId().toString(), "modules"));
 			}
 			@Override
 			public void onFailure(ServerFailure error){

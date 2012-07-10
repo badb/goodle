@@ -4,11 +4,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
+import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
+import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -24,6 +29,8 @@ public class CourseView extends Composite
 
 	@UiField Label courseName;
 	
+	@UiField Button joinMethodAction;
+	
 	@UiField CourseMenuView courseMenu;
 	@UiField SimplePanel currentView;
 
@@ -36,7 +43,26 @@ public class CourseView extends Composite
 
 	private CourseProxy course;
 	public CourseProxy getCourse() { return course; }	
-	public void setCourse(CourseProxy course) { this.course = course; }
+	public void setCourse(CourseProxy course) 
+	{ 
+		this.course = course;
+		if (course != null)
+		{
+			courseName.setText(course.getName());
+			
+			if (currentUserIsOwner()) 
+			{
+				joinMethodAction.setText(course.getJoinMethod().toString());
+			}
+			else if (currentUserIsMember())
+			{
+				joinMethodAction.setText("Zarejestrowany");
+			}
+			else joinMethodAction.setText("Dołącz");
+			
+			courseMenu.setCourseId(course.getId().toString());
+		}
+	}
 
 	public CourseView()
 	{
@@ -63,11 +89,10 @@ public class CourseView extends Composite
 						return;
 					}
 
-					course = response;
-					courseName.setText(course.getName());
-					courseMenu.setCourseId(course.getId().toString());
+					setCourse(response);			
 					setSelectedView(selectedView);
 				}
+				
 				@Override
 				public void onFailure(ServerFailure error) {
 					courseName.setText("error");
@@ -96,10 +121,54 @@ public class CourseView extends Composite
 		}
 	}
 	
+	private boolean currentUserIsOwner()
+	{
+		return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+	}
+	
+	private boolean currentUserIsMember()
+	{
+		return course.getMembers().contains(clientFactory.getCurrentUser().getId());		
+	}
+	
 	private void onCourseNotFound()
 	{
-		courseName.setText("Nie znaleziono");
-		// TODO Pokaż widok "strona nie została odnaleziona"
+		courseName.setText("Nie znaleziono kursu!");
+		// TODO Pokaż widok "strong nie została odnaleziona"
+	}
+	
+	public void onUserRegistered()
+	{
+		joinMethodAction.setText("Zarejestrowany");
+		joinMethodAction.setEnabled(false);
+	}
+	
+	@UiHandler("joinMethodAction")
+	public void onJoinMethodActionClicked(ClickEvent click)
+	{
+		if (currentUserIsOwner())
+		{
+			CourseJoinMethodPopup popup = clientFactory.getCourseJoinMethodPopup();
+			popup.setCourseProxy(course);
+			popup.center();
+		}
+		else if (!currentUserIsMember())
+		{
+			if (course.getJoinMethod() == JoinMethod.OPEN)
+			{
+				CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+				course = request.edit(course);
+				request.registerCurrentUser(null).using(course).fire();
+				onUserRegistered();
+			}
+			else
+			{
+				courseName.setText("Tutaj");
+				CoursePasswordPopup popup = clientFactory.getCoursePasswordPopup();
+				popup.setCourseProxy(course);
+				popup.center();
+			}
+		}
 	}
 }
 

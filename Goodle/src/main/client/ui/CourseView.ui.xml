@@ -7,7 +7,7 @@
 
     <g:FlowPanel>
 		<g:Label ui:field="courseName" />
-		<g:Label ui:field="courseDesc" />
+		<g:Button ui:field="joinMethodAction" />
 		<my:CourseMenuView ui:field="courseMenu" />
 		<g:SimplePanel ui:field="currentView" />
 	</g:FlowPanel>

@@ -12,6 +12,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -170,5 +171,69 @@ public class Course implements Serializable
         }
         catch (NoResultException e) { return null; }
         finally { em.close(); }
+    }
+    
+    public static Course newCourse()
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return null;
+    	
+    	Course c = new Course();
+    	c.setVersion(1);
+    	c.setName("Nowy kurs");
+    	c.setTerm("2012L");
+    	c.setJoinMethod(JoinMethod.OPEN);    	
+    	c.addCoordinator(u.getId());
+        EntityManager em = entityManager();
+        try 
+        { 
+        	em.persist(c);
+        	return c;
+        }
+        finally { em.close(); }
+    }
+    
+    public Course update()
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return null;
+    	
+    	if (!coordinators.contains(u.getId()))
+    	{
+    		return null;
+    	}
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		em.persist(this);    	
+        	return this;
+    	}
+    	finally { em.close(); }
+    }
+    
+    public boolean registerCurrentUser(String key)
+    {
+    	if (joinMethod == JoinMethod.KEY && !this.key.equals(key)) return false;
+    	
+        GoodleUser u = GoodleUser.getCurrentUser();
+        if (u == null) return false;
+    	
+    	EntityManager em = entityManager();
+    	EntityTransaction tx = em.getTransaction();
+    	try
+    	{
+            Course c = em.find(Course.class, this.id);
+    		c.addMember(u.getId());
+    		u.addCourseAttended(c);
+    		em.merge(c);
+    		em.merge(u);
+    	}
+    	finally 
+    	{ 
+    		em.close(); 
+    	}
+    	
+    	return true;
     }
 }

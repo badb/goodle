@@ -1,9 +1,11 @@
 package main.client;
 
 import main.client.ui.CourseInfoView;
+import main.client.ui.CourseJoinMethodPopup;
 import main.client.ui.CourseListView;
 import main.client.ui.CourseMembersView;
 import main.client.ui.CourseModulesView;
+import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
@@ -25,6 +27,9 @@ public class ClientFactoryImpl implements ClientFactory
 	private static CourseModulesView courseModulesView;
 	private static CourseMembersView courseMembersView;
 	private static UserMainPageView userMainPageView;
+	
+	private static CourseJoinMethodPopup courseJoinMethodPopup;
+	private static CoursePasswordPopup coursePasswordPopup;
 
 	private static GoodleUserProxy currentUserProxy;
 
@@ -100,6 +105,30 @@ public class ClientFactoryImpl implements ClientFactory
 			userMainPageView.setClientFactory(this);
 		}
 		return userMainPageView; 
+	}
+	
+	@Override
+	public CourseJoinMethodPopup getCourseJoinMethodPopup()
+	{
+		if (courseJoinMethodPopup == null)
+		{
+			courseJoinMethodPopup = new CourseJoinMethodPopup();
+			courseJoinMethodPopup.setClientFactory(this);
+			courseJoinMethodPopup.setParent(getCourseView());
+		}
+		return courseJoinMethodPopup;
+	}
+	
+	@Override
+	public CoursePasswordPopup getCoursePasswordPopup()
+	{
+		if (coursePasswordPopup == null)
+		{
+			coursePasswordPopup = new CoursePasswordPopup();
+			coursePasswordPopup.setClientFactory(this);
+			coursePasswordPopup.setParent(getCourseView());
+		}
+		return coursePasswordPopup;
 	}
 
 	@Override

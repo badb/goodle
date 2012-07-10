@@ -21,8 +21,13 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, Void> addMessage(MessageProxy message);
 	InstanceRequest<CourseProxy, Void> removeMessage(MessageProxy message);
 	
+	InstanceRequest<CourseProxy, Boolean> registerCurrentUser(String key);
+	InstanceRequest<CourseProxy, CourseProxy> update();
+	
 	InstanceRequest<CourseProxy, Long> persist();
 	InstanceRequest<CourseProxy, Void> remove();
 	Request<CourseProxy> findCourse(Long id);
 	Request<List<CourseProxy>> findCoursesByName(String name);
+	
+	Request<CourseProxy> newCourse();
 }

@@ -1,9 +1,11 @@
 package main.client;
 
 import main.client.ui.CourseInfoView;
+import main.client.ui.CourseJoinMethodPopup;
 import main.client.ui.CourseListView;
 import main.client.ui.CourseMembersView;
 import main.client.ui.CourseModulesView;
+import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
@@ -25,6 +27,9 @@ public interface ClientFactory
 	CourseModulesView getCourseModulesView();
 	CourseMembersView getCourseMembersView();
 	UserMainPageView getUserMainPageView();
+	
+	CourseJoinMethodPopup getCourseJoinMethodPopup();
+	CoursePasswordPopup getCoursePasswordPopup();
 	
 	void setCurrentUser(GoodleUserProxy userProxy);
 	GoodleUserProxy getCurrentUser();

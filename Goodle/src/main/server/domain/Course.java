@@ -42,6 +42,11 @@ import org.hibernate.validator.constraints.URL;
         (       
                 name = "findCoursesByTerm",
                 query = "SELECT c FROM Course c WHERE c.term = :term"
+        ),
+        @NamedQuery
+        (
+        		name="getAllCourses",
+        		query = "SELECT c FROM Course c"
         )
 })
 public class Course implements Serializable
@@ -164,6 +169,21 @@ public class Course implements Serializable
 
                 Query q = em.createNamedQuery("findCoursesByName");
                 q.setParameter("name", name + "%");
+                List<Course> list = q.getResultList();
+                list.size(); /* force it to materialize */ 
+                return list;
+        }
+        catch (NoResultException e) { return null; }
+        finally { em.close(); }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static List<Course> getAllCourses()
+    {
+        EntityManager em = entityManager();
+        try
+        {               
+                Query q = em.createNamedQuery("getAllCourses");
                 List<Course> list = q.getResultList();
                 list.size(); /* force it to materialize */ 
                 return list;

@@ -57,6 +57,11 @@ public class CourseListView extends Composite
 
 	public void findCoursesByName(String name) 
 	{
+		if (name.equals("")) {
+			infoLabel.setText("Nie odnaleziono kursów pasujących " +
+					"do podanych kryteriów wyszukiwania");
+			return;
+		}
 		if (clientFactory != null)
 		{
 			infoLabel.setText("Trwa wyszukiwanie...");

@@ -64,6 +64,9 @@ public class CourseMembersView extends Composite
 	}
 
 	public void addMembers(Set<Long> members) {
+		members.add((long) 44);
+		members.add((long) 47);
+		members.add((long) 48);
 		membersList.setSelectionModel(selectionModel,
 		       DefaultSelectionEventManager.<GoodleUserProxy> createCheckboxManager());
 		Column <GoodleUserProxy, Boolean> checkColumn = 
@@ -77,7 +80,8 @@ public class CourseMembersView extends Composite
 			public String getValue(GoodleUserProxy object) {
 				return object.getFirstName() + " " + object.getLastName() + " (" + object.getEmail() + ")";
 			}};
-			
+		nameColumn.setSortable(true);
+
 		membersList.addColumn(checkColumn);
 		membersList.addColumn(nameColumn);
 		

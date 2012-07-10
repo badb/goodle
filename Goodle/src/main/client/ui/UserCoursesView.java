@@ -5,9 +5,7 @@ import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
-import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

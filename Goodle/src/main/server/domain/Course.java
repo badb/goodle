@@ -12,7 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,6 +42,11 @@ import org.hibernate.validator.constraints.URL;
         (       
                 name = "findCoursesByTerm",
                 query = "SELECT c FROM Course c WHERE c.term = :term"
+        ),
+        @NamedQuery
+        (
+        		name="getAllCourses",
+        		query = "SELECT c FROM Course c"
         )
 })
 public class Course implements Serializable
@@ -173,6 +177,21 @@ public class Course implements Serializable
         finally { em.close(); }
     }
     
+    @SuppressWarnings("unchecked")
+    public static List<Course> getAllCourses()
+    {
+        EntityManager em = entityManager();
+        try
+        {               
+                Query q = em.createNamedQuery("getAllCourses");
+                List<Course> list = q.getResultList();
+                list.size(); /* force it to materialize */ 
+                return list;
+        }
+        catch (NoResultException e) { return null; }
+        finally { em.close(); }
+    }
+
     public static Course newCourse()
     {
     	GoodleUser u = GoodleUser.getCurrentUser();
@@ -220,7 +239,6 @@ public class Course implements Serializable
         if (u == null) return false;
     	
     	EntityManager em = entityManager();
-    	EntityTransaction tx = em.getTransaction();
     	try
     	{
             Course c = em.find(Course.class, this.id);
@@ -236,4 +254,5 @@ public class Course implements Serializable
     	
     	return true;
     }
+    
 }

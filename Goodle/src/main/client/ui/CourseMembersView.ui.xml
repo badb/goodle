@@ -2,9 +2,14 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
         xmlns:g="urn:import:com.google.gwt.user.client.ui"
         xmlns:my="urn:import:main.client.ui"
+        xmlns:c='urn:import:com.google.gwt.user.cellview.client'
 >
 	<ui:style src="../../../css/Goodle.css"/>
 
-	<g:HTMLPanel />
+	<g:VerticalPanel>
+	    <g:Button text="Usuń zaznaczonych" ui:field="removeButton"/>
+	    <c:CellTable ui:field="membersList" styleName="{style.membersList}"/>
+	    <g:Label text="Prośby o rejestrację"/>
+	</g:VerticalPanel>
 </ui:UiBinder>
 

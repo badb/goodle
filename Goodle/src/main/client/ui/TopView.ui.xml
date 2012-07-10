@@ -13,7 +13,7 @@
 			text="Goodle" 
 		/>
 		<g:HorizontalPanel>
-			<g:TextBox styleName='{style.searchBox}' ui:field="searchBox"/>
+			<g:SuggestBox styleName='{style.searchBox}' ui:field="searchBox"/>
 			<g:Button  styleName='{style.searchButton}' ui:field="searchButton" text="Szukaj" />
 		</g:HorizontalPanel>
 		<g:HorizontalPanel styleName='{style.userBox}' ui:field="userBox">

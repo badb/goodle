@@ -1,5 +1,6 @@
 package main.client;
 
+import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseFormsView;
 import main.client.ui.CourseGroupsView;
 import main.client.ui.CourseInfoView;
@@ -38,4 +39,5 @@ public interface ClientFactory
 	
 	void setCurrentUser(GoodleUserProxy userProxy);
 	GoodleUserProxy getCurrentUser();
+	CourseModulesEditView getCourseModulesEditView();
 }

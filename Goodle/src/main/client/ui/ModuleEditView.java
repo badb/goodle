@@ -1,8 +1,7 @@
 package main.client.ui;
 
-
-
 import main.client.ClientFactory;
+import main.client.ui.ModuleView.ModuleWidgetUiBinder;
 import main.shared.proxy.ModuleProxy;
 import main.shared.proxy.ModuleRequest;
 
@@ -11,21 +10,20 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DeckLayoutPanel;
+import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ModuleView extends Composite {
+public class ModuleEditView extends Composite {
 
 	private static ModuleWidgetUiBinder uiBinder = GWT
 			.create(ModuleWidgetUiBinder.class);
 
-	interface ModuleWidgetUiBinder extends UiBinder<Widget, ModuleView> {
+	interface ModuleWidgetUiBinder extends UiBinder<Widget, ModuleEditView> {
 	}
 
 	private ModuleProxy module;
@@ -35,25 +33,20 @@ public class ModuleView extends Composite {
 	EditLabel titleEdit;
 	@UiField
 	EditLabel descEdit;
-	/*@UiField
-	Button editButton;
-	@UiField
-	HorizontalPanel editPanel;
 
 	@UiField
 	CheckBox showHideBox;
-	NotSavedPopup popup;*/
+	NotSavedPopup popup;
 
 	private ClientFactory clientFactory;
 	private ModuleRequest request;
 	private boolean isEdited = false;
 
-	public ModuleView() {
+	public ModuleEditView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		titleEdit.setText("Nowy moduł");
 		descEdit.setText("Opis");
-		
-		//TODO: jeśli ogląda to prowadzący przedmiot, to powinien widzieć inaczej moduły niewidoczne dla studentów
+
 	}
 
 	public ModuleProxy getModule() {
@@ -82,10 +75,8 @@ public class ModuleView extends Composite {
 
 		if (!isEdited) {
 		isEdited = true;
-		/*editButton.setVisible(false);
-		editPanel.setVisible(true);
 		showHideBox.setValue(!visible);
-	*/
+	
 		}
 		//}
 	}
@@ -99,40 +90,27 @@ public class ModuleView extends Composite {
 			//	saveData();
 		    
 			isEdited = false;
-		/*editButton.setVisible(true);
-		editPanel.setVisible(false);
-*/
+
 		}
 		//}
 	}
 
 
 
-	/*private boolean isChanged() {
+	public boolean isChanged() {
 		return (visible != showHideBox.getValue())
 				|| (titleEdit.getText() != titleEdit.getText())
 				|| (descEdit.getText() != descEdit.getText());
-	}*/
-
-	/*@UiHandler("cancelButton")
-	void onCancelButtonClicked(ClickEvent event) {
-		hideEdit();
-		event.stopPropagation();
 	}
 
-	@UiHandler("saveButton")
-	void onSaveButtonClicked(ClickEvent event) {
-		if (isChanged())
-			saveData();
-		hideEdit();
-		event.stopPropagation();
-	}*/
+	
 
-	private void saveData() {
-
+	public void saveData() {
+		//tODO usunąć:
+		if (module == null) return;
 		module.setTitle(titleEdit.getText());
 		module.setText(descEdit.getText());
-		/*visible = !showHideBox.getValue();*/
+		visible = !showHideBox.getValue();
 		module.setIsVisible(visible);
 		
 

@@ -5,10 +5,9 @@ import main.client.ui.CourseGroupsView;
 import main.client.ui.CourseInfoView;
 import main.client.ui.CourseListView;
 import main.client.ui.CourseMembersView;
+import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseModulesView;
 import main.client.ui.CourseView;
-import main.client.ui.CourseInfoView;
-import main.client.ui.CourseGroupsView;
 import main.client.ui.CreateCourseImportView;
 import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
@@ -39,6 +38,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private static UserProfileView userProfileView;
 
 	private static GoodleUserProxy currentUserProxy;
+	private CourseModulesEditView courseModulesEditView;
 
 	@Override
 	public SimpleEventBus getEventBus() { return eventBus; }
@@ -176,4 +176,14 @@ public class ClientFactoryImpl implements ClientFactory
 
 	@Override
 	public GoodleUserProxy getCurrentUser() { return currentUserProxy; }
+
+	@Override
+	public CourseModulesEditView getCourseModulesEditView() {
+		if (courseModulesEditView == null)
+		{
+			courseModulesEditView = new CourseModulesEditView();
+			courseModulesEditView.setClientFactory(this);
+		}
+		return courseModulesEditView;
+	}
 }

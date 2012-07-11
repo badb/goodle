@@ -35,9 +35,9 @@ public class CourseViewAbstract extends Composite
 {	
 	Label courseName;
 	Label courseDesc;
-	Button editButton;
-	Button saveButton;
-	Button cancelButton;
+	@UiField Button editButton;
+	@UiField Button saveButton;
+	@UiField Button cancelButton;
 	
 	Label infoLabel;
 	Label moduleLabel;

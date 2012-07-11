@@ -3,54 +3,52 @@ package main.client.ui;
 import java.util.List;
 
 import main.client.ClientFactory;
-import main.client.place.CourseModulesEditPlace;
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseGroupProxy;
 import main.shared.proxy.ModuleProxy;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CourseModulesView  extends CourseViewAbstract
-{
-	private static CourseModulesViewUiBinder uiBinder = GWT.create(CourseModulesViewUiBinder.class);
+public class CourseModulesEditView extends CourseViewAbstract {
 
-	interface CourseModulesViewUiBinder extends UiBinder<Widget, CourseModulesView> { }
+	private static CourseModulesEditViewUiBinder uiBinder = GWT
+			.create(CourseModulesEditViewUiBinder.class);
+
+	interface CourseModulesEditViewUiBinder extends
+			UiBinder<Widget, CourseModulesEditView> {
+	}
 
 	@UiField Label infoLabel;
-	//@UiField Button addModuleButton;
+	@UiField Button addModuleButton;
 	@UiField FlexTable modulesTable;
-	@UiField Button editModulesButton;
-	
 	private CourseGroupProxy group;
+	private boolean click = false;
+	private boolean changed = false;
 	
 	private ClientFactory clientFactory;
 	
-	//private ModuleView currentEdited = null;
+	/*private ModuleEditView currentEdited = null;*/
 
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 
-	public CourseModulesView()
+	public CourseModulesEditView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-
+		
+	}
+	
+	protected void onLoad() {
+		click = false;
+		changed = false;
 	}
 	
 	public void setGroup(CourseGroupProxy group) 
@@ -78,7 +76,7 @@ public class CourseModulesView  extends CourseViewAbstract
 				{
 					for (ModuleProxy m : result)
 					{
-						ModuleView view = new ModuleView();
+						ModuleEditView view = new ModuleEditView();
 						view.setClientFactory(clientFactory);
 					    view.setModule(m);
 					    
@@ -93,25 +91,14 @@ public class CourseModulesView  extends CourseViewAbstract
 		}
 	}
 	
-	@UiHandler("editModulesButton")
-	void onEditButtonClick(ClickEvent event) {
-		clientFactory.getCourseView().setCourse(course);
-		//TODO sprawdzić gdzie ma przenosić
-
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CourseModulesEditPlace(courseId, groupId, "1"));
-	}
-	
-	
-	/*@UiHandler("addModuleButton")
+	@UiHandler("addModuleButton")
 	void onAddModuleButtonClick(ClickEvent event)
 	{	
 		Integer rows = modulesTable.getRowCount();
 		modulesTable.insertRow(rows);
 		modulesTable.insertCell(rows, 0);
 		
-	    ModuleView view = new ModuleView();
+	    ModuleEditView view = new ModuleEditView();
 		view.setClientFactory(clientFactory);
 
 	    ModuleProxy m = clientFactory.getRequestFactory().moduleRequest().create(ModuleProxy.class);
@@ -121,56 +108,41 @@ public class CourseModulesView  extends CourseViewAbstract
 	    view.setModule(m);
 	    
 	    modulesTable.setWidget(rows, 0, view);
-	    onModuleClick(view);
+	    changed = true;
 	    
-	}*/
+	}
 	
-	/*private void onModuleClick(ModuleView view) {
-
-	    if (view != null) {
-	    	if (!view.equals(currentEdited) || (!view.getIsEdited())) {
-	    		//jeśli zamknięto edycję modułu, to currentEdited dalej jest ustawiony
-	    		if (currentEdited != null) {
-	    			currentEdited.hideEdit();
-	    		}
-	    		view.showEdit();
-	    	} 
-			currentEdited = view;
-	    }
-	}*/
-	
-	/*@UiHandler("modulesTable")
-	void onModulesTableClick(ClickEvent event) {
-		int row = modulesTable.getCellForEvent(event).getRowIndex();
-
-	    ModuleView view = (ModuleView) modulesTable.getWidget(row, 0);
-	    //onModuleClick(view);
-	}*/
-	
-	void onModuleLoad() {
-		//nie wiem, czy to dobrze działa...
-		Window.addWindowClosingHandler(new Window.ClosingHandler() {
-		      public void onWindowClosing(Window.ClosingEvent closingEvent) {
-		    	  //stopEditing();
-		        closingEvent.setMessage("Do you really want to leave the page?");
-		      }
-		    });
-		History.addValueChangeHandler(new ValueChangeHandler<String>() {
-
-			public void onValueChange(ValueChangeEvent<String> event) {
-				//stopEditing();
-				
-			}
-		});
+	@UiHandler("cancelModulesButton")
+	void onCancelButtonClicked(ClickEvent event) {
+		/*hideEdit();*/
+		//event.stopPropagation();
+		click = true;
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
 	}
 
-	/*void stopEditing() {
-		if (currentEdited != null) {
-			currentEdited.hideEdit();
-		}
-
-		currentEdited = null;
-	}*/
+	@UiHandler("saveModulesButton")
+	void onSaveButtonClicked(ClickEvent event) {
+		for (int i = 0; i < modulesTable.getRowCount(); i++) {
+			//try {
+				ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
+				if (view.isChanged()) {
+					view.saveData();
+				}
+			//} catch ()
+			/*hideEdit();*/
+			//event.stopPropagation();
+		}	
+		click = true;
+		
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		String groupId = (group == null ? "-1" : group.getId().toString());
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
+	}
+	
+	
+	
 	@UiHandler("infoLabel")
 	void showInfo(ClickEvent event) {
 		String courseId = (course == null ? "-1" : course.getId().toString());
@@ -205,6 +177,18 @@ public class CourseModulesView  extends CourseViewAbstract
 		String groupId = (group == null ? "-1" : group.getId().toString());
 		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
 	}
-	
-	
+
+	public boolean hasChanged() {
+		if (click) return false;
+		for (int i = 0; i < modulesTable.getRowCount(); i++) {
+			//try {
+				ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
+				if (view.isChanged()) {
+					changed = true;
+				}
+			
+		}	
+		return changed;
+	}
+
 }

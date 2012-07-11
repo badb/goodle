@@ -80,6 +80,13 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 		this.setValue(text);
 	}
 
-
+	public void setText(String text) {
+		setValue(text, true);
+	}
+	
+	public String getText() {
+		return getValue();
+	}
+	
 
 }

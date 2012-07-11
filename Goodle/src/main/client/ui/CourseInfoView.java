@@ -59,12 +59,12 @@ public class CourseInfoView extends CourseViewAbstract
 	
 	@UiHandler("biblio")
 	public void onBiblioValueChange(ValueChangeEvent<String> event) {
-		course.setBibliography(event.getValue());
+		if (course != null) course.setBibliography(event.getValue());
     }
 	
 	@UiHandler("desc")
 	public void onDescValueChange(ValueChangeEvent<String> event) {
-		course.setDescription(event.getValue());
+		if (course != null) course.setDescription(event.getValue());
     }
 
 	private CourseGroupProxy group;

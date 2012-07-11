@@ -1,5 +1,6 @@
 package main.client.mapper;
 
+import main.client.place.CourseModulesEditPlace;
 import main.client.place.CoursePlace;
 import main.client.place.CreateCourseImportPlace;
 import main.client.place.CreateCoursePlace;
@@ -13,6 +14,7 @@ import com.google.gwt.place.shared.WithTokenizers;
 @WithTokenizers
 ({
 	CoursePlace.Tokenizer.class, 
+	CourseModulesEditPlace.Tokenizer.class,
 	FindCoursesByNamePlace.Tokenizer.class, 
 	CreateCoursePlace.Tokenizer.class,
 	CreateCourseImportPlace.Tokenizer.class,

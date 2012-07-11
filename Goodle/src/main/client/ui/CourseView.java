@@ -1,161 +1,190 @@
 package main.client.ui;
 
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
-import main.client.place.CoursePlace;
-import main.shared.proxy.CourseGroupProxy;
+import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
-import main.shared.proxy.ModuleProxy;
+import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
-
 
 public class CourseView extends Composite
 {
 	private static CourseViewUiBinder uiBinder = GWT.create(CourseViewUiBinder.class);
 
 	interface CourseViewUiBinder extends UiBinder<Widget, CourseView> { }
-	
-	@UiField Label courseName;
-	@UiField Label courseDesc;
-	@UiField Button editButton;
-	@UiField Button saveButton;
-	@UiField Button cancelButton;
 
+	@UiField Label courseName;
 	
+	@UiField Button joinMethodAction;
+	
+	@UiField CourseMenuView courseMenu;
+	@UiField SimplePanel currentView;
+
 	private ClientFactory clientFactory;
 	public void setClientFactory(ClientFactory clientFactory) 
 	{ 
 		this.clientFactory = clientFactory;
+		courseMenu.setClientFactory(clientFactory);
 	}
-	
+
 	private CourseProxy course;
 	public CourseProxy getCourse() { return course; }	
-	public void setCourse(CourseProxy course) { this.course = course; }
-	
-	private CourseGroupProxy group;
-	public CourseGroupProxy getGroup() { return group; }	
-	public void setGroup(CourseGroupProxy group) { this.group = group; }	
-	
-	private String selectedTab;
+	public void setCourse(CourseProxy course) 
+	{ 
+		this.course = course;
+		if (course != null)
+		{
+			courseName.setText(course.getName());
+			
+			if (currentUserIsOwner()) 
+			{
+				joinMethodAction.setText(course.getJoinMethod().toString());
+			}
+			else if (currentUserIsMember())
+			{
+				joinMethodAction.setText("Zarejestrowany");
+			}
+			else joinMethodAction.setText("Dołącz");
+			
+			courseMenu.setCourseId(course.getId().toString());
+		}
+	}
+
 	public CourseView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
-	public void getCourse(String courseId)
+	public void prepareView(String courseId, final String selectedView)
 	{
-		if (clientFactory != null)
+		if (course != null && course.getId() != null && course.getId().toString().equals(courseId))
 		{
-			clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
-			(
-				new Receiver<CourseProxy>()
+			setSelectedView(selectedView);
+			return;
+		}
+		clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
+		(	
+			new Receiver<CourseProxy>()
+			{
+				@Override
+				public void onSuccess(CourseProxy response)
 				{
-					@Override
-					public void onSuccess(CourseProxy response)
-					{
-						course = response;
-						if (course == null) {
-							//TODO lepsza obsługa braku kursu
-							Logger logger = Logger.getLogger("Goodle.Log");
-						    logger.log(Level.SEVERE, "nie ma takiego kursu");
-							return;
-						}
-						courseName.setText(course.getName());
-
-						courseDesc.setText(course.getDescription());
-						//String id = course.getModuleIds().get(0);
-						//courseModulesView.setClientFactory(clientFactory);
-						//courseInfoView.setClientFactory(clientFactory);
-
-
+					if (response == null) 
+					{ 
+						onCourseNotFound();
+						return;
 					}
-					@Override
-					public void onFailure(ServerFailure error){
-						Logger logger = Logger.getLogger("Goodle.Log");
-					    logger.log(Level.SEVERE, error.getMessage());
-					    logger.log(Level.SEVERE, error.getStackTraceString());
-					    logger.log(Level.SEVERE, error.getExceptionType());
-					}
+
+					setCourse(response);			
+					setSelectedView(selectedView);
 				}
-			);
+				
+				@Override
+				public void onFailure(ServerFailure error) {
+					courseName.setText("error");
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, error.getMessage());
+					logger.log(Level.SEVERE, error.getStackTraceString());
+					logger.log(Level.SEVERE, error.getExceptionType());
+				}
+			}
+		);
+	}
+	
+	private void setSelectedView(String selectedView)
+	{
+		if (selectedView.equals("info")) 
+		{ 
+			currentView.setWidget(clientFactory.getCourseInfoView()); 
+		}
+		else if (selectedView.equals("members")) 
+		{ 
+			CourseMembersView courseMembersView = clientFactory.getCourseMembersView();
+			if (course != null) {
+				courseMembersView.setClientFactory(clientFactory);
+				courseMembersView.setCourse(course);
+				Set<Long> members = course.getMembers();
+				courseMembersView.addMembers(members);
+			} else {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, "CourseProxy is null");
+			}
+			currentView.setWidget(courseMembersView); 
+		}
+		else if (selectedView.equals("modules")) 
+		{ 
+			currentView.setWidget(clientFactory.getCourseModulesView()); 
+		}
+		else if (selectedView.equals("modulesEdit"))
+		{
+			currentView.setWidget(clientFactory.getCourseModulesEditView());
 		}
 	}
 	
-	public void getGroup(String groupId)
+	private boolean currentUserIsOwner()
 	{
-		if (clientFactory != null)
+		return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+	}
+	
+	private boolean currentUserIsMember()
+	{
+		return course.getMembers().contains(clientFactory.getCurrentUser().getId());		
+	}
+	
+	private void onCourseNotFound()
+	{
+		courseName.setText("Nie znaleziono kursu!");
+		// TODO Pokaż widok "strong nie została odnaleziona"
+	}
+	
+	public void onUserRegistered()
+	{
+		joinMethodAction.setText("Zarejestrowany");
+		joinMethodAction.setEnabled(false);
+	}
+	
+	@UiHandler("joinMethodAction")
+	public void onJoinMethodActionClicked(ClickEvent click)
+	{
+		if (currentUserIsOwner())
 		{
-			clientFactory.getRequestFactory().courseGroupRequest().findCourseGroup(Long.parseLong(groupId)).fire
-			(
-				new Receiver<CourseGroupProxy>()
-				{
-					@Override
-					public void onSuccess(CourseGroupProxy response)
-					{
-						group = response;
-						if (group == null) {
-							//TODO lepsza obsługa braku grupy
-							Logger logger = Logger.getLogger("Goodle.Log");
-						    logger.log(Level.SEVERE, "group null");
-							return;
-						}
-					}
-					@Override
-					public void onFailure(ServerFailure error)
-					{
-						Logger logger = Logger.getLogger("Goodle.Log");
-					    logger.log(Level.SEVERE, error.getMessage());
-					    logger.log(Level.SEVERE, error.getStackTraceString());
-					    logger.log(Level.SEVERE, error.getExceptionType());
-					}
-				}
-			);
-		}		
+			CourseJoinMethodPopup popup = clientFactory.getCourseJoinMethodPopup();
+			popup.setCourseProxy(course);
+			popup.center();
+		}
+		else if (!currentUserIsMember())
+		{
+			if (course.getJoinMethod() == JoinMethod.OPEN)
+			{
+				CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+				course = request.edit(course);
+				request.registerCurrentUser(null).using(course).fire();
+				onUserRegistered();
+			}
+			else
+			{
+				courseName.setText("Tutaj");
+				CoursePasswordPopup popup = clientFactory.getCoursePasswordPopup();
+				popup.setCourseProxy(course);
+				popup.center();
+			}
+		}
 	}
-		
-	
-	@UiHandler("editButton")
-	void onEditButtonClick(ClickEvent event)
-	{	
-			editButton.setVisible(false);
-			saveButton.setVisible(true);
-			cancelButton.setVisible(true);
-		
-	}
-	
-	@UiHandler("saveButton")
-	void onSaveButtonClick(ClickEvent event)
-	{	
-		//TODO zapisać zmiany w bazie danych
-		
-	}
-	
-	
-	@UiHandler("cancelButton")
-	void onCancelButtonClick(ClickEvent event)
-	{	
-		//TODO spytać o niezapisane dane
-		
-
-		editButton.setVisible(true);
-		saveButton.setVisible(false);
-		cancelButton.setVisible(false);
-		
-	}
-	
 }
+
+	

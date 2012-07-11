@@ -41,12 +41,12 @@ public class CourseListView extends Composite
 	{
 		coursesList = new CellList<CourseProxy>(new CourseCell());
 		ValueUpdater<CourseProxy> updater = new ValueUpdater<CourseProxy>()
-				{
+		{
 			public void update(CourseProxy value) 
 			{
-				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString(), "-1", "0"));
+				clientFactory.getPlaceController().goTo(new CoursePlace(value.getId().toString(), "modules"));
 			}
-				};
+		};
 				coursesList.setValueUpdater(updater);
 	}
 
@@ -57,6 +57,11 @@ public class CourseListView extends Composite
 
 	public void findCoursesByName(String name) 
 	{
+		if (name.equals("")) {
+			infoLabel.setText("Nie odnaleziono kursów pasujących " +
+					"do podanych kryteriów wyszukiwania");
+			return;
+		}
 		if (clientFactory != null)
 		{
 			infoLabel.setText("Trwa wyszukiwanie...");

@@ -2,19 +2,15 @@ package main.client.mapper;
 
 import main.client.ClientFactory;
 import main.client.activity.CourseActivity;
+
 import main.client.activity.CourseModulesEditActivity;
-import main.client.activity.CreateCourseActivity;
-import main.client.activity.CreateCourseImportActivity;
 import main.client.activity.FindCoursesByNameActivity;
 import main.client.activity.UserMainPageActivity;
-import main.client.activity.UserProfileActivity;
 import main.client.place.CourseModulesEditPlace;
+
 import main.client.place.CoursePlace;
-import main.client.place.CreateCourseImportPlace;
-import main.client.place.CreateCoursePlace;
 import main.client.place.FindCoursesByNamePlace;
 import main.client.place.UserMainPagePlace;
-import main.client.place.UserProfilePlace;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -36,14 +32,6 @@ public class ContentPanelActivityMapper implements ActivityMapper
 		{
 			return new CourseActivity(clientFactory, (CoursePlace) place);
 		}		
-		else if (place instanceof CreateCoursePlace) 
-		{
-			return new CreateCourseActivity(clientFactory);
-		}
-		else if (place instanceof CreateCourseImportPlace)
-		{
-			return new CreateCourseImportActivity(clientFactory);
-		}
 		else if (place instanceof FindCoursesByNamePlace) 
 		{
 			return new FindCoursesByNameActivity(clientFactory, (FindCoursesByNamePlace) place);
@@ -51,10 +39,6 @@ public class ContentPanelActivityMapper implements ActivityMapper
 		else if (place instanceof UserMainPagePlace)
 		{
 			return new UserMainPageActivity(clientFactory, (UserMainPagePlace) place);
-		}
-		else if (place instanceof UserProfilePlace)
-		{
-			return new UserProfileActivity(clientFactory, (UserProfilePlace) place);
 		}
 		else if (place instanceof CourseModulesEditPlace)
 		{

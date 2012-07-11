@@ -42,6 +42,11 @@ import org.hibernate.validator.constraints.URL;
         (       
                 name = "findCoursesByTerm",
                 query = "SELECT c FROM Course c WHERE c.term = :term"
+        ),
+        @NamedQuery
+        (
+        		name="getAllCourses",
+        		query = "SELECT c FROM Course c"
         )
 })
 public class Course implements Serializable
@@ -101,10 +106,16 @@ public class Course implements Serializable
     public void removeCoordinator(Long id) { coordinators.remove(id); }
     
     @Basic
-    private List<Long> groups = new ArrayList<Long>();
-    public List<Long> getGroups() { return Collections.unmodifiableList(groups); }
-    public void addGroup(Long id) { groups.add(id); }
-    public void removeGroup(Long id) { groups.remove(id); }
+    private Set<Long> members = new HashSet<Long>();
+    public Set<Long> getMembers() { return Collections.unmodifiableSet(members); }
+    public void addMember(Long id) { members.add(id); }
+    public void removeMember(Long id) { members.remove(id); }
+    
+    @Basic
+    private List<Long> modules = new ArrayList<Long>();
+    public List<Long> getModules() { return Collections.unmodifiableList(modules); }
+    public void addModule(Long id) { modules.add(id); }
+    public void removeModule(Long id) { modules.remove(id); }
        
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();
@@ -165,4 +176,83 @@ public class Course implements Serializable
         catch (NoResultException e) { return null; }
         finally { em.close(); }
     }
+    
+    @SuppressWarnings("unchecked")
+    public static List<Course> getAllCourses()
+    {
+        EntityManager em = entityManager();
+        try
+        {               
+                Query q = em.createNamedQuery("getAllCourses");
+                List<Course> list = q.getResultList();
+                list.size(); /* force it to materialize */ 
+                return list;
+        }
+        catch (NoResultException e) { return null; }
+        finally { em.close(); }
+    }
+
+    public static Course newCourse()
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return null;
+    	
+    	Course c = new Course();
+    	c.setVersion(1);
+    	c.setName("Nowy kurs");
+    	c.setTerm("2012L");
+    	c.setJoinMethod(JoinMethod.OPEN);    	
+    	c.addCoordinator(u.getId());
+        EntityManager em = entityManager();
+        try 
+        { 
+        	em.persist(c);
+        	return c;
+        }
+        finally { em.close(); }
+    }
+    
+    public Course update()
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return null;
+    	
+    	if (!coordinators.contains(u.getId()))
+    	{
+    		return null;
+    	}
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		em.persist(this);    	
+        	return this;
+    	}
+    	finally { em.close(); }
+    }
+    
+    public boolean registerCurrentUser(String key)
+    {
+    	if (joinMethod == JoinMethod.KEY && !this.key.equals(key)) return false;
+    	
+        GoodleUser u = GoodleUser.getCurrentUser();
+        if (u == null) return false;
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+            Course c = em.find(Course.class, this.id);
+    		c.addMember(u.getId());
+    		u.addCourseAttended(c);
+    		em.merge(c);
+    		em.merge(u);
+    	}
+    	finally 
+    	{ 
+    		em.close(); 
+    	}
+    	
+    	return true;
+    }
+    
 }

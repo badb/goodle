@@ -6,10 +6,7 @@ import java.util.logging.Logger;
 import main.client.ClientFactory;
 import main.client.mapper.ContentPanelActivityMapper;
 import main.client.place.CoursePlace;
-import main.client.place.CreateCoursePlace;
-import main.shared.proxy.CourseGroupProxy;
 import main.shared.proxy.CourseProxy;
-import main.shared.proxy.ModuleProxy;
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -35,9 +32,9 @@ public class CourseViewAbstract extends Composite
 {	
 	Label courseName;
 	Label courseDesc;
-	@UiField Button editButton;
+	/*@UiField Button editButton;
 	@UiField Button saveButton;
-	@UiField Button cancelButton;
+	@UiField Button cancelButton;*/
 	
 	Label infoLabel;
 	Label moduleLabel;
@@ -55,9 +52,6 @@ public class CourseViewAbstract extends Composite
 	public CourseProxy getCourse() { return course; }	
 	public void setCourse(CourseProxy course) { this.course = course; }
 	
-	protected CourseGroupProxy group;
-	public CourseGroupProxy getGroup() { return group; }	
-	public void setGroup(CourseGroupProxy group) { this.group = group; }	
 		
 	private String selectedTab;
 
@@ -100,7 +94,7 @@ public class CourseViewAbstract extends Composite
 		}
 	}
 	
-	public void getGroup(String groupId)
+	/*public void getGroup(String groupId)
 	{
 		if (clientFactory != null)
 		{
@@ -130,7 +124,7 @@ public class CourseViewAbstract extends Composite
 				}
 			);
 		}		
-	}
+	}*/
 		
 /*	@UiHandler("moduleLabel")
 	void showModules(ClickEvent event) {
@@ -139,7 +133,7 @@ public class CourseViewAbstract extends Composite
 		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupsId, 2));
 	}*/
 	
-	
+	/*
 	@UiHandler("editButton")
 	void onEditButtonClick(ClickEvent event)
 	{	
@@ -170,5 +164,5 @@ public class CourseViewAbstract extends Composite
 	}
 		public void setSelectedTab(String tabId) {
 			selectedTab = tabId;	
-	}
+	}*/
 }

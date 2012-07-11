@@ -1,10 +1,12 @@
 package main.client.ui;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.shared.proxy.CourseGroupProxy;
+import main.shared.proxy.CourseProxy;
 import main.shared.proxy.ModuleProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -14,9 +16,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class CourseModulesEditView extends CourseViewAbstract {
 
@@ -27,16 +29,14 @@ public class CourseModulesEditView extends CourseViewAbstract {
 			UiBinder<Widget, CourseModulesEditView> {
 	}
 
-	@UiField Label infoLabel;
 	@UiField Button addModuleButton;
 	@UiField FlexTable modulesTable;
-	private CourseGroupProxy group;
 	private boolean click = false;
 	private boolean changed = false;
+	private CourseProxy course;
 	
 	private ClientFactory clientFactory;
 	
-	/*private ModuleEditView currentEdited = null;*/
 
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 
@@ -49,21 +49,13 @@ public class CourseModulesEditView extends CourseViewAbstract {
 	protected void onLoad() {
 		click = false;
 		changed = false;
-	}
-	
-	public void setGroup(CourseGroupProxy group) 
-	{
-		if (!group.equals(this.group))
-		{
-			this.group = group;
-			loadModules();
-		}
+		loadModules();
 	}
 	
 	private void loadModules()
 	{
 		modulesTable.clear();
-		List<Long> ids = group.getModules();
+		List<Long> ids = course.getModules();
 		
 		if(!ids.isEmpty()){
 		
@@ -113,17 +105,16 @@ public class CourseModulesEditView extends CourseViewAbstract {
 	}
 	
 	@UiHandler("cancelModulesButton")
-	void onCancelButtonClicked(ClickEvent event) {
+	void onCancelModulesButtonClicked(ClickEvent event) {
 		/*hideEdit();*/
 		//event.stopPropagation();
 		click = true;
 		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
 	}
 
 	@UiHandler("saveModulesButton")
-	void onSaveButtonClicked(ClickEvent event) {
+	void onSaveModulesButtonClicked(ClickEvent event) {
 		for (int i = 0; i < modulesTable.getRowCount(); i++) {
 			//try {
 				ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
@@ -137,46 +128,9 @@ public class CourseModulesEditView extends CourseViewAbstract {
 		click = true;
 		
 		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
 	}
 	
-	
-	
-	@UiHandler("infoLabel")
-	void showInfo(ClickEvent event) {
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "0"));
-	}
-	
-	@UiHandler("moduleLabel")
-	void showModules(ClickEvent event) {
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "1"));
-	}
-	
-	@UiHandler("groupLabel")
-	void showGroup(ClickEvent event) {
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "2"));
-	}
-	
-	@UiHandler("membersLabel")
-	void showMembers(ClickEvent event) {
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "3"));
-	}
-	
-	@UiHandler("formsLabel")
-	void showForms(ClickEvent event) {
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		String groupId = (group == null ? "-1" : group.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, groupId, "4"));
-	}
 
 	public boolean hasChanged() {
 		if (click) return false;
@@ -189,6 +143,39 @@ public class CourseModulesEditView extends CourseViewAbstract {
 			
 		}	
 		return changed;
+	}
+
+	public void setCourse(String courseId) {
+		clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
+		(	
+			new Receiver<CourseProxy>()
+			{
+				@Override
+				public void onSuccess(CourseProxy response)
+				{
+					if (response == null) 
+					{ 
+						//TODO: onCourseNotFound();
+
+						Logger logger = Logger.getLogger("Goodle.Log");
+						logger.log(Level.SEVERE, "pusta odpowiedź");
+						
+						return;
+					}
+
+					setCourse(response);
+				}
+				
+				@Override
+				public void onFailure(ServerFailure error) {
+					courseName.setText("error");
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, error.getMessage());
+					logger.log(Level.SEVERE, error.getStackTraceString());
+					logger.log(Level.SEVERE, error.getExceptionType());
+				}
+			}
+		);
 	}
 
 }

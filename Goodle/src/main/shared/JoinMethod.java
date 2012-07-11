@@ -13,7 +13,7 @@ public enum JoinMethod
 	{
 		if (this.equals(JoinMethod.OPEN)) return "Otwarty";
 		if (this.equals(JoinMethod.ASK)) return "Zaproszenie";
-		if (this.equals(JoinMethod.KEY)) return "Klucz";
+		if (this.equals(JoinMethod.KEY)) return "Zabezpieczony kluczem";
 		return null;
 	}
 }

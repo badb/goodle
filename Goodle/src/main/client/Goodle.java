@@ -5,9 +5,8 @@ import java.util.logging.Logger;
 
 import main.client.mapper.AppPlaceHistoryMapper;
 import main.client.mapper.ContentPanelActivityMapper;
-import main.client.place.CreateCoursePlace;
+import main.client.place.UserMainPagePlace;
 import main.client.ui.CalendarView;
-import main.client.ui.FooterView;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
 import main.shared.proxy.GoodleUserProxy;
@@ -21,13 +20,9 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SimpleLayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
@@ -45,8 +40,8 @@ public class Goodle implements EntryPoint
     @UiField SimplePanel contentPanel;
     @UiField CalendarView rightPanel;
         
-    private Place defaultPlace = new CreateCoursePlace();
-    private ClientFactory clientFactory = null;
+    private Place defaultPlace = new UserMainPagePlace();
+    private ClientFactory clientFactory;
 
 	public void onModuleLoad() 
 	{		
@@ -60,7 +55,7 @@ public class Goodle implements EntryPoint
 				public void onSuccess(GoodleUserProxy response)
 				{
 					clientFactory.setCurrentUser(response);
-					whenUserLogged();
+					onUserLogged();
 				}
 				@Override
 				public void onFailure(ServerFailure error)
@@ -73,7 +68,7 @@ public class Goodle implements EntryPoint
 		});		
 	}
 	
-	public void whenUserLogged()
+	public void onUserLogged()
 	{
 		ScrollPanel outer = binder.createAndBindUi(this);
 		EventBus eventBus = clientFactory.getEventBus();
@@ -89,6 +84,7 @@ public class Goodle implements EntryPoint
         
         topPanel.setClientFactory(clientFactory);
         topPanel.setUserName(clientFactory.getCurrentUser().getLogin());
+        topPanel.addSuggestions();
         leftPanel.setClientFactory(clientFactory);
         rightPanel.setClientFactory(clientFactory);
         

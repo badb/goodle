@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+    <g:HTMLPanel>
+        <p>Wybierz metodę rejestracji na kurs:</p>
+        <g:RadioButton ui:field="openRadio" ui:name="method" ui:text="Otwarty" /> <br />
+        <g:RadioButton ui:field="keyRadio" ui:name="method" ui:text="Chroniony hasłem" />
+        <g:PasswordTextBox ui:field="keyBox" /> <br />
+        <g:Label ui:field="message" /> <br />
+        <g:Button ui:field="save" ui:text="Zapisz zmiany" />
+        <g:Button ui:field="cancel" ui:text="Odrzuć zmiany" />
+    </g:HTMLPanel>
+    
+</ui:UiBinder>

@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public abstract class Material implements Serializable
 {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     public Long getId() { return id; }
     

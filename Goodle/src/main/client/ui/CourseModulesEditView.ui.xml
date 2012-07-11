@@ -5,23 +5,7 @@
 	<ui:style src="../../../css/Goodle.css"/>
 
         <g:FlowPanel>
-	        <g:Label ui:field="courseName" />
-	        <g:Label ui:field="courseDesc" />
-	        <g:Button ui:field="editButton" visible="false">Edytuj kurs</g:Button>
-	        <g:Button ui:field="saveButton">Zapisz zmiany</g:Button>
-	        <g:Button ui:field="cancelButton">Anuluj</g:Button>
-	       	<g:HorizontalPanel styleName="{style.tabBefore}">
-			<g:HorizontalPanel styleName="{style.tabs}">
-				<g:SimplePanel styleName="{style.tabBegin}"/>
-	        <g:Label ui:field="infoLabel" styleName="{style.tab}">Informacje</g:Label>
-	        <g:Label ui:field="moduleLabel" styleName="{style.tab}">Moduły</g:Label>
-	        <g:Label ui:field="groupLabel" styleName="{style.tab}">Grupy</g:Label>
-	        <g:Label ui:field="membersLabel" styleName="{style.tab}">Uczestnicy</g:Label>
-	        <g:Label ui:field="formsLabel" styleName="{style.tab}">Ankiety</g:Label>
-	        </g:HorizontalPanel>
-	        <g:SimplePanel styleName="{style.tabEnd}"/>
-	        </g:HorizontalPanel>
-	
+
 	        <g:Button ui:field="saveModulesButton">Zapisz zmiany</g:Button>
 	        <g:Button ui:field="cancelModulesButton">Anuluj</g:Button>
 		<g:FlowPanel>

@@ -1,16 +1,17 @@
-# Ignore everything #
+#] Ignore everything #
 
-*
-
-# Whitelist directories #
-
-!*/
+/*
 
 # Track these files #
 
-!praca.tex
+!.gitignore
+!praca/praca.tex
+
+!Goodle/
+Goodle/*
+!Goodle/src/
+
 !Goodle/.project
-!Goodle/src/*
 !Goodle/war/Goodle.html
 !Goodle/war/WEB-INF/appengine-web.xml
 !Goodle/war/WEB-INF/web.xml

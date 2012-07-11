@@ -1,17 +1,14 @@
 package main.client;
 
-import main.client.ui.CourseFormsView;
-import main.client.ui.CourseGroupsView;
 import main.client.ui.CourseInfoView;
+import main.client.ui.CourseJoinMethodPopup;
 import main.client.ui.CourseListView;
 import main.client.ui.CourseMembersView;
 import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseModulesView;
+import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseView;
-import main.client.ui.CreateCourseImportView;
-import main.client.ui.CreateCourseView;
 import main.client.ui.UserMainPageView;
-import main.client.ui.UserProfileView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
 
@@ -29,13 +26,11 @@ public class ClientFactoryImpl implements ClientFactory
 	private static CourseView courseView;
 	private static CourseInfoView courseInfoView;
 	private static CourseModulesView courseModulesView;
-	private static CourseGroupsView courseGroupsView;
 	private static CourseMembersView courseMembersView;
-	private static CourseFormsView courseFormsView;
-	private static CreateCourseView createCourseView;
-	private static CreateCourseImportView createCourseImportView;
 	private static UserMainPageView userMainPageView;
-	private static UserProfileView userProfileView;
+	
+	private static CourseJoinMethodPopup courseJoinMethodPopup;
+	private static CoursePasswordPopup coursePasswordPopup;
 
 	private static GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
@@ -70,17 +65,6 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return courseView; 
 	}
-	
-	@Override
-	public CreateCourseView getCreateCourseView() 
-	{
-		if (createCourseView == null) 
-		{
-			createCourseView = new CreateCourseView();
-			createCourseView.setClientFactory(this);
-		}
-		return createCourseView; 
-	}
 
 	@Override
 	public CourseInfoView getCourseInfoView() 
@@ -103,18 +87,6 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return courseModulesView; 
 	}
-
-	
-	@Override
-	public CourseGroupsView getCourseGroupsView() 
-	{
-		if (courseGroupsView == null) 
-		{
-			courseGroupsView = new CourseGroupsView();
-			courseGroupsView.setClientFactory(this);
-		}
-		return courseGroupsView; 
-	}
 	
 	public CourseMembersView getCourseMembersView() 
 	{
@@ -124,26 +96,6 @@ public class ClientFactoryImpl implements ClientFactory
 			courseMembersView.setClientFactory(this);
 		}
 		return courseMembersView; 
-	}
-	
-	public CourseFormsView getCourseFormsView() 
-	{
-		if (courseFormsView == null) 
-		{
-			courseFormsView = new CourseFormsView();
-			courseFormsView.setClientFactory(this);
-		}
-		return courseFormsView; 
-	}
-	@Override
-	public CreateCourseImportView getCreateCourseImportView() 
-	{
-		if (createCourseImportView == null) 
-		{
-			createCourseImportView = new CreateCourseImportView();
-			createCourseImportView.setClientFactory(this);
-		}
-		return createCourseImportView; 
 	}
 	
 	@Override
@@ -156,16 +108,29 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return userMainPageView; 
 	}
-
+	
 	@Override
-	public UserProfileView getUserProfileView() 
+	public CourseJoinMethodPopup getCourseJoinMethodPopup()
 	{
-		if (userProfileView == null)
+		if (courseJoinMethodPopup == null)
 		{
-			userProfileView = new UserProfileView();
-			userProfileView.setClientFactory(this);
+			courseJoinMethodPopup = new CourseJoinMethodPopup();
+			courseJoinMethodPopup.setClientFactory(this);
+			courseJoinMethodPopup.setParent(getCourseView());
 		}
-		return userProfileView; 
+		return courseJoinMethodPopup;
+	}
+	
+	@Override
+	public CoursePasswordPopup getCoursePasswordPopup()
+	{
+		if (coursePasswordPopup == null)
+		{
+			coursePasswordPopup = new CoursePasswordPopup();
+			coursePasswordPopup.setClientFactory(this);
+			coursePasswordPopup.setParent(getCourseView());
+		}
+		return coursePasswordPopup;
 	}
 
 	@Override

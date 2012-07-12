@@ -1,6 +1,8 @@
 package main.client.ui;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.client.place.CourseModulesEditPlace;
@@ -36,11 +38,11 @@ public class CourseModulesView  extends Composite
 	private CourseProxy course;
 	public void setCourse(CourseProxy course) 
 	{
-		if (!course.equals(this.course))
-		{
+		//if (!course.equals(this.course))
+		//{
 			this.course = course;
 			loadModules();
-		}
+		//}
 	}
 	
 	private ClientFactory clientFactory;
@@ -51,7 +53,6 @@ public class CourseModulesView  extends Composite
 	public CourseModulesView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
-
 	}
 	
 	private void loadModules()
@@ -86,10 +87,14 @@ public class CourseModulesView  extends Composite
 	
 	@UiHandler("editModulesButton")
 	void onEditButtonClick(ClickEvent event) {
-		clientFactory.getCourseView().setCourse(course);
+		//clientFactory.getCourseView().setCourse(course);
 		//TODO sprawdzić gdzie ma przenosić
+		
 
 		String courseId = (course == null ? "-1" : course.getId().toString());
+		Logger logger = Logger.getLogger("Goodle.Log");
+		logger.log(Level.SEVERE, courseId);
+		
 		clientFactory.getPlaceController().goTo(new CourseModulesEditPlace(courseId));
 	}
 	

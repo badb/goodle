@@ -25,6 +25,7 @@ public class CourseInfoView extends Composite
 	public void setCourse(CourseProxy course) 
 	{
 		this.course = course;
+		desc.setValue(course.getDescription());
 		biblio.setValue(course.getBibliography());
 	}
 	

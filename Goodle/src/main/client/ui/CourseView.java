@@ -128,10 +128,26 @@ public class CourseView extends Composite
 		}
 		else if (selectedView.equals("modules")) 
 		{ 
+			CourseModulesView courseModulesView = clientFactory.getCourseModulesView();
+			if (course != null) {
+				courseModulesView.setClientFactory(clientFactory);
+				courseModulesView.setCourse(course);
+			} else {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, "CourseProxy is null");
+			}
 			currentView.setWidget(clientFactory.getCourseModulesView()); 
 		}
 		else if (selectedView.equals("modulesEdit"))
 		{
+			CourseModulesEditView courseModulesEditView = clientFactory.getCourseModulesEditView();
+			if (course != null) {
+				courseModulesEditView.setClientFactory(clientFactory);
+				courseModulesEditView.setCourse(course);
+			} else {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, "CourseProxy is null");
+			}
 			currentView.setWidget(clientFactory.getCourseModulesEditView());
 		}
 	}

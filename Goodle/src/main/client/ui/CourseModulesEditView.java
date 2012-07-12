@@ -49,12 +49,22 @@ public class CourseModulesEditView extends CourseViewAbstract {
 	protected void onLoad() {
 		click = false;
 		changed = false;
+	}
+	
+	public void setCourse(CourseProxy course) { 
+		this.course = course; 
 		loadModules();
 	}
+
 	
 	private void loadModules()
 	{
 		modulesTable.clear();
+		if (course == null) {
+			Logger logger = Logger.getLogger("Goodle.Log");
+			logger.log(Level.SEVERE, "CourseProxy jest nullem!");
+			return;
+		}
 		List<Long> ids = course.getModules();
 		
 		if(!ids.isEmpty()){
@@ -115,6 +125,9 @@ public class CourseModulesEditView extends CourseViewAbstract {
 
 	@UiHandler("saveModulesButton")
 	void onSaveModulesButtonClicked(ClickEvent event) {
+		Logger logger = Logger.getLogger("Goodle.Log");
+		logger.log(Level.SEVERE, ""+modulesTable.getRowCount() + course.getModules().size());
+		
 		for (int i = 0; i < modulesTable.getRowCount(); i++) {
 			//try {
 				ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
@@ -135,17 +148,17 @@ public class CourseModulesEditView extends CourseViewAbstract {
 	public boolean hasChanged() {
 		if (click) return false;
 		for (int i = 0; i < modulesTable.getRowCount(); i++) {
-			//try {
-				ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
-				if (view.isChanged()) {
-					changed = true;
-				}
+			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
+			if (view.isChanged()) {
+				changed = true;
+			}
 			
 		}	
 		return changed;
 	}
 
 	public void setCourse(String courseId) {
+
 		clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
 		(	
 			new Receiver<CourseProxy>()

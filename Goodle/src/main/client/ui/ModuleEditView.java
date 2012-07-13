@@ -1,21 +1,18 @@
 package main.client.ui;
 
+
 import main.client.ClientFactory;
-import main.client.ui.ModuleView.ModuleWidgetUiBinder;
 import main.shared.proxy.ModuleProxy;
-import main.shared.proxy.ModuleRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ModuleEditView extends Composite {
@@ -33,14 +30,14 @@ public class ModuleEditView extends Composite {
 	EditLabel titleEdit;
 	@UiField
 	EditLabel descEdit;
+	@UiField
+	Button deleteButton;
 
 	@UiField
 	CheckBox showHideBox;
 	NotSavedPopup popup;
 
 	private ClientFactory clientFactory;
-	private ModuleRequest request;
-	private boolean isEdited = false;
 
 	public ModuleEditView() {
 		initWidget(uiBinder.createAndBindUi(this));
@@ -58,43 +55,10 @@ public class ModuleEditView extends Composite {
 	}
 
 	public void setModule(ModuleProxy module) {
-
 		titleEdit.setText(module.getTitle());
 		descEdit.setText(module.getText());
 		visible = module.getIsVisible();
-
 	}
-	
-	public boolean getIsEdited() {
-		return isEdited;
-	}
-	
-	
-	public void showEdit() {
-		//if (clientFactory.getCurrentUser().getId().equals(module.getAuthor().getId())) {
-
-		if (!isEdited) {
-		isEdited = true;
-		showHideBox.setValue(!visible);
-	
-		}
-		//}
-	}
-
-	
-	public void hideEdit() {
-		//if (clientFactory.getCurrentUser().getId().equals(module.getAuthor().getId())) {
-
-		if (isEdited) {
-			//if (isChanged())
-			//	saveData();
-		    
-			isEdited = false;
-
-		}
-		//}
-	}
-
 
 
 	public boolean isChanged() {
@@ -103,7 +67,6 @@ public class ModuleEditView extends Composite {
 				|| (descEdit.getText() != descEdit.getText());
 	}
 
-	
 
 	public void saveData() {
 		//tODO usunąć:
@@ -112,8 +75,15 @@ public class ModuleEditView extends Composite {
 		module.setText(descEdit.getText());
 		visible = !showHideBox.getValue();
 		module.setIsVisible(visible);
-		
-
 	}
-
+	
+	@UiHandler("deleteButton")
+	void onDeleteButtonClick(ClickEvent event) {
+		if (getParent() instanceof FlexTable) {
+			FlexTable parent = (FlexTable) this.getParent();
+			parent.removeRow(parent.getCellForEvent(event).getRowIndex());
+		}
+		this.removeFromParent();
+		
+	}
 }

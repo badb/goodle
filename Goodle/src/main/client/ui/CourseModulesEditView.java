@@ -7,7 +7,9 @@ import java.util.logging.Logger;
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseProxy;
+import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;
+import main.shared.proxy.ModuleRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -103,15 +105,57 @@ public class CourseModulesEditView extends CourseViewAbstract {
 	    ModuleEditView view = new ModuleEditView();
 		view.setClientFactory(clientFactory);
 
-	    ModuleProxy m = clientFactory.getRequestFactory().moduleRequest().create(ModuleProxy.class);
+	    ModuleRequest mreq = clientFactory.getRequestFactory().moduleRequest();
+	    ModuleProxy m = mreq.create(ModuleProxy.class);
 	    m.setTitle("Nowy moduł " + rows.toString());
 	    m.setText("");
 	    m.setAuthor(clientFactory.getCurrentUser());
-	    view.setModule(m);
 	    
+	    mreq.persist().using(m).fire(new Receiver<Void>()
+				{			
+			@Override
+			public void onFailure(ServerFailure error) {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, error.getMessage());
+				logger.log(Level.SEVERE, error.getStackTraceString());
+				logger.log(Level.SEVERE, error.getExceptionType());
+			}
+
+			@Override
+			public void onSuccess(Void response) {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, response.toString());
+	    
+			}});
+	    
+	    
+	    CourseRequest req = clientFactory.getRequestFactory().courseRequest();
+	    course = req.edit(course);
+	    req.addModule(m.getId());
+	    req.persist().using(course).fire(new Receiver<Long>()
+				{			
+			@Override
+			public void onFailure(ServerFailure error) {
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, error.getMessage());
+				logger.log(Level.SEVERE, error.getStackTraceString());
+				logger.log(Level.SEVERE, error.getExceptionType());
+			}
+
+			@Override
+			public void onSuccess(Long response) {
+				
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, "courseRequest response " + response.toString());
+					
+			}
+		});
+	    
+	    
+	    view.setModule(m);
 	    modulesTable.setWidget(rows, 0, view);
 	    changed = true;
-	    
+
 	}
 	
 	@UiHandler("cancelModulesButton")
@@ -125,18 +169,12 @@ public class CourseModulesEditView extends CourseViewAbstract {
 
 	@UiHandler("saveModulesButton")
 	void onSaveModulesButtonClicked(ClickEvent event) {
-		Logger logger = Logger.getLogger("Goodle.Log");
-		logger.log(Level.SEVERE, ""+modulesTable.getRowCount() + course.getModules().size());
 		
 		for (int i = 0; i < modulesTable.getRowCount(); i++) {
-			//try {
-				ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
-				if (view.isChanged()) {
-					view.saveData();
-				}
-			//} catch ()
-			/*hideEdit();*/
-			//event.stopPropagation();
+			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
+			if (view.isChanged()) {
+				view.saveData();
+			}
 		}	
 		click = true;
 		
@@ -152,36 +190,27 @@ public class CourseModulesEditView extends CourseViewAbstract {
 			if (view.isChanged()) {
 				changed = true;
 			}
-			
 		}	
 		return changed;
 	}
 
 	public void setCourse(String courseId) {
-
 		clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
 		(	
-			new Receiver<CourseProxy>()
-			{
+			new Receiver<CourseProxy>() {
 				@Override
-				public void onSuccess(CourseProxy response)
-				{
-					if (response == null) 
-					{ 
+				public void onSuccess(CourseProxy response) {
+					if (response == null) { 
 						//TODO: onCourseNotFound();
-
 						Logger logger = Logger.getLogger("Goodle.Log");
 						logger.log(Level.SEVERE, "pusta odpowiedź");
-						
 						return;
 					}
-
 					setCourse(response);
 				}
 				
 				@Override
 				public void onFailure(ServerFailure error) {
-					courseName.setText("error");
 					Logger logger = Logger.getLogger("Goodle.Log");
 					logger.log(Level.SEVERE, error.getMessage());
 					logger.log(Level.SEVERE, error.getStackTraceString());

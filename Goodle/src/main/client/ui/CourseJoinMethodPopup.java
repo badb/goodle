@@ -53,7 +53,8 @@ public class CourseJoinMethodPopup extends DialogBox
 	private ClientFactory clientFactory;
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 	
-	public static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
+	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
+	private static String emptyKeyMessage = "Klucz nie może być pusty!";
 	
 	public CourseJoinMethodPopup() 
 	{
@@ -64,17 +65,26 @@ public class CourseJoinMethodPopup extends DialogBox
 	public void onOpenMethodSelected(ClickEvent event)
 	{
 		keyBox.setEnabled(false);
+		message.setText("");
 	}
 	
 	@UiHandler("keyRadio")
 	public void onKeyMethodSelected(ClickEvent event)
 	{
 		keyBox.setEnabled(true);
+		message.setText("");
 	}
 	
 	@UiHandler("save")
 	public void onSaveButtonClicked(ClickEvent click)
 	{
+		message.setText("");
+		
+		if (keyRadio.getValue() && keyBox.getText().isEmpty()) {
+			message.setText(emptyKeyMessage);
+			return;
+		}
+		
 		final CourseJoinMethodPopup me = this;
 		
 		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
@@ -111,6 +121,7 @@ public class CourseJoinMethodPopup extends DialogBox
 	@UiHandler("cancel")
 	public void onCancelButtonClicked(ClickEvent click)
 	{
+		message.setText("");
 		this.hide();
 	}
 }

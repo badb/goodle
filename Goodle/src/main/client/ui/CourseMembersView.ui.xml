@@ -9,7 +9,6 @@
 	<g:VerticalPanel>
 	    <g:Button text="Usuń zaznaczonych" ui:field="removeButton"/>
 	    <c:CellTable ui:field="membersList" styleName="{style.membersList}"/>
-	    <g:Label text="Prośby o rejestrację"/>
 	</g:VerticalPanel>
 </ui:UiBinder>
 

@@ -43,7 +43,17 @@ public class CourseMembersView extends Composite
 	private ClientFactory clientFactory;
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
 	private CourseProxy course;
-	public void setCourse(CourseProxy course) {this.course = course;}
+	public void setCourse(CourseProxy course) {
+		this.course = course;
+	}
+	
+	public void afterSetCourse() {
+		if (currentUserIsOwner()) {
+			removeButton.setEnabled(true);
+			removeButton.setVisible(true);
+		}
+	}
+
 	
 	
 	@UiField(provided=true) 
@@ -56,6 +66,8 @@ public class CourseMembersView extends Composite
 	{
 		initList();
 		initWidget(uiBinder.createAndBindUi(this));
+		removeButton.setEnabled(false);
+		removeButton.setVisible(false);
 	}
 	
 	private void initList() {
@@ -63,10 +75,7 @@ public class CourseMembersView extends Composite
 		selectionModel = new MultiSelectionModel<GoodleUserProxy>();
 	}
 
-	public void addMembers(Set<Long> members) {
-		members.add((long) 44);
-		members.add((long) 47);
-		members.add((long) 48);
+	public void addMembers(Set<Long> members) {	
 		membersList.setSelectionModel(selectionModel,
 		       DefaultSelectionEventManager.<GoodleUserProxy> createCheckboxManager());
 		Column <GoodleUserProxy, Boolean> checkColumn = 
@@ -142,5 +151,12 @@ public class CourseMembersView extends Composite
 			}
 		}
 	}
-
+	
+	private boolean currentUserIsOwner()
+	{
+		if (course != null)
+			return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+		else
+			return false;
+	}
 }

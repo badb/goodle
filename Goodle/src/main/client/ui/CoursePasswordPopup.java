@@ -49,9 +49,13 @@ public class CoursePasswordPopup extends DialogBox
 	@UiHandler("save")
 	public void onSaveButtonClicked(ClickEvent click)
 	{
+		message.setText("");
+		message.setVisible(true);
+		
 		if (keyBox.getText().isEmpty())
 		{
 			message.setText(emptyKeyMessage);
+	
 			return;
 		}
 		

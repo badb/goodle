@@ -53,14 +53,17 @@ public class CourseView extends Composite
 			
 			if (currentUserIsOwner()) 
 			{
+				joinMethodAction.setEnabled(true);
 				joinMethodAction.setText(course.getJoinMethod().toString());
 			}
 			else if (currentUserIsMember())
 			{
-				joinMethodAction.setText("Zarejestrowany");
+				joinMethodAction.setText("Wypisz się");
+				joinMethodAction.setEnabled(false);
+			} else {
+				joinMethodAction.setEnabled(true);
+				joinMethodAction.setText("Dołącz");
 			}
-			else joinMethodAction.setText("Dołącz");
-			
 			courseMenu.setCourseId(course.getId().toString());
 		}
 	}
@@ -118,6 +121,7 @@ public class CourseView extends Composite
 			if (course != null) {
 				courseMembersView.setClientFactory(clientFactory);
 				courseMembersView.setCourse(course);
+				courseMembersView.afterSetCourse();
 				Set<Long> members = course.getMembers();
 				courseMembersView.addMembers(members);
 			} else {
@@ -154,8 +158,7 @@ public class CourseView extends Composite
 	
 	public void onUserRegistered()
 	{
-		joinMethodAction.setText("Zarejestrowany");
-		joinMethodAction.setEnabled(false);
+		com.google.gwt.user.client.Window.Location.reload();
 	}
 	
 	@UiHandler("joinMethodAction")
@@ -178,7 +181,6 @@ public class CourseView extends Composite
 			}
 			else
 			{
-				courseName.setText("Tutaj");
 				CoursePasswordPopup popup = clientFactory.getCoursePasswordPopup();
 				popup.setCourseProxy(course);
 				popup.center();

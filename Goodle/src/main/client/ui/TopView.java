@@ -60,7 +60,7 @@ public class TopView extends Composite
 
 	public void addSuggestions() {
 		final MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) searchBox.getSuggestOracle();
-/*		clientFactory.getRequestFactory().courseRequest().getAllCourses().fire(
+		clientFactory.getRequestFactory().courseRequest().getAllCourses().fire(
 				new Receiver <List<CourseProxy>> (){
 					@Override
 					public void onSuccess(List<CourseProxy> response) {
@@ -69,11 +69,7 @@ public class TopView extends Composite
 						} 
 					}
 				} 
-		); */
-		
-		oracle.add("abc");
-		oracle.add("blablaryka");
-		oracle.add("kucyk");
+		); 
 	}
 	
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }

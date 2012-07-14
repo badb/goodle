@@ -53,14 +53,19 @@ public class CourseView extends Composite
 			
 			if (currentUserIsOwner()) 
 			{
+				joinMethodAction.setEnabled(true);
 				joinMethodAction.setText(course.getJoinMethod().toString());
 			}
 			else if (currentUserIsMember())
 			{
-				joinMethodAction.setText("Zarejestrowany");
+				joinMethodAction.setText("Wypisz się");
+				joinMethodAction.setEnabled(false);
+			} 
+			else 
+			{
+				joinMethodAction.setEnabled(true);
+				joinMethodAction.setText("Dołącz");
 			}
-			else joinMethodAction.setText("Dołącz");
-			
 			courseMenu.setCourseId(course.getId().toString());
 		}
 	}
@@ -115,15 +120,7 @@ public class CourseView extends Composite
 		else if (selectedView.equals("members")) 
 		{ 
 			CourseMembersView courseMembersView = clientFactory.getCourseMembersView();
-			if (course != null) {
-				courseMembersView.setClientFactory(clientFactory);
-				courseMembersView.setCourse(course);
-				Set<Long> members = course.getMembers();
-				courseMembersView.addMembers(members);
-			} else {
-				Logger logger = Logger.getLogger("Goodle.Log");
-				logger.log(Level.SEVERE, "CourseProxy is null");
-			}
+			courseMembersView.setCourse(course);
 			currentView.setWidget(courseMembersView); 
 		}
 		else if (selectedView.equals("modules")) 
@@ -154,7 +151,11 @@ public class CourseView extends Composite
 	
 	private boolean currentUserIsOwner()
 	{
-		return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+		if (course != null)
+		{
+			return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+		}
+		else return false;
 	}
 	
 	private boolean currentUserIsMember()
@@ -170,8 +171,7 @@ public class CourseView extends Composite
 	
 	public void onUserRegistered()
 	{
-		joinMethodAction.setText("Zarejestrowany");
-		joinMethodAction.setEnabled(false);
+		com.google.gwt.user.client.Window.Location.reload();
 	}
 	
 	@UiHandler("joinMethodAction")
@@ -194,7 +194,6 @@ public class CourseView extends Composite
 			}
 			else
 			{
-				courseName.setText("Tutaj");
 				CoursePasswordPopup popup = clientFactory.getCoursePasswordPopup();
 				popup.setCourseProxy(course);
 				popup.center();

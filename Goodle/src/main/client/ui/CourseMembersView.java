@@ -11,10 +11,8 @@ import main.client.ClientFactory;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.GoodleUserProxy;
-import main.shared.proxy.MessageProxy;
 
 import com.google.gwt.cell.client.CheckboxCell;
-import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -25,13 +23,12 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.MultiSelectionModel;
-import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.web.bindery.requestfactory.shared.Receiver;
-import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class CourseMembersView extends Composite
@@ -42,15 +39,26 @@ public class CourseMembersView extends Composite
 		
 	private ClientFactory clientFactory;
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	private CourseProxy course;
-	public void setCourse(CourseProxy course) {this.course = course;}
 	
+	private CourseProxy course;
+	public void setCourse(CourseProxy course) 
+	{ 
+		this.course = course;
+		prepareView();
+	}
+	
+	private List <GoodleUserProxy> membersProxies = new ArrayList<GoodleUserProxy>();
 	
 	@UiField(provided=true) 
 	CellTable<GoodleUserProxy> membersList;
-	List <GoodleUserProxy> membersUserProxies = new ArrayList<GoodleUserProxy>();
+
 	@UiField Button removeButton;
 	SelectionModel<GoodleUserProxy> selectionModel;
+	
+	@UiField Label message;
+	
+	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
+	private static String usersRemoved = "Użytkownicy zostali wyrejestrowani z kursu.";
 	
 	public CourseMembersView()
 	{
@@ -58,89 +66,133 @@ public class CourseMembersView extends Composite
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	private void initList() {
-		membersList = new CellTable<GoodleUserProxy>();
+	private void initList() 
+	{
 		selectionModel = new MultiSelectionModel<GoodleUserProxy>();
-	}
-
-	public void addMembers(Set<Long> members) {
-		members.add((long) 44);
-		members.add((long) 47);
-		members.add((long) 48);
-		membersList.setSelectionModel(selectionModel,
-		       DefaultSelectionEventManager.<GoodleUserProxy> createCheckboxManager());
+		
+		membersList = new CellTable<GoodleUserProxy>();
+		membersList.setSelectionModel
+		(
+			selectionModel,
+			DefaultSelectionEventManager.<GoodleUserProxy>createCheckboxManager()
+		);
+			
 		Column <GoodleUserProxy, Boolean> checkColumn = 
-				new Column <GoodleUserProxy, Boolean> (new CheckboxCell(true, false))	{
+			new Column <GoodleUserProxy, Boolean> (new CheckboxCell(true, false))	
+		{
 			@Override
-			public Boolean getValue(GoodleUserProxy object) {
+			public Boolean getValue(GoodleUserProxy object) 
+			{
 				return selectionModel.isSelected(object);
-			}};
-		TextColumn<GoodleUserProxy> nameColumn = new TextColumn<GoodleUserProxy>() {
+			}
+		};
+		
+		TextColumn<GoodleUserProxy> nameColumn = new TextColumn<GoodleUserProxy>() 
+		{
 			@Override
-			public String getValue(GoodleUserProxy object) {
+			public String getValue(GoodleUserProxy object) 
+			{
 				return object.getFirstName() + " " + object.getLastName() + " (" + object.getEmail() + ")";
-			}};
+			}
+		};
 		nameColumn.setSortable(true);
 
 		membersList.addColumn(checkColumn);
 		membersList.addColumn(nameColumn);
-		
-		int size = members.size();
-		membersList.setRowCount(size);
-		for(Iterator<Long> it = members.iterator(); it.hasNext();)
-				this.getUser(it.next(), size);
 	}
 	
-	public void getUser(Long id, final int size) 
+	public void prepareView()
 	{
-		if (clientFactory != null)
+		membersProxies.clear();
+		message.setText("");
+		if (course != null)
 		{
-				clientFactory.getRequestFactory().goodleUserRequest().findGoodleUser(id).fire
-			(
-					new Receiver<GoodleUserProxy>()
-					{
-						@Override
-						public void onSuccess(GoodleUserProxy response)
-						{
-							if (response != null)
-							{
-								membersUserProxies.add(response);
-								if (membersUserProxies.size() == size)
-									membersList.setRowData(0, membersUserProxies);
-							}
-						}
-					}
-			);
+			if (currentUserIsOwner()) 
+			{
+				removeButton.setEnabled(true);
+				removeButton.setVisible(true);
+			}
+			else 
+			{
+				removeButton.setEnabled(false);
+				removeButton.setVisible(false);
+			}
+			getCourseMembers();
 		}
+	}
+
+	public void getCourseMembers() 
+	{	
+		Set<Long> ids = course.getMembers();
+				
+		clientFactory.getRequestFactory().goodleUserRequest().findGoodleUsers(ids).fire
+		(
+			new Receiver<Set<GoodleUserProxy>>()
+			{
+				@Override
+				public void onSuccess(Set<GoodleUserProxy> response)
+				{
+					membersProxies.addAll(response);
+					membersList.setRowData(membersProxies);
+				}
+			}
+		);
 	}
 
 	@UiHandler("removeButton")
-	public void onRemoveButtonClick(ClickEvent event) {
-		final Logger logger = Logger.getLogger("Goodle.Log");
-		if (clientFactory == null)
-			return;
-		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
-		for(Iterator<GoodleUserProxy> it = membersUserProxies.iterator(); it.hasNext();) {
-			final GoodleUserProxy user = it.next();
-			if (selectionModel.isSelected(user)) {
-				request.removeMember(user.getId()).using(course).fire(
-						new Receiver<Void>() {			
-							@Override
-							public void onFailure(ServerFailure error) {
-								Logger logger = Logger.getLogger("Goodle.Log");
-								logger.log(Level.SEVERE, error.getMessage());
-								logger.log(Level.SEVERE, error.getStackTraceString());
-								logger.log(Level.SEVERE, error.getExceptionType());
-							}
-
-							@Override
-							public void onSuccess(Void response) {
-								Logger logger = Logger.getLogger("Goodle.Log");
-								logger.log(Level.INFO, "usunieto uzytkownika " + user.getId() + " z kursu");
-							}
-				});
+	public void onRemoveButtonClick(ClickEvent event) 
+	{
+		List<Long> ids = new ArrayList<Long>();
+		
+		for(GoodleUserProxy i : membersProxies)
+		{
+			if (selectionModel.isSelected(i)) 
+			{
+				ids.add(i.getId());
 			}
 		}
+		
+		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+		course = request.edit(course);
+		request.unregisterUsers(ids).using(course).fire
+		(
+			new Receiver<Boolean>() 
+			{			
+				
+				@Override
+				public void onSuccess(Boolean response) 
+				{
+					if (response) 
+					{
+						message.setText(usersRemoved);
+						Iterator<GoodleUserProxy> i = membersProxies.iterator();
+						while(i.hasNext())
+						{
+							GoodleUserProxy u = i.next();							
+							if (selectionModel.isSelected(u)) i.remove();
+						}
+						membersList.setRowData(membersProxies);
+					}
+					else message.setText(failure);
+				}
+				
+				@Override
+				public void onFailure(ServerFailure error) {
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, error.getMessage());
+					logger.log(Level.SEVERE, error.getStackTraceString());
+					logger.log(Level.SEVERE, error.getExceptionType());
+				}
+			}
+		);
 	}
-
+	
+	private boolean currentUserIsOwner()
+	{
+		if (course != null)
+		{
+			return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+		}
+		else return false;
+	}
 }

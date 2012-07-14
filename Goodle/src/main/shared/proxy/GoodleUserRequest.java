@@ -1,6 +1,7 @@
 package main.shared.proxy;
 
 import java.util.List;
+import java.util.Set;
 
 import main.server.domain.GoodleUser;
 
@@ -25,6 +26,7 @@ public interface GoodleUserRequest extends RequestContext
 	InstanceRequest<GoodleUserProxy, Void> persist();
 	InstanceRequest<GoodleUserProxy, Void> remove();
 	Request<GoodleUserProxy> findGoodleUser(Long id);
+	Request<Set<GoodleUserProxy>> findGoodleUsers(Set<Long> ids);
 	Request<List<GoodleUserProxy>> findGoodleUsersByName(String name);
 	Request<GoodleUserProxy> getCurrentUser();
 	Request<String> getLoginUrl(String destination);

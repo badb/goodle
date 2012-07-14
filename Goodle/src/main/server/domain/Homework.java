@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
-public class Homework extends Material 
+public class Homework extends Material
 {
 	@NotNull
     private String text;

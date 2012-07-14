@@ -11,7 +11,7 @@ import com.googlecode.objectify.annotation.Entity;
 
 @SuppressWarnings("serial")
 @Entity
-public class UploadedFile extends Material
+public class UploadedFile extends Material 
 {
 	@NotBlank
 	@URL

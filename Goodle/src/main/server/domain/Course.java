@@ -2,6 +2,7 @@ package main.server.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -259,6 +260,31 @@ public class Course implements Serializable
     	}
     	
     	return true;
+    }
+    
+    public boolean unregisterUsers(Collection<Long> ids)
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null || !coordinators.contains(u.getId()))
+    	{
+    		return false;
+    	}
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		Course c = em.find(Course.class, this.id);
+    		for (Long userId : ids)
+    		{
+    			c.removeMember(userId);
+    			u = em.find(GoodleUser.class, userId);
+    			u.removeCourseAttended(c);
+    			em.merge(u);
+    			em.merge(c);
+    		}
+    		return true;
+    	}
+    	finally { em.close(); }
     }
     
 }

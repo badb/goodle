@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @SuppressWarnings("serial")
 public class Module implements Serializable 
-{
+{ 
 	
 	@Id
 	@Column(name="id")

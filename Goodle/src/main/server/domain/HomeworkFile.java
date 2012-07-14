@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 
 @SuppressWarnings("serial")
 @Entity
-public class HomeworkFile extends UploadedFile 
+public class HomeworkFile extends UploadedFile
 {
     private Mark mark;
     public Mark getMark() { return mark; }

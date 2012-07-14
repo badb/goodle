@@ -7,6 +7,7 @@
 	<ui:style src="../../../css/Goodle.css"/>
 
 	<g:VerticalPanel>
+	    <g:Label ui:field="message" />
 	    <g:Button text="Usuń zaznaczonych" ui:field="removeButton"/>
 	    <c:CellTable ui:field="membersList" styleName="{style.membersList}"/>
 	</g:VerticalPanel>

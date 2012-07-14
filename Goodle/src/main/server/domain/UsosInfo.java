@@ -4,7 +4,7 @@ public class UsosInfo
 {
 	private String accessTokenKey;
 
-	private String accessTokenSecret;
+	private String accessTokenSecret; 
 
 	private String requestKey;
 	

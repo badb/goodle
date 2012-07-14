@@ -2,6 +2,7 @@ package main.server.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -140,6 +141,19 @@ public class GoodleUser implements Serializable
 		{
 			GoodleUser u = em.find(GoodleUser.class, id);
 			return u;
+		}
+		finally { em.close(); }
+	}
+	
+	public static Set<GoodleUser> findGoodleUsers(Collection<Long> ids)
+	{
+		Set<GoodleUser> users = new HashSet<GoodleUser>();
+		
+		EntityManager em = entityManager();
+		try
+		{
+			for(Long id : ids) users.add(em.find(GoodleUser.class, id));
+			return users;
 		}
 		finally { em.close(); }
 	}

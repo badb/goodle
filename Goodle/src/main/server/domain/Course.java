@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -114,8 +115,13 @@ public class Course implements Serializable
     @Basic
     private List<Long> modules = new ArrayList<Long>();
     public List<Long> getModules() { return Collections.unmodifiableList(modules); }
+    public void setModules(List<Long> modules) {
+    	this.modules = modules;
+    }
     public void addModule(Long id) { modules.add(id); }
-    public void removeModule(Long id) { modules.remove(id); }
+    public void removeModule(Long id) { 
+    	//TODO usunięcie modułu z bazy danych?
+    	modules.remove(id); }
        
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();

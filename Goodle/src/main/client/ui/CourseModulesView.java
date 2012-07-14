@@ -91,10 +91,7 @@ public class CourseModulesView  extends Composite
 		//TODO sprawdzić gdzie ma przenosić
 		
 
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		Logger logger = Logger.getLogger("Goodle.Log");
-		logger.log(Level.SEVERE, courseId);
-		
+		String courseId = (course == null ? "-1" : course.getId().toString());		
 		clientFactory.getPlaceController().goTo(new CourseModulesEditPlace(courseId));
 	}
 	

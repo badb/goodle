@@ -33,4 +33,5 @@ public interface CourseProxy extends EntityProxy
 	void setJoinMethod(JoinMethod joinMethod);
 	void setKey(String key);
 	void setCalendar(String link);
+	void setModules(List<Long> modules);
 }

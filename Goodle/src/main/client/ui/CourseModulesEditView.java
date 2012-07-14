@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,36 +32,39 @@ public class CourseModulesEditView extends CourseViewAbstract {
 			UiBinder<Widget, CourseModulesEditView> {
 	}
 
-	@UiField Button addModuleButton;
-	@UiField FlexTable modulesTable;
+	@UiField
+	Button addModuleButton;
+	@UiField
+	FlexTable modulesTable;
 	private boolean click = false;
 	private boolean changed = false;
 	private CourseProxy course;
 	
+
 	private ClientFactory clientFactory;
-	
 
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-
-	public CourseModulesEditView()
-	{
-		initWidget(uiBinder.createAndBindUi(this));
-		
+	public void setClientFactory(ClientFactory clientFactory) {
+		this.clientFactory = clientFactory;
 	}
-	
+
+	public CourseModulesEditView() {
+		initWidget(uiBinder.createAndBindUi(this));
+
+	}
+
 	protected void onLoad() {
 		click = false;
 		changed = false;
+		// TODO: usunąć?
+		//loadModules();
 	}
-	
-	public void setCourse(CourseProxy course) { 
-		this.course = course; 
+
+	public void setCourse(CourseProxy course) {
+		this.course = course;
 		loadModules();
 	}
 
-	
-	private void loadModules()
-	{
+	private void loadModules() {
 		modulesTable.clear();
 		if (course == null) {
 			Logger logger = Logger.getLogger("Goodle.Log");
@@ -68,72 +72,150 @@ public class CourseModulesEditView extends CourseViewAbstract {
 			return;
 		}
 		List<Long> ids = course.getModules();
-		
-		if(!ids.isEmpty()){
-		
-		clientFactory.getRequestFactory().moduleRequest().findModules(ids).fire
-		(
-			new Receiver<List<ModuleProxy>>()
-			{
-				@Override
-				public void onSuccess(List<ModuleProxy> result)
-				{
-					for (ModuleProxy m : result)
-					{
-						ModuleEditView view = new ModuleEditView();
-						view.setClientFactory(clientFactory);
-					    view.setModule(m);
-					    
-						int rows = modulesTable.getRowCount();
-						modulesTable.insertRow(rows);
-						modulesTable.insertCell(rows, 0);					
-					    modulesTable.setWidget(rows, 0, view);
-					}
-				}
-			}
-		);
+
+		if (!ids.isEmpty()) {
+
+			clientFactory.getRequestFactory().moduleRequest().findModules(ids)
+					.fire(new Receiver<List<ModuleProxy>>() {
+						@Override
+						public void onSuccess(List<ModuleProxy> result) {
+							for (ModuleProxy m : result) {
+								ModuleEditView view = new ModuleEditView();
+								view.setClientFactory(clientFactory);
+								view.setModule(m);
+
+								int rows = modulesTable.getRowCount();
+								modulesTable.insertRow(rows);
+								modulesTable.insertCell(rows, 0);
+								modulesTable.setWidget(rows, 0, view);
+							}
+						}
+					});
 		}
 	}
-	
+
 	@UiHandler("addModuleButton")
-	void onAddModuleButtonClick(ClickEvent event)
-	{	
+	void onAddModuleButtonClick(ClickEvent event) {
 		Integer rows = modulesTable.getRowCount();
 		modulesTable.insertRow(rows);
 		modulesTable.insertCell(rows, 0);
-		
-	    ModuleEditView view = new ModuleEditView();
+
+		ModuleEditView view = new ModuleEditView();
 		view.setClientFactory(clientFactory);
+		ModuleRequest mreq = clientFactory.getRequestFactory().moduleRequest();
+		ModuleProxy m = mreq.create(ModuleProxy.class);
+		m.setTitle("Nowy moduł " + rows.toString());
+		m.setText("");
+		m.setAuthor(clientFactory.getCurrentUser());
 
-	    ModuleRequest mreq = clientFactory.getRequestFactory().moduleRequest();
-	    ModuleProxy m = mreq.create(ModuleProxy.class);
-	    m.setTitle("Nowy moduł " + rows.toString());
-	    m.setText("");
-	    m.setAuthor(clientFactory.getCurrentUser());
-	    
-	    mreq.persist().using(m).fire(new Receiver<Void>()
-				{			
-			@Override
-			public void onFailure(ServerFailure error) {
-				Logger logger = Logger.getLogger("Goodle.Log");
-				logger.log(Level.SEVERE, error.getMessage());
-				logger.log(Level.SEVERE, error.getStackTraceString());
-				logger.log(Level.SEVERE, error.getExceptionType());
+		/*
+		 * mreq.persist().using(m).fire(new Receiver<Void>() {
+		 * 
+		 * @Override public void onFailure(ServerFailure error) { Logger logger
+		 * = Logger.getLogger("Goodle.Log"); logger.log(Level.SEVERE,
+		 * error.getMessage()); logger.log(Level.SEVERE,
+		 * error.getStackTraceString()); logger.log(Level.SEVERE,
+		 * error.getExceptionType()); }
+		 * 
+		 * @Override public void onSuccess(Void response) { Logger logger =
+		 * Logger.getLogger("Goodle.Log"); logger.log(Level.SEVERE,
+		 * "moduleRequest response " + response.toString());
+		 * 
+		 * }});
+		 */
+
+		/*
+		 * CourseRequest req =
+		 * clientFactory.getRequestFactory().courseRequest(); course =
+		 * req.edit(course); req.addModule(m.getId());
+		 * req.persist().using(course).fire(new Receiver<Long>() {
+		 * 
+		 * @Override public void onFailure(ServerFailure error) { Logger logger
+		 * = Logger.getLogger("Goodle.Log"); logger.log(Level.SEVERE,
+		 * error.getMessage()); logger.log(Level.SEVERE,
+		 * error.getStackTraceString()); logger.log(Level.SEVERE,
+		 * error.getExceptionType()); }
+		 * 
+		 * @Override public void onSuccess(Long response) {
+		 * 
+		 * Logger logger = Logger.getLogger("Goodle.Log");
+		 * logger.log(Level.SEVERE, "courseRequest response " +
+		 * response.toString());
+		 * 
+		 * } });
+		 */
+
+		view.setModule(m);
+		modulesTable.setWidget(rows, 0, view);
+		changed = true;
+
+	}
+
+	@UiHandler("cancelModulesButton")
+	void onCancelModulesButtonClicked(ClickEvent event) {
+		/* hideEdit(); */
+		// event.stopPropagation();
+
+		ModuleRequest mreq = clientFactory.getRequestFactory()
+				.moduleRequest();
+		for (int i = 0; i < modulesTable.getRowCount(); i++) {
+			
+			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
+			ModuleProxy proxy = view.getModule();
+			if (!course.getModules().contains(proxy.getId())) {
+				mreq.remove().using(proxy).fire();
+				
 			}
+		}
+		mreq.persist();
+		
+		
+		click = true;
+		String courseId = (course == null ? "-1" : course.getId().toString());
+		clientFactory.getPlaceController().goTo(
+				new CoursePlace(courseId, "modules"));
+	}
 
-			@Override
-			public void onSuccess(Void response) {
-				Logger logger = Logger.getLogger("Goodle.Log");
-				logger.log(Level.SEVERE, response.toString());
-	    
-			}});
-	    
-	    
-	    CourseRequest req = clientFactory.getRequestFactory().courseRequest();
-	    course = req.edit(course);
-	    req.addModule(m.getId());
-	    req.persist().using(course).fire(new Receiver<Long>()
-				{			
+	@UiHandler("saveModulesButton")
+	void onSaveModulesButtonClicked(ClickEvent event) {
+
+		CourseRequest req = clientFactory.getRequestFactory().courseRequest();
+		course = req.edit(course);
+		course.setModules(new ArrayList<Long>());
+
+		ModuleRequest mreq = clientFactory.getRequestFactory()
+				.moduleRequest();
+		for (int i = 0; i < modulesTable.getRowCount(); i++) {
+
+			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
+			ModuleProxy proxy = view.getModule();
+			mreq.edit(proxy);
+			// if (view.isChanged()) {
+			// view.saveData(mreq);
+			// }
+			view.saveData(proxy);
+
+			mreq.persist().using(proxy).fire(new Receiver<Void>() {
+				@Override
+				public void onFailure(ServerFailure error) {
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, error.getMessage());
+					logger.log(Level.SEVERE, error.getStackTraceString());
+					logger.log(Level.SEVERE, error.getExceptionType());
+				}
+
+				@Override
+				public void onSuccess(Void response) {
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, "moduleRequest response "
+							+ response.toString());
+
+				}
+			});
+
+			req.addModule(proxy.getId());
+		}
+		req.persist().using(course).fire(new Receiver<Long>() {
 			@Override
 			public void onFailure(ServerFailure error) {
 				Logger logger = Logger.getLogger("Goodle.Log");
@@ -144,80 +226,55 @@ public class CourseModulesEditView extends CourseViewAbstract {
 
 			@Override
 			public void onSuccess(Long response) {
-				
-					Logger logger = Logger.getLogger("Goodle.Log");
-					logger.log(Level.SEVERE, "courseRequest response " + response.toString());
-					
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE,
+						"courseRequest response " + response.toString());
 			}
 		});
-	    
-	    
-	    view.setModule(m);
-	    modulesTable.setWidget(rows, 0, view);
-	    changed = true;
+		
 
-	}
-	
-	@UiHandler("cancelModulesButton")
-	void onCancelModulesButtonClicked(ClickEvent event) {
-		/*hideEdit();*/
-		//event.stopPropagation();
 		click = true;
 		String courseId = (course == null ? "-1" : course.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
+		clientFactory.getPlaceController().goTo(
+				new CoursePlace(courseId, "modules"));
 	}
-
-	@UiHandler("saveModulesButton")
-	void onSaveModulesButtonClicked(ClickEvent event) {
-		
-		for (int i = 0; i < modulesTable.getRowCount(); i++) {
-			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
-			if (view.isChanged()) {
-				view.saveData();
-			}
-		}	
-		click = true;
-		
-		String courseId = (course == null ? "-1" : course.getId().toString());
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
-	}
-	
 
 	public boolean hasChanged() {
-		if (click) return false;
+		if (click)
+			return false;
 		for (int i = 0; i < modulesTable.getRowCount(); i++) {
 			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
 			if (view.isChanged()) {
 				changed = true;
 			}
-		}	
+		}
 		return changed;
 	}
 
 	public void setCourse(String courseId) {
-		clientFactory.getRequestFactory().courseRequest().findCourse(Long.parseLong(courseId)).fire
-		(	
-			new Receiver<CourseProxy>() {
-				@Override
-				public void onSuccess(CourseProxy response) {
-					if (response == null) { 
-						//TODO: onCourseNotFound();
-						Logger logger = Logger.getLogger("Goodle.Log");
-						logger.log(Level.SEVERE, "pusta odpowiedź");
-						return;
+		clientFactory.getRequestFactory().courseRequest()
+				.findCourse(Long.parseLong(courseId))
+				.fire(new Receiver<CourseProxy>() {
+					@Override
+					public void onSuccess(CourseProxy response) {
+						if (response == null) {
+							// TODO: onCourseNotFound();
+							Logger logger = Logger.getLogger("Goodle.Log");
+							logger.log(Level.SEVERE, "pusta odpowiedź");
+							return;
+						}
+						setCourse(response);
 					}
-					setCourse(response);
-				}
-				
-				@Override
-				public void onFailure(ServerFailure error) {
-					Logger logger = Logger.getLogger("Goodle.Log");
-					logger.log(Level.SEVERE, error.getMessage());
-					logger.log(Level.SEVERE, error.getStackTraceString());
-					logger.log(Level.SEVERE, error.getExceptionType());
-				}
-			}
-		);
+
+					@Override
+					public void onFailure(ServerFailure error) {
+						Logger logger = Logger.getLogger("Goodle.Log");
+						logger.log(Level.SEVERE,
+								"setCourse fail:" + error.getMessage());
+						logger.log(Level.SEVERE, error.getStackTraceString());
+						logger.log(Level.SEVERE, error.getExceptionType());
+					}
+				});
 	}
 
 }

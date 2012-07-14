@@ -3,6 +3,7 @@ package main.client.ui;
 
 import main.client.ClientFactory;
 import main.shared.proxy.ModuleProxy;
+import main.shared.proxy.ModuleRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -41,8 +42,8 @@ public class ModuleEditView extends Composite {
 
 	public ModuleEditView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		titleEdit.setText("Nowy moduł");
-		descEdit.setText("Opis");
+		//titleEdit.setText("Nowy moduł");
+		//descEdit.setText("Opis");
 
 	}
 
@@ -68,13 +69,15 @@ public class ModuleEditView extends Composite {
 	}
 
 
-	public void saveData() {
+	public void saveData(ModuleProxy proxy) {
 		//tODO usunąć:
-		if (module == null) return;
-		module.setTitle(titleEdit.getText());
-		module.setText(descEdit.getText());
+		if (proxy == null) return;
+
+		proxy.setTitle(titleEdit.getText());
+		proxy.setText(descEdit.getText());
 		visible = !showHideBox.getValue();
-		module.setIsVisible(visible);
+		proxy.setIsVisible(visible);
+		
 	}
 	
 	@UiHandler("deleteButton")
@@ -84,6 +87,5 @@ public class ModuleEditView extends Composite {
 			parent.removeRow(parent.getCellForEvent(event).getRowIndex());
 		}
 		this.removeFromParent();
-		
 	}
 }

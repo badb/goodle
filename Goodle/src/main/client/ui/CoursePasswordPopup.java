@@ -85,6 +85,7 @@ public class CoursePasswordPopup extends DialogBox
 	@UiHandler("cancel")
 	public void onCancelButtonClicked(ClickEvent click)
 	{
+		message.setText("");
 		this.hide();
 	}
 }

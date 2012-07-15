@@ -97,7 +97,8 @@ public class CourseMembersView extends Composite
 		};
 		nameColumn.setSortable(true);
 
-		membersList.addColumn(checkColumn);
+		if (currentUserIsOwner())
+			membersList.addColumn(checkColumn);
 		membersList.addColumn(nameColumn);
 	}
 	

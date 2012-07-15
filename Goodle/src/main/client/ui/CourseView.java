@@ -133,7 +133,7 @@ public class CourseView extends Composite
 				Logger logger = Logger.getLogger("Goodle.Log");
 				logger.log(Level.SEVERE, "CourseProxy is null");
 			}
-			currentView.setWidget(clientFactory.getCourseModulesView()); 
+			currentView.setWidget(courseModulesView); 
 		}
 		else if (selectedView.equals("modulesEdit"))
 		{
@@ -145,7 +145,7 @@ public class CourseView extends Composite
 				Logger logger = Logger.getLogger("Goodle.Log");
 				logger.log(Level.SEVERE, "CourseProxy is null");
 			}
-			currentView.setWidget(clientFactory.getCourseModulesEditView());
+			currentView.setWidget(courseModulesEditView);
 		}
 	}
 	

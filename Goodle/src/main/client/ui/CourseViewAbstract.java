@@ -52,8 +52,6 @@ public class CourseViewAbstract extends Composite
 	public CourseProxy getCourse() { return course; }	
 	public void setCourse(CourseProxy course) { this.course = course; }
 	
-		
-	private String selectedTab;
 
 	public void getCourse(String courseId)
  	{

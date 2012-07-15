@@ -61,6 +61,9 @@ public class CourseModulesEditView extends CourseViewAbstract {
 
 	public void setCourse(CourseProxy course) {
 		this.course = course;
+
+		Logger logger = Logger.getLogger("Goodle.Log");
+		logger.log(Level.SEVERE, "CourseProxy ustawione");
 		loadModules();
 	}
 
@@ -183,10 +186,9 @@ public class CourseModulesEditView extends CourseViewAbstract {
 		course = req.edit(course);
 		course.setModules(new ArrayList<Long>());
 
-		ModuleRequest mreq = clientFactory.getRequestFactory()
-				.moduleRequest();
 		for (int i = 0; i < modulesTable.getRowCount(); i++) {
 
+			ModuleRequest mreq = clientFactory.getRequestFactory().moduleRequest();
 			ModuleEditView view = (ModuleEditView) modulesTable.getWidget(i, 0);
 			ModuleProxy proxy = view.getModule();
 			mreq.edit(proxy);

@@ -1,7 +1,11 @@
 package main.client.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.ClientFactory;
 import main.shared.proxy.CourseProxy;
+import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -10,6 +14,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class CourseInfoView extends Composite
@@ -39,11 +45,52 @@ public class CourseInfoView extends Composite
 	
 	@UiHandler("biblio")
 	public void onBiblioValueChange(ValueChangeEvent<String> event) {
-		if (course != null) course.setBibliography(event.getValue());
+		if (course != null) {
+			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+			course = request.edit(course);
+			request.addBiblio(event.getValue()).using(course).fire
+			(
+					new Receiver<Boolean>() 
+					{
+						@Override
+						public void onSuccess(Boolean response)
+						{
+							Logger logger = Logger.getLogger("Goodle.Log");
+							if (response) 
+							{
+								logger.log(Level.INFO, "Zmieniono bibliografię kursu");
+							}
+							else 
+								logger.log(Level.INFO, "Nie udalo sie zmienić bibliografii");
+						}
+					}
+			);
+		}
     }
+
 	
 	@UiHandler("desc")
 	public void onDescValueChange(ValueChangeEvent<String> event) {
-		if (course != null) course.setDescription(event.getValue());
+		if (course != null) {
+			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+			course = request.edit(course);
+			request.addDescription(event.getValue()).using(course).fire
+			(
+					new Receiver<Boolean>() 
+					{
+						@Override
+						public void onSuccess(Boolean response)
+						{
+							Logger logger = Logger.getLogger("Goodle.Log");
+							if (response) 
+							{
+								logger.log(Level.INFO, "Zmieniono opis kursu");
+							}
+							else 
+								logger.log(Level.INFO, "Nie udalo sie zmienic opisu");
+						}
+					}
+			);
+		}
     }
 }

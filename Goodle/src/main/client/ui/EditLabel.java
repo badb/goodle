@@ -25,22 +25,26 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 
 	interface EditLabelUiBinder extends UiBinder<Widget, EditLabel> {
 	}
-	
 
 	@UiField HTML label;
 	@UiField DeckLayoutPanel deckPanel;
 	@UiField TextArea textArea;
 	@UiField Button saveButton;
-
+	@UiField Button cancelButton;
+	
+	private String text;
+	
 	public EditLabel() {
 		initWidget(uiBinder.createAndBindUi(this));
 		deckPanel.showWidget(0);
 		label.getElement().getStyle().setProperty("whiteSpace", "pre");
+		text = getValue();
 	}
 	
 
 	@UiHandler("label")
 	void onLabelClick(ClickEvent e) {
+		text = getValue();
 		//if (deckPanel.getVisibleWidgetIndex() == 0) {
 			textArea.setText(getValue());
 			deckPanel.showWidget(1);
@@ -52,6 +56,13 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	public void onSaveButtonClick(ClickEvent event) {
 		if(deckPanel.getVisibleWidgetIndex() == 0) return;
 		setValue(textArea.getText(), true);
+		deckPanel.showWidget(0);
+	}
+
+	@UiHandler("cancelButton")
+	public void onCancelButtonClick(ClickEvent event) {
+		if(deckPanel.getVisibleWidgetIndex() == 0) return;
+		setValue(text, false);
 		deckPanel.showWidget(0);
 	}
 

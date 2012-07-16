@@ -24,6 +24,8 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, Boolean> registerCurrentUser(String key);
 	InstanceRequest<CourseProxy, Boolean> unregisterUsers(List<Long> ids);
 	InstanceRequest<CourseProxy, CourseProxy> update();
+	InstanceRequest<CourseProxy, Boolean> addDescription(String desc);
+	InstanceRequest<CourseProxy, Boolean> addBiblio(String bibl);
 	
 	InstanceRequest<CourseProxy, Long> persist();
 	InstanceRequest<CourseProxy, Void> remove();

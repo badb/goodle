@@ -15,7 +15,6 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
-import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class CourseInfoView extends Composite
@@ -34,8 +33,6 @@ public class CourseInfoView extends Composite
 		if (!currentUserIsOwner()) {
 			desc.setEnabled(false);
 			biblio.setEnabled(false);
-			Logger logger = Logger.getLogger("Goodle.Log");
-			logger.log(Level.SEVERE, "false");
 		} else {
 			desc.setEnabled(true);
 			biblio.setEnabled(true);
@@ -54,71 +51,51 @@ public class CourseInfoView extends Composite
 	
 	@UiHandler("biblio")
 	public void onBiblioValueChange(ValueChangeEvent<String> event) {
-		if (course != null) {
+		if (course != null && currentUserIsOwner()) {
 			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
 			course = request.edit(course);
-
-			course.setBibliography(event.getValue());
-			request.update().using(course).fire
+			request.addBiblio(event.getValue()).using(course).fire
 			(
-				new Receiver<CourseProxy>() 
-				{
-					@Override
-					public void onSuccess(CourseProxy response) 
+					new Receiver<Boolean>() 
 					{
-						if (response != null) 
+						@Override
+						public void onSuccess(Boolean response)
 						{
-							course = response;
+							Logger logger = Logger.getLogger("Goodle.Log");
+							if (response) 
+							{
+								logger.log(Level.INFO, "Zmieniono bibliografię kursu");
+							}
+							else 
+								logger.log(Level.INFO, "Nie udalo sie zmienić bibliografii");
 						}
 					}
-					
-					@Override
-					public void onFailure(ServerFailure error) {
-						Logger logger = Logger.getLogger("Goodle.Log");
-						logger.log(Level.SEVERE, error.getMessage());
-						logger.log(Level.SEVERE, error.getStackTraceString());
-						logger.log(Level.SEVERE, error.getExceptionType());
-					}
-				}
 			);
 		}
     }
+
 	
 	@UiHandler("desc")
 	public void onDescValueChange(ValueChangeEvent<String> event) {
-		if (course != null) {
+		if (course != null && currentUserIsOwner()) {
 			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
 			course = request.edit(course);
-
-
-			Logger logger = Logger.getLogger("Goodle.Log");
-			logger.log(Level.SEVERE,"true");
-			
-			course.setDescription(event.getValue());
-			request.update().using(course).fire
+			request.addDescription(event.getValue()).using(course).fire
 			(
-				new Receiver<CourseProxy>() 
-				{
-					@Override
-					public void onSuccess(CourseProxy response) 
+					new Receiver<Boolean>() 
 					{
-						if (response != null) 
+						@Override
+						public void onSuccess(Boolean response)
 						{
-							course = response;
-
 							Logger logger = Logger.getLogger("Goodle.Log");
-							logger.log(Level.SEVERE,"true2");
+							if (response) 
+							{
+								logger.log(Level.INFO, "Zmieniono opis kursu");
+							}
+							else 
+								logger.log(Level.INFO, "Nie udalo sie zmienic opisu");
 						}
 					}
-					
-					@Override
-					public void onFailure(ServerFailure error) {
-						Logger logger = Logger.getLogger("Goodle.Log");
-						logger.log(Level.SEVERE, error.getMessage());
-						logger.log(Level.SEVERE, error.getStackTraceString());
-						logger.log(Level.SEVERE, error.getExceptionType());
-					}
-				}
 			);
 		}
     }

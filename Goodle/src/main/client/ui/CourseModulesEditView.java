@@ -278,5 +278,7 @@ public class CourseModulesEditView extends CourseViewAbstract {
 					}
 				});
 	}
+	
+	public boolean mayStop() { return click; }
 
 }

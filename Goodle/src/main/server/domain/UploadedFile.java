@@ -2,12 +2,11 @@ package main.server.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
-
-import com.googlecode.objectify.annotation.Entity;
 
 @SuppressWarnings("serial")
 @Entity

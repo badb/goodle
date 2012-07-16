@@ -1,11 +1,9 @@
 package main.client.ui;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import main.client.ClientFactory;
-import main.client.place.CourseModulesEditPlace;
+import main.client.place.CoursePlace;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.ModuleProxy;
 
@@ -92,7 +90,7 @@ public class CourseModulesView  extends Composite
 		
 
 		String courseId = (course == null ? "-1" : course.getId().toString());		
-		clientFactory.getPlaceController().goTo(new CourseModulesEditPlace(courseId));
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "modulesEdit"));
 	}
 	
 	

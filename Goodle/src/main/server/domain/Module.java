@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @SuppressWarnings("serial")
 public class Module implements Serializable 
 { 
-	
+
 	@Id
 	@Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)	

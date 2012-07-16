@@ -59,6 +59,7 @@ public class CourseMembersView extends Composite
 	
 	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
 	private static String usersRemoved = "Użytkownicy zostali wyrejestrowani z kursu.";
+	private static String markToRemove = "Musisz najpierw zaznaczyć użytkowników do wyrejestrowania";
 	
 	public CourseMembersView()
 	{
@@ -150,6 +151,11 @@ public class CourseMembersView extends Composite
 			{
 				ids.add(i.getId());
 			}
+		}
+		
+		if (ids.isEmpty()) {
+			message.setText(markToRemove);
+			return;
 		}
 		
 		CourseRequest request = clientFactory.getRequestFactory().courseRequest();

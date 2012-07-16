@@ -1,7 +1,11 @@
 package main.client.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.ClientFactory;
 import main.shared.proxy.CourseProxy;
+import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -10,6 +14,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class CourseInfoView extends Composite
@@ -25,6 +31,15 @@ public class CourseInfoView extends Composite
 	public void setCourse(CourseProxy course) 
 	{
 		this.course = course;
+		if (!currentUserIsOwner()) {
+			desc.setEnabled(false);
+			biblio.setEnabled(false);
+			Logger logger = Logger.getLogger("Goodle.Log");
+			logger.log(Level.SEVERE, "false");
+		} else {
+			desc.setEnabled(true);
+			biblio.setEnabled(true);
+		}
 		desc.setValue(course.getDescription());
 		biblio.setValue(course.getBibliography());
 	}
@@ -39,11 +54,83 @@ public class CourseInfoView extends Composite
 	
 	@UiHandler("biblio")
 	public void onBiblioValueChange(ValueChangeEvent<String> event) {
-		if (course != null) course.setBibliography(event.getValue());
+		if (course != null) {
+			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+			course = request.edit(course);
+
+			course.setBibliography(event.getValue());
+			request.update().using(course).fire
+			(
+				new Receiver<CourseProxy>() 
+				{
+					@Override
+					public void onSuccess(CourseProxy response) 
+					{
+						if (response != null) 
+						{
+							course = response;
+						}
+					}
+					
+					@Override
+					public void onFailure(ServerFailure error) {
+						Logger logger = Logger.getLogger("Goodle.Log");
+						logger.log(Level.SEVERE, error.getMessage());
+						logger.log(Level.SEVERE, error.getStackTraceString());
+						logger.log(Level.SEVERE, error.getExceptionType());
+					}
+				}
+			);
+		}
     }
 	
 	@UiHandler("desc")
 	public void onDescValueChange(ValueChangeEvent<String> event) {
-		if (course != null) course.setDescription(event.getValue());
+		if (course != null) {
+			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+			course = request.edit(course);
+
+
+			Logger logger = Logger.getLogger("Goodle.Log");
+			logger.log(Level.SEVERE,"true");
+			
+			course.setDescription(event.getValue());
+			request.update().using(course).fire
+			(
+				new Receiver<CourseProxy>() 
+				{
+					@Override
+					public void onSuccess(CourseProxy response) 
+					{
+						if (response != null) 
+						{
+							course = response;
+
+							Logger logger = Logger.getLogger("Goodle.Log");
+							logger.log(Level.SEVERE,"true2");
+						}
+					}
+					
+					@Override
+					public void onFailure(ServerFailure error) {
+						Logger logger = Logger.getLogger("Goodle.Log");
+						logger.log(Level.SEVERE, error.getMessage());
+						logger.log(Level.SEVERE, error.getStackTraceString());
+						logger.log(Level.SEVERE, error.getExceptionType());
+					}
+				}
+			);
+		}
     }
+	
+	private boolean currentUserIsOwner()
+	{
+		if (course != null)
+		{
+			return course.getCoordinators().contains(clientFactory.getCurrentUser().getId());
+		}
+		else return false;
+	}
+	
+	
 }

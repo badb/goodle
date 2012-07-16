@@ -32,6 +32,8 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	@UiField TextArea textArea;
 	@UiField Button saveButton;
 
+	private boolean enabled = true;
+	
 	public EditLabel() {
 		initWidget(uiBinder.createAndBindUi(this));
 		deckPanel.showWidget(0);
@@ -41,10 +43,10 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 
 	@UiHandler("label")
 	void onLabelClick(ClickEvent e) {
-		//if (deckPanel.getVisibleWidgetIndex() == 0) {
+		if (enabled) {
 			textArea.setText(getValue());
 			deckPanel.showWidget(1);
-		//}
+		}
 	}
 	
 	
@@ -76,7 +78,7 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 
 	@Override
 	public void setValue(String text, boolean fireEvents) {
-		if(fireEvents) ValueChangeEvent.fireIfNotEqual(this, getValue(), text);
+		if(fireEvents & enabled) ValueChangeEvent.fireIfNotEqual(this, getValue(), text);
 		this.setValue(text);
 	}
 
@@ -86,6 +88,10 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	
 	public String getText() {
 		return getValue();
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 

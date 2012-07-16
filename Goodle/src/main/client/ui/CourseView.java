@@ -115,7 +115,9 @@ public class CourseView extends Composite
 	{
 		if (selectedView.equals("info")) 
 		{ 
-			currentView.setWidget(clientFactory.getCourseInfoView()); 
+			CourseInfoView courseInfoView = clientFactory.getCourseInfoView();
+			courseInfoView.setCourse(course);
+			currentView.setWidget(courseInfoView); 
 		}
 		else if (selectedView.equals("members")) 
 		{ 

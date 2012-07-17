@@ -111,19 +111,34 @@ public class CourseMembersView extends Composite
 		message.setText("");
 		if (course != null)
 		{
-			if (currentUserIsOwner()) 
-			{
-				insertCheckBoxColumn(checkColumn);
-				removeButton.setEnabled(true);
-				removeButton.setVisible(true);
-			}
-			else 
-			{
-				removeCheckBoxColumn(checkColumn);
-				removeButton.setEnabled(false);
-				removeButton.setVisible(false);
-			}
-			getCourseMembers();
+			clientFactory.getRequestFactory().courseRequest().findCourse(course.getId()).fire(
+					new Receiver<CourseProxy>()
+					{
+						@Override
+						public void onSuccess(CourseProxy response)
+						{
+							if (response == null) 
+							{ 
+								return;
+							}
+
+							course = response;	
+							if (currentUserIsOwner()) 
+							{
+								insertCheckBoxColumn(checkColumn);
+								removeButton.setEnabled(true);
+								removeButton.setVisible(true);
+							}
+							else 
+							{
+								removeCheckBoxColumn(checkColumn);
+								removeButton.setEnabled(false);
+								removeButton.setVisible(false);
+							}
+							getCourseMembers();
+						}
+					}
+			);
 		}
 	}
 

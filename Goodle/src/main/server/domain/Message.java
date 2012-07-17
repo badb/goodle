@@ -19,7 +19,7 @@ public class Message implements Serializable
     @NotNull
     private String text;
     public String getText() { return text; }
-    public void setText(String text) 
+    public void setText(String text)
     {
     	this.text = text;
     	modified = new Date();

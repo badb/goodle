@@ -23,7 +23,6 @@ public interface CourseProxy extends EntityProxy
 	String getCalendar();
 	Set<Long> getCoordinators();
 	Set<Long> getMembers();
-	List<Long> getModules();
 	List<MessageProxy> getMessages();
 	
 	void setName(String name);
@@ -33,5 +32,4 @@ public interface CourseProxy extends EntityProxy
 	void setJoinMethod(JoinMethod joinMethod);
 	void setKey(String key);
 	void setCalendar(String link);
-	void setModules(List<Long> modules);
 }

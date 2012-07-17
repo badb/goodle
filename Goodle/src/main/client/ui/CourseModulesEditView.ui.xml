@@ -6,12 +6,12 @@
 
         <g:FlowPanel>
 
-	        <g:Button ui:field="saveModulesButton">Zapisz zmiany</g:Button>
-	        <g:Button ui:field="cancelModulesButton">Anuluj</g:Button>
+	        <g:Button ui:field="save" text="Zapisz zmiany" />
+	        <g:Button ui:field="cancel" text="Anuluj" />
 		<g:FlowPanel>
-			<g:Label ui:field="infoListLabel">Tu będzie lista modułów:</g:Label>
-			<g:Button ui:field="addModuleButton" text="Dodaj moduł"/>
-			<g:FlexTable ui:field="modulesTable" />
+			<g:Label ui:field="info" />
+			<g:Button ui:field="newModule" text="Dodaj moduł"/>
+			<g:FlexTable ui:field="modules" />
 		</g:FlowPanel>
 	</g:FlowPanel>
 

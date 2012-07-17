@@ -41,9 +41,9 @@ public class Module implements Serializable
 	public void setTitle(String title) { this.title = title; }
 	
 	@NotNull
-	private GoodleUser author;
-	public GoodleUser getAuthor() { return author; }
-	public void setAuthor(GoodleUser author) { this.author = author; }
+	private Long author;
+	public Long getAuthor() { return author; }
+	public void setAuthor(Long author) { this.author = author; }
 	
 	@NotNull
     private String text;	
@@ -54,11 +54,11 @@ public class Module implements Serializable
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Material> materials = new ArrayList<Material>();
-    public List<Material> getMaterials() { return Collections.unmodifiableList(materials); }
-    public void addMaterial(Material material) { materials.add(material); }
-    public void removeMaterial(Material material) { materials.remove(material); }
+    //@OneToMany(cascade=CascadeType.ALL)
+    //private List<Material> materials = new ArrayList<Material>();
+    //public List<Material> getMaterials() { return Collections.unmodifiableList(materials); }
+    //public void addMaterial(Material material) { materials.add(material); }
+    //public void removeMaterial(Material material) { materials.remove(material); }
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> comments = new ArrayList<Message>();
@@ -97,21 +97,4 @@ public class Module implements Serializable
         }
         finally { em.close(); }    	
     }
-    
-    public static List<Module> findModules(List<Long> ids)
-    {
-    	EntityManager em = entityManager();
-    	List<Module> result = new ArrayList<Module>();
-    	try
-    	{
-    		for (Long id : ids)
-    		{
-    			Module m = findModule(id);
-    			if (m != null) result.add(m);
-    		}
-    		return result;
-    	}
-    	finally { em.close(); }
-    }
-
 }

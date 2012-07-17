@@ -6,12 +6,9 @@
 	<ui:style src="../../../css/Goodle.css"/>
 
         <g:FlowPanel>
-
-	        
-	        <g:Button ui:field="editModulesButton">Edytuj listę modułów</g:Button>
-		<g:FlowPanel>
-			<g:Label ui:field="infoListLabel">Tu będzie lista modułów:</g:Label>
-			<g:FlexTable ui:field="modulesTable" />
+            <g:Label ui:field="info" />
+	        <g:Button ui:field="edit" ui:text="Edytuj" />
+			<g:FlexTable ui:field="modules" />
 		</g:FlowPanel>
-	</g:FlowPanel>
+		
 </ui:UiBinder>

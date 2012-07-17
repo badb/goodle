@@ -12,14 +12,14 @@ public interface ModuleProxy extends EntityProxy
 {
 	Long getId();
 	String getTitle();
-	GoodleUserProxy getAuthor();
+	Long getAuthor();
 	String getText();
 	boolean getIsVisible();
 	List<MessageProxy> getComments();
-	List<MaterialProxy> getMaterials();
+	//List<MaterialProxy> getMaterials();
 	
 	void setTitle(String title);
-	void setAuthor(GoodleUserProxy author);
+	void setAuthor(Long author);
 	void setText(String text);
 	void setIsVisible(boolean isVisible);
 }

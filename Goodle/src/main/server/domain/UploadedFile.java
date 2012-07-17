@@ -4,12 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.MappedSuperclass;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
 @SuppressWarnings("serial")
 @Entity
+@MappedSuperclass
 public class UploadedFile extends Material 
 {
 	@NotBlank

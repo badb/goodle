@@ -55,10 +55,14 @@ public class CourseMembersView extends Composite
 	@UiField Button removeButton;
 	SelectionModel<GoodleUserProxy> selectionModel;
 	
+	private TextColumn<GoodleUserProxy> nameColumn;
+	private Column <GoodleUserProxy, Boolean> checkColumn;
+	
 	@UiField Label message;
 	
 	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
 	private static String usersRemoved = "Użytkownicy zostali wyrejestrowani z kursu.";
+	private static String markToRemove = "Musisz najpierw zaznaczyć użytkowników do wyrejestrowania";
 	
 	public CourseMembersView()
 	{
@@ -77,7 +81,7 @@ public class CourseMembersView extends Composite
 			DefaultSelectionEventManager.<GoodleUserProxy>createCheckboxManager()
 		);
 			
-		Column <GoodleUserProxy, Boolean> checkColumn = 
+		checkColumn = 
 			new Column <GoodleUserProxy, Boolean> (new CheckboxCell(true, false))	
 		{
 			@Override
@@ -87,7 +91,7 @@ public class CourseMembersView extends Composite
 			}
 		};
 		
-		TextColumn<GoodleUserProxy> nameColumn = new TextColumn<GoodleUserProxy>() 
+		nameColumn = new TextColumn<GoodleUserProxy>() 
 		{
 			@Override
 			public String getValue(GoodleUserProxy object) 
@@ -97,9 +101,8 @@ public class CourseMembersView extends Composite
 		};
 		nameColumn.setSortable(true);
 
-		if (currentUserIsOwner())
-			membersList.addColumn(checkColumn);
 		membersList.addColumn(nameColumn);
+		membersList.addColumn(checkColumn);
 	}
 	
 	public void prepareView()
@@ -108,17 +111,34 @@ public class CourseMembersView extends Composite
 		message.setText("");
 		if (course != null)
 		{
-			if (currentUserIsOwner()) 
-			{
-				removeButton.setEnabled(true);
-				removeButton.setVisible(true);
-			}
-			else 
-			{
-				removeButton.setEnabled(false);
-				removeButton.setVisible(false);
-			}
-			getCourseMembers();
+			clientFactory.getRequestFactory().courseRequest().findCourse(course.getId()).fire(
+					new Receiver<CourseProxy>()
+					{
+						@Override
+						public void onSuccess(CourseProxy response)
+						{
+							if (response == null) 
+							{ 
+								return;
+							}
+
+							course = response;	
+							if (currentUserIsOwner()) 
+							{
+								insertCheckBoxColumn(checkColumn);
+								removeButton.setEnabled(true);
+								removeButton.setVisible(true);
+							}
+							else 
+							{
+								removeCheckBoxColumn(checkColumn);
+								removeButton.setEnabled(false);
+								removeButton.setVisible(false);
+							}
+							getCourseMembers();
+						}
+					}
+			);
 		}
 	}
 
@@ -151,6 +171,11 @@ public class CourseMembersView extends Composite
 			{
 				ids.add(i.getId());
 			}
+		}
+		
+		if (ids.isEmpty()) {
+			message.setText(markToRemove);
+			return;
 		}
 		
 		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
@@ -196,4 +221,17 @@ public class CourseMembersView extends Composite
 		}
 		else return false;
 	}
+
+	public void insertCheckBoxColumn(Column<GoodleUserProxy,Boolean> column) {
+	    if (membersList.getColumnIndex(column) == -1)
+	        membersList.addColumn(column);
+	}
+	
+
+	public void removeCheckBoxColumn(Column<GoodleUserProxy, Boolean> column) {
+	    int index = membersList.getColumnIndex(column);
+	    if (index != -1)
+	         membersList.removeColumn(index);
+	}
+
 }

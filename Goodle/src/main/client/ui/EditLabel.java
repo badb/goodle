@@ -14,8 +14,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -25,26 +23,32 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 
 	interface EditLabelUiBinder extends UiBinder<Widget, EditLabel> {
 	}
-	
 
 	@UiField HTML label;
 	@UiField DeckLayoutPanel deckPanel;
 	@UiField TextArea textArea;
 	@UiField Button saveButton;
 
+	private boolean enabled = true;
+	@UiField Button cancelButton;
+	
+	private String text;
+	
 	public EditLabel() {
 		initWidget(uiBinder.createAndBindUi(this));
 		deckPanel.showWidget(0);
 		label.getElement().getStyle().setProperty("whiteSpace", "pre");
+		text = getValue();
 	}
 	
 
 	@UiHandler("label")
 	void onLabelClick(ClickEvent e) {
-		//if (deckPanel.getVisibleWidgetIndex() == 0) {
+		if (enabled) {
+			text = getValue();
 			textArea.setText(getValue());
 			deckPanel.showWidget(1);
-		//}
+		}
 	}
 	
 	
@@ -52,6 +56,13 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	public void onSaveButtonClick(ClickEvent event) {
 		if(deckPanel.getVisibleWidgetIndex() == 0) return;
 		setValue(textArea.getText(), true);
+		deckPanel.showWidget(0);
+	}
+
+	@UiHandler("cancelButton")
+	public void onCancelButtonClick(ClickEvent event) {
+		if(deckPanel.getVisibleWidgetIndex() == 0) return;
+		setValue(text, false);
 		deckPanel.showWidget(0);
 	}
 
@@ -76,7 +87,7 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 
 	@Override
 	public void setValue(String text, boolean fireEvents) {
-		if(fireEvents) ValueChangeEvent.fireIfNotEqual(this, getValue(), text);
+		if(fireEvents & enabled) ValueChangeEvent.fireIfNotEqual(this, getValue(), text);
 		this.setValue(text);
 	}
 
@@ -86,6 +97,10 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	
 	public String getText() {
 		return getValue();
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 

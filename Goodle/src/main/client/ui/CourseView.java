@@ -48,6 +48,10 @@ public class CourseView extends Composite
 		this.course = course;
 		if (course != null)
 		{
+			courseMenu.setVisible(true);
+			currentView.setVisible(true);
+			joinMethodAction.setVisible(true);
+
 			courseName.setText(course.getName());
 			
 			if (currentUserIsOwner()) 
@@ -113,7 +117,9 @@ public class CourseView extends Composite
 	{
 		if (selectedView.equals("info")) 
 		{ 
-			currentView.setWidget(clientFactory.getCourseInfoView()); 
+			CourseInfoView courseInfoView = clientFactory.getCourseInfoView();
+			courseInfoView.setCourse(course);
+			currentView.setWidget(courseInfoView); 
 		}
 		else if (selectedView.equals("members")) 
 		{ 
@@ -154,6 +160,9 @@ public class CourseView extends Composite
 	private void onCourseNotFound()
 	{
 		courseName.setText("Nie znaleziono kursu!");
+		courseMenu.setVisible(false);
+		currentView.setVisible(false);
+		joinMethodAction.setVisible(false);
 		// TODO Pokaż widok "strong nie została odnaleziona"
 	}
 	

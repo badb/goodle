@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import main.client.ClientFactory;
@@ -57,6 +58,7 @@ public class CourseListView extends Composite
 
 	public void findCoursesByName(String name) 
 	{
+		coursesList.setRowData(new ArrayList<CourseProxy>());
 		if (name.equals("")) {
 			infoLabel.setText("Nie odnaleziono kursów pasujących " +
 					"do podanych kryteriów wyszukiwania");

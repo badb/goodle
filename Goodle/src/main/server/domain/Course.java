@@ -342,4 +342,29 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
+    public boolean addDescription(String description)
+    {
+    	EntityManager em = entityManager();
+    	try
+    	{
+            Course c = em.find(Course.class, this.id);
+    		c.setDescription(description);
+    		em.merge(c);
+        	return true;
+    	}
+    	finally { em.close(); }
+    }
+    
+    public boolean addBibliography(String bibliography)
+    {
+    	EntityManager em = entityManager();
+    	try
+    	{
+            Course c = em.find(Course.class, this.id);
+    		c.setBibliography(bibliography);
+    		em.merge(c);
+        	return true;
+    	}
+    	finally { em.close(); }	
+    }
 }

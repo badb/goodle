@@ -1,5 +1,8 @@
 package main.client.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.ClientFactory;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;

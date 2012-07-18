@@ -4,7 +4,7 @@
 	xmlns:my="urn:import:main.client.ui"
 >
 	<g:VerticalPanel width="100%">
-	    <my:EditLabel ui:field="title" />
+	    <my:EditLabel width="100%" ui:field="title" />
 	   	<g:CheckBox ui:field="isVisible" />
 	    <my:EditLabel ui:field="text" />
 	</g:VerticalPanel>

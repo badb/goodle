@@ -62,6 +62,7 @@ public class CourseModulesEditView extends Composite {
 	private void getModules() 
 	{
 		modules.clear();
+		modules.removeAllRows();
 		
 		CourseRequest getRequest = clientFactory.getRequestFactory().courseRequest();
 		course = getRequest.edit(course);
@@ -125,7 +126,7 @@ public class CourseModulesEditView extends Composite {
 		for (int i = 0; i < modules.getRowCount(); ++i) 
 		{
 			ModuleEditView view = (ModuleEditView) modules.getWidget(i, 0);
-			updated.add(view.getModule());
+			if (view != null) updated.add(view.getModule());
 		}
 		
 		course = request.edit(course);

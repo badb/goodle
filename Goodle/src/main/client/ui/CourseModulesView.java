@@ -55,6 +55,7 @@ public class CourseModulesView  extends Composite
 	{
 		try {
 		modules.clear();
+		modules.removeAllRows();
 		
 		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
 		course = request.edit(course);
@@ -68,7 +69,7 @@ public class CourseModulesView  extends Composite
 				{
 					for (ModuleProxy m : result) 
 					{
-						ModuleEditView view = new ModuleEditView();
+						ModuleView view = new ModuleView();
 						view.setClientFactory(clientFactory);
 						view.setModule(m);
 

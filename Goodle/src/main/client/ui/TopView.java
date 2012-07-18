@@ -45,7 +45,7 @@ public class TopView extends Composite
 	{
 		searchBox = new SuggestBox(allCoursesOracle());
 		initWidget(uiBinder.createAndBindUi(this));
-		horizontalPanel.setCellWidth(goodleLogo, "200px");
+		horizontalPanel.setCellWidth(goodleLogo, "250px");
 		horizontalPanel.setCellWidth(userBox, "250px");
 		horizontalPanel.setCellWidth(logoutButton, "46px");
 		Image img = new Image("http://picol.org/images/icons/files/png/64/logout_64.png");
@@ -60,13 +60,12 @@ public class TopView extends Composite
 
 	public void addSuggestions() {
 		final MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) searchBox.getSuggestOracle();
-		clientFactory.getRequestFactory().courseRequest().getAllCourses().fire(
-				new Receiver <List<CourseProxy>> (){
+		clientFactory.getRequestFactory().courseRequest().getAllCoursesNames().fire(
+				new Receiver <List<String>> (){
 					@Override
-					public void onSuccess(List<CourseProxy> response) {
-						for (Iterator<CourseProxy> it = response.iterator(); it.hasNext();) {
-							oracle.add(it.next().getName());
-						} 
+					public void onSuccess(List<String> response) {
+						if (response != null)
+							oracle.addAll(response);
 					}
 				} 
 		); 

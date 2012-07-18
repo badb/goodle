@@ -32,6 +32,7 @@ public interface CourseRequest extends RequestContext
 	Request<CourseProxy> findCourse(Long id);
 	Request<List<CourseProxy>> findCoursesByName(String name);
 	Request<List<CourseProxy>> getAllCourses();
+	Request<List<String>> getAllCoursesNames();
 	
 	Request<CourseProxy> newCourse();
 

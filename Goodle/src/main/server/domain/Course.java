@@ -48,7 +48,13 @@ import org.hibernate.validator.constraints.URL;
         (
         		name="getAllCourses",
         		query = "SELECT c FROM Course c"
+        ),
+        @NamedQuery
+        (
+        		name="getAllCoursesNames",
+        		query = "SELECT name FROM Course"
         )
+        
 })
 public class Course implements Serializable
 {       
@@ -198,6 +204,21 @@ public class Course implements Serializable
         finally { em.close(); }
     }
 
+    @SuppressWarnings("unchecked")
+    public static List<String> getAllCoursesNames()
+    {
+        EntityManager em = entityManager();
+        try
+        {               
+                Query q = em.createNamedQuery("getAllCoursesNames");
+                List<String> list = q.getResultList();
+                list.size(); /* force it to materialize */ 
+                return list;
+        }
+        catch (NoResultException e) { return null; }
+        finally { em.close(); }
+    }
+    
     public static Course newCourse()
     {
     	GoodleUser u = GoodleUser.getCurrentUser();

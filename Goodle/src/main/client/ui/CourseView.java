@@ -1,6 +1,5 @@
 package main.client.ui;
 
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -98,7 +97,6 @@ public class CourseView extends Composite
 						onCourseNotFound();
 						return;
 					}
-
 					setCourse(response);			
 					setSelectedView(selectedView);
 				}
@@ -132,25 +130,15 @@ public class CourseView extends Composite
 		else if (selectedView.equals("modules")) 
 		{ 
 			CourseModulesView courseModulesView = clientFactory.getCourseModulesView();
-			if (course != null) {
-				courseModulesView.setClientFactory(clientFactory);
-				courseModulesView.setCourse(course);
-			} else {
-				Logger logger = Logger.getLogger("Goodle.Log");
-				logger.log(Level.SEVERE, "CourseProxy is null");
-			}
+			courseModulesView.setClientFactory(clientFactory);
+			courseModulesView.setCourse(course);
 			currentView.setWidget(courseModulesView); 
 		}
 		else if (selectedView.equals("modulesEdit"))
 		{
 			CourseModulesEditView courseModulesEditView = clientFactory.getCourseModulesEditView();
-			if (course != null) {
-				courseModulesEditView.setClientFactory(clientFactory);
-				courseModulesEditView.setCourse(course);
-			} else {
-				Logger logger = Logger.getLogger("Goodle.Log");
-				logger.log(Level.SEVERE, "CourseProxy is null");
-			}
+			courseModulesEditView.setClientFactory(clientFactory);
+			courseModulesEditView.setCourse(course);
 			currentView.setWidget(courseModulesEditView);
 		}
 	}

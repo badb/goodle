@@ -4,17 +4,9 @@
 	xmlns:my="urn:import:main.client.ui"
 >
 	<g:VerticalPanel width="100%">
-		<g:HorizontalPanel>
-	    	<g:CheckBox ui:field="showHideBox">Ukryj moduł</g:CheckBox>
-	    	<g:Button ui:field="deleteButton">Usuń moduł</g:Button>
-		</g:HorizontalPanel>
-	    
-	    <my:EditLabel ui:field="titleEdit"></my:EditLabel>
-	    <my:EditLabel ui:field="descEdit"></my:EditLabel>
-	    
-
-
-		
+	    <my:EditLabel ui:field="title" />
+	   	<g:CheckBox ui:field="isVisible" />
+	    <my:EditLabel ui:field="text" />
 	</g:VerticalPanel>
 
 </ui:UiBinder> 

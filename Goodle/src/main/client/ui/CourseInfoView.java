@@ -54,7 +54,7 @@ public class CourseInfoView extends Composite
 		if (course != null && currentUserIsOwner()) {
 			CourseRequest request = clientFactory.getRequestFactory().courseRequest();
 			course = request.edit(course);
-			request.addBiblio(event.getValue()).using(course).fire
+			request.addBibliography(event.getValue()).using(course).fire
 			(
 					new Receiver<Boolean>() 
 					{
@@ -73,7 +73,6 @@ public class CourseInfoView extends Composite
 			);
 		}
     }
-
 	
 	@UiHandler("desc")
 	public void onDescValueChange(ValueChangeEvent<String> event) {

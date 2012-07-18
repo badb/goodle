@@ -2,12 +2,8 @@ package main.client.mapper;
 
 import main.client.ClientFactory;
 import main.client.activity.CourseActivity;
-
-import main.client.activity.CourseModulesEditActivity;
 import main.client.activity.FindCoursesByNameActivity;
 import main.client.activity.UserMainPageActivity;
-import main.client.place.CourseModulesEditPlace;
-
 import main.client.place.CoursePlace;
 import main.client.place.FindCoursesByNamePlace;
 import main.client.place.UserMainPagePlace;
@@ -39,10 +35,6 @@ public class ContentPanelActivityMapper implements ActivityMapper
 		else if (place instanceof UserMainPagePlace)
 		{
 			return new UserMainPageActivity(clientFactory, (UserMainPagePlace) place);
-		}
-		else if (place instanceof CourseModulesEditPlace)
-		{
-			return new CourseModulesEditActivity(clientFactory, (CourseModulesEditPlace) place);
 		}
 		return null;
 	}

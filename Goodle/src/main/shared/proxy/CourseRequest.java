@@ -12,28 +12,24 @@ import com.google.web.bindery.requestfactory.shared.Service;
 @Service(Course.class)
 public interface CourseRequest extends RequestContext 
 {
-	InstanceRequest<CourseProxy, Void> addCoordinator(Long id);
-	InstanceRequest<CourseProxy, Void> removeCoordinator(Long id);
-	InstanceRequest<CourseProxy, Void> addMember(Long id);
-	InstanceRequest<CourseProxy, Void> removeMember(Long id);
-	InstanceRequest<CourseProxy, Void> addModule(Long id);
-	InstanceRequest<CourseProxy, Void> removeModule(Long id);
-	InstanceRequest<CourseProxy, Void> addMessage(MessageProxy message);
-	InstanceRequest<CourseProxy, Void> removeMessage(MessageProxy message);
 	
-	InstanceRequest<CourseProxy, Boolean> registerCurrentUser(String key);
-	InstanceRequest<CourseProxy, Boolean> unregisterUsers(List<Long> ids);
-	InstanceRequest<CourseProxy, CourseProxy> update();
-	InstanceRequest<CourseProxy, Boolean> addDescription(String desc);
-	InstanceRequest<CourseProxy, Boolean> addBiblio(String bibl);
-	
+	Request<CourseProxy> newCourse();
 	InstanceRequest<CourseProxy, Long> persist();
+	InstanceRequest<CourseProxy, CourseProxy> update();
 	InstanceRequest<CourseProxy, Void> remove();
+	InstanceRequest<CourseProxy, Boolean> addDescription(String description);
+	InstanceRequest<CourseProxy, Boolean> addBibliography(String bibliography);
+	
 	Request<CourseProxy> findCourse(Long id);
 	Request<List<CourseProxy>> findCoursesByName(String name);
 	Request<List<CourseProxy>> getAllCourses();
 	Request<List<String>> getAllCoursesNames();
 	
-	Request<CourseProxy> newCourse();
+	InstanceRequest<CourseProxy, Boolean> registerCurrentUser(String key);
+	InstanceRequest<CourseProxy, Boolean> unregisterUsers(List<Long> ids);
+	
+	InstanceRequest<CourseProxy, List<ModuleProxy>> getModulesSafe();
+	InstanceRequest<CourseProxy, Boolean> updateModules(List<ModuleProxy> modules);
+
 
 }

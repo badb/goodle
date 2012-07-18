@@ -4,14 +4,9 @@
 	xmlns:my="urn:import:main.client.ui"
 >
 	<g:VerticalPanel width="100%">
-
-	    
-	    <my:EditLabel ui:field="titleEdit"></my:EditLabel>
-	    <my:EditLabel ui:field="descEdit"></my:EditLabel>
-	    
-
-
-		
+	    <g:Label ui:field="visible" />
+	    <g:Label ui:field="title" />
+	    <g:Label ui:field="text" />
 	</g:VerticalPanel>
 
 </ui:UiBinder>

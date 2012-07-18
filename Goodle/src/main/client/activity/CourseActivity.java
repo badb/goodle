@@ -28,4 +28,14 @@ public class CourseActivity extends AbstractActivity
 		panel.setWidget(courseView.asWidget());
 		courseView.prepareView(courseId, viewName);
 	}
+	
+	@Override
+	public String mayStop()
+	{
+		if (viewName.equals("modulesEdit") && !clientFactory.getCourseModulesEditView().mayStop())
+		{
+			return "Jesteś w trakcie edycji zajęć. Czy na pewno chcesz zakończyć?";
+		}
+		return null;
+	}
 }

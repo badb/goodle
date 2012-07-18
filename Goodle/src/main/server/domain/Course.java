@@ -121,13 +121,8 @@ public class Course implements Serializable
     @Basic
     private List<Long> modules = new ArrayList<Long>();
     public List<Long> getModules() { return Collections.unmodifiableList(modules); }
-    public void setModules(List<Long> modules) {
-    	this.modules = modules;
-    }
     public void addModule(Long id) { modules.add(id); }
-    public void removeModule(Long id) { 
-    	//TODO usunięcie modułu z bazy danych?
-    	modules.remove(id); }
+    public void removeModule(Long id) { modules.remove(id); }
        
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();
@@ -234,6 +229,9 @@ public class Course implements Serializable
         try 
         { 
         	em.persist(c);
+        	em.refresh(c);
+        	u.addCourseLed(c);
+        	em.persist(u);
         	return c;
         }
         finally { em.close(); }
@@ -306,38 +304,88 @@ public class Course implements Serializable
     	}
     	finally { em.close(); }
     }
-
-    public boolean addDescription(String desc)
+    
+    public List<Module> getModulesSafe() 
     {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	boolean owner = coordinators.contains(u.getId());
+    	List<Module> l = new ArrayList<Module>();
     	EntityManager em = entityManager();
     	try
     	{
-            Course c = em.find(Course.class, this.id);
-    		c.setDescription(desc);
-    		em.merge(c);
+    		for (Long id : modules)
+    		{
+    			Module m = em.find(Module.class, id);
+    			if (m.getIsVisible() || (!m.getIsVisible() && owner))
+    			{
+    				l.add(m);
+    			}
+    		}
+    		return l;
     	}
-    	finally 
-    	{ 
-    		em.close(); 
-    	}
-    	
-    	return true;
+    	finally { em.close(); }
     }
     
-    public boolean addBiblio(String bibl)
+    public boolean updateModules(List<Module> modules)
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return false;
+    	
+    	if (!coordinators.contains(u.getId())) return false;
+    	
+    	List<Long> newModules = new ArrayList<Long>();
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		Course c = em.find(Course.class, this.id);
+			u = em.merge(u);
+    		
+    		for (Module m : modules)
+    		{
+    			if (!c.modules.remove(m.getId()))
+    			{
+    				m.setAuthor(u.getId());
+    			}
+    			em.persist(m);
+    			em.refresh(m);
+    			newModules.add(m.getId());
+    		}
+    		for (Long id : c.modules)
+    		{
+    			Module m = em.find(Module.class, id);
+    			em.remove(m);
+    		}
+    		c.modules = newModules;
+    		em.persist(c);
+        	return true;
+    	}
+    	finally { em.close(); }
+    }
+    
+    public boolean addDescription(String description)
     {
     	EntityManager em = entityManager();
     	try
     	{
             Course c = em.find(Course.class, this.id);
-    		c.setBibliography(bibl);
+    		c.setDescription(description);
     		em.merge(c);
+        	return true;
     	}
-    	finally 
-    	{ 
-    		em.close(); 
+    	finally { em.close(); }
+    }
+    
+    public boolean addBibliography(String bibliography)
+    {
+    	EntityManager em = entityManager();
+    	try
+    	{
+            Course c = em.find(Course.class, this.id);
+    		c.setBibliography(bibliography);
+    		em.merge(c);
+        	return true;
     	}
-    	
-    	return true;
+    	finally { em.close(); }	
     }
 }

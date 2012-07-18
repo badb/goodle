@@ -51,7 +51,7 @@ import org.hibernate.validator.constraints.URL;
         ),
         @NamedQuery
         (
-        		name="getAllCoursesNames",
+        		name="getDataForSuggestBox",
         		query = "SELECT name FROM Course"
         )
         
@@ -200,12 +200,12 @@ public class Course implements Serializable
     }
 
     @SuppressWarnings("unchecked")
-    public static List<String> getAllCoursesNames()
+    public static List<String> getDataForSuggestBox()
     {
         EntityManager em = entityManager();
         try
         {               
-                Query q = em.createNamedQuery("getAllCoursesNames");
+                Query q = em.createNamedQuery("getDataForSuggestBox");
                 List<String> list = q.getResultList();
                 list.size(); /* force it to materialize */ 
                 return list;

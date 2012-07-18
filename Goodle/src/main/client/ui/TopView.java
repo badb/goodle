@@ -60,7 +60,7 @@ public class TopView extends Composite
 
 	public void addSuggestions() {
 		final MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) searchBox.getSuggestOracle();
-		clientFactory.getRequestFactory().courseRequest().getAllCoursesNames().fire(
+		clientFactory.getRequestFactory().courseRequest().getDataForSuggestBox().fire(
 				new Receiver <List<String>> (){
 					@Override
 					public void onSuccess(List<String> response) {

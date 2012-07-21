@@ -15,6 +15,8 @@ import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
@@ -43,29 +45,53 @@ public class Goodle implements EntryPoint
     private Place defaultPlace = new UserMainPagePlace();
     private ClientFactory clientFactory;
 
+    public Throwable unwrap(Throwable e) {  
+        if(e instanceof UmbrellaException) {  
+          UmbrellaException ue = (UmbrellaException) e;  
+          if(ue.getCauses().size() == 1) {  
+            return unwrap(ue);  
+          }  
+        }  
+        return e;  
+      }  
+    
 	public void onModuleLoad() 
 	{		
-		clientFactory = GWT.create(ClientFactory.class);		
-		clientFactory.initializeRequestFactory();		
-		clientFactory.getRequestFactory().goodleUserRequest().getCurrentUser().fire
-		(
-			new Receiver<GoodleUserProxy>()
-			{
-				@Override
-				public void onSuccess(GoodleUserProxy response)
+		GWT.UncaughtExceptionHandler uncaughtExceptionHandler  = 
+			new GWT.UncaughtExceptionHandler() {
+			public void onUncaughtException(Throwable e) {
+				Throwable unwrapped = unwrap(e);
+				Logger logger = Logger.getLogger("Goodle.Log");
+				logger.log(Level.SEVERE, "Bląd serwera: " + unwrapped.getMessage());
+			}
+		};
+		GWT.setUncaughtExceptionHandler(uncaughtExceptionHandler);
+		
+		try {
+			clientFactory = GWT.create(ClientFactory.class);		
+			clientFactory.initializeRequestFactory();		
+			clientFactory.getRequestFactory().goodleUserRequest().getCurrentUser().fire
+			(
+				new Receiver<GoodleUserProxy>()
 				{
-					clientFactory.setCurrentUser(response);
-					onUserLogged();
-				}
-				@Override
-				public void onFailure(ServerFailure error)
-				{
-					Logger logger = Logger.getLogger("Goodle.Log");
-					logger.log(Level.SEVERE, error.getMessage());
-					logger.log(Level.SEVERE, error.getStackTraceString());
-					logger.log(Level.SEVERE, error.getExceptionType());
-				}
-		});		
+					@Override
+					public void onSuccess(GoodleUserProxy response)
+					{
+						clientFactory.setCurrentUser(response);
+						onUserLogged();
+					}
+					@Override
+					public void onFailure(ServerFailure error)
+					{
+						Logger logger = Logger.getLogger("Goodle.Log");
+						logger.log(Level.SEVERE, error.getMessage());
+						logger.log(Level.SEVERE, error.getStackTraceString());
+						logger.log(Level.SEVERE, error.getExceptionType());
+					}
+			});	
+		} catch (Throwable e) {
+			uncaughtExceptionHandler.onUncaughtException(e);
+		}
 	}
 	
 	public void onUserLogged()

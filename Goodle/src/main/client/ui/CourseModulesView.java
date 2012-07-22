@@ -2,9 +2,7 @@ package main.client.ui;
 
 import java.util.List;
 
-import main.client.ClientFactory;
 import main.client.place.CoursePlace;
-import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;
 
@@ -14,13 +12,12 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CourseModulesView  extends Composite
+public class CourseModulesView  extends AbstractCourseView
 {
 	private static CourseModulesViewUiBinder uiBinder = GWT.create(CourseModulesViewUiBinder.class);
 
@@ -30,34 +27,34 @@ public class CourseModulesView  extends Composite
 	@UiField Button edit;
 	@UiField FlexTable modules;
 	
-	private CourseProxy course;
-	public void setCourse(CourseProxy course) 
-	{
-		if (!course.equals(this.course) || isEdited)
-		{
-			this.course = course;
-			getModules();
-		}
-		isEdited = false;
-	}
-	
-	private ClientFactory clientFactory;
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	
-	private boolean isEdited;
+	public static String notRegistered = "Musisz być zarejestrowany na kurs, aby obejrzeć zawartość.";
 	
 	public CourseModulesView()
 	{
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
+	@Override
+	public void onCourseSet()
+	{
+		info.setText("");
+		edit.setEnabled(isCurrUserOwner());
+		edit.setVisible(isCurrUserOwner());
+		getModules();
+	}
+	
 	private void getModules()
 	{
-		try {
 		modules.clear();
 		modules.removeAllRows();
 		
-		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+		if (!isCurrUserMember())
+		{
+			info.setText(notRegistered);
+			return;
+		}
+		
+		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
 		
 		request.getModulesSafe().using(course).fire
@@ -70,7 +67,7 @@ public class CourseModulesView  extends Composite
 					for (ModuleProxy m : result) 
 					{
 						ModuleView view = new ModuleView();
-						view.setClientFactory(clientFactory);
+						view.setClientFactory(cf);
 						view.setModule(m);
 
 						int rows = modules.getRowCount();
@@ -81,14 +78,15 @@ public class CourseModulesView  extends Composite
 				}
 			}
 		);
-		} catch(Exception e) { info.setText(e.getMessage()); }
 	}
 	
 	@UiHandler("edit")
 	public void onEditClick(ClickEvent event) 
 	{
-		isEdited = true;
-		String courseId = course.getId().toString();
-		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "modulesEdit"));
+		if (isCurrUserOwner())
+		{
+			String courseId = course.getId().toString();
+			cf.getPlaceController().goTo(new CoursePlace(courseId, "modulesEdit"));
+		}
 	}
 }

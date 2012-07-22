@@ -46,6 +46,7 @@ public class CourseView extends Composite
 	public void setCourse(CourseProxy course) 
 	{ 
 		this.course = course;
+		changed = false;
 		if (course != null)
 		{
 			courseMenu.setVisible(true);
@@ -72,6 +73,9 @@ public class CourseView extends Composite
 			courseMenu.setCourseId(course.getId().toString());
 		}
 	}
+	
+	boolean changed = false;
+	public void changeCourse() { changed = true; }
 
 	public CourseView()
 	{
@@ -80,7 +84,7 @@ public class CourseView extends Composite
 
 	public void prepareView(String courseId, final String selectedView)
 	{
-		if (course != null && course.getId() != null && course.getId().toString().equals(courseId))
+		if (!changed && course != null && course.getId() != null && course.getId().toString().equals(courseId))
 		{
 			setSelectedView(selectedView);
 			return;

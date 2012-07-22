@@ -6,9 +6,9 @@
 	<ui:style src="../../../css/Goodle.css"/>
 
     <g:FlowPanel>
-		<g:Label>Opis kursu:</g:Label>		
-		<my:EditLabel ui:field="desc"></my:EditLabel>
-		<g:Label>Bibliografia:</g:Label>
-		<my:EditLabel ui:field="biblio"></my:EditLabel>
+		<g:Label ui:text="Opis kursu: " />		
+		<my:EditLabel ui:field="description" />
+		<g:Label ui:text="Bibliografia: " />
+		<my:EditLabel ui:field="bibliography" />
 	</g:FlowPanel>
 </ui:UiBinder>

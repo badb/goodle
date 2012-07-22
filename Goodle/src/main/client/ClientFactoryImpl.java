@@ -18,21 +18,21 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 
 public class ClientFactoryImpl implements ClientFactory 
 {
-	private static final SimpleEventBus eventBus = new SimpleEventBus();
-	private static final PlaceController placeController = new PlaceController(eventBus);
-	private static final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
+	private final SimpleEventBus eventBus = new SimpleEventBus();
+	private final PlaceController placeController = new PlaceController(eventBus);
+	private final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
 
-	private static CourseListView courseListView;
-	private static CourseView courseView;
-	private static CourseInfoView courseInfoView;
-	private static CourseModulesView courseModulesView;
-	private static CourseMembersView courseMembersView;
-	private static UserMainPageView userMainPageView;
+	private CourseListView courseListView;
+	private CourseView courseView;
+	private CourseInfoView courseInfoView;
+	private CourseModulesView courseModulesView;
+	private CourseMembersView courseMembersView;
+	private UserMainPageView userMainPageView;
 	
-	private static CourseJoinMethodPopup courseJoinMethodPopup;
-	private static CoursePasswordPopup coursePasswordPopup;
+	private CourseJoinMethodPopup courseJoinMethodPopup;
+	private CoursePasswordPopup coursePasswordPopup;
 
-	private static GoodleUserProxy currentUserProxy;
+	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
 
 	@Override
@@ -72,6 +72,7 @@ public class ClientFactoryImpl implements ClientFactory
 		if (courseInfoView == null) 
 		{
 			courseInfoView = new CourseInfoView();
+			courseInfoView.setParent(getCourseView());
 			courseInfoView.setClientFactory(this);
 		}
 		return courseInfoView; 
@@ -83,6 +84,7 @@ public class ClientFactoryImpl implements ClientFactory
 		if (courseModulesView == null) 
 		{
 			courseModulesView = new CourseModulesView();
+			courseModulesView.setParent(getCourseView());
 			courseModulesView.setClientFactory(this);
 		}
 		return courseModulesView; 
@@ -93,6 +95,7 @@ public class ClientFactoryImpl implements ClientFactory
 		if (courseMembersView == null) 
 		{
 			courseMembersView = new CourseMembersView();
+			courseMembersView.setParent(getCourseView());
 			courseMembersView.setClientFactory(this);
 		}
 		return courseMembersView; 

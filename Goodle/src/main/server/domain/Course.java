@@ -280,12 +280,12 @@ public class Course implements Serializable
     	return true;
     }
     
-    public boolean unregisterUsers(Collection<Long> ids)
+    public Course unregisterUsers(Collection<Long> ids)
     {
     	GoodleUser u = GoodleUser.getCurrentUser();
     	if (u == null || !coordinators.contains(u.getId()))
     	{
-    		return false;
+    		return null;
     	}
     	
     	EntityManager em = entityManager();
@@ -300,7 +300,7 @@ public class Course implements Serializable
     			em.merge(u);
     			em.merge(c);
     		}
-    		return true;
+    		return c;
     	}
     	finally { em.close(); }
     }
@@ -309,7 +309,11 @@ public class Course implements Serializable
     {
     	GoodleUser u = GoodleUser.getCurrentUser();
     	boolean owner = coordinators.contains(u.getId());
+    	boolean member = members.contains(u.getId());
     	List<Module> l = new ArrayList<Module>();
+    	
+    	if (!owner && !member) return l;
+    	
     	EntityManager em = entityManager();
     	try
     	{

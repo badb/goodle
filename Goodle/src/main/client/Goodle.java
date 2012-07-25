@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import main.client.mapper.AppPlaceHistoryMapper;
 import main.client.mapper.ContentPanelActivityMapper;
 import main.client.place.UserMainPagePlace;
+import main.client.resources.GoodleResources;
 import main.client.ui.CalendarView;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
@@ -15,14 +16,15 @@ import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.EventBus;
@@ -57,12 +59,16 @@ public class Goodle implements EntryPoint
     
 	public void onModuleLoad() 
 	{		
+		GoodleResources.INSTANCE.css().ensureInjected();
 		GWT.UncaughtExceptionHandler uncaughtExceptionHandler  = 
 			new GWT.UncaughtExceptionHandler() {
 			public void onUncaughtException(Throwable e) {
 				Throwable unwrapped = unwrap(e);
 				Logger logger = Logger.getLogger("Goodle.Log");
 				logger.log(Level.SEVERE, "Bląd serwera: " + unwrapped.getMessage());
+				unwrapped.printStackTrace();
+				RootPanel.get().clear();
+				RootPanel.get().add(new HTML("Wystąpił błąd. Spróbuj za kilka minut.", true));
 			}
 		};
 		GWT.setUncaughtExceptionHandler(uncaughtExceptionHandler);

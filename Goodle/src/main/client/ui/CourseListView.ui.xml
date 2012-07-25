@@ -3,6 +3,8 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 	xmlns:c='urn:import:com.google.gwt.user.cellview.client'>
 
+    	<ui:style src="../resources/Goodle.css"/>
+    
 	<g:VerticalPanel>
 		<g:Label ui:field="infoLabel" />
 		<c:CellList ui:field="coursesList" />

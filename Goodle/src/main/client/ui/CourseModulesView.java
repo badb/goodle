@@ -48,7 +48,7 @@ public class CourseModulesView  extends AbstractCourseView
 		modules.clear();
 		modules.removeAllRows();
 		
-		if (!isCurrUserMember())
+		if (!isCurrUserMember() && !isCurrUserOwner())
 		{
 			info.setText(notRegistered);
 			return;

@@ -151,6 +151,7 @@ public class ClientFactoryImpl implements ClientFactory
 		{
 			courseModulesEditView = new CourseModulesEditView();
 			courseModulesEditView.setClientFactory(this);
+			courseModulesEditView.setParent(getCourseView());
 		}
 		return courseModulesEditView;
 	}

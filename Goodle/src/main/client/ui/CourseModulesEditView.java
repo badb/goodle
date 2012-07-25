@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.client.place.CoursePlace;
+import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;
 
@@ -13,6 +14,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -121,10 +123,27 @@ public class CourseModulesEditView extends AbstractCourseView
 		}
 		
 		course = request.edit(course);
-		request.updateModules(updated).using(course).fire();
+		request.updateModules(updated).using(course).fire
+		(
+			new Receiver<CourseProxy>()
+			{
+				@Override
+				public void onSuccess(CourseProxy result)
+				{
+					if (result != null)
+					{
+						try {
+						parent.setCourse(result);
+						String courseId = result.getId().toString();
+						cf.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
+						} catch(Exception e) { DialogBox db = new DialogBox(); db.setText(e.getMessage()); db.show(); }
+					}
+
+				}
+			}
+		);
 		
-		String courseId = course.getId().toString();
-		cf.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
+
 	}
 
 }

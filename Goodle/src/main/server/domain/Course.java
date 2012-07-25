@@ -330,12 +330,12 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
-    public boolean updateModules(List<Module> modules)
+    public Course updateModules(List<Module> modules)
     {
     	GoodleUser u = GoodleUser.getCurrentUser();
-    	if (u == null) return false;
+    	if (u == null) return null;
     	
-    	if (!coordinators.contains(u.getId())) return false;
+    	if (!coordinators.contains(u.getId())) return null;
     	
     	List<Long> newModules = new ArrayList<Long>();
     	
@@ -362,7 +362,7 @@ public class Course implements Serializable
     		}
     		c.modules = newModules;
     		em.persist(c);
-        	return true;
+        	return c;
     	}
     	finally { em.close(); }
     }

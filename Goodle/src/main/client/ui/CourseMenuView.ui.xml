@@ -3,9 +3,8 @@
         xmlns:g="urn:import:com.google.gwt.user.client.ui"
         xmlns:my="urn:import:main.client.ui"
 >
-
-    <ui:style src="../../../css/Goodle.css"/>
-
+    	<ui:style src="../resources/Goodle.css"/>
+ 
 	<g:HorizontalPanel styleName="{style.tabBefore}">
       	<g:HorizontalPanel styleName="{style.tabs}">
         <g:SimplePanel styleName="{style.tabBegin}"/>

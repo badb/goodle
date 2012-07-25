@@ -3,7 +3,7 @@
         xmlns:g="urn:import:com.google.gwt.user.client.ui"
         xmlns:my="urn:import:main.client.ui"
 >
-	<ui:style src="../../../css/Goodle.css"/>
+	<ui:style src="../resources/Goodle.css"/>
 
         <g:FlowPanel  width="100%">
             <g:Label ui:field="info" />

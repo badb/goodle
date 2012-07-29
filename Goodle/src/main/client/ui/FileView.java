@@ -30,7 +30,7 @@ public class FileView extends Composite {
 	@UiField
 	Label title;
 	private UploadedFileProxy file;
-	private String url;
+	private String url = "";
 
 	private ClientFactory clientFactory;
 	
@@ -43,7 +43,7 @@ public class FileView extends Composite {
 	
 	public void setUploadedFile(UploadedFileProxy file) {
 		this.file = file;
-		init();
+		//init();
 	}
 	
 	private void init() {
@@ -76,9 +76,7 @@ public class FileView extends Composite {
 
 	@UiHandler("downloadButton")
 	public void onDownloadButtonClick(ClickEvent event) {
-
 		Window.open(url, "_self", "");
-
 	}
 
 	public void setClientFactory(ClientFactory clientFactory) {

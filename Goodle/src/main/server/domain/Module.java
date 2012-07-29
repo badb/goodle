@@ -54,12 +54,12 @@ public class Module implements Serializable
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
-    //@OneToMany(cascade=CascadeType.ALL)
-    //private List<Material> materials = new ArrayList<Material>();
-    //public List<Material> getMaterials() { return Collections.unmodifiableList(materials); }
-    //public void addMaterial(Material material) { materials.add(material); }
-    //public void removeMaterial(Material material) { materials.remove(material); }
-
+    /*@OneToMany(cascade=CascadeType.ALL)
+    private List<Material> materials = new ArrayList<Material>();
+    public List<Material> getMaterials() { return Collections.unmodifiableList(materials); }
+    public void addMaterial(Material material) { materials.add(material); }
+    public void removeMaterial(Material material) { materials.remove(material); }
+*/
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return Collections.unmodifiableList(comments); }

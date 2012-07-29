@@ -7,6 +7,8 @@
 	    <my:EditLabel width="100%" ui:field="title" />
 	   	<g:CheckBox ui:field="isVisible" />
 	    <my:EditLabel ui:field="text" />
+	    <g:FlexTable ui:field="filesTable"></g:FlexTable>
+	    <my:FileUploadView ui:field="upload"></my:FileUploadView>
 	</g:VerticalPanel>
 
 </ui:UiBinder> 

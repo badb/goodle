@@ -5,9 +5,11 @@ import java.util.Date;
 import main.server.domain.Material;
 
 import com.google.web.bindery.requestfactory.shared.EntityProxy;
+import com.google.web.bindery.requestfactory.shared.ExtraTypes;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
 @ProxyFor(Material.class)
+//@ExtraTypes(UploadedFileProxy.class)
 public interface MaterialProxy extends EntityProxy
 {
 	Long getId();

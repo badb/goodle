@@ -4,6 +4,8 @@ package main.server;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.client.ClientFactory;
-import main.server.domain.GoodleUser;
 import main.server.domain.UploadedFile;
 
 import com.google.appengine.api.blobstore.BlobKey;
@@ -40,19 +41,20 @@ public class UploadServiceImpl extends HttpServlet
 			throws ServletException, IOException {
 
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
-		List<BlobKey> blobKeys = blobs.get("uploadFile");
+		Logger logger = Logger.getLogger("Goodle.Log");
+		logger.log(Level.SEVERE, blobs.toString());
+		List<BlobKey> blobKeys = blobs.get("file");
+		logger.log(Level.SEVERE, blobKeys.toString());
 
-		//Get the paramters from the request to populate the UploadedFile object
-		//TODO dodanie autora pliku
-		UploadedFile uploadedFile = new UploadedFile();
+		/*UploadedFile uploadedFile = new UploadedFile();
 		uploadedFile.setName(req.getParameter("title"));
-		uploadedFile.setAuthor(null); /* TODO Author nie może być nullem - to generuje error! */
+		uploadedFile.setAuthor(clientFactory.getCurrentUser().getId());
 		uploadedFile.setUrl("/goodle/blobservice?blob-key=" + blobKeys.get(0).getKeyString());
 
 		ofy.put(uploadedFile);
-
+*/
 		//Redirect recursively to this servlet (calls doGet)
-		res.sendRedirect("/goodle/uploadservice?id=" + uploadedFile.getId());
+		//res.sendRedirect("/goodle/uploadservice?id=" + uploadedFile.getId());
 	}
 
 	@Override

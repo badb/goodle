@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,10 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.google.web.bindery.requestfactory.shared.ExtraTypes;
+
 @SuppressWarnings("serial")
+@Entity
 @MappedSuperclass
 public abstract class Material implements Serializable
 {

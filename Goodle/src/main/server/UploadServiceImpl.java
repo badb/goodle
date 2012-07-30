@@ -20,6 +20,7 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.sun.xml.internal.ws.api.server.Module;
 
 
 //The FormPanel must submit to a servlet that extends HttpServlet  
@@ -32,9 +33,9 @@ public class UploadServiceImpl extends HttpServlet
 
 	//Start Blobstore and Objectify Sessions
 	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-	Objectify ofy = ObjectifyService.begin();
+	//Objectify ofy = ObjectifyService.begin();
 
-	static { ObjectifyService.register(UploadedFile.class); }
+	//static { ObjectifyService.register(UploadedFile.class); }
 
 	//Override the doPost method to store the Blob's meta-data
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -44,15 +45,14 @@ public class UploadServiceImpl extends HttpServlet
 		Logger logger = Logger.getLogger("Goodle.Log");
 		logger.log(Level.SEVERE, blobs.toString());
 		List<BlobKey> blobKeys = blobs.get("file");
-		logger.log(Level.SEVERE, blobKeys.toString());
+		logger.log(Level.SEVERE, blobKeys.get(0).getKeyString());
 
-		/*UploadedFile uploadedFile = new UploadedFile();
+		/*UploadedFileProxy uploadedFile = new UploadedFile();
 		uploadedFile.setName(req.getParameter("title"));
 		uploadedFile.setAuthor(clientFactory.getCurrentUser().getId());
 		uploadedFile.setUrl("/goodle/blobservice?blob-key=" + blobKeys.get(0).getKeyString());
-
-		ofy.put(uploadedFile);
-*/
+		*/
+		
 		//Redirect recursively to this servlet (calls doGet)
 		//res.sendRedirect("/goodle/uploadservice?id=" + uploadedFile.getId());
 	}

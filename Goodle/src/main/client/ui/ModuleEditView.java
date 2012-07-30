@@ -1,8 +1,11 @@
 package main.client.ui;
 
+import java.util.ArrayList;
+
 import main.client.ClientFactory;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;
+import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -24,13 +27,15 @@ public class ModuleEditView extends Composite {
 	@UiField EditLabel text;
 	@UiField FlexTable filesTable;
 	@UiField CheckBox isVisible;
+	@UiField FileUploadView upload;
 	
 	private String previousTitle;
 	private String previousText;
 	private boolean previousIsVisible;
 
 	private ClientFactory clientFactory;
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
+	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; 
+		upload.setClientFactory(clientFactory);}
 	
 	private CourseRequest request;
 	public void setRequest(CourseRequest request) { this.request = request; }
@@ -57,12 +62,12 @@ public class ModuleEditView extends Composite {
 		module.setTitle("Moduł " + n.toString());
 		module.setText("Edytuj treść");
 		module.setIsVisible(false);
+		module.setMaterials(new ArrayList<UploadedFileProxy>());
 		prepareView();
 	}
 	
 	public void prepareView()
 	{
-		
 		previousTitle = module.getTitle();
 		previousText = module.getText();
 		previousIsVisible = module.getIsVisible();
@@ -96,23 +101,16 @@ public class ModuleEditView extends Composite {
 				}
 			}
 		);*/
-		/* stara wersja:
-		 * for (MaterialProxy m : module.getFiles()) {
+		
+		/*for (UploadedFileProxy m : module.getMaterials()) {
 			int rows = filesTable.getRowCount();
 			filesTable.insertRow(rows);
 			filesTable.insertCell(rows, 0);
-			if (m.getClass() == UploadedFileProxy.class){
-				//TODO zmiana na edycję pliku
-				FileView view = new FileView();
-				view.setClientFactory(clientFactory);
-				view.setUploadedFile((UploadedFileProxy) m);
-				filesTable.setWidget(rows, 0, view);
-			}
-			else {
-				//TODO: co jeśli to nie jest plik?
-				
-				filesTable.setWidget(rows, 0, new Label("Podgląd jeszcze nieobsługiwany"));
-			}
+			FileView view = new FileView();
+			view.setClientFactory(clientFactory);
+			view.setUploadedFile(m);
+			filesTable.setWidget(rows, 0, view);
+			
 		}*/
 	}
 	

@@ -34,6 +34,7 @@ public class ClientFactoryImpl implements ClientFactory
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
+	private BlobServiceAsync blobService;
 
 	@Override
 	public SimpleEventBus getEventBus() { return eventBus; }
@@ -154,5 +155,13 @@ public class ClientFactoryImpl implements ClientFactory
 			courseModulesEditView.setParent(getCourseView());
 		}
 		return courseModulesEditView;
+	}
+
+	@Override
+	public BlobServiceAsync getBlobService() {
+		if (blobService == null) {
+			blobService = GWT.create(BlobService.class);
+		}
+		return blobService;
 	}
 }

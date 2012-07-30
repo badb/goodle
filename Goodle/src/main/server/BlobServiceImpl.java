@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.client.BlobService;
-import main.server.domain.UploadedFile;
-import main.shared.ClientFile;
-
 import com.google.appengine.api.blobstore.BlobInfo;
 import com.google.appengine.api.blobstore.BlobInfoFactory;
 import com.google.appengine.api.blobstore.BlobKey;
@@ -17,8 +14,6 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
 
 
 @SuppressWarnings("serial")
@@ -26,9 +21,8 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		BlobService {
 
 	// Start a GAE BlobstoreService session and Objectify session
-	BlobstoreService blobstoreService = BlobstoreServiceFactory
-			.getBlobstoreService();
-	Objectify ofy = ObjectifyService.begin();
+	BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	//Objectify ofy = ObjectifyService.begin();
 	//static {
 	//	ObjectifyService.register(UploadedFile.class);
 	//}
@@ -44,17 +38,6 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		String localName = System.getProperty("computername");
 		return blobstoreService.createUploadUrl("/goodle/uploadservice").replace(localName, "127.0.0.1");
 	
-	}
-
-	public ClientFile getUploadedFile(String id) {
-
-		long l = Long.parseLong(id);
-		UploadedFile file = ofy.get(UploadedFile.class, l);
-		ClientFile sfile = new ClientFile();
-		sfile.setName(file.getName());
-		sfile.setUrl(file.getUrl());
-		return sfile;
-
 	}
 	
 

@@ -43,7 +43,7 @@ public class FileView extends Composite {
 	
 	public void setUploadedFile(UploadedFileProxy file) {
 		this.file = file;
-		//init();
+		init();
 	}
 	
 	private void init() {

@@ -35,4 +35,5 @@ public interface ClientFactory
 	void setCurrentUser(GoodleUserProxy userProxy);
 	GoodleUserProxy getCurrentUser();
 	CourseModulesEditView getCourseModulesEditView();
+	BlobServiceAsync getBlobService();
 }

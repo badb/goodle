@@ -11,6 +11,4 @@ public interface BlobService extends RemoteService {
 
   String getBlobStoreUploadUrl();
 
-  ClientFile getUploadedFile(String id);
-
 }

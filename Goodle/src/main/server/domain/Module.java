@@ -7,11 +7,15 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -54,12 +58,14 @@ public class Module implements Serializable
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
-    /*@OneToMany(cascade=CascadeType.ALL)
-    private List<Material> materials = new ArrayList<Material>();
-    public List<Material> getMaterials() { return Collections.unmodifiableList(materials); }
-    public void addMaterial(Material material) { materials.add(material); }
-    public void removeMaterial(Material material) { materials.remove(material); }
-*/
+
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<UploadedFile> materials = new ArrayList<UploadedFile>();
+    public List<UploadedFile> getMaterials() { return materials; }
+    public void setMaterials(List<UploadedFile> materials) { this.materials = materials; }
+    public void addMaterial(UploadedFile material) { materials.add(material); }
+    public void removeMaterial(UploadedFile material) { materials.remove(material); }
+
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> comments = new ArrayList<Message>();
     public List<Message> getComments() { return Collections.unmodifiableList(comments); }

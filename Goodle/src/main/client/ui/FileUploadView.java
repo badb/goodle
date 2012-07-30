@@ -2,6 +2,7 @@ package main.client.ui;
 
 import main.client.BlobService;
 import main.client.BlobServiceAsync;
+import main.client.ClientFactory;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,6 +16,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class FileUploadView extends Composite {
@@ -33,11 +35,14 @@ public class FileUploadView extends Composite {
 		 
 	}
 
+	private ClientFactory clientFactory;
+	private BlobServiceAsync blobService;
+
 	@UiField Button submitButton;
 	@UiField FormPanel form;
+	@UiField TextBox title;
 	@UiField Label info;
-	BlobServiceAsync blobService = GWT.create(BlobService.class);
-
+	
 	@UiHandler("submitButton")
 	public void submitButtonClickHandler(ClickEvent event) {
 		blobService.getBlobStoreUploadUrl(new AsyncCallback<String>() {
@@ -65,8 +70,17 @@ public class FileUploadView extends Composite {
 			info.setText("Sukces!" + event.getResults());
 
 			// pokaż wysłany plik
-
+			
 			//getFile(event.getResults().trim());
 
 		}
+
+	public ClientFactory getClientFactory() {
+		return clientFactory;
+	}
+
+	public void setClientFactory(ClientFactory clientFactory) {
+		this.clientFactory = clientFactory;
+		blobService = clientFactory.getBlobService();
+	}
 	}

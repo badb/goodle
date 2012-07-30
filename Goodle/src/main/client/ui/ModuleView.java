@@ -2,6 +2,7 @@ package main.client.ui;
 
 import main.client.ClientFactory;
 import main.shared.proxy.ModuleProxy;
+import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -58,20 +59,15 @@ public class ModuleView extends Composite {
 		 * );
 		 */
 
-		/*
-		 * stara wersja for (MaterialProxy m : module.getMaterials()) { int rows
-		 * = filesTable.getRowCount(); filesTable.insertRow(rows);
-		 * filesTable.insertCell(rows, 0); if (m.getClass() ==
-		 * UploadedFileProxy.class){
-		 * 
-		 * FileView view = new FileView(); view.setClientFactory(clientFactory);
-		 * view.setUploadedFile((UploadedFileProxy) m);
-		 * filesTable.setWidget(rows, 0, view); } else { //TODO: co jeśli to nie
-		 * jest plik?
-		 * 
-		 * filesTable.setWidget(rows, 0, new
-		 * Label("Podgląd jeszcze nieobsługiwany")); } }
-		 */
+		
+		 /*for (UploadedFileProxy m : module.getMaterials()) { 
+			 int rows = filesTable.getRowCount(); filesTable.insertRow(rows);
+			 filesTable.insertCell(rows, 0);
+			 FileView view = new FileView(); 
+			 view.setClientFactory(clientFactory);
+			 view.setUploadedFile(m);
+			 filesTable.setWidget(rows, 0, view);
+		 }*/
 	}
 
 	public ModuleView() {

@@ -145,6 +145,20 @@ public class CourseView extends Composite
 			courseModulesEditView.setCourse(course);
 			currentView.setWidget(courseModulesEditView);
 		}
+		else if (selectedView.equals("homeworks"))
+		{
+			CourseHomeworksView courseHomeworksView = clientFactory.getCourseHomeworksView();
+			courseHomeworksView.setClientFactory(clientFactory);
+			courseHomeworksView.setCourse(course);
+			currentView.setWidget(courseHomeworksView);
+		}
+		else if (selectedView.equals("homeworksEdit"))
+		{
+			CourseHomeworksEditView courseHomeworksEditView = clientFactory.getCourseHomeworksEditView();
+			courseHomeworksEditView.setClientFactory(clientFactory);
+			courseHomeworksEditView.setCourse(course);
+			currentView.setWidget(courseHomeworksEditView);
+		}
 	}
 	
 	private boolean currentUserIsOwner()

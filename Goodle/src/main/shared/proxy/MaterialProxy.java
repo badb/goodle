@@ -12,10 +12,10 @@ public interface MaterialProxy extends EntityProxy
 {
 	Long getId();
 	String getName();
-	GoodleUserProxy getAuthor();
+	Long getAuthor();
 	Date getCreated();
 	Date getModified();
 	
 	void setName(String name);
-	void setAuthor(GoodleUserProxy author);
+	void setAuthor(Long author);
 }

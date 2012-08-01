@@ -1,5 +1,7 @@
 package main.client;
 
+import main.client.ui.CourseHomeworksEditView;
+import main.client.ui.CourseHomeworksView;
 import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseInfoView;
 import main.client.ui.CourseJoinMethodPopup;
@@ -27,6 +29,7 @@ public interface ClientFactory
 	CourseInfoView getCourseInfoView();
 	CourseModulesView getCourseModulesView();
 	CourseMembersView getCourseMembersView();
+	CourseHomeworksView getCourseHomeworksView();
 	UserMainPageView getUserMainPageView();
 	
 	CourseJoinMethodPopup getCourseJoinMethodPopup();
@@ -35,4 +38,5 @@ public interface ClientFactory
 	void setCurrentUser(GoodleUserProxy userProxy);
 	GoodleUserProxy getCurrentUser();
 	CourseModulesEditView getCourseModulesEditView();
+	CourseHomeworksEditView getCourseHomeworksEditView();
 }

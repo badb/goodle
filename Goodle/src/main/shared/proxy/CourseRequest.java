@@ -29,7 +29,9 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, CourseProxy> unregisterUsers(List<Long> ids);
 	
 	InstanceRequest<CourseProxy, List<ModuleProxy>> getModulesSafe();
+	InstanceRequest<CourseProxy, List<HomeworkProxy>> getHomeworksSafe();
 	InstanceRequest<CourseProxy, CourseProxy> updateModules(List<ModuleProxy> modules);
+	InstanceRequest<CourseProxy, CourseProxy> updateHomeworks(List<HomeworkProxy> homeworks);
 
 
 }

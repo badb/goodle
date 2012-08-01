@@ -21,6 +21,7 @@ public class CourseMenuView extends Composite
 	@UiField Label infoLabel;
 	@UiField Label modulesLabel;
 	@UiField Label membersLabel;
+	@UiField Label homeworksLabel;
 	
 	private String courseId;
 	public void setCourseId(String courseId) { this.courseId = courseId; }
@@ -49,6 +50,12 @@ public class CourseMenuView extends Composite
 	void onMembersLabelClicked(ClickEvent event) 
 	{
 		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "members"));
+	}
+
+	@UiHandler("homeworksLabel")
+	void onHomeworksLabelClicked(ClickEvent event) 
+	{
+		clientFactory.getPlaceController().goTo(new CoursePlace(courseId, "homeworks"));
 	}
 
 }

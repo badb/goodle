@@ -12,9 +12,10 @@ public interface HomeworkProxy extends MaterialProxy
 {
 	String getText();
 	Date getDeadline();
-	List<Long> getSolutions();
+//	List<Long> getSolutions();
+	boolean getIsVisible();
 	
 	void setText(String text);
 	void setDeadline(Date deadline);
-	
+	void setIsVisible(boolean isVisible);
 }

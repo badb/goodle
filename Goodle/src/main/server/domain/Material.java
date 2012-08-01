@@ -44,9 +44,9 @@ public abstract class Material implements Serializable
 	}
 
     @NotNull
-    private GoodleUser author;
-    public GoodleUser getAuthor() { return author; }
-    public void setAuthor(GoodleUser author) { this.author = author; }
+    private Long author;
+    public Long getAuthor() { return author; }
+    public void setAuthor(Long author) { this.author = author; }
     
     @Basic
     @Past

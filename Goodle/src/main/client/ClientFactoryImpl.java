@@ -1,5 +1,7 @@
 package main.client;
 
+import main.client.ui.CourseHomeworksEditView;
+import main.client.ui.CourseHomeworksView;
 import main.client.ui.CourseInfoView;
 import main.client.ui.CourseJoinMethodPopup;
 import main.client.ui.CourseListView;
@@ -27,6 +29,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private CourseInfoView courseInfoView;
 	private CourseModulesView courseModulesView;
 	private CourseMembersView courseMembersView;
+	private CourseHomeworksView courseHomeworksView;
 	private UserMainPageView userMainPageView;
 	
 	private CourseJoinMethodPopup courseJoinMethodPopup;
@@ -34,7 +37,8 @@ public class ClientFactoryImpl implements ClientFactory
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
-
+	private CourseHomeworksEditView courseHomeworksEditView;
+	
 	@Override
 	public SimpleEventBus getEventBus() { return eventBus; }
 
@@ -154,5 +158,27 @@ public class ClientFactoryImpl implements ClientFactory
 			courseModulesEditView.setParent(getCourseView());
 		}
 		return courseModulesEditView;
+	}
+	
+	@Override
+	public CourseHomeworksView getCourseHomeworksView() {
+		if (courseHomeworksView == null)
+		{
+			courseHomeworksView = new CourseHomeworksView();
+			courseHomeworksView.setClientFactory(this);
+			courseHomeworksView.setParent(getCourseView());
+		}
+		return courseHomeworksView;
+	}
+
+	@Override
+	public CourseHomeworksEditView getCourseHomeworksEditView() {
+		if (courseHomeworksEditView == null)
+		{
+			courseHomeworksEditView = new CourseHomeworksEditView();
+			courseHomeworksEditView.setClientFactory(this);
+			courseHomeworksEditView.setParent(getCourseView());
+		}
+		return courseHomeworksEditView;
 	}
 }

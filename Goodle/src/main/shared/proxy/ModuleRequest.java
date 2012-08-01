@@ -1,6 +1,5 @@
 package main.shared.proxy;
 
-
 import main.server.domain.Module;
 
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;

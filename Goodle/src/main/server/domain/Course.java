@@ -76,7 +76,6 @@ public class Course implements Serializable
     public void setName(String name) { this.name = name; }
 
     @NotBlank
-    @Pattern(regexp = "\\d{4}[LZ]?")
     private String term;
     public String getTerm() { return term; }
     public void setTerm(String term) { this.term = term; }

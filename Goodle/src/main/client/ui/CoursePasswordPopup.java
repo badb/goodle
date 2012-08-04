@@ -1,7 +1,5 @@
 package main.client.ui;
 
-import main.client.ClientFactory;
-import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
@@ -10,13 +8,12 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CoursePasswordPopup extends DialogBox
+public class CoursePasswordPopup extends AbstractCoursePopup
 {
 	private static CoursePasswordPopupUiBinder uiBinder = GWT.create(CoursePasswordPopupUiBinder.class);
 
@@ -27,15 +24,6 @@ public class CoursePasswordPopup extends DialogBox
 	
 	@UiField Button save;
 	@UiField Button cancel;
-	
-	private CourseProxy course;
-	public void setCourseProxy(CourseProxy course) { this.course = course; }
-	
-	private ClientFactory clientFactory;
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	
-	private CourseView parent;
-	public void setParent(CourseView parent) { this.parent = parent; }
 	
 	private static String wrongKeyMessage = "Operacja nie powiodła się. Sprawdź czy podany przez Ciebie klucz jest prawidłowy.";
 	private static String emptyKeyMessage = "Klucz nie może być pusty!";
@@ -62,7 +50,7 @@ public class CoursePasswordPopup extends DialogBox
 		final CoursePasswordPopup me = this;
 		String key = keyBox.getText();
 		
-		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
 		request.registerCurrentUser(key).using(course).fire
 		(

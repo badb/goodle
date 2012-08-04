@@ -1,30 +1,30 @@
 package main.client.ui;
 
-import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsDate;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PasswordTextBox;
-import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CourseJoinMethodPopup extends AbstractCoursePopup
+public class CourseNameTermPopup extends AbstractCoursePopup
 {
-	private static CourseJoinMethodPopupUiBinder uiBinder = GWT.create(CourseJoinMethodPopupUiBinder.class);
+	private static CourseNameTermPopupUiBinder uiBinder = GWT.create(CourseNameTermPopupUiBinder.class);
 
-	interface CourseJoinMethodPopupUiBinder extends UiBinder<Widget, CourseJoinMethodPopup> { }
+	interface CourseNameTermPopupUiBinder extends UiBinder<Widget, CourseNameTermPopup> { }
 	
-	@UiField RadioButton openRadio;
-	@UiField RadioButton keyRadio;
-	@UiField PasswordTextBox keyBox;
+	@UiField TextBox name;
+	@UiField ListBox year;
+	@UiField ListBox term;
 	
 	@UiField Label message;
 	
@@ -32,37 +32,25 @@ public class CourseJoinMethodPopup extends AbstractCoursePopup
 	@UiField Button cancel;
 	
 	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
-	private static String emptyKeyMessage = "Klucz nie może być pusty!";
+	private static String emptyNameMsg = "Nazwa kursu nie może być pusta.";
 	
-	public CourseJoinMethodPopup() 
+	public CourseNameTermPopup() 
 	{
 		setWidget(uiBinder.createAndBindUi(this));
+		setTermOptions();
 	}
 	
+	private void setTermOptions()
+	{
+		int currYear = JsDate.create().getFullYear() - 2000;
+		year.addItem("" + (currYear - 1) + "/" + currYear); /* e.g. "11/12" */
+		year.addItem("" + currYear + "/" + (currYear + 1)); /* "" for implicit string cast */
+	}
+	
+	@Override
 	protected void onCourseSet()
 	{
-		if (course.getJoinMethod().equals(JoinMethod.OPEN))
-		{
-			openRadio.setValue(true);
-		}
-		else if (course.getJoinMethod().equals(JoinMethod.KEY))
-		{
-			keyRadio.setValue(true);
-		}
-	}
-	
-	@UiHandler("openRadio")
-	public void onOpenMethodSelected(ClickEvent event)
-	{
-		keyBox.setEnabled(false);
-		message.setText("");
-	}
-	
-	@UiHandler("keyRadio")
-	public void onKeyMethodSelected(ClickEvent event)
-	{
-		keyBox.setEnabled(true);
-		message.setText("");
+		name.setText(course.getName());
 	}
 	
 	@UiHandler("save")
@@ -70,25 +58,18 @@ public class CourseJoinMethodPopup extends AbstractCoursePopup
 	{
 		message.setText("");
 		
-		if (keyRadio.getValue() && keyBox.getText().isEmpty()) {
-			message.setText(emptyKeyMessage);
+		if (name.getText().isEmpty()) {
+			message.setText(emptyNameMsg);
 			return;
 		}
 		
-		final CourseJoinMethodPopup me = this;
+		final CourseNameTermPopup me = this;
 		
 		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
 		
-		if (openRadio.getValue()) 
-		{
-			course.setJoinMethod(JoinMethod.OPEN);
-		}
-		else if (keyRadio.getValue()) 
-		{
-			course.setJoinMethod(JoinMethod.KEY);
-			course.setKey(keyBox.getText());
-		}
+		course.setName(name.getText());
+		course.setTerm(year.getValue(year.getSelectedIndex()) + term.getItemText(term.getSelectedIndex()));
 		
 		request.update().using(course).fire
 		(

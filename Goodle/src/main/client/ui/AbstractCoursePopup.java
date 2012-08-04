@@ -3,10 +3,10 @@ package main.client.ui;
 import main.client.ClientFactory;
 import main.shared.proxy.CourseProxy;
 
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 
-public abstract class AbstractCourseView extends Composite
-{	
+public abstract class AbstractCoursePopup extends DialogBox
+{
 	protected CourseView parent;
 	public void setParent(CourseView parent) { this.parent = parent; }
 	
@@ -40,5 +40,5 @@ public abstract class AbstractCourseView extends Composite
 		return (owner == null ? course.getMembers().contains(cf.getCurrentUser().getId()) : member);
 	}
 	
-	public void onCourseSet() { }
+	protected void onCourseSet() { }
 }

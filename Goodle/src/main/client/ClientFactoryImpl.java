@@ -8,6 +8,7 @@ import main.client.ui.CourseListView;
 import main.client.ui.CourseMembersView;
 import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseModulesView;
+import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseView;
 import main.client.ui.UserMainPageView;
@@ -33,6 +34,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private UserMainPageView userMainPageView;
 	
 	private CourseJoinMethodPopup courseJoinMethodPopup;
+	private CourseNameTermPopup courseNameTermPopup;
 	private CoursePasswordPopup coursePasswordPopup;
 
 	private GoodleUserProxy currentUserProxy;
@@ -126,6 +128,18 @@ public class ClientFactoryImpl implements ClientFactory
 			courseJoinMethodPopup.setParent(getCourseView());
 		}
 		return courseJoinMethodPopup;
+	}
+	
+	@Override
+	public CourseNameTermPopup getCourseNameTermPopup()
+	{
+		if (courseNameTermPopup == null)
+		{
+			courseNameTermPopup = new CourseNameTermPopup();
+			courseNameTermPopup.setClientFactory(this);
+			courseNameTermPopup.setParent(getCourseView());
+		}
+		return courseNameTermPopup;
 	}
 	
 	@Override

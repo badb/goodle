@@ -11,6 +11,7 @@ import main.client.ui.CourseModulesView;
 import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseView;
+import main.client.ui.TopView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -38,6 +39,7 @@ public interface ClientFactory
 	CoursePasswordPopup getCoursePasswordPopup();
 	
 	void setCurrentUser(GoodleUserProxy userProxy);
+	void setTopView(TopView topView);
 	GoodleUserProxy getCurrentUser();
 	CourseModulesEditView getCourseModulesEditView();
 	CourseHomeworksEditView getCourseHomeworksEditView();

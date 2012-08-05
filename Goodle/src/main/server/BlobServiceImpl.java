@@ -55,7 +55,6 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 
 		resp.setHeader("content-type", blobInfo.getContentType());
 		resp.setHeader("content-disposition", "attachment;filename=" + blobInfo.getFilename());
-		
 		blobstoreService.serve(blobKey, resp);
 		
 	}

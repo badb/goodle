@@ -47,8 +47,8 @@ public class FileView extends Composite {
 	}
 	
 	private void init() {
-		url = GWT.getHostPageBaseURL() + file.getUrl().substring(1);
-		title.setText(file.getName() + " zmodyfikowany: " + file.getModified().toString());
+		url = file.getUrl().substring(1);
+		title.setText(file.getUrl());
 	}
 	
 
@@ -65,7 +65,7 @@ public class FileView extends Composite {
 	}
 
 	private void showViewer() {
-		frame.setUrl("http://docs.google.com/viewer?url=" + url
+		frame.setUrl("http://docs.google.com/viewer?url=" + GWT.getHostPageBaseURL()+ url
 				+ "&embedded=true");
 		frame.setVisible(true);
 	}
@@ -76,7 +76,8 @@ public class FileView extends Composite {
 
 	@UiHandler("downloadButton")
 	public void onDownloadButtonClick(ClickEvent event) {
-		Window.open(url, "_self", "");
+		Window.open(GWT.getHostPageBaseURL() + url, "_self", "");
+		//Window.Location.replace(GWT.getHostPageBaseURL() + url);
 	}
 
 	public void setClientFactory(ClientFactory clientFactory) {

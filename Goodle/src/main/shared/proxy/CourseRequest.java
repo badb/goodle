@@ -3,6 +3,7 @@ package main.shared.proxy;
 import java.util.List;
 
 import main.server.domain.Course;
+import main.server.domain.Module;
 
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.Request;
@@ -31,5 +32,7 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, List<ModuleProxy>> getModulesSafe();
 	InstanceRequest<CourseProxy, CourseProxy> updateModules(List<ModuleProxy> modules);
 
-
+	//InstanceRequest<CourseProxy, ModuleProxy> setMaterialProxies(ModuleProxy module, List<UploadedFileProxy> materials);
+	//InstanceRequest<CourseProxy, ModuleProxy> addComment(ModuleProxy module, MessageProxy comments);
+	
 }

@@ -28,6 +28,8 @@ public class ModuleView extends Composite {
 	Label text;
 	@UiField
 	FlexTable filesTable;
+	
+	private ModuleProxy module;
 
 	private ClientFactory clientFactory;
 
@@ -36,38 +38,22 @@ public class ModuleView extends Composite {
 	}
 
 	public void setModule(ModuleProxy module) {
+		this.module = module;
 		title.setText(module.getTitle());
 		text.setText(module.getText());
 		if (module.getIsVisible()) {
 			visible.setText("Widoczny");
 		} else
 			visible.setText("Ukryty");
-
-		/*
-		 * ModuleRequest request =
-		 * clientFactory.getRequestFactory().moduleRequest(); module =
-		 * request.edit(module);
-		 * 
-		 * request.getFiles().using(module).fire ( new
-		 * Receiver<List<UploadedFileProxy>>() {
-		 * 
-		 * @Override public void onSuccess(List<UploadedFileProxy> result) { for
-		 * (UploadedFileProxy m : result) { int rows = filesTable.getRowCount();
-		 * filesTable.insertRow(rows); filesTable.insertCell(rows, 0); FileView
-		 * view = new FileView(); view.setClientFactory(clientFactory);
-		 * view.setUploadedFile(m); filesTable.setWidget(rows, 0, view); } } }
-		 * );
-		 */
-
 		
-		 /*for (UploadedFileProxy m : module.getMaterials()) { 
+		for (UploadedFileProxy m : module.getMaterials()) { 
 			 int rows = filesTable.getRowCount(); filesTable.insertRow(rows);
 			 filesTable.insertCell(rows, 0);
 			 FileView view = new FileView(); 
 			 view.setClientFactory(clientFactory);
 			 view.setUploadedFile(m);
 			 filesTable.setWidget(rows, 0, view);
-		 }*/
+		}
 	}
 
 	public ModuleView() {

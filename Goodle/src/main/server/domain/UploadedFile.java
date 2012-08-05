@@ -5,25 +5,29 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EntityManager;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.persistence.JoinColumn;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
+import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
-@Embeddable
-public abstract class UploadedFile implements Serializable
+@Entity
+public class UploadedFile implements Serializable
 {
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
-    public String getId() { return id; }
+	private Key id;
+	public Key getId() { return id; }
     
     @Version
     @Column(name="version")
@@ -43,7 +47,8 @@ public abstract class UploadedFile implements Serializable
     	}
 	}
 
-    @NotNull
+    //@NotNull TODO usunąć to pole?
+    @ManyToOne
     private GoodleUser author;
     public GoodleUser getAuthor() { return author; }
     public void setAuthor(GoodleUser author) { this.author = author; }
@@ -58,8 +63,7 @@ public abstract class UploadedFile implements Serializable
     protected Date modified = new Date();
     public Date getModified() { return modified; }
     
-    @NotBlank
-    @URL
+    @NotNull
     private String url;
     public String getUrl() {
 		return url;
@@ -68,18 +72,26 @@ public abstract class UploadedFile implements Serializable
 		this.url = url;
 	}
 	
-	//@Parent Module module;
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "materials", referencedColumnName = "module_id")
+	private Module module;
+	public Module getModule() {
+		return module;
+	}
+	public void setModule(Module module) {
+		this.module = module;
+	}
+	
     
-    public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
-
-    public String persist() 
+    /*public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
+    public Long persist() 
     {
     	EntityManager em = entityManager();
     	try 
     	{ 
     		em.persist(this);
     		em.refresh(this);
-    		return this.id;
+    		return this.id.getId();
     	}
     	finally { em.close(); }
     }
@@ -95,7 +107,7 @@ public abstract class UploadedFile implements Serializable
     	finally { em.close(); }
     }
 
-    public static UploadedFile findUploadedFile(String id) 
+    public static UploadedFile findUploadedFile(Long id) 
     {
     	if (id == null) { return null; }
     	EntityManager em = entityManager();
@@ -105,6 +117,5 @@ public abstract class UploadedFile implements Serializable
     		return m;
     	}
     	finally { em.close(); }
-    }
-	
+    }*/
 }

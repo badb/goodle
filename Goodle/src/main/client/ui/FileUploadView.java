@@ -1,12 +1,10 @@
 package main.client.ui;
 
-import main.client.BlobService;
 import main.client.BlobServiceAsync;
 import main.client.ClientFactory;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -15,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -29,7 +28,7 @@ public class FileUploadView extends Composite {
 
 	public FileUploadView() {
 		initWidget(uiBinder.createAndBindUi(this));
-		form.setAction(GWT.getModuleBaseURL() +"upload");
+		form.setAction(GWT.getModuleBaseURL() +"uploadservice");
 		form.setEncoding(FormPanel.ENCODING_MULTIPART);
 		form.setMethod(FormPanel.METHOD_POST);
 		 
@@ -37,6 +36,7 @@ public class FileUploadView extends Composite {
 
 	private ClientFactory clientFactory;
 	private BlobServiceAsync blobService;
+	private ModuleEditView parent;
 
 	@UiField Button submitButton;
 	@UiField FormPanel form;
@@ -52,7 +52,7 @@ public class FileUploadView extends Composite {
 				// blobstore upload URL
 				form.setAction(result.toString());
 				// Submit the form to complete the upload
-				info.setText(result);
+				//info.setText(result.toString());
 				form.submit();
 				form.reset();
 			}
@@ -67,8 +67,14 @@ public class FileUploadView extends Composite {
 	
 	@UiHandler("form")
 	public void formSubmitComplete(SubmitCompleteEvent event) {
-			info.setText("Sukces!" + event.getResults());
+			//info.setText("Sukces!" + event.getResults().trim());
 
+			String url = "/goodle/blobservice?blob-key=" + event.getResults().trim();
+			//Window.open(url, "_self", "");
+			//frame.setUrl(url);
+			
+			parent.addFile(url, title.getText());
+			
 			// pokaż wysłany plik
 			
 			//getFile(event.getResults().trim());
@@ -82,5 +88,8 @@ public class FileUploadView extends Composite {
 	public void setClientFactory(ClientFactory clientFactory) {
 		this.clientFactory = clientFactory;
 		blobService = clientFactory.getBlobService();
+	}
+	public void setParent(ModuleEditView parent) {
+		this.parent = parent;
 	}
 	}

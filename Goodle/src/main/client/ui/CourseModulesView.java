@@ -57,7 +57,7 @@ public class CourseModulesView  extends AbstractCourseView
 		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
 		
-		request.getModulesSafe().using(course).fire
+		request.getModulesSafe().using(course).with("materials").fire
 		(
 			new Receiver<List<ModuleProxy>>()
 			{

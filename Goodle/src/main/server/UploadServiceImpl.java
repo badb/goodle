@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.client.ClientFactory;
 import main.server.domain.UploadedFile;
 
+import com.google.appengine.api.blobstore.BlobInfoFactory;
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
@@ -42,19 +43,15 @@ public class UploadServiceImpl extends HttpServlet
 			throws ServletException, IOException {
 
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
-		Logger logger = Logger.getLogger("Goodle.Log");
-		logger.log(Level.SEVERE, blobs.toString());
 		List<BlobKey> blobKeys = blobs.get("file");
-		logger.log(Level.SEVERE, blobKeys.get(0).getKeyString());
 
-		/*UploadedFileProxy uploadedFile = new UploadedFile();
-		uploadedFile.setName(req.getParameter("title"));
-		uploadedFile.setAuthor(clientFactory.getCurrentUser().getId());
-		uploadedFile.setUrl("/goodle/blobservice?blob-key=" + blobKeys.get(0).getKeyString());
-		*/
-		
 		//Redirect recursively to this servlet (calls doGet)
-		//res.sendRedirect("/goodle/uploadservice?id=" + uploadedFile.getId());
+		if (blobKeys.get(0) == null) { 
+            res.sendRedirect("/"); 
+		} else { 
+			res.sendRedirect("/goodle/uploadservice?id=" + blobKeys.get(0).getKeyString());
+		} 
+		
 	}
 
 	@Override

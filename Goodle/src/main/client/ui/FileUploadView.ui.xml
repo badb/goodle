@@ -5,7 +5,7 @@
 
 	<g:FormPanel ui:field="form"> <g:HorizontalPanel>
 		<g:FileUpload ui:field="uploadField" name="file"/>
-		<g:Label ui:field="info">Podaj nazwę pliku:</g:Label>
+		<g:Label ui:field="info">Podaj opis pliku:</g:Label>
 		<g:TextBox ui:field="title"></g:TextBox>
 		<g:Button ui:field="submitButton">Upload</g:Button>
 	</g:HorizontalPanel></g:FormPanel>

@@ -78,7 +78,6 @@ public class Course implements Serializable
     public void setName(String name) { this.name = name; }
 
     @NotBlank
-    @Pattern(regexp = "\\d{4}[LZ]?")
     private String term;
     public String getTerm() { return term; }
     public void setTerm(String term) { this.term = term; }
@@ -125,7 +124,13 @@ public class Course implements Serializable
     public List<Long> getModules() { return Collections.unmodifiableList(modules); }
     public void addModule(Long id) { modules.add(id); }
     public void removeModule(Long id) { modules.remove(id); }
-       
+    
+    @Basic
+    private List<Long> homeworks = new ArrayList<Long>();
+    public List<Long> getHomeworks() { return Collections.unmodifiableList(homeworks); }
+    public void addHomework(Long id) { homeworks.add(id); }
+    public void removeHomework(Long id) {homeworks.remove(id);}
+    
     @OneToMany(cascade=CascadeType.ALL)
     private List<Message> messages = new ArrayList<Message>();
     public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
@@ -333,6 +338,31 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
+    public List<Homework> getHomeworksSafe() 
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	boolean owner = coordinators.contains(u.getId());
+    	boolean member = members.contains(u.getId());
+    	List<Homework> l = new ArrayList<Homework>();
+    	
+    	if (!owner && !member) return l;
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		for (Long id : homeworks)
+    		{
+    			Homework h = em.find(Homework.class, id);
+    			if (h.getIsVisible() || (!h.getIsVisible() && owner))
+    			{
+    				l.add(h);
+    			}
+    		}
+    		return l;
+    	}
+    	finally { em.close(); }
+    }
+    
     public Course updateModules(List<Module> modules)
     {
     	GoodleUser u = GoodleUser.getCurrentUser();
@@ -364,6 +394,45 @@ public class Course implements Serializable
     			em.remove(m);
     		}
     		c.modules = newModules;
+    		em.persist(c);
+        	return c;
+    	}
+    	finally { em.close(); }
+    }
+    
+    public Course updateHomeworks(List<Homework> homeworks)
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return null;
+    	
+    	if (!coordinators.contains(u.getId())) return null;
+    	
+    	List<Long> newHomeworks = new ArrayList<Long>();
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		Course c = em.find(Course.class, this.id);
+			u = em.merge(u);
+    		
+    		for (Homework h : homeworks)
+    		{
+    			if (!c.homeworks.remove(h.getId()))
+    			{
+    				h.setAuthor(u.getId());
+    				h.setVersion(1);
+    			}
+    			
+    			em.persist(h);
+    			em.refresh(h);
+    			newHomeworks.add(h.getId());
+    		}
+    		for (Long id : c.homeworks)
+    		{
+    			Homework h = em.find(Homework.class, id);
+    			em.remove(h);
+    		}
+    		c.homeworks = newHomeworks;
     		em.persist(c);
         	return c;
     	}

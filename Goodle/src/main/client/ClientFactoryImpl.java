@@ -1,13 +1,17 @@
 package main.client;
 
+import main.client.ui.CourseHomeworksEditView;
+import main.client.ui.CourseHomeworksView;
 import main.client.ui.CourseInfoView;
 import main.client.ui.CourseJoinMethodPopup;
 import main.client.ui.CourseListView;
 import main.client.ui.CourseMembersView;
 import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseModulesView;
+import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseView;
+import main.client.ui.TopView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -22,20 +26,24 @@ public class ClientFactoryImpl implements ClientFactory
 	private final PlaceController placeController = new PlaceController(eventBus);
 	private final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
 
+	private TopView topView;
 	private CourseListView courseListView;
 	private CourseView courseView;
 	private CourseInfoView courseInfoView;
 	private CourseModulesView courseModulesView;
 	private CourseMembersView courseMembersView;
+	private CourseHomeworksView courseHomeworksView;
 	private UserMainPageView userMainPageView;
 	
 	private CourseJoinMethodPopup courseJoinMethodPopup;
+	private CourseNameTermPopup courseNameTermPopup;
 	private CoursePasswordPopup coursePasswordPopup;
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
 	private BlobServiceAsync blobService;
-
+	private CourseHomeworksEditView courseHomeworksEditView;
+	
 	@Override
 	public SimpleEventBus getEventBus() { return eventBus; }
 
@@ -126,6 +134,21 @@ public class ClientFactoryImpl implements ClientFactory
 	}
 	
 	@Override
+	public CourseNameTermPopup getCourseNameTermPopup()
+	{
+		if (courseNameTermPopup == null)
+		{
+			courseNameTermPopup = new CourseNameTermPopup();
+			courseNameTermPopup.setClientFactory(this);
+			courseNameTermPopup.setParent(getCourseView());
+			if (topView != null) {
+				courseNameTermPopup.addNameChangedEventHandler(topView);
+			}
+		}
+		return courseNameTermPopup;
+	}
+	
+	@Override
 	public CoursePasswordPopup getCoursePasswordPopup()
 	{
 		if (coursePasswordPopup == null)
@@ -143,6 +166,11 @@ public class ClientFactoryImpl implements ClientFactory
 	@Override
 	public void setCurrentUser(GoodleUserProxy userProxy) { currentUserProxy = userProxy; }
 
+	@Override
+	public void setTopView(TopView topView) {
+		this.topView = topView;
+	}
+	
 	@Override
 	public GoodleUserProxy getCurrentUser() { return currentUserProxy; }
 
@@ -163,5 +191,26 @@ public class ClientFactoryImpl implements ClientFactory
 			blobService = GWT.create(BlobService.class);
 		}
 		return blobService;
+	}
+	@Override
+	public CourseHomeworksView getCourseHomeworksView() {
+		if (courseHomeworksView == null)
+		{
+			courseHomeworksView = new CourseHomeworksView();
+			courseHomeworksView.setClientFactory(this);
+			courseHomeworksView.setParent(getCourseView());
+		}
+		return courseHomeworksView;
+	}
+
+	@Override
+	public CourseHomeworksEditView getCourseHomeworksEditView() {
+		if (courseHomeworksEditView == null)
+		{
+			courseHomeworksEditView = new CourseHomeworksEditView();
+			courseHomeworksEditView.setClientFactory(this);
+			courseHomeworksEditView.setParent(getCourseView());
+		}
+		return courseHomeworksEditView;
 	}
 }

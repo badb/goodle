@@ -11,9 +11,9 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
-import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -37,14 +37,21 @@ public class FileUploadView extends Composite {
 	private ClientFactory clientFactory;
 	private BlobServiceAsync blobService;
 	private ModuleEditView parent;
+	private String titleText;
 
 	@UiField Button submitButton;
 	@UiField FormPanel form;
 	@UiField TextBox title;
 	@UiField Label info;
+	@UiField FileUpload uploadField;
 	
 	@UiHandler("submitButton")
 	public void submitButtonClickHandler(ClickEvent event) {
+		if (title.getText().equals("")) {
+			titleText = uploadField.getFilename();
+		} else {
+			titleText = title.getText();
+		}
 		blobService.getBlobStoreUploadUrl(new AsyncCallback<String>() {
 			@Override
 			public void onSuccess(String result) {
@@ -52,7 +59,6 @@ public class FileUploadView extends Composite {
 				// blobstore upload URL
 				form.setAction(result.toString());
 				// Submit the form to complete the upload
-				//info.setText(result.toString());
 				form.submit();
 				form.reset();
 			}
@@ -70,15 +76,8 @@ public class FileUploadView extends Composite {
 			//info.setText("Sukces!" + event.getResults().trim());
 
 			String url = "/goodle/blobservice?blob-key=" + event.getResults().trim();
-			//Window.open(url, "_self", "");
-			//frame.setUrl(url);
+			parent.addFile(url, titleText);
 			
-			parent.addFile(url, title.getText());
-			
-			// pokaż wysłany plik
-			
-			//getFile(event.getResults().trim());
-
 		}
 
 	public ClientFactory getClientFactory() {

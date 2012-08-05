@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.client.NameChangedEvent;
+import main.client.NameChangedEventHandler;
 import main.client.place.FindCoursesByNamePlace;
 import main.shared.proxy.CourseProxy;
 
@@ -26,7 +28,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
 
-public class TopView extends Composite
+public class TopView extends Composite implements NameChangedEventHandler
 {
 	private static TopViewUiBinder uiBinder = GWT.create(TopViewUiBinder.class);
 	
@@ -105,6 +107,14 @@ public class TopView extends Composite
 						Window.Location.assign(response);
 					}
 					});
+	}
+
+	@Override
+	public void onNameChanged(NameChangedEvent event) {
+		final MultiWordSuggestOracle oracle = (MultiWordSuggestOracle) searchBox.getSuggestOracle();
+		//oracle.add(event.getName());		
+		oracle.clear();
+		addSuggestions();
 	}
 }
 

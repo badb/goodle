@@ -1,6 +1,5 @@
 package main.client.ui;
 
-import main.client.ClientFactory;
 import main.shared.JoinMethod;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
@@ -11,14 +10,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CourseJoinMethodPopup extends DialogBox
+public class CourseJoinMethodPopup extends AbstractCoursePopup
 {
 	private static CourseJoinMethodPopupUiBinder uiBinder = GWT.create(CourseJoinMethodPopupUiBinder.class);
 
@@ -33,13 +31,16 @@ public class CourseJoinMethodPopup extends DialogBox
 	@UiField Button save;
 	@UiField Button cancel;
 	
-	private CourseView parent;
-	public void setParent(CourseView parent) { this.parent = parent; }
+	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
+	private static String emptyKeyMessage = "Klucz nie może być pusty!";
 	
-	private CourseProxy course;
-	public void setCourseProxy(CourseProxy course) 
-	{ 
-		this.course = course;
+	public CourseJoinMethodPopup() 
+	{
+		setWidget(uiBinder.createAndBindUi(this));
+	}
+	
+	protected void onCourseSet()
+	{
 		if (course.getJoinMethod().equals(JoinMethod.OPEN))
 		{
 			openRadio.setValue(true);
@@ -48,17 +49,6 @@ public class CourseJoinMethodPopup extends DialogBox
 		{
 			keyRadio.setValue(true);
 		}
-	}
-	
-	private ClientFactory clientFactory;
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; }
-	
-	private static String failure = "Operacja nie powiodła się. Spróbuj ponownie.";
-	private static String emptyKeyMessage = "Klucz nie może być pusty!";
-	
-	public CourseJoinMethodPopup() 
-	{
-		setWidget(uiBinder.createAndBindUi(this));
 	}
 	
 	@UiHandler("openRadio")
@@ -87,7 +77,7 @@ public class CourseJoinMethodPopup extends DialogBox
 		
 		final CourseJoinMethodPopup me = this;
 		
-		CourseRequest request = clientFactory.getRequestFactory().courseRequest();
+		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
 		
 		if (openRadio.getValue()) 

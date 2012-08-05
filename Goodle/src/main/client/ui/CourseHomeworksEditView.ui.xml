@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:style src="../resources/Goodle.css"/>
+
+        <g:FlowPanel width="100%">
+
+	        <g:Button ui:field="save" text="Zapisz zmiany" />
+	        <g:Button ui:field="cancel" text="Anuluj" />
+		<g:FlowPanel width="100%">
+			<g:Label ui:field="info" />
+			<g:Button ui:field="newHomework" text="Dodaj zadanie"/>
+			<g:FlexTable width="100%" ui:field="homeworks" />
+		</g:FlowPanel>
+	</g:FlowPanel>
+
+</ui:UiBinder> 

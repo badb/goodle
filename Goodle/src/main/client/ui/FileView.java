@@ -48,7 +48,7 @@ public class FileView extends Composite {
 	
 	private void init() {
 		url = file.getUrl().substring(1);
-		title.setText(file.getUrl());
+		title.setText(file.getName());
 	}
 	
 

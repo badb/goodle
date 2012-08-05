@@ -6,13 +6,15 @@
 
 !.gitignore
 !praca/praca.tex
-
 !Goodle/
 Goodle/*
 !Goodle/src/
-
 !Goodle/.project
+!Goodle/war
+Goodle/war/*
 !Goodle/war/Goodle.html
+!Goodle/war/WEB-INF
+Goodle/war/WEB-INF/*
 !Goodle/war/WEB-INF/appengine-web.xml
 !Goodle/war/WEB-INF/web.xml
 !Goodle/war/WEB-INF/classes/META-INF/persistence.xml

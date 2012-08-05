@@ -1,0 +1,32 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+    <ui:style src="../resources/Goodle.css">
+	    .name
+		{
+			border: 1px solid #D1C7AC;
+			height: 20px;
+			padding: 4px;
+			width: 240px;
+		}
+	</ui:style>
+    
+    <g:HTMLPanel>
+        <p>
+        	Podaj nową nazwę kursu i wybierz semestr,
+        	w którym będzie się odbywać:
+        </p> <br />
+        <g:TextBox styleName="{style.name}" ui:field="name" ui:maxLength="32"/> 
+        <g:ListBox ui:field="year" />
+        <g:ListBox ui:field="term" >
+            <g:item value="Z"> Z </g:item>
+            <g:item value="L"> L </g:item>
+            <g:item value=" ">   </g:item>
+        </g:ListBox>             
+        <g:Label ui:field="message" /> <br />
+        <g:Button ui:field="save" ui:text="Zapisz" />
+        <g:Button ui:field="cancel" ui:text="Anuluj" />
+    </g:HTMLPanel>
+    
+</ui:UiBinder>

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.client.place.CoursePlace;
+import main.client.resources.GoodleResources;
 import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -30,6 +31,7 @@ public class UserCoursesView extends Composite
 	
 	public UserCoursesView()
 	{
+		GoodleResources.INSTANCE.css().ensureInjected();  
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	

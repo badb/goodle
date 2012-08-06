@@ -11,10 +11,10 @@ import com.google.web.bindery.requestfactory.shared.Service;
 @Service(Module.class)
 public interface ModuleRequest extends RequestContext 
 {
-	//InstanceRequest<ModuleProxy, Void> addMaterial(MaterialProxy material);
-	//InstanceRequest<ModuleProxy, Void> removeMaterial(MaterialProxy material);
-	InstanceRequest<ModuleProxy, Void> addComment(MessageProxy comment);
-	InstanceRequest<ModuleProxy, Void> removeComment(MessageProxy comment);
+	//InstanceRequest<ModuleProxy, Void> addMaterial(UploadedFileProxy material);
+	//InstanceRequest<ModuleProxy, Void> removeMaterial(UploadedFileProxy material);
+	//InstanceRequest<ModuleProxy, Void> addComment(MessageProxy comment);
+	//InstanceRequest<ModuleProxy, Void> removeComment(MessageProxy comment);
 	
 	InstanceRequest<ModuleProxy, Void> persist();
 	InstanceRequest<ModuleProxy, Void> remove();

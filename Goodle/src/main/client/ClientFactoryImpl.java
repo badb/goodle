@@ -41,6 +41,7 @@ public class ClientFactoryImpl implements ClientFactory
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
+	private BlobServiceAsync blobService;
 	private CourseHomeworksEditView courseHomeworksEditView;
 	
 	@Override
@@ -183,7 +184,14 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return courseModulesEditView;
 	}
-	
+
+	@Override
+	public BlobServiceAsync getBlobService() {
+		if (blobService == null) {
+			blobService = GWT.create(BlobService.class);
+		}
+		return blobService;
+	}
 	@Override
 	public CourseHomeworksView getCourseHomeworksView() {
 		if (courseHomeworksView == null)

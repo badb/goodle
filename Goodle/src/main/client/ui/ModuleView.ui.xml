@@ -9,6 +9,7 @@
 	    <g:Label ui:field="visible" width="100%"/>
 	    <g:Label ui:field="title" width="100%"/>
 	    <g:Label ui:field="text" />
+	    <g:FlexTable ui:field="filesTable"></g:FlexTable>
 	</g:VerticalPanel>
 
 </ui:UiBinder>

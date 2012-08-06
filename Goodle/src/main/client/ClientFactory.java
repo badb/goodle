@@ -42,5 +42,6 @@ public interface ClientFactory
 	void setTopView(TopView topView);
 	GoodleUserProxy getCurrentUser();
 	CourseModulesEditView getCourseModulesEditView();
+	BlobServiceAsync getBlobService();
 	CourseHomeworksEditView getCourseHomeworksEditView();
 }

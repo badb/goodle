@@ -16,10 +16,14 @@ public interface ModuleProxy extends EntityProxy
 	String getText();
 	boolean getIsVisible();
 	List<MessageProxy> getComments();
-	//List<MaterialProxy> getMaterials();
+	//List<Long> getMaterials();
+	List<UploadedFileProxy> getMaterials();
 	
 	void setTitle(String title);
 	void setAuthor(Long author);
 	void setText(String text);
 	void setIsVisible(boolean isVisible);
+	void setMaterials(List<UploadedFileProxy> materials);
+	//void setMaterials(List<Long> materials);
+	void setComments(List<MessageProxy> comments);
 }

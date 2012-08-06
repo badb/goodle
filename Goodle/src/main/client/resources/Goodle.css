@@ -314,3 +314,21 @@ body {
 	margin-left: 20px;
 	
 }
+
+.homework {
+	border: 1px solid gray;
+	padding: 20px;
+	margin: 5px;
+	-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;
+box-shadow: 0 0 5px #888;
+}
+
+.module {
+	border: 1px solid gray;
+	padding: 5px;
+	margin: 5px;
+-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;
+box-shadow: 0 0 5px #888;
+}

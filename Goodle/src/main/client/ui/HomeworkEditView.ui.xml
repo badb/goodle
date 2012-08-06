@@ -4,7 +4,9 @@
 	xmlns:my="urn:import:main.client.ui"
 	xmlns:dp="urn:import:com.google.gwt.user.datepicker.client" 
 >
-	<g:VerticalPanel width="100%">
+	<ui:style src="../resources/Goodle.css"/>
+    
+	<g:VerticalPanel width="100%" styleName='{style.homework}'>
 	    <my:EditLabel width="100%" ui:field="title" />
 	   	<g:CheckBox ui:field="isVisible" />
 	    <my:EditLabel ui:field="text" />

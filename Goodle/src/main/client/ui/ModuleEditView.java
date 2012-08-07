@@ -126,25 +126,40 @@ public class ModuleEditView extends Composite {
 		else isVisible.setText("Widoczny");
 	}
 	public void addFile(String url, String title) {
-		UploadedFileProxy p = request.create(UploadedFileProxy.class);
-		p.setName(title);
-		p.setUrl(url);
-		p.setModule(module);
-		currentFiles.add(p);
-		module.setMaterials(currentFiles);
-		refreshFiles();
+		UploadedFileProxy file = request.create(UploadedFileProxy.class);
+		file.setName(title);
+		file.setUrl(url);
+		file.setModule(module);
+		currentFiles.add(file);
+		//module.setMaterials(currentFiles);
+		addFileView(file);
+	}
+	
+	private void addFileView(UploadedFileProxy file) {
+		int rows = filesTable.getRowCount();
+		filesTable.insertRow(rows);
+		filesTable.insertCell(rows, 0);
+		FileEditView view = new FileEditView();
+		view.setClientFactory(clientFactory);
+		view.setUploadedFile(file);
+		view.setParent(this);
+		filesTable.setWidget(rows, 0, view);
 	}
 	
 	private void refreshFiles() {
 		filesTable.removeAllRows();
-		for (UploadedFileProxy m : currentFiles) {
-			int rows = filesTable.getRowCount();
-			filesTable.insertRow(rows);
-			filesTable.insertCell(rows, 0);
-			FileView view = new FileView();
-			view.setClientFactory(clientFactory);
-			view.setUploadedFile(m);
-			filesTable.setWidget(rows, 0, view);
+		for (UploadedFileProxy file : currentFiles) {
+			addFileView(file);
 		}
+	}
+	public void removeFile(UploadedFileProxy file) {
+		int index = currentFiles.lastIndexOf(file);
+		if (index == -1) {
+			return;
+		}
+		text.setText(""+index);
+		filesTable.removeRow(index);
+		text.setText("usunięto view");
+		currentFiles.remove(index);
 	}
 }

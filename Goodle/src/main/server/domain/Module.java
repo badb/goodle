@@ -60,7 +60,20 @@ public class Module implements Serializable
     @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="module")
     private List<UploadedFile> materials = new ArrayList<UploadedFile>();
     public List<UploadedFile> getMaterials() { return Collections.unmodifiableList(materials);  }
-    public void setMaterials(List<UploadedFile> materials) { this.materials = materials; }
+    public void setMaterials(List<UploadedFile> materials) { 
+    	EntityManager em = entityManager();
+    	try {
+    		for (UploadedFile uf : this.materials) {
+    			if (!materials.contains(uf)) {
+    				UploadedFile u = em.find(UploadedFile.class, uf.getId());
+    				em.remove(u);
+    			}
+    		}
+    		this.materials = materials;
+    	}
+    	finally {em.close();}
+    	
+    }
     public void addMaterial(UploadedFile material) { materials.add(material); }
     public void removeMaterial(UploadedFile material) { materials.remove(material); }
 

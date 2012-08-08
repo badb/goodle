@@ -11,11 +11,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DeckLayoutPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
+import main.client.ui.ResizableTextArea;
 
 public class EditLabel extends Composite implements HasValue<String>, HasValueChangeHandlers <String> {
 
@@ -24,65 +22,52 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	interface EditLabelUiBinder extends UiBinder<Widget, EditLabel> {
 	}
 
-	@UiField HTML label;
-	@UiField DeckLayoutPanel deckPanel;
-	@UiField TextArea textArea;
+	@UiField ResizableTextArea textArea;
 	@UiField Button saveButton;
 
 	private boolean enabled = true;
 	@UiField Button cancelButton;
 	
 	private String text;
+	private final String MAX_LENGTH = "300";
 	
 	public EditLabel() {
 		initWidget(uiBinder.createAndBindUi(this));
-		deckPanel.showWidget(0);
-		label.getElement().getStyle().setProperty("whiteSpace", "pre");
+		//TODO ustawić własciwą długość
+		textArea.getElement().setAttribute("maxlength", MAX_LENGTH);
 		text = getValue();
+		textArea.resize();
 	}
-	
-
-	@UiHandler("label")
-	void onLabelClick(ClickEvent e) {
-		if (enabled) {
-			text = getValue();
-			textArea.setText(getValue());
-			deckPanel.showWidget(1);
-		}
-	}
-	
 	
 	@UiHandler("saveButton")
 	public void onSaveButtonClick(ClickEvent event) {
-		if(deckPanel.getVisibleWidgetIndex() == 0) return;
 		setValue(textArea.getText(), true);
-		deckPanel.showWidget(0);
+		textArea.resize();
 	}
 
 	@UiHandler("cancelButton")
 	public void onCancelButtonClick(ClickEvent event) {
-		if(deckPanel.getVisibleWidgetIndex() == 0) return;
 		setValue(text, false);
-		deckPanel.showWidget(0);
 	}
-
+	
+	public void onLoad() {
+		textArea.resize();
+	}
 	
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
 		return addHandler(handler, ValueChangeEvent.getType());
-		//return textArea.addValueChangeHandler(handler);
 	}
 
 	@Override
 	public String getValue() {
-		return label.getText();
+		return text;
 	}
 
 	@Override
 	public void setValue(String text) {
-		label.setHTML(text);
 		textArea.setText(text);
-		
+		this.text = text;
 	}
 
 	@Override
@@ -103,5 +88,4 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 		this.enabled = enabled;
 	}
 	
-
 }

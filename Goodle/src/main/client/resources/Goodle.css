@@ -332,3 +332,34 @@ box-shadow: 0 0 5px #888;
 -webkit-box-shadow: 0 0 5px#888;
 box-shadow: 0 0 5px #888;
 }
+
+
+.panel {
+    /*vertical-align: middle;*/
+}
+
+/* EDIT MODULES, FILES */
+
+.rightButton {
+	float: right;
+}
+
+.leftButton {
+	float: left;
+}
+
+.textArea {
+	margin: 10px;
+	border: 1px solid;
+	resize: none;
+	width: 90%;
+}
+
+.addButton {
+	width: 100%;
+}
+
+.panel {
+	min-height: 100px;
+	height: auto;
+}

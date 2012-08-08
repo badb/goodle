@@ -10,6 +10,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
 public class ModuleView extends Composite {
@@ -23,9 +24,9 @@ public class ModuleView extends Composite {
 	@UiField
 	Label visible;
 	@UiField
-	Label title;
+	ResizableTextArea title;
 	@UiField
-	Label text;
+	ResizableTextArea text;
 	@UiField
 	FlexTable filesTable;
 	
@@ -41,11 +42,12 @@ public class ModuleView extends Composite {
 		this.module = module;
 		title.setText(module.getTitle());
 		text.setText(module.getText());
+		title.resize();
+		text.resize();
 		if (module.getIsVisible()) {
 			visible.setText("Widoczny");
 		} else
 			visible.setText("Ukryty");
-		
 		for (UploadedFileProxy m : module.getMaterials()) { 
 			 int rows = filesTable.getRowCount(); filesTable.insertRow(rows);
 			 filesTable.insertCell(rows, 0);
@@ -58,6 +60,11 @@ public class ModuleView extends Composite {
 
 	public ModuleView() {
 		initWidget(uiBinder.createAndBindUi(this));
+	}
+	
+	public void onLoad() {
+		title.resize();
+		text.resize();
 	}
 
 }

@@ -89,10 +89,10 @@ public class ModuleEditView extends Composite {
 		previousFiles = module.getMaterials();
 		currentFiles = previousFiles;
 		//currentMessages = module.getComments();
-		
-		text.setText(module.getText());
-		isVisible.setValue(module.getIsVisible());
-		if (module.getIsVisible())
+		title.setText(previousTitle);
+		text.setText(previousText);
+		isVisible.setValue(previousIsVisible);
+		if (previousIsVisible) 
 		{
 			isVisible.setText("Widoczny");
 		}
@@ -100,7 +100,6 @@ public class ModuleEditView extends Composite {
 		
 		upload.setParent(this);
 		refreshFiles();
-		
 	}
 	
 	public boolean isChanged() 

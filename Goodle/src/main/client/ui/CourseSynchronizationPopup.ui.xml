@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+
+		<g:VerticalPanel>
+		<g:HorizontalPanel height="">
+			<g:TextBox text="Search Course" ui:field="searchBox"/>
+			<g:Button ui:field="searchButton" text="Search"/>
+		</g:HorizontalPanel>
+		<p1:CellList ui:field="cellList"/>
+		<g:Cell verticalAlignment="ALIGN_BOTTOM" horizontalAlignment="ALIGN_RIGHT">
+			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT">
+			<g:Button ui:field="okButton" text="OK"/>
+			<g:Button ui:field="cancelButton" text="Cancel"/>
+		</g:HorizontalPanel>
+		</g:Cell>
+		</g:VerticalPanel>
+
+</ui:UiBinder> 

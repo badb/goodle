@@ -10,6 +10,7 @@ import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseModulesView;
 import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
+import main.client.ui.CourseSynchronizationPopup;
 import main.client.ui.CourseView;
 import main.client.ui.TopView;
 import main.client.ui.UserMainPageView;
@@ -38,6 +39,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private CourseJoinMethodPopup courseJoinMethodPopup;
 	private CourseNameTermPopup courseNameTermPopup;
 	private CoursePasswordPopup coursePasswordPopup;
+	private CourseSynchronizationPopup courseSynchronizationPopup;
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
@@ -159,6 +161,19 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return coursePasswordPopup;
 	}
+	
+	@Override
+	public CourseSynchronizationPopup getCourseSynchronizationPopup()
+	{
+		if (courseSynchronizationPopup == null)
+		{
+			courseSynchronizationPopup = new CourseSynchronizationPopup();
+			courseSynchronizationPopup.setClientFactory(this);
+			courseSynchronizationPopup.setParent(getCourseView());
+			
+		}
+		return courseSynchronizationPopup;
+	}
 
 	@Override
 	public void initializeRequestFactory() { requestFactory.initialize(eventBus); }
@@ -213,4 +228,6 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return courseHomeworksEditView;
 	}
+
+
 }

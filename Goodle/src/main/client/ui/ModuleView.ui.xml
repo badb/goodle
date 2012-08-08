@@ -3,7 +3,9 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 	xmlns:my="urn:import:main.client.ui"
 >
-	<g:VerticalPanel width="100%">
+	<ui:style src="../resources/Goodle.css"/>
+    
+	<g:VerticalPanel width="100%" styleName='{style.module}'>
 	    <g:Label ui:field="visible" width="100%"/>
 	    <g:Label ui:field="title" width="100%"/>
 	    <g:Label ui:field="text" />

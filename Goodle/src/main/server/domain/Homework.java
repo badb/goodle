@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @Entity
 public class Homework extends Material
@@ -37,11 +39,11 @@ public class Homework extends Material
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
-  //  @OneToMany(cascade=CascadeType.ALL)
-   // private List<Long> solutions = new ArrayList<Long>();
-//    public List<Long> getSolutions() { return Collections.unmodifiableList(solutions); }
- //   public void addSolution(HomeworkFile file) { solutions.add(file.getId()); }
- //   public void removeSolution(HomeworkFile file) { solutions.remove(file.getId()); }
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Key> solutions = new ArrayList<Key>();
+    public List<Key> getSolutions() { return Collections.unmodifiableList(solutions); }
+    public void addSolution(UploadedFile file) { solutions.add(file.getId()); }
+    public void removeSolution(UploadedFile file) { solutions.remove(file.getId()); }
     
     public static Homework findHomework(Long id) 
     {

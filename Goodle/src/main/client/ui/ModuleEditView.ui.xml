@@ -3,7 +3,9 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:my="urn:import:main.client.ui"
 >
-	<g:VerticalPanel width="100%">
+	<ui:style src="../resources/Goodle.css"/>
+
+	<g:VerticalPanel width="100%" styleName='{style.module}'>
 	    <my:EditLabel width="100%" ui:field="title" />
 	   	<g:CheckBox ui:field="isVisible" />
 	    <my:EditLabel ui:field="text" />

@@ -10,6 +10,7 @@ import main.client.ui.CourseModulesEditView;
 import main.client.ui.CourseModulesView;
 import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
+import main.client.ui.CourseSynchronizationPopup;
 import main.client.ui.CourseView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
@@ -36,6 +37,7 @@ public interface ClientFactory
 	CourseJoinMethodPopup getCourseJoinMethodPopup();
 	CourseNameTermPopup getCourseNameTermPopup();
 	CoursePasswordPopup getCoursePasswordPopup();
+	CourseSynchronizationPopup getCourseSynchronizationPopup();
 	
 	void setCurrentUser(GoodleUserProxy userProxy);
 	GoodleUserProxy getCurrentUser();

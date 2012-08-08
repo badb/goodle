@@ -30,6 +30,7 @@ public class CourseView extends Composite
 	@UiField Label courseName;
 	
 	@UiField Button joinMethodAction;
+	@UiField Button synchronizationButton;
 	
 	@UiField CourseMenuView courseMenu;
 	@UiField SimplePanel currentView;
@@ -52,6 +53,7 @@ public class CourseView extends Composite
 			courseMenu.setVisible(true);
 			currentView.setVisible(true);
 			joinMethodAction.setVisible(true);
+			synchronizationButton.setVisible(false);
 
 			setCourseName();
 			 
@@ -59,6 +61,9 @@ public class CourseView extends Composite
 			{
 				joinMethodAction.setEnabled(true);
 				joinMethodAction.setText(course.getJoinMethod().toString());
+				synchronizationButton.setVisible(true);
+				synchronizationButton.setEnabled(true);
+				synchronizationButton.setText("Synchronize");
 			}
 			else if (currentUserIsMember())
 			{
@@ -230,6 +235,13 @@ public class CourseView extends Composite
 				popup.center();
 			}
 		}
+	}
+	@UiHandler("synchronizationButton")
+	public void onSynchronizationButtonClicked(ClickEvent click)
+	{
+		CourseSynchronizationPopup popup = clientFactory.getCourseSynchronizationPopup();
+		popup.setCourse(course);
+		popup.center();
 	}
 }
 

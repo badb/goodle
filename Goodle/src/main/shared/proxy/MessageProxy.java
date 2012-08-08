@@ -10,11 +10,13 @@ import com.google.web.bindery.requestfactory.shared.ValueProxy;
 @ProxyFor(Message.class)
 public interface MessageProxy extends ValueProxy
 {
-	GoodleUserProxy getAuthor();
+	//GoodleUserProxy getAuthor();
 	String getText();
-	Date getCreated();
-	Date getModified();
+	//Date getCreated();
+	//Date getModified();
+	ModuleProxy getModule();
 	
-	void setAuthor(GoodleUserProxy author);
+	//void setAuthor(GoodleUserProxy author);
 	void setText(String text);
+	void setModule(ModuleProxy module);
 }

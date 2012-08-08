@@ -2,6 +2,8 @@ package main.client.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseProxy;
@@ -19,6 +21,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class CourseModulesEditView extends AbstractCourseView 
 {
@@ -60,7 +63,7 @@ public class CourseModulesEditView extends AbstractCourseView
 		CourseRequest getRequest = cf.getRequestFactory().courseRequest();
 		course = getRequest.edit(course);
 				
-		getRequest.getModulesSafe().using(course).fire
+		getRequest.getModulesSafe().using(course).with("materials", "comments").fire
 		(
 			new Receiver<List<ModuleProxy>>() 
 			{
@@ -123,7 +126,7 @@ public class CourseModulesEditView extends AbstractCourseView
 		}
 		
 		course = request.edit(course);
-		request.updateModules(updated).using(course).fire
+		request.updateModules(updated).using(course).with("materials", "comments").fire
 		(
 			new Receiver<CourseProxy>()
 			{
@@ -139,6 +142,13 @@ public class CourseModulesEditView extends AbstractCourseView
 						} catch(Exception e) { DialogBox db = new DialogBox(); db.setText(e.getMessage()); db.show(); }
 					}
 
+				}
+				public void onFailure(ServerFailure error) {
+
+					Logger logger = Logger.getLogger("Goodle.Log");
+					logger.log(Level.SEVERE, error.getMessage());
+					logger.log(Level.SEVERE, error.getStackTraceString());
+					logger.log(Level.SEVERE, error.getExceptionType());
 				}
 			}
 		);

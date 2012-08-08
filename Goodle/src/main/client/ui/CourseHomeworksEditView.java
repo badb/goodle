@@ -1,4 +1,4 @@
-package main.client.ui;
+ package main.client.ui;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -45,14 +45,14 @@
     </security-constraint>
 	<error-page>
 	    <error-code>404</error-code>
-	    <location>../web/Error404Page.html</location>
+	    <location>Error404Page.html</location>
 	</error-page>
 	<error-page>
 	    <error-code>500</error-code>
-	    <location>../web/ErrorPage.html</location>
+	    <location>ErrorPage.html</location>
 	</error-page>
 	<error-page>
 		    <error-code>503</error-code>
-	    <location>../web/ErrorPage.html</location>
+	    <location>ErrorPage.html</location>
 	</error-page>
 </web-app>

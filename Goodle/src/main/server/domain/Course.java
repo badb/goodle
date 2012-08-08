@@ -26,6 +26,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import main.shared.JoinMethod;
+import main.shared.proxy.ModuleProxy;
+import main.shared.proxy.UploadedFileProxy;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -325,6 +327,7 @@ public class Course implements Serializable
     		for (Long id : modules)
     		{
     			Module m = em.find(Module.class, id);
+    			m.getMaterials().size();
     			if (m.getIsVisible() || (!m.getIsVisible() && owner))
     			{
     				l.add(m);
@@ -461,4 +464,14 @@ public class Course implements Serializable
     	}
     	finally { em.close(); }	
     }
+    
+    /*public Module setMaterialProxies(Module module, List<UploadedFile> materials) {
+    
+    	module.setMaterials(materials);
+    	return module;
+    }
+    public Module addComment(Module module, Message comment) {
+    	module.addComment(comment);
+    	return module;
+    }*/
 }

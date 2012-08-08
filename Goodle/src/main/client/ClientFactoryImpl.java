@@ -12,6 +12,7 @@ import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseSynchronizationPopup;
 import main.client.ui.CourseView;
+import main.client.ui.TopView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -26,6 +27,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private final PlaceController placeController = new PlaceController(eventBus);
 	private final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
 
+	private TopView topView;
 	private CourseListView courseListView;
 	private CourseView courseView;
 	private CourseInfoView courseInfoView;
@@ -41,6 +43,7 @@ public class ClientFactoryImpl implements ClientFactory
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
+	private BlobServiceAsync blobService;
 	private CourseHomeworksEditView courseHomeworksEditView;
 	
 	@Override
@@ -140,6 +143,9 @@ public class ClientFactoryImpl implements ClientFactory
 			courseNameTermPopup = new CourseNameTermPopup();
 			courseNameTermPopup.setClientFactory(this);
 			courseNameTermPopup.setParent(getCourseView());
+			if (topView != null) {
+				courseNameTermPopup.addNameChangedEventHandler(topView);
+			}
 		}
 		return courseNameTermPopup;
 	}
@@ -176,6 +182,11 @@ public class ClientFactoryImpl implements ClientFactory
 	public void setCurrentUser(GoodleUserProxy userProxy) { currentUserProxy = userProxy; }
 
 	@Override
+	public void setTopView(TopView topView) {
+		this.topView = topView;
+	}
+	
+	@Override
 	public GoodleUserProxy getCurrentUser() { return currentUserProxy; }
 
 	@Override
@@ -188,7 +199,14 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return courseModulesEditView;
 	}
-	
+
+	@Override
+	public BlobServiceAsync getBlobService() {
+		if (blobService == null) {
+			blobService = GWT.create(BlobService.class);
+		}
+		return blobService;
+	}
 	@Override
 	public CourseHomeworksView getCourseHomeworksView() {
 		if (courseHomeworksView == null)

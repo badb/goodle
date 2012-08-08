@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
@@ -47,7 +48,8 @@ public class UploadedFile implements Serializable
     	}
 	}
 
-    //@NotNull TODO usunąć to pole?
+    //@NotNull 
+    //TODO usunąć to pole?
     @ManyToOne
     private GoodleUser author;
     public GoodleUser getAuthor() { return author; }
@@ -80,6 +82,11 @@ public class UploadedFile implements Serializable
 	}
 	public void setModule(Module module) {
 		this.module = module;
+	}
+	
+	public BlobKey getKey() {
+		String key = url.split("blob-key=")[1];
+		return new BlobKey(key);
 	}
 	
     

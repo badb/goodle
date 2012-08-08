@@ -157,9 +157,7 @@ public class ModuleEditView extends Composite {
 		if (index == -1) {
 			return;
 		}
-		text.setText(""+index);
 		filesTable.removeRow(index);
-		text.setText("usunięto view");
 		currentFiles.remove(index);
 	}
 }

@@ -88,10 +88,7 @@ public class FileEditView extends Composite {
 	
 	@UiHandler("deleteButton")
 	public void onDeleteButtonClick(ClickEvent event) {
-		title.setText("usuwanie");
 		parent.removeFile(file);
-		//this.removeFromParent();
-		title.setText("koniec usuwania");
 	}
 }
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,6 +20,9 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 @Entity
 @SuppressWarnings("serial")
@@ -62,10 +66,12 @@ public class Module implements Serializable
     public List<UploadedFile> getMaterials() { return Collections.unmodifiableList(materials);  }
     public void setMaterials(List<UploadedFile> materials) { 
     	EntityManager em = entityManager();
+    	BlobstoreService blobstore = BlobstoreServiceFactory.getBlobstoreService();
     	try {
     		for (UploadedFile uf : this.materials) {
     			if (!materials.contains(uf)) {
     				UploadedFile u = em.find(UploadedFile.class, uf.getId());
+    				blobstore.delete(uf.getKey());
     				em.remove(u);
     			}
     		}
@@ -166,9 +172,4 @@ public class Module implements Serializable
         }
         finally { em.close(); }    	
     }
-    
-    //public Module() {
-    	//materials = new ArrayList<UploadedFile>();
-    //}
-    
 }

@@ -23,11 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import main.shared.JoinMethod;
-import main.shared.proxy.ModuleProxy;
-import main.shared.proxy.UploadedFileProxy;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -55,8 +52,7 @@ import org.hibernate.validator.constraints.URL;
         (
         		name="getDataForSuggestBox",
         		query = "SELECT name FROM Course"
-        )
-        
+        )        
 })
 public class Course implements Serializable
 {       
@@ -170,6 +166,23 @@ public class Course implements Serializable
         {
             Course c = em.find(Course.class, id);
             return c;
+        }
+        finally { em.close(); }
+    }
+    
+    @SuppressWarnings("unchecked")
+	public static List<Course> findCourses(Set<Long> ids) {
+    	
+    	List<Course> lista = new ArrayList<Course>();
+    	if (ids == null || ids.isEmpty()) { return lista; }
+        EntityManager em = entityManager();
+        try 
+        {
+        	Query q = em.createQuery(  
+                    "SELECT c FROM Course c WHERE c.id IN (?1)").setParameter(1, ids);
+            lista = q.getResultList();
+            lista.size(); /* force it to materialize */ 
+        	return lista;
         }
         finally { em.close(); }
     }

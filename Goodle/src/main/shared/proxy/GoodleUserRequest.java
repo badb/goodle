@@ -25,10 +25,15 @@ public interface GoodleUserRequest extends RequestContext
 	
 	InstanceRequest<GoodleUserProxy, Void> persist();
 	InstanceRequest<GoodleUserProxy, Void> remove();
+
+	InstanceRequest<GoodleUserProxy, List<CourseProxy>> getAttendedCourseProxies();
+	InstanceRequest<GoodleUserProxy, List<CourseProxy>> getLedCourseProxies();
+	
 	Request<GoodleUserProxy> findGoodleUser(Long id);
 	Request<Set<GoodleUserProxy>> findGoodleUsers(Set<Long> ids);
 	Request<List<GoodleUserProxy>> findGoodleUsersByName(String name);
 	Request<GoodleUserProxy> getCurrentUser();
 	Request<String> getLoginUrl(String destination);
 	Request<String> getLogoutUrl(String destination);
+	
 }

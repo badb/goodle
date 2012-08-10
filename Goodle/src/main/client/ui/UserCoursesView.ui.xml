@@ -1,10 +1,15 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-			 xmlns:g="urn:import:com.google.gwt.user.client.ui">
+			 xmlns:g="urn:import:com.google.gwt.user.client.ui"
+        xmlns:c='urn:import:com.google.gwt.user.cellview.client' >
 	<ui:style src="../resources/Goodle.css"/>		
 	
-	<g:VerticalPanel>
+	<g:VerticalPanel height="100%">
 		<g:Button ui:field="createCourseButton" text="Stwórz kurs" styleName="{style.createButton}"/>
+		<g:Label ui:field="coordinatedLabel" visible="false"> Prowadzone kursy: </g:Label>
+		<g:ScrollPanel ui:field="coordinatedPanel" height="200px"></g:ScrollPanel>
+		<g:Label ui:field="attendedLabel" visible="false"> Uczęszczasz na kursy: </g:Label>
+		<g:ScrollPanel ui:field="attendedPanel" height="200px"></g:ScrollPanel>
 	</g:VerticalPanel>		
 	 
 </ui:UiBinder>

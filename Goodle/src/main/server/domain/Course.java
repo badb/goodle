@@ -1,6 +1,7 @@
 package main.server.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -72,7 +73,7 @@ public class Course implements Serializable
     private String name;
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-
+    
     @NotBlank
     private String term;
     public String getTerm() { return term; }
@@ -239,10 +240,14 @@ public class Course implements Serializable
     	GoodleUser u = GoodleUser.getCurrentUser();
     	if (u == null) return null;
     	
+    	Date d = new Date();
+		int year = (d.getMonth() > 5 ? d.getYear() : (d.getYear() - 1)) - 100;
+    	String term = "" + year + "/" + (year + 1);
+    	
     	Course c = new Course();
     	c.setVersion(1);
     	c.setName("Nowy kurs");
-    	c.setTerm("2012L");
+    	c.setTerm(term);
     	c.setJoinMethod(JoinMethod.OPEN);    	
     	c.addCoordinator(u.getId());
         EntityManager em = entityManager();

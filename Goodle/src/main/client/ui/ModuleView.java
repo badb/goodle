@@ -21,14 +21,10 @@ public class ModuleView extends Composite {
 	interface ModuleWidgetUiBinder extends UiBinder<Widget, ModuleView> {
 	}
 
-	@UiField
-	Label visible;
-	@UiField
-	ResizableTextArea title;
-	@UiField
-	ResizableTextArea text;
-	@UiField
-	FlexTable filesTable;
+	@UiField Label visible;
+	@UiField EditLabel title;
+	@UiField EditLabel text;
+	@UiField FlexTable filesTable;
 	
 	private ModuleProxy module;
 
@@ -42,8 +38,6 @@ public class ModuleView extends Composite {
 		this.module = module;
 		title.setText(module.getTitle());
 		text.setText(module.getText());
-		title.resize();
-		text.resize();
 		if (module.getIsVisible()) {
 			visible.setText("Widoczny");
 		} else
@@ -62,9 +56,4 @@ public class ModuleView extends Composite {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void onLoad() {
-		title.resize();
-		text.resize();
-	}
-
 }

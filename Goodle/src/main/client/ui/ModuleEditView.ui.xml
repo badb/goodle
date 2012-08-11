@@ -5,12 +5,12 @@
 >
 	<ui:style src="../resources/Goodle.css"/>
 
-	<g:VerticalPanel width="100%" styleName='{style.module}'>
-	    <my:EditLabel width="100%" ui:field="title" />
-	   	<g:CheckBox ui:field="isVisible" />
-	    <my:EditLabel ui:field="text" width="100%"/>
-	    <g:FlexTable ui:field="filesTable" width="100%"></g:FlexTable>
-	    <my:FileUploadView ui:field="upload" width="100%"></my:FileUploadView>
-	</g:VerticalPanel>
+	<g:HTMLPanel styleName='{style.module}'>
+	    <my:EditLabel ui:field="title" /> 
+	   	<g:CheckBox ui:field="isVisible" /> <br />
+	    <my:EditLabel ui:field="text" wordWrapped="true" /> <br />
+	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
+	    <my:FileUploadView ui:field="upload" width="100%" /> 
+	</g:HTMLPanel>
 
 </ui:UiBinder> 

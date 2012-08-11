@@ -4,11 +4,11 @@
 	xmlns:my="urn:import:main.client.ui">
 
 	<ui:style src="../resources/Goodle.css"/>
-	<g:VerticalPanel>
-				<my:ResizableTextArea ui:field="textArea" width="90%" styleName='{style.textArea}' />
-				<g:HorizontalPanel>
-					<g:Button ui:field="saveButton" styleName='{style.leftButton}'>Zapisz</g:Button>	
-					<g:Button ui:field="cancelButton" styleName="{style.leftButton}">Anuluj</g:Button>	
-				</g:HorizontalPanel>
-	</g:VerticalPanel>
+	<g:HTMLPanel>
+		<g:HTML ui:field="label" ui:text="Edytuj" />
+		<g:TextBox ui:field="textBox" visible="false" maxLength="20000" />
+		<my:ResizableTextArea ui:field="textArea" visible="false" maxLength="20000" styleName='{style.textArea}' /> <br />
+		<g:Button ui:field="save" visible="false" styleName='{style.leftButton}' ui:text="Zapisz" />	
+		<g:Button ui:field="cancel" visible="false" styleName="{style.leftButton}" ui:text="Anuluj" /> <br />
+	</g:HTMLPanel>
 </ui:UiBinder> 

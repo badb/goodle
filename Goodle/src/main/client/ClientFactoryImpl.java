@@ -12,6 +12,7 @@ import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseSynchronizationPopup;
 import main.client.ui.CourseView;
+import main.client.ui.SynchronizationConfirmationPopup;
 import main.client.ui.TopView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
@@ -40,6 +41,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private CourseNameTermPopup courseNameTermPopup;
 	private CoursePasswordPopup coursePasswordPopup;
 	private CourseSynchronizationPopup courseSynchronizationPopup;
+	private SynchronizationConfirmationPopup synchronizationConfirmationPopup;
 
 	private GoodleUserProxy currentUserProxy;
 	private CourseModulesEditView courseModulesEditView;
@@ -227,6 +229,17 @@ public class ClientFactoryImpl implements ClientFactory
 			courseHomeworksEditView.setParent(getCourseView());
 		}
 		return courseHomeworksEditView;
+	}
+
+	@Override
+	public SynchronizationConfirmationPopup getSynchronizationConfirmationPopup() {
+		if (synchronizationConfirmationPopup == null)
+		{
+			synchronizationConfirmationPopup = new SynchronizationConfirmationPopup();
+			synchronizationConfirmationPopup.setClientFactory(this);
+			synchronizationConfirmationPopup.setParent(getCourseView());
+		}
+		return synchronizationConfirmationPopup;
 	}
 
 

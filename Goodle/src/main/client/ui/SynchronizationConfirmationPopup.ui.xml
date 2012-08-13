@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:VerticalPanel>
+		<g:Label text="Dane kursu, który edytujesz zostaną nadpisane"/>
+		<g:Label ui:field="courseName"/>
+		<g:Label text="Opis kursu:"/>
+		<g:TextArea ui:field="courseDesc" readOnly="true"/>
+		<g:Label text="Bibliografia:"/>
+		<g:TextArea ui:field="courseBib" readOnly="true"/>
+		<g:HorizontalPanel>
+			<g:Button ui:field="okButton" text="OK"/>
+			<g:Button ui:field="cancelButton" text="Anuluj"/>
+		</g:HorizontalPanel></g:VerticalPanel>
+</ui:UiBinder> 

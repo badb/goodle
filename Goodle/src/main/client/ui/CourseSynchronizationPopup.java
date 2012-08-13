@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import main.client.place.CoursePlace;
 import main.client.util.ShortCourseCell;
 import main.shared.proxy.CourseProxy;
+import main.shared.proxy.LongUSOSCourseDescProxy;
 import main.shared.proxy.ShortUSOSCourseDescProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -52,9 +53,19 @@ public class CourseSynchronizationPopup extends AbstractCoursePopup {
 				{
 					public void update(ShortUSOSCourseDescProxy value) 
 					{
-						//searchBox.setText(value.getId());
-						// należy pobrać dane z USOS na temat tego kursu a następnie wyświetlić popup
-						// z tymi danymi
+						cf.getRequestFactory().usosApiRequest().getCourseById(value.getId()).fire(
+								new Receiver<LongUSOSCourseDescProxy>()
+								{
+									@Override
+									public void onSuccess(LongUSOSCourseDescProxy response)
+									{
+										SynchronizationConfirmationPopup popup = cf.getSynchronizationConfirmationPopup();
+										popup.setCourse(course);
+										popup.setUSOSCourseDesc(response);
+										popup.center();
+										
+									}
+								});
 					}
 				};
 		cellList.setValueUpdater(updater);

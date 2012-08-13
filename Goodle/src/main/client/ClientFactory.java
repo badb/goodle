@@ -12,6 +12,7 @@ import main.client.ui.CourseNameTermPopup;
 import main.client.ui.CoursePasswordPopup;
 import main.client.ui.CourseSynchronizationPopup;
 import main.client.ui.CourseView;
+import main.client.ui.SynchronizationConfirmationPopup;
 import main.client.ui.TopView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
@@ -39,6 +40,7 @@ public interface ClientFactory
 	CourseNameTermPopup getCourseNameTermPopup();
 	CoursePasswordPopup getCoursePasswordPopup();
 	CourseSynchronizationPopup getCourseSynchronizationPopup();
+	SynchronizationConfirmationPopup getSynchronizationConfirmationPopup();
 	
 	void setCurrentUser(GoodleUserProxy userProxy);
 	void setTopView(TopView topView);
@@ -46,4 +48,5 @@ public interface ClientFactory
 	CourseModulesEditView getCourseModulesEditView();
 	BlobServiceAsync getBlobService();
 	CourseHomeworksEditView getCourseHomeworksEditView();
+
 }

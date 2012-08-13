@@ -38,7 +38,7 @@ public class LongCourseDeserializer implements JsonDeserializer<LongCourseDesc>
 	{
 		if (json.has("pl")) 
 		{
-			return json.get("pl").getAsString(); 
+			return !json.get("pl").isJsonNull() ? json.get("pl").getAsString() : ""; 
 		}
 		throw new JsonParseException(parseExceptionMsg("pl", json));
 	}

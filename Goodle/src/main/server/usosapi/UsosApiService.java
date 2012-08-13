@@ -89,6 +89,7 @@ public class UsosApiService
 
 	public UsosSearchCourseResponse getCourseListById(String usosCourseID) 
 	{
+		Logger log = Logger.getLogger("UsosApiService");
 		try 
 		{
 			String requestURL = baseUrl + "services/courses/course?course_id=" + usosCourseID + "&fields="; 
@@ -96,18 +97,20 @@ public class UsosApiService
 			requestURL += URLEncoder.encode(encoded, "utf-8");
 			URL url = new URL(requestURL);
 			HttpURLConnection request = (HttpURLConnection) url.openConnection();
-			consumer.sign(request);
+			log.log(Level.INFO, "generateList: requestURL:" + requestURL);
+			//consumer.sign(request);
 			request.connect();
-			if (request.getResponseCode() != 200) 
-			{
-				throw new Exception
-				(
-					"Response Code != 200\n Response: "
-					+ request.getResponseCode() + " "
-					+ request.getResponseMessage()
-				);
-			}
+//			if (request.getResponseCode() != 200) 
+//			{
+//				throw new Exception
+//				(
+//					"Response Code != 200\n Response: "
+//					+ request.getResponseCode() + " "
+//					+ request.getResponseMessage()
+//				);
+//			}
 			String response = createResponse(request);
+			log.log(Level.INFO, "generateList: response" + response);
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.registerTypeAdapter(LongCourseDesc.class, new LongCourseDeserializer()).create();
 			Vector<LongCourseDesc> v = new Vector<LongCourseDesc>();

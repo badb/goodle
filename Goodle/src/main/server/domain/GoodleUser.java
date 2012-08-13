@@ -224,4 +224,12 @@ public class GoodleUser implements Serializable
 		if (service.isUserLoggedIn()) return service.createLogoutURL(destination);
 		return null;
 	}
+	
+	public List<Course> getAttendedCourseProxies() {
+		return Collections.unmodifiableList(Course.findCourses(this.coursesAttended));
+	}
+	
+	public List<Course> getLedCourseProxies() {
+		return Collections.unmodifiableList(Course.findCourses(this.coursesLed));
+	}
 }

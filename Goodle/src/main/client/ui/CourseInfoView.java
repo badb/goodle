@@ -24,8 +24,8 @@ public class CourseInfoView extends AbstractCourseView
 	@Override
 	public void onCourseSet() 
 	{
-		description.setEnabled(isCurrUserOwner());
-		bibliography.setEnabled(isCurrUserOwner());
+		description.setEditable(isCurrUserOwner());
+		bibliography.setEditable(isCurrUserOwner());
 		description.setValue(course.getDescription());
 		bibliography.setValue(course.getBibliography());
 	}

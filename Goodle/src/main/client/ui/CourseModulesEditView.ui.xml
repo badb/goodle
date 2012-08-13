@@ -10,7 +10,7 @@
 	        <g:Button ui:field="cancel" text="Anuluj" />
 		<g:FlowPanel width="100%">
 			<g:Label ui:field="info" />
-			<g:Button ui:field="newModule" text="Dodaj moduł"/>
+			<g:Button ui:field="newModule" text="Dodaj moduł" styleName="{style.addButton}"/>
 			<g:FlexTable width="100%" ui:field="modules" />
 		</g:FlowPanel>
 	</g:FlowPanel>

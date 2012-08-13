@@ -1,6 +1,7 @@
 package main.server.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,11 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import main.shared.JoinMethod;
-import main.shared.proxy.ModuleProxy;
-import main.shared.proxy.UploadedFileProxy;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -55,8 +53,7 @@ import org.hibernate.validator.constraints.URL;
         (
         		name="getDataForSuggestBox",
         		query = "SELECT name FROM Course"
-        )
-        
+        )        
 })
 public class Course implements Serializable
 {       
@@ -76,7 +73,7 @@ public class Course implements Serializable
     private String name;
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-
+    
     @NotBlank
     private String term;
     public String getTerm() { return term; }
@@ -175,6 +172,23 @@ public class Course implements Serializable
     }
     
     @SuppressWarnings("unchecked")
+	public static List<Course> findCourses(Set<Long> ids) {
+    	
+    	List<Course> lista = new ArrayList<Course>();
+    	if (ids == null || ids.isEmpty()) { return lista; }
+        EntityManager em = entityManager();
+        try 
+        {
+        	Query q = em.createQuery(  
+                    "SELECT c FROM Course c WHERE c.id IN (?1)").setParameter(1, ids);
+            lista = q.getResultList();
+            lista.size(); /* force it to materialize */ 
+        	return lista;
+        }
+        finally { em.close(); }
+    }
+    
+    @SuppressWarnings("unchecked")
     public static List<Course> findCoursesByName(String name)
     {
         EntityManager em = entityManager();
@@ -226,10 +240,14 @@ public class Course implements Serializable
     	GoodleUser u = GoodleUser.getCurrentUser();
     	if (u == null) return null;
     	
+    	Date d = new Date();
+		int year = (d.getMonth() > 5 ? d.getYear() : (d.getYear() - 1)) - 100;
+    	String term = "" + year + "/" + (year + 1);
+    	
     	Course c = new Course();
     	c.setVersion(1);
     	c.setName("Nowy kurs");
-    	c.setTerm("2012L");
+    	c.setTerm(term);
     	c.setJoinMethod(JoinMethod.OPEN);    	
     	c.addCoordinator(u.getId());
         EntityManager em = entityManager();

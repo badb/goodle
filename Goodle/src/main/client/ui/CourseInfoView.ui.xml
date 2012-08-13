@@ -5,10 +5,10 @@
 >
 	<ui:style src="../resources/Goodle.css"/>
 
-    <g:FlowPanel>
-		<g:Label ui:text="Opis kursu: " />		
-		<my:EditLabel ui:field="description" />
-		<g:Label ui:text="Bibliografia: " />
-		<my:EditLabel ui:field="bibliography" />
-	</g:FlowPanel>
+    <g:HTMLPanel>
+		<g:Label ui:text="Opis kursu: " /> <br />
+		<my:EditLabel ui:field="description" wordWrapped="true" /> <br />
+		<g:Label ui:text="Bibliografia: " /> <br />
+		<my:EditLabel ui:field="bibliography" wordWrapped="true" /> <br />
+	</g:HTMLPanel>
 </ui:UiBinder>

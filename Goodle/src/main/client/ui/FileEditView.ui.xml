@@ -7,11 +7,9 @@
 	<g:Frame ui:field="frame" width="100%" height="200px" visible="false"></g:Frame>
 	<g:HorizontalPanel width="100%">
 		<g:Label ui:field="title"></g:Label>
-		<g:HorizontalPanel width="100%">
-			<g:Button ui:field="showButton">Podgląd pliku</g:Button>
-			<!-- <g:Button ui:field="downloadButton">Zapisz plik na dysku</g:Button>  -->
-			<g:Button ui:field="deleteButton">Usuń plik</g:Button>
-		</g:HorizontalPanel>
+		<g:Button ui:field="showButton" styleName='{style.leftButton}'>Podgląd pliku</g:Button>
+		<!-- <g:Button ui:field="downloadButton">Zapisz plik na dysku</g:Button>  -->
+		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'>Usuń plik</g:Button>
 	</g:HorizontalPanel>
 	</g:VerticalPanel>
 </ui:UiBinder> 

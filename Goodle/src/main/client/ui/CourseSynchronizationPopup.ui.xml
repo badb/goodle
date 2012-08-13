@@ -4,15 +4,14 @@
 
 		<g:VerticalPanel>
 		<g:HorizontalPanel height="">
-			<g:TextBox text="Search Course" ui:field="searchBox"/>
-			<g:Button ui:field="searchButton" text="Search"/>
+			<g:TextBox text="Szukaj kursu" ui:field="searchBox"/>
+			<g:Button ui:field="searchButton" text="Szukaj"/>
 		</g:HorizontalPanel>
 		<p1:CellList ui:field="cellList"/>
 		<g:Cell verticalAlignment="ALIGN_BOTTOM" horizontalAlignment="ALIGN_RIGHT">
 			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT">
-			<g:Button ui:field="okButton" text="OK"/>
-			<g:Button ui:field="cancelButton" text="Cancel"/>
-		</g:HorizontalPanel>
+			<g:Button ui:field="cancelButton" text="Anuluj"/>
+			</g:HorizontalPanel>
 		</g:Cell>
 		</g:VerticalPanel>
 

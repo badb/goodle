@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import main.server.domain.GoodleUser;
+import main.shared.ShortCourseDesc;
 
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.Request;
@@ -31,4 +32,5 @@ public interface GoodleUserRequest extends RequestContext
 	Request<GoodleUserProxy> getCurrentUser();
 	Request<String> getLoginUrl(String destination);
 	Request<String> getLogoutUrl(String destination);
+	
 }

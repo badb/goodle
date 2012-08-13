@@ -240,6 +240,7 @@ public class CourseView extends Composite
 	public void onSynchronizationButtonClicked(ClickEvent click)
 	{
 		CourseSynchronizationPopup popup = clientFactory.getCourseSynchronizationPopup();
+		popup.setClientFactory(clientFactory);
 		popup.setCourse(course);
 		popup.center();
 	}

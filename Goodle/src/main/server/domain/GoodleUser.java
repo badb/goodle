@@ -232,4 +232,20 @@ public class GoodleUser implements Serializable
 	public List<Course> getLedCourseProxies() {
 		return Collections.unmodifiableList(Course.findCourses(this.coursesLed));
 	}
+	
+	public List<Long> getLedCourseIds() {
+		List <Long> l = new ArrayList<Long>();
+		for (Course c: Course.findCourses(this.coursesLed)) {
+			l.add(c.getId());
+		}
+		return l;
+	}
+	
+	public List<Long> getAttendedCourseIds() {
+		List <Long> l = new ArrayList<Long>();
+		for (Course c: Course.findCourses(this.coursesAttended)) {
+			l.add(c.getId());
+		}
+		return l;
+	}
 }

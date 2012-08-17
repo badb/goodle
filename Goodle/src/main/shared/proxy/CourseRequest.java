@@ -1,6 +1,7 @@
 package main.shared.proxy;
 
 import java.util.List;
+import java.util.Set;
 
 import main.server.domain.Course;
 import main.server.domain.Module;
@@ -25,6 +26,7 @@ public interface CourseRequest extends RequestContext
 	Request<List<CourseProxy>> findCoursesByName(String name);
 	Request<List<CourseProxy>> getAllCourses();
 	Request<List<String>> getDataForSuggestBox();
+	Request<List<HomeworkProxy>> findUserHomeworks(List<Long> ids);
 	
 	InstanceRequest<CourseProxy, Boolean> registerCurrentUser(String key);
 	InstanceRequest<CourseProxy, CourseProxy> unregisterUsers(List<Long> ids);

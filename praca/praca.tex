@@ -28,9 +28,9 @@
 
 \nralbumu{280468, 292629, 236188, 234586}
 
-\title{Google Apps dla MIMUW}
+\title{Goodle - platforma e-learningowa}
 
-\tytulang{Google Apps for MIMUW}
+\tytulang{Google - e-learning platform}
 
 %kierunek: Matematyka, Informatyka, ...
 \kierunek{Informatyka}
@@ -53,7 +53,7 @@
 % (podaæ tytu³/stopieñ imiê i nazwisko opiekuna
 % Instytut
 % ew. Wydzia³ ew. Uczelnia (je¿eli nie MIM UW))
-\opiekun{dra Jacka Sroki\\
+\opiekun{dr Jacek Sroka\\
   Instytut Informatyki\\
   }
 
@@ -77,7 +77,7 @@
 }
 
 % S³owa kluczowe:
-\keywords{GoogleApps, platforma edukacyjna, e-learning, Moodle}
+\keywords{Goodle, platforma edukacyjna, e-learning}
 
 % Tu jest dobre miejsce na Twoje w³asne makra i~¶rodowiska:
 \newtheorem{defi}{Definicja}[section]
@@ -87,81 +87,256 @@
 \begin{document}
 \maketitle
 
-%tu idzie streszczenie na strone poczatkowa
+%
+%  Abstrakt
+%
 \begin{abstract}
-W ramach projektu stworzono zestaw narzędzi usprawniających korzystanie 
-z serwisów internetowych Uniwersytetu Warszawskiego. Tworzona aplikacja zapewni integrację 
-technologii Google z danymi udostępnianymi przez USOS. Grono potencjalnych odbiorców stanowią 
-studenci i pracownicy akademiccy. Ważnym elementem systemu będzie zbiór rozwiązań 
-alternatywnych w stosunku do funkcjonującej platformy Moodle. Nie stworzono dotychczas 
-produktu zapewniającego wszystkie pożądane funkcje, co stanowi motywację do realizacji projektu. 
+Dokument opisuje, stworzoną w ramach projektu licencjackiego, platformę 
+edukacyjną Goodle. Nazwa stanowi kontaminację słów Google i Moodle. 
+Innowacyjne technologie i narzędzia Google'a wykorzystano do stworzenia
+programu. Moodle, natomiast, to używana obecnie przez Uniwersytet Warszawski
+platforma-rywal, w stosunku do której Goodle stanowi alternatywę. Integracja z
+systemem USOS zapewnia aplikacji ważną, lecz nie jedyną, przewagę. 
+
+Grono potencjalnych odbiorców stanowią studenci i pracownicy akademiccy. Nie 
+stworzono dotychczas produktu zapewniającego wszystkie pożądane funkcje, co 
+stanowiło motywację do realizacji projektu. 
+
+W kolejnych rozdziałach pracy opisane zostaną: przyczyny stworzenia systemu,
+charakterystyka potencjalnych użytkowników, funkcjonalność i architektura 
+aplikacji, możliwe scenariusze użycia, zastosowana przy tworzeniu metodyka,
+narzędzia i technologie oraz ewentualne przyszłe rozszerzenia.
 \end{abstract}
 
 \tableofcontents
 %\listoffigures
 %\listoftables
 
-\chapter*{Wprowadzenie}
-\addcontentsline{toc}{chapter}{Wprowadzenie}
-%Na czym w ogóle polega projekt, co stworzyliśmy i ogólnie dlaczego w takiej technologii
+\chapter*{Wprowadzenie} % Ta gwiazdka jest potrzebna, czy to błąd? 
+\addcontentsline{toc}{chapter}{Wprowadzenie} % Co robi ta komenda?
+
+%
+%  Wstęp. Jak wyglądała sytuacja przed rozpoczęciem projektu i dlaczego
+%  powstała potrzeba stworzenia aplikacji.
+%
+\section{Sformułowanie problemu}
 
 
-\chapter{Sformułowanie problemu}
+
+%
+%  Definicje użytych w dokumencie trudnych terminów i rozwinięcie akronimów.
+%
 \section{Definicje}
-%definicje z wizji - co to jest Moodle, e-learning
+\begin{description}
+   \item[E-learning]
+      nauczanie z wykorzystaniem sieci komputerowych i internetu.
+   \item[Framework]
+      szkielet do budowy aplikacji, definiuje podstawowy mechanizm działania
+      programu i dostarcza zestaw komponentów i bibliotek ogólnego
+      przeznaczenia do wykonywania określonych zadań. 
+   \item[GAE]
+      Google App Engine, działająca na zasadzie chmury platforma do tworzenia 
+      aplikacji internetowych i utrzymywania ich w centrach danych Google.
+   \item[GWT]
+      Google Web Toolkit, framework i zestaw narzędzi umożliwiający 
+      i ułatwiający użytkownikom tworzenie aplikacji internetowych.
+   \item[Lama]
+      udomowiony ssak parzystokopytny z rodziny wielbłądowatych, do którego
+      podejrzaną słabość czuł jeden z uczestników projektu.
+   \item[Moodle]
+      Modular Object-Oriented Dynamic Learning Environment, platforma 
+      e-learningowa. 
+   \item[USOS]
+      Uniwersytecki System Obsługi Studiów.
+\end{description}
 
-\section{Cel}
-%Co chcieliśmy stworzyć. Ogólne wymagania systemu. 
+%
+%  Opisana pokrótce zawartość każdego rozdziału.
+%
+\section{Omówienie zawartości}
+
+Dokument podzielony został na 5 rozdziałów, z których każdy zawiera po kilka
+logicznie powiązanych sekcji:
+
+%  TODO Uzupełnić nazwę rozdziału
+W rozdziale \emph{ } objaśniono przyczyny rozpoczęcia projektu i
+uzasadniono wybrany scenariusz biznesowy. Opisano najpierw jakie braki i wady 
+istniejącego rozwiązania - platformy Moodle - stały się motywacją pracy. 
+Następnie wskazano jakie funkcje powinien zapewniać alternatywny, idealny
+system. Dalej streszczono rozważane opcje biznesowe i zaprezentowano argumenty,
+które zadecydowały o stworzeniu nowej aplikacji. Na koniec przedstawiono krótką
+charakterystykę potencjalnych użytkowników.
+
+%  TODO Uzupełnić po napisaniu rozdziału
+Rozdział \emph{Możliwości systemu} omawia dokładnie funkcjonalność produktu.
+
+%  TODO Uzupełnić po napisaniu rozdziału
+W kolejnym rozdziale omówiono \emph{możliwe scenariusze użycia}. 
+
+%  TODO Uzupełnić po napisaniu rozdziału
+Następnie dokument przechodzi do opisu \emph{użytych narzędzi i technologii}. 
+
+%  TODO Uzupełnić po napisaniu rozdziału
+\emph{Metodyka pracy} 
+
+%  TODO Uzupełnić po napisaniu rozdziału
+\emph{Podsumowanie}
+
+%
+%  Przyczyny rozpoczęcia projektu i uzasadnienie wybranego scenariusza
+%  biznesowego.
+%
+\chapter{ } % TODO Uzupełnić nazwę rozdziału
+
+%
+%  Dlaczego zdecydowano się na rozpoczęcie projektu.
+%
 \section{Motywacja}
-%dlaczego powstało takie oprogramowanie (fragmenty wizji). Opis istniejących 
-%rozwiązań, ich wady. 
-\section{Zawartość pracy}
-%co opisaliśmy w pracy licencjackiej - opisowe streszczenie pracy. 
+
+Od momentu uruchomienia system USOS podlega kolejnym usprawnieniom. Niestety, 
+wprowadzane modyfikacje i dodawane moduły nie są w stanie nadążyć za rosnącymi 
+wymaganiami użytkowników.
+ 
+Jednym z oczekiwań niektórych odbiorców jest integracja serwisu z kontem Google i 
+oferowanymi przez firmę narzędziami. Dla wielu użytkowników uciążliwy jest również 
+brak konsolidacji USOS z innymi portalami akademickimi np. platformą Moodle. 
+Tworzenie kursów, zarządzanie użytkownikami czy umieszczanie wyników studentów
+musi się zatem odbywać na kilku stronach w sposób niezależny.
+
+Do problemów Moodle należy np. trudny w obsłudze, nieprzyjazny dla użytkownika 
+interfejs. Spotyka się on z nieustanną krytyką ze strony studentów i pracowników 
+wydziału. Dodatkowo platforma nie zapewnia prowadzącemu zajęcia dostatecznej 
+elastyczności i łatwości w udostępnianiu i organizacji udostępnianych materiałów. 
+	
+Wynikiem wymienionych mankamentów jest niezadowolenie użytkowników oraz 
+nieefektywne wykorzystanie potencjału tkwiącego w tego typu portalach. Celem 
+postawionym przed nowym systemem było rozwiązanie ich, co uatrakcyjniłoby pracę 
+i zaoszczędziło czas zarówno pracowników, jak i studentów oraz podniosło komfort 
+kształcenia na Uniwesytecie Warszawskim.
+
+%
+%  Jakie powinny być cechy idealnego produktu, czyli do czego dążył projekt.
+%
+\section{Cele}
+
+%
+%  Jakie alternatywne rozwiązania rozpatrywano i dlaczego zdecydowano się
+%  na stworzenie własnej aplikacji.
+%
+%  TODO Pierwsza wersja, można trochę rozwinąć. Nie, żebyśmy rozważali 
+%  wcześniej jakieś scenariusze, ale jak już czarować, to po mistrzowsku.
+\section{Odrzucone scenariusze} 
+
+Praca z systemem Moodle jest żmudna i nieefektywna z powodu problemów 
+wymienionych we wcześniejszych częściach dokumentu. Rozsądnym scenariuszem
+byłoby zatem przejście na alternatywną platformę e-learningową. Rozwiązania 
+komercyjne, np. Blackboard Learning, trzeba było niestety odrzucić ze względu
+na koszty. Drugim problemem okazała się synchronizacja takiego systemu z
+USOS. W przypadku rozwiązania open-source (np. platformy OLAT) wymagałaby
+dokonania pracochłonnych modyfikacji kodu. Z tego powodu, zdecydowano się na 
+stworzenie nowej aplikacji, dostosowanej do potrzeb studentów i pracowników 
+Uniwersytetu Warszawskiego. 
+
+%
+%  Opis potencjalnych odbiorców i ich wymagań w stosunku do systemu, które
+%  postanowiono spełnić.
+%
 \section{Charakterystyka użytkowników}
-%też z wizji - co robi pracownik a co student. Jakie mają wymagania użytkownicy,
-%czym różnią się ich role, jakie mają możliwości.
+
+Podczas tworzenia aplikacji przypisano potencjalnych użytkowników
+do jednej z czterech ról, których wymagania następnie poddano analizie:
+
+\begin{itemize}
+   \item Administratorzy
+      \begin{description}
+         \item[Opis] Osoby zarządzające serwisem i dbające o jego bezpieczeństwo.
+         \item[Potrzeby] Interfejs zapewniający wygodne narzędzia do 
+            administracji systemem, pozwalający dokonywać typowych operacji 
+            przez przeglądarkę.
+      \end{description}
+   \item Studenci
+      \begin{description}
+         \item[Opis] Studenci zapisani na kursy prowadzone przy użyciu platformy.
+         \item[Potrzeby] Intuicyjny i prosty w obsłudze interfejs zapewniający: 
+            wygodny dostęp do materiałów, możliwość przesłania prac domowych 
+            prowadzącemu, wgląd w wyniki kursu; przejrzysta szata graficzna, 
+            integracja z serwisami USOS. 
+      \end{description}  
+   \item Byli studenci
+      \begin{description}
+         \item[Opis] Osoby, zapisane na kursy prowadzone przy użyciu platformy, 
+            które przestały być studentami.
+         \item[Potrzeby] Intuicyjny i prosty w obsłudze interfejs zapewniający: 
+            wygodny dostęp do materiałów oraz wgląd w wyniki kursu; przejrzysta 
+            szata graficzna.
+      \end{description}  
+   \item Prowadzący zajęcia
+      \begin{description}
+         \item[Opis] Pracownicy Uniwersytetu Warszawskiego prowadzący zajęcia 
+            przy użyciu platformy.
+         \item[Potrzeby] Intuicyjny i prosty w obsłudze interfejs zapewniający 
+            możliwość: ograniczenia dostępu do kursu wybranej grupie
+            studentów, publikacji materiałów i wyników kursu, zadania i 
+            przyjęcia prac domowych; integracja z serwisami USOS, przejrzysta 
+            szata graficzna.
+      \end{description}  
+\end{itemize}
+
+%
+%  Możliwości programu. Poszczególne funkcje powinny być sekcjami tego
+%  rozdziału.
+%
+\chapter{Możliwości systemu}
+
+%
+%  Przypadki użycia. Ważniejsze przypadki powinny być sekcjami tego
+%  rozdziału. Ewentualne zdjęcia interfejsu. 
+%
+\chapter{Możliwe scenariusze użycia}
 
 
-
-\chapter{Funkcjonalność}
-%Dokładniejszy opis stworzonego serwisu
-\section{Dostepne funkcje}
-%tu opis co można zrobić przy użyciu naszego systemu. Opis pojedyńczych funkcjonalności, 
-%np. "możliwość umieszczania plików" - jakie pliki można umieszczać, gdzie są 
-%przechowywane itp.  
-
-\section{Przypadki użycia}
-%lista przypadków użycia - z dokumentu "Przypadki użycia"
-
-\section{Opis przypadku użycia}
-%tu chcemy opisać przykładowy przypadek użycia systemu - cos podobnego 
-%do opisanego wcześniej przypadku użycia.
-%To pomoże zobrazować w jaki sposób użytkownik może korzystać z systemu.
-%Można tu np umieścić zdjęcia interfejsu.
-
-
+%
+%  Użyte narzędzia, biblioteki, technologie. Poszczególne rozwiązania powinny 
+%  być sekcjami tego rozdziału. Ewentualne zdjęcia.
+%
 \chapter{Zastosowane technologie}
-%dlaczego użylismy tych technologii i czym się charakteryzują
+
+\section{Java}
+\section{Git}
 \section{Google Web Toolkit}
 \section{Google App Engine}
+\section{Selenium}
 
-
+%
+%  Sposób pracy. Epicki epos o bohaterach, opis heroicznego wysiłku, potu, krwi 
+%  i łez. Rozdział powinien być pisany heksametrem.
+%
 \chapter{Metodyka pracy}
-%opis procesu powstawania serwisu
+
+%
+%  W jakich iteracjach pracowano, jak wyglądała komunikacja i podział
+%  zadań, jakie panowały zasady, kto był szefem projektu :)
+%
 \section{System pracy}
-%w jakich iteracjach pracowaliśmy, wykorzystane technologie (np. repozytorium, 
-%testowanie)
+
+%
+%  Jakie dokumenty powstały, ich cel i zawartość.
+%
 \section{Dokumentacja}
-%co napisaliśmy poza pracą licencjacką. Opis dokumentów które powstały, 
-%po co powstały i co się w nich znajduje
 
 
-
+%
+%  Ocena serwisu, wnioski (poprawa systemu pracy, uniknięcie błędów 
+%  w przyszłości).
+%
 \chapter{Podsumowanie}
-%ocena powstałego serwisu, wnioski wyciągnięte z całego semestru (jak możnaby 
-% poprawić system pracy, w jaki sposób uniknąć błędów w przyszłości)
+
+%
+%  Jak mógłby dalej rozwijać się produkt. Czego nie udało się napisać i 
+%  nigdy nie zostanie napisane. Zdjęcie członków zespołu nad morzem, używających
+%  zdobytych dyplomów jako podkładek pod gofry. 
+%
 \section{Możliwe rozszerzenia}
-%jak dalej może rozwijać się produkt - czego nie napisaliśmy a warto napisać.
 
 
 \begin{thebibliography}{99}

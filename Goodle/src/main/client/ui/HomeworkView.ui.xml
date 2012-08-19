@@ -10,6 +10,8 @@
 	    <g:Label ui:field="title" width="100%"/>
 	    <g:Label ui:field="text" />
 	    <g:Label ui:field="deadline"/>
+	    <g:FlexTable ui:field="filesTable" width="100%"></g:FlexTable>
+	    <my:FileUploadView ui:field="upload" width="100%" /> 
 	</g:VerticalPanel>
 
 </ui:UiBinder>

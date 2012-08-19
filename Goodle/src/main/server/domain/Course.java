@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -371,7 +373,7 @@ public class Course implements Serializable
     		for (Long id : homeworks)
     		{
     			Homework h = em.find(Homework.class, id);
-    			if (h.getIsVisible() || (!h.getIsVisible() && owner))
+    			if (h != null && (h.getIsVisible() || (!h.getIsVisible() && owner)))
     			{
     				l.add(h);
     			}
@@ -492,4 +494,25 @@ public class Course implements Serializable
     	module.addComment(comment);
     	return module;
     }*/
+    
+	public static List<Homework> findUserHomeworks(List<Long> ids)
+	{
+
+		List<Homework> homeworks = new ArrayList<Homework>();
+		
+		EntityManager em = entityManager();
+		try
+		{
+			for(Long id : ids) {
+	    		Course c = em.find(Course.class, id);
+	    		if (c != null) {
+	    			List <Homework> l = c.getHomeworksSafe();
+	    			if (l!= null)
+	    				homeworks.addAll(l);
+	    		}
+			}
+			return homeworks;
+		}
+		finally { em.close(); }
+	}
 }

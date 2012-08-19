@@ -9,9 +9,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
@@ -39,12 +42,28 @@ public class Homework extends Material
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Key> solutions = new ArrayList<Key>();
-    public List<Key> getSolutions() { return Collections.unmodifiableList(solutions); }
-    public void addSolution(UploadedFile file) { solutions.add(file.getId()); }
-    public void removeSolution(UploadedFile file) { solutions.remove(file.getId()); }
-    
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<UploadedFile> solutions = new ArrayList<UploadedFile>();
+    public List<UploadedFile> getSolutions() { return Collections.unmodifiableList(solutions);  }
+    public void setMaterials(List<UploadedFile> solutions) { 
+    	EntityManager em = entityManager();
+    	BlobstoreService blobstore = BlobstoreServiceFactory.getBlobstoreService();
+    	try {
+    		for (UploadedFile uf : this.solutions) {
+    			if (!solutions.contains(uf)) {
+    				UploadedFile u = em.find(UploadedFile.class, uf.getId());
+    				blobstore.delete(uf.getKey());
+    				em.remove(u);
+    			}
+    		}
+    		this.solutions = solutions;
+    	}
+    	finally {em.close();}
+    	
+    }
+    public void addSolution(UploadedFile solution) { solutions.add(solution); }
+    public void removeSolution(UploadedFile solution) { solutions.remove(solution); }
+  
     public static Homework findHomework(Long id) 
     {
     	if (id == null) { return null; }

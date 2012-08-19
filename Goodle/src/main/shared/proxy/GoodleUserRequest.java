@@ -29,6 +29,8 @@ public interface GoodleUserRequest extends RequestContext
 
 	InstanceRequest<GoodleUserProxy, List<CourseProxy>> getAttendedCourseProxies();
 	InstanceRequest<GoodleUserProxy, List<CourseProxy>> getLedCourseProxies();
+	InstanceRequest<GoodleUserProxy, List<Long>> getAttendedCourseIds();
+	InstanceRequest<GoodleUserProxy, List<Long>> getLedCourseIds();
 	
 	Request<GoodleUserProxy> findGoodleUser(Long id);
 	Request<Set<GoodleUserProxy>> findGoodleUsers(Set<Long> ids);

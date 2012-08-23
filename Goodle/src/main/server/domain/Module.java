@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -26,6 +27,7 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 @Entity
 @SuppressWarnings("serial")
+@MappedSuperclass
 public class Module implements Serializable 
 { 
 

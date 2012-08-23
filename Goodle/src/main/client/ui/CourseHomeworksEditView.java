@@ -45,7 +45,7 @@ public class CourseHomeworksEditView extends AbstractCourseView
 	
 	private CourseRequest request;
 	
-	public static String errorMsg = "Przepraszamy, wystąpił błąd i nie udało się załadować zadań. Spróbuj ponownie później.";
+	public static String errorMsg = "Przepraszamy, wyst��pi�� b����d i nie uda��o si�� za��adowa�� zada��. Spr��buj ponownie p����niej.";
 
 	public CourseHomeworksEditView()
 	{

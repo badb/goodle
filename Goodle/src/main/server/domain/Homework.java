@@ -1,30 +1,21 @@
 package main.server.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-
-import com.google.appengine.api.blobstore.BlobstoreService;
-import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
-import com.google.appengine.api.datastore.Key;
+import javax.validation.constraints.Past;
 
 @SuppressWarnings("serial")
 @Entity
-public class Homework extends Material
+public class Homework extends Module
 {
-	@NotNull
-    private String text;
-    public String getText() { return text; }
-    public void setText(String text) { this.text = text; }
+    @Basic
+    @Past
+    protected Date modified = new Date();
+    public Date getModified() { return modified; }
     
     @Basic
     private Date deadline;
@@ -42,28 +33,6 @@ public class Homework extends Material
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-    private List<UploadedFile> solutions = new ArrayList<UploadedFile>();
-    public List<UploadedFile> getSolutions() { return Collections.unmodifiableList(solutions);  }
-    public void setMaterials(List<UploadedFile> solutions) { 
-    	EntityManager em = entityManager();
-    	BlobstoreService blobstore = BlobstoreServiceFactory.getBlobstoreService();
-    	try {
-    		for (UploadedFile uf : this.solutions) {
-    			if (!solutions.contains(uf)) {
-    				UploadedFile u = em.find(UploadedFile.class, uf.getId());
-    				blobstore.delete(uf.getKey());
-    				em.remove(u);
-    			}
-    		}
-    		this.solutions = solutions;
-    	}
-    	finally {em.close();}
-    	
-    }
-    public void addSolution(UploadedFile solution) { solutions.add(solution); }
-    public void removeSolution(UploadedFile solution) { solutions.remove(solution); }
-  
     public static Homework findHomework(Long id) 
     {
     	if (id == null) { return null; }
@@ -76,3 +45,4 @@ public class Homework extends Material
     	finally { em.close(); }
     }
 }
+

@@ -33,8 +33,8 @@ public class FileEditView extends Composite {
 	private String url = "";
 
 	private ClientFactory clientFactory;
-	private ModuleEditView parent;
-	public void setParent(ModuleEditView parent) { this.parent = parent; }
+	private FileContainerInterface parent;
+	public void setParent(FileContainerInterface parent) { this.parent = parent; }
 	
 	interface FileEditViewUiBinder extends UiBinder<Widget, FileEditView> {
 	}

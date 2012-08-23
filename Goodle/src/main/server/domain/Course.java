@@ -506,9 +506,12 @@ public class Course implements Serializable
 			for(Long id : ids) {
 	    		Course c = em.find(Course.class, id);
 	    		if (c != null) {
+	    			Date d = new Date();
 	    			List <Homework> l = c.getHomeworksSafe();
-	    			if (l!= null)
-	    				homeworks.addAll(l);
+	    			for(Homework h: l) {
+	    				if (h!= null && (h.getDeadline() == null || h.getDeadline().compareTo(d) > 0 ))
+	    					homeworks.add(h);
+	    			}
 	    		}
 			}
 			return homeworks;

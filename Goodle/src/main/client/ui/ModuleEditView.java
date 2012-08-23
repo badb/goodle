@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
-public class ModuleEditView extends Composite {
+public class ModuleEditView extends Composite implements FileContainerInterface {
 
 	private static ModuleWidgetUiBinder uiBinder = GWT.create(ModuleWidgetUiBinder.class);
 

@@ -44,7 +44,7 @@ public class HomeworkEditView extends Composite {
 	private HomeworkProxy homework;
 	public HomeworkProxy getHomework()
 	{
-		homework.setName(title.getText());
+		homework.setTitle(title.getText());
 		homework.setText(text.getText());
 		homework.setDeadline(deadline.getValue());
 		homework.setIsVisible(isVisible.getValue());
@@ -60,7 +60,7 @@ public class HomeworkEditView extends Composite {
 		if (n == null) return;
 		
 		homework = request.create(HomeworkProxy.class);
-		homework.setName("Zadanie " + n.toString());
+		homework.setTitle("Zadanie " + n.toString());
 		homework.setText("Edytuj treść");
 		homework.setIsVisible(false);
 		prepareView();
@@ -68,11 +68,11 @@ public class HomeworkEditView extends Composite {
 	
 	public void prepareView()
 	{
-		previousTitle = homework.getName();
+		previousTitle = homework.getTitle();
 		previousText = homework.getText();
 		previousIsVisible = homework.getIsVisible();
 		previousDeadline = homework.getDeadline();
-		title.setText(homework.getName());
+		title.setText(homework.getTitle());
 		text.setText(homework.getText());
 		if (previousDeadline != null)
 			deadline.setValue(homework.getDeadline());

@@ -1,5 +1,7 @@
 package main.client.ui;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,10 +16,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
 public class CalendarView extends Composite 
@@ -30,6 +34,7 @@ public class CalendarView extends Composite
 	
 	private TextColumn<HomeworkProxy> nameColumn;
 	private TextColumn<HomeworkProxy> dateColumn;
+	ListDataProvider<HomeworkProxy> dataProvider;
 	
 	interface CalendarViewUiBinder extends UiBinder<Widget, CalendarView> { }
 	 
@@ -52,7 +57,7 @@ public class CalendarView extends Composite
 		nameColumn = new TextColumn<HomeworkProxy>() {
 			public String getValue(HomeworkProxy object) 
 			{
-				return object.getName();
+				return object.getTitle();
 			}
 		};
 		
@@ -71,6 +76,9 @@ public class CalendarView extends Composite
 
 		termsList.addColumn(nameColumn);
 		termsList.addColumn(dateColumn);
+		
+		dataProvider = new ListDataProvider<HomeworkProxy>();
+		dataProvider.addDataDisplay(termsList);
 	}
 	
 	private void refreshList() {
@@ -94,8 +102,43 @@ public class CalendarView extends Composite
 			
 					@Override
 					public void onSuccess(List<HomeworkProxy> h) {
-						termsList.setRowData(h);
-	
+						class HomeworkComparator implements Comparator<HomeworkProxy> {
+					          public int compare(HomeworkProxy h1, HomeworkProxy h2) {
+					        	  Date d1 = h1.getDeadline();
+					        	  Date d2 = h2.getDeadline();
+					            if (d1 == d2) {
+					              return 0;
+					            }
+
+					            if (d1 != null) {
+					              return (d2 != null) ? d1.compareTo(d2) : 1;
+					            }
+					            return -1;
+					        }
+					}
+						Collections.sort(h, new HomeworkComparator());
+						List<HomeworkProxy> list = dataProvider.getList();
+						list.addAll(h);
+						ListHandler<HomeworkProxy> columnSortHandler = new ListHandler<HomeworkProxy>(dataProvider.getList());
+					    columnSortHandler.setComparator(dateColumn,
+					        new Comparator<HomeworkProxy>() {
+					          public int compare(HomeworkProxy h1, HomeworkProxy h2) {
+					        	  Date d1 = h1.getDeadline();
+					        	  Date d2 = h2.getDeadline();
+					            if (d1 == d2) {
+					              return 0;
+					            }
+
+					            if (d1 != null) {
+					              return (d2 != null) ? d1.compareTo(d2) : 1;
+					            }
+					            return -1;
+					          }
+					        });
+					    termsList.addColumnSortHandler(columnSortHandler);
+					    
+					    termsList.getColumnSortList().push(dateColumn);
+					    list = dataProvider.getList();
 					}
 				}
 		);

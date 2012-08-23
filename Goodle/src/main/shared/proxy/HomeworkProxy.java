@@ -9,15 +9,8 @@ import com.google.appengine.api.datastore.Key;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 
 @ProxyFor(Homework.class)
-public interface HomeworkProxy extends MaterialProxy
+public interface HomeworkProxy extends ModuleProxy
 {
-	String getText();
 	Date getDeadline();
-	List<UploadedFileProxy> getSolutions();
-	boolean getIsVisible();
-	
-	void setText(String text);
 	void setDeadline(Date deadline);
-	void setMaterials(List<UploadedFileProxy> materials);
-	void setIsVisible(boolean isVisible);
 }

@@ -1,6 +1,7 @@
 package main.client.ui;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseRequest;
@@ -27,6 +28,8 @@ public class CourseHomeworksView  extends AbstractCourseView
 	@UiField Button edit;
 	@UiField FlexTable homeworks;
 	
+	private CourseRequest request;
+	
 	public static String notRegistered = "Musisz być zarejestrowany na kurs, aby obejrzeć zawartość.";
 	
 	public CourseHomeworksView()
@@ -37,6 +40,7 @@ public class CourseHomeworksView  extends AbstractCourseView
 	@Override
 	public void onCourseSet()
 	{
+		request = cf.getRequestFactory().courseRequest();
 		info.setText("");
 		edit.setEnabled(isCurrUserOwner());
 		edit.setVisible(isCurrUserOwner());
@@ -54,7 +58,6 @@ public class CourseHomeworksView  extends AbstractCourseView
 			return;
 		}
 		
-		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
 		
 		request.getHomeworksSafe().using(course).fire
@@ -68,6 +71,7 @@ public class CourseHomeworksView  extends AbstractCourseView
 					{
 						HomeworkView view = new HomeworkView();
 						view.setClientFactory(cf);
+						view.setRequest(request);
 						view.setHomework(h);
 
 						int rows = homeworks.getRowCount();

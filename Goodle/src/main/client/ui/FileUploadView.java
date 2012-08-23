@@ -36,7 +36,7 @@ public class FileUploadView extends Composite {
 
 	private ClientFactory clientFactory;
 	private BlobServiceAsync blobService;
-	private ModuleEditView parent;
+	private FileContainerInterface parent;
 	private String titleText;
 
 	@UiField Button submitButton;
@@ -88,7 +88,7 @@ public class FileUploadView extends Composite {
 		this.clientFactory = clientFactory;
 		blobService = clientFactory.getBlobService();
 	}
-	public void setParent(ModuleEditView parent) {
+	public void setParent(FileContainerInterface parent) {
 		this.parent = parent;
 	}
 	}

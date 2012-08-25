@@ -1,10 +1,8 @@
 package main.shared.proxy;
 
 import java.util.List;
-import java.util.Set;
 
 import main.server.domain.Course;
-import main.server.domain.Module;
 
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.Request;
@@ -15,12 +13,14 @@ import com.google.web.bindery.requestfactory.shared.Service;
 public interface CourseRequest extends RequestContext 
 {
 	
+	
 	Request<CourseProxy> newCourse();
 	InstanceRequest<CourseProxy, Long> persist();
 	InstanceRequest<CourseProxy, CourseProxy> update();
 	InstanceRequest<CourseProxy, Void> remove();
-	InstanceRequest<CourseProxy, Boolean> addDescription(String description);
-	InstanceRequest<CourseProxy, Boolean> addBibliography(String bibliography);
+	InstanceRequest<CourseProxy, CourseProxy> changeCourseInfo(String description, String bibliography);
+	InstanceRequest<CourseProxy, String> getDescription();
+	InstanceRequest<CourseProxy, String> getBibliography();
 	
 	Request<CourseProxy> findCourse(Long id);
 	Request<List<CourseProxy>> findCoursesByName(String name);

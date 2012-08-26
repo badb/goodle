@@ -1,15 +1,13 @@
 package main.server.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -31,6 +29,8 @@ import main.shared.JoinMethod;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
+
+import com.google.appengine.api.datastore.Text;
 
 @SuppressWarnings("serial")
 @Entity
@@ -82,14 +82,12 @@ public class Course implements Serializable
     public void setTerm(String term) { this.term = term; }
     
     @NotNull
-    private String description;
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    private Text description = new Text("");
+    public String getDescription() { return description.getValue(); }
     
     @NotNull
-    private String bibliography;
-    public String getBibliography() { return bibliography; }
-    public void setBibliography(String bibliography) { this.bibliography = bibliography; }
+    private Text bibliography = new Text("");
+    public String getBibliography() { return bibliography.getValue(); }
     
     @NotNull 
     private JoinMethod joinMethod;
@@ -262,6 +260,22 @@ public class Course implements Serializable
         	return c;
         }
         finally { em.close(); }
+    }
+    
+    public Course changeCourseInfo(String description, String bibliography)
+    {
+    	EntityManager em = entityManager();
+    	try
+    	{
+            Course c = em.find(Course.class, this.id);
+            if (bibliography != null)
+            	c.bibliography = new Text(bibliography);
+            if (description != null) 
+            	c.description = new Text(description);
+    		em.merge(c);
+            return c;
+    	}
+    	finally { em.close(); }
     }
     
     public Course update()
@@ -457,32 +471,6 @@ public class Course implements Serializable
         	return c;
     	}
     	finally { em.close(); }
-    }
-    
-    public boolean addDescription(String description)
-    {
-    	EntityManager em = entityManager();
-    	try
-    	{
-            Course c = em.find(Course.class, this.id);
-    		c.setDescription(description);
-    		em.merge(c);
-        	return true;
-    	}
-    	finally { em.close(); }
-    }
-    
-    public boolean addBibliography(String bibliography)
-    {
-    	EntityManager em = entityManager();
-    	try
-    	{
-            Course c = em.find(Course.class, this.id);
-    		c.setBibliography(bibliography);
-    		em.merge(c);
-        	return true;
-    	}
-    	finally { em.close(); }	
     }
     
     /*public Module setMaterialProxies(Module module, List<UploadedFile> materials) {

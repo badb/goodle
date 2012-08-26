@@ -16,8 +16,6 @@ public interface CourseProxy extends EntityProxy
 	Long getId();
 	String getName();
 	String getTerm();
-	String getDescription();
-	String getBibliography();
 	JoinMethod getJoinMethod();
 	String getKey();
 	String getCalendar();
@@ -27,8 +25,6 @@ public interface CourseProxy extends EntityProxy
 	
 	void setName(String name);
 	void setTerm(String term);
-	void setDescription(String description);
-	void setBibliography(String bibliography);
 	void setJoinMethod(JoinMethod joinMethod);
 	void setKey(String key);
 	void setCalendar(String link);

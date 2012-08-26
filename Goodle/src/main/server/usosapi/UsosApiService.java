@@ -3,49 +3,30 @@ package main.server.usosapi;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import main.client.ClientFactory;
-import main.server.domain.GoodleUser;
-import main.server.domain.UsosInfo;
 import main.shared.LongCourseDesc;
 import main.shared.ShortCourseDesc;
-import main.shared.proxy.LongUSOSCourseDescProxy;
 import main.shared.usos.UsosResponseStatus;
 import main.shared.usos.UsosSearchCourseResponse;
-import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.basic.DefaultOAuthConsumer;
 import oauth.signpost.basic.DefaultOAuthProvider;
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
-import oauth.signpost.exception.OAuthNotAuthorizedException;
 
-import com.google.appengine.tools.admin.OAuth2ServerConnection.OAuthException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-import com.google.web.bindery.requestfactory.shared.Request;
-
-import org.apache.commons.lang.StringUtils;
-
-
 
 public class UsosApiService 
 {	
@@ -212,6 +193,7 @@ public class UsosApiService
 		UsosApiService service = new UsosApiService();
 		return service.searchCourse(query);
 	}
+	
 	public static LongCourseDesc getCourseById(String courseId){
 		UsosApiService service = new UsosApiService();
 		return service.getCourseListById(courseId).getCourses().firstElement();

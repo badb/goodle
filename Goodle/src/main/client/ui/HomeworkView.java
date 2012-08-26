@@ -9,7 +9,6 @@ import main.client.ClientFactory;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
-import main.shared.proxy.ModuleProxy;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -91,7 +90,9 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 			logger.log(Level.SEVERE, "HomeworkView: CourseRequest is NULL");
 			return;
 		}
+		logger.log(Level.SEVERE, "Going to create proxy you sheepfaka.");
 		UploadedFileProxy file = request.create(UploadedFileProxy.class);
+		logger.log(Level.SEVERE, "Created proxy you madafaka.");
 		if (file == null) {
 			logger.log(Level.SEVERE, "HomeworkView: file is NULL");
 			return;

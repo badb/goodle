@@ -1,85 +1,79 @@
 package main.client.ui;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import main.client.place.CoursePlace;
 import main.client.util.ShortCourseCell;
-import main.shared.proxy.CourseProxy;
 import main.shared.proxy.LongUSOSCourseDescProxy;
 import main.shared.proxy.ShortUSOSCourseDescProxy;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.cellview.client.CellList;
-import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.cell.client.ValueUpdater;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
-import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class CourseSynchronizationPopup extends AbstractCoursePopup {
 
 	private static CourseSynchronizationPopupUiBinder uiBinder = GWT.
 			create(CourseSynchronizationPopupUiBinder.class);
-	
+
 	interface CourseSynchronizationPopupUiBinder extends
-		UiBinder<Widget, CourseSynchronizationPopup> { }
-	
+	UiBinder<Widget, CourseSynchronizationPopup> { }
+
 	@UiField(provided=true) 
 	CellList<ShortUSOSCourseDescProxy> cellList;
-	
-	
+
+
 	@UiField TextBox searchBox;
 	@UiField Button searchButton;
 	@UiField Button cancelButton;
 
-	
+
 
 	public CourseSynchronizationPopup() {
-		
+
 		
 		cellList = new CellList<ShortUSOSCourseDescProxy>(new ShortCourseCell());
-		
+
 		ValueUpdater<ShortUSOSCourseDescProxy> updater = new ValueUpdater<ShortUSOSCourseDescProxy>()
-				{
-					public void update(ShortUSOSCourseDescProxy value) 
+		{
+			public void update(ShortUSOSCourseDescProxy value) 
+			{
+				cf.getRequestFactory().usosApiRequest().getCourseById(value.getId()).fire
+				(
+					new Receiver<LongUSOSCourseDescProxy>()
 					{
-						cf.getRequestFactory().usosApiRequest().getCourseById(value.getId()).fire(
-								new Receiver<LongUSOSCourseDescProxy>()
-								{
-									@Override
-									public void onSuccess(LongUSOSCourseDescProxy response)
-									{
-										SynchronizationConfirmationPopup popup = cf.getSynchronizationConfirmationPopup();
-										popup.setCourse(course);
-										popup.setUSOSCourseDesc(response);
-										popup.center();
-										
-									}
-								});
-					}
-				};
+						@Override
+						public void onSuccess(LongUSOSCourseDescProxy response)
+						{
+							SynchronizationConfirmationPopup popup = cf.getSynchronizationConfirmationPopup();
+							popup.setCourse(course);
+							popup.setUSOSCourseDesc(response);
+							popup.center();
+
+						}
+					});
+			}
+		};
 		cellList.setValueUpdater(updater);
 		setWidget(uiBinder.createAndBindUi(this));
 		searchBox.getElement().setAttribute("placeHolder", "Szukaj kursu");
 	}
-	
+
 	@UiHandler("cancelButton")
 	public void onCancelButtonClicked(ClickEvent click)
 	{
 		searchBox.setText("");
 		this.hide();
 	}
-	
+
 	@UiHandler("searchButton")
 	public void onSearchButtonClicked(ClickEvent click)
 	{

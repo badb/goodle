@@ -3,18 +3,16 @@ package main.client.ui;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.LongUSOSCourseDescProxy;
-import main.shared.proxy.ShortUSOSCourseDescProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
 public class SynchronizationConfirmationPopup extends AbstractCoursePopup {
@@ -61,9 +59,7 @@ public class SynchronizationConfirmationPopup extends AbstractCoursePopup {
 		{
 			CourseRequest request = cf.getRequestFactory().courseRequest();
 			course = request.edit(course);
-			course.setDescription(usosCourse.getDesc());
-			course.setBibliography(usosCourse.getBibliography());
-			request.update().using(course).fire
+			request.changeCourseInfo(usosCourse.getDesc(), usosCourse.getBibliography()).using(course).fire
 			(
 				new Receiver<CourseProxy>()
 				{

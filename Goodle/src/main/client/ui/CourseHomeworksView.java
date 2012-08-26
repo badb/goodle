@@ -1,7 +1,6 @@
 package main.client.ui;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseRequest;

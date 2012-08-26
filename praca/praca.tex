@@ -121,8 +121,6 @@ narzędzia i technologie oraz ewentualne przyszłe rozszerzenia.
 %
 \section{Sformułowanie problemu}
 
-
-
 %
 %  Definicje użytych w dokumencie trudnych terminów i rozwinięcie akronimów.
 %
@@ -219,23 +217,45 @@ kształcenia na Uniwesytecie Warszawskim.
 %
 \section{Cele}
 
+Najważniejszym celem, jaki stawiano sobie podczas realizacji systemu, było
+zapewnienie prostego, intuicyjnego interfejsu. Moodle oferował użytkownikom,
+szczególnie od strony prowadzącego, rozmaite funkcje, np. podczas umieszczania
+nowych materiałów. Niestety powodowało to przeładowanie aplikacji licznymi
+przyciskami i opcjami. Zapewniana elastyczność i szeroki wachlarz możliwości
+nie skusiły użytkowników, którzy większości funkcji nie używali, a często
+nawet nie znali. Pisząc Goodle, przyjęto inną filozofię. Ustalono listę
+pożądanych przez odbiorców opcji, w tym kluczowych do uczestnictwa w kursach
+i administrowania nimi, i postanowiono zapewnić to minimum w jak najbardziej
+klarownej formie. 
+
+Drugi ważny cel, jaki postawili sobie twórcy, stanowiła integracja
+tworzonego portalu z systemem USOS. Kiedy rozpoczęto projekt, nie było
+możliwe zalogowanie się do Moodle przy pomocy uczelnianego Centralnego
+Systemu Uwierzytelniania. Opcję tę dodano później. Dodatkowo tworzone na
+platformie e-learningowej kursy były zwykle odpowiednikami tych z USOS. Mimo
+to, nie istniała możliwość transferu infromacji np. danych kursu, listy
+użytkowników czy wystawionych ocen. W Goodle postanowiono zapewnić taką 
+komunikację. Niestety te zamierzenia udało się zrealizować tylko
+częściowo, z uwagi za ograniczenia dostępnego USOS API.   
+
 %
 %  Jakie alternatywne rozwiązania rozpatrywano i dlaczego zdecydowano się
 %  na stworzenie własnej aplikacji.
 %
-%  TODO Pierwsza wersja, można trochę rozwinąć. Nie, żebyśmy rozważali 
-%  wcześniej jakieś scenariusze, ale jak już czarować, to po mistrzowsku.
-\section{Odrzucone scenariusze} 
+%  TODO Poniższa sekcja jest laniem wody na pełną skalę. Skomponowałem
+%  ją z materiałów wygrzebanych z wizji, ale może warto z niej zrezygnować.
 
-Praca z systemem Moodle jest żmudna i nieefektywna z powodu problemów 
-wymienionych we wcześniejszych częściach dokumentu. Rozsądnym scenariuszem
-byłoby zatem przejście na alternatywną platformę e-learningową. Rozwiązania 
-komercyjne, np. Blackboard Learning, trzeba było niestety odrzucić ze względu
-na koszty. Drugim problemem okazała się synchronizacja takiego systemu z
-USOS. W przypadku rozwiązania open-source (np. platformy OLAT) wymagałaby
-dokonania pracochłonnych modyfikacji kodu. Z tego powodu, zdecydowano się na 
-stworzenie nowej aplikacji, dostosowanej do potrzeb studentów i pracowników 
-Uniwersytetu Warszawskiego. 
+%\section{Odrzucone scenariusze} 
+%
+%Praca z systemem Moodle jest żmudna i nieefektywna z powodu problemów 
+%wymienionych we wcześniejszych częściach dokumentu. Rozsądnym scenariuszem
+%było zatem przejście na alternatywną platformę e-learningową. Rozwiązania 
+%komercyjne, np. Blackboard Learning, trzeba było niestety odrzucić ze względu
+%na koszty. Drugim problemem okazała się synchronizacja takiego systemu z
+%USOS. W przypadku rozwiązania open-source (np. platformy OLAT) wymagałaby
+%dokonania pracochłonnych modyfikacji kodu. Z tego powodu, zdecydowano się na 
+%stworzenie nowej aplikacji, dostosowanej do potrzeb studentów i pracowników 
+%Uniwersytetu Warszawskiego. 
 
 %
 %  Opis potencjalnych odbiorców i ich wymagań w stosunku do systemu, które
@@ -287,6 +307,95 @@ do jednej z czterech ról, których wymagania następnie poddano analizie:
 %  rozdziału.
 %
 \chapter{Możliwości systemu}
+
+Obecnie aplikacja Goodle oferuje użytkownikom następujące funkcje:
+
+\section{Tworzenie i administracja kursem, synchronizacja z USOS}
+
+Każdy użytkownik Goodle ma możliwość utworzenia zajęć poprzez kliknięcie
+przycisku "Stwórz kurs" w lewym panelu. Powstawowymi operacjami na 
+utworzonym kursie są zmiana jego nazwy oraz semestru i roku szkolnego, 
+w którym odbywają się zajęcia. Kurs w Goodle, podobnie jak na Uniwersytecie
+Warszawskim może odbywać się w semestrze zimowym, letnim lub być całoroczny.
+Domyślnie kurs zostaje przypisany do aktualnego semestru.
+Zakładka "Informacje" umożliwia dodatkowo dodanie opisu kursu oraz związanej
+z nim bibliografii.
+
+Zdaża się często, że tworzony kurs posiada swój odpowiednik w USOS. W takim
+przypadku, zamiast wpisywać dane ręcznie, prowadzący ma możliwość pobrania
+ich z systemu.
+
+\section{Wyszukiwanie kursów}
+
+Możliwe jest wyszukiwanie zajęć używając panelu znajdującego
+się u góry strony. W trakcie wpisywania, aplikacja wspiera użytkownika,
+podpowiadając pasujące nazwy. 
+
+Na liście wyników wyszukiwania podana jest nie tylko nazwa kursu, 
+ale również jego semestr i rok szkolny, co pozwala łatwo odróżnić zajęcia z 
+danego przedmiotu prowadzone w kolejnych latach.  
+
+\section{Rejestracja na kurs i zarządzanie użytkownikami}
+
+Aby prowadzenie zajęć miało sens, do kursu powinni dołączyć uczestnicy. 
+Nowoutworzony kurs nie jest ukryty - użytkownicy mogą go wyszukać i obejrzeć
+informacje na jego temat, jednak aby uzyskać wgląd w dodane materiały, prace
+domowe czy listę uczestników, konieczne jest pomyślne przejście procesu 
+rejestracji.
+
+Istnieją dwa poziomy zabezpieczenia kursu: otwarty i zabezpieczony hasłem. 
+Na zajęcia użytkownik Goodle może zarejestrować się, klikając przycisk 
+"zarejestruj", znajdujący się obok nazwy kursu. W przypadku zajęć otwartych
+spowoduje to natychmiastowe dołączenie użytkownika do listy uczęszczających.
+Jeżeli prowadzący zdefiniował hasło, do ukończenia rejestracji konieczne będzie
+podanie go. Lista kursów, w których użytkownik uczestniczy, podobnie
+jak prowadzonych przez niego, pojawia się w panelu po lewej stronie ekranu.
+
+Domyślnie kurs nie jest chroniony hasłem, ale prowadzący ma możliwość zmiany
+polityki w dowolnym momencie. 
+
+Wszyscy zarejestrowani mają możliwość obejrzenia listy współuczestników, 
+dostępnej w zakładce "Uczestnicy". Dodatkowo prowadzący może
+wyrejestrować wybranych uczestników z kursu, zaznaczając ich na wymienionej
+liście, a następnie klikając "usuń". 
+
+\section{Dodawanie i przeglądanie materiałów}
+
+Prowadzący kurs dysponuje możliwością umieszczania na stronie kursu 
+materiałów - tekstu zawierającego na przykład streszczenie wykładu czy
+dodatkowe informacje przeznaczone dla bardziej zaangażowanych uczestników.
+Każdy materiał może być widoczny dla uczestników lub ukryty - widoczny
+tylko dla prowadzącego. Umożliwia do wcześniejsze przygotowanie informacji
+i udostępnianie ich studentom w dogodnym momencie. Dodatkowo materiały mogą 
+zostać wzbogacone załadowanymi na serwer plikami, np.
+dokumentami pdf, obrazkami czy filmami.  
+
+Materiały modyfikowane są w trybie edycji, do której prowadzący przechodzi
+klikając "edytuj" w zakładce "Materiały". Od tego momentu ma możliwość
+dodawania i usuwania materiałów, zmieniania ich nazwy, treści, widoczoności
+oraz ładowania plików. Zmiany zostaną zapisane dopiero, kiedy prowadzący
+zatwierdzi je klikając "zapisz", dlatego też w każdej chwili może 
+wycofać się z wprowadzonych modyfikacji wybierając "anuluj".
+
+\section{Zadawanie i ocena prac domowych}
+
+Aby sprawdzić umiejętności uczestników i zachęcić ich do regularnej pracy,
+prowadzący może dawać im zadania do wykonania w zakładce "Zadania". 
+W wielu aspektach prace domowe funkcjonują podobnie jak materiały: 
+treść zadania może zostać wzbogacona dodatkowymi plikami, zadanie może być
+widoczne dla wszystkich lub tylko dla prowadzącego oraz modyfikacji
+zadań dokonuje się w specjalnym trybie edycji, w którym prowadzący może
+w każdym momencie wycofać się z wprowadzonych zmian. Dodatkowo, prowadzący
+może ustawić termin, do którego należy przysyłać rozwiązanie problemu.
+
+Na specjalnej liście prowadzący widzi kto z uczestników umieścił plik
+i czy zrobił to w terminie. Może przejrzeć zamieszczone rozwiązania 
+i ocenić je. Uzyskany wynik studenci zobaczą obok zadania.
+
+Każde dodane, odkryte zadanie jest widoczne dla studentów nie tylko w zakładce
+"Zadania", ale również w prawym panelu wraz z terminem nadsyłania prac, 
+gdzie użytkownicy widzą wszystkie prace domowe z kursów, na które są
+zarejestrowani.
 
 %
 %  Przypadki użycia. Ważniejsze przypadki powinny być sekcjami tego

@@ -20,6 +20,8 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.requestfactory.shared.Receiver;
@@ -29,8 +31,10 @@ public class CalendarView extends Composite
 
 	private static CalendarViewUiBinder uiBinder = GWT.create(CalendarViewUiBinder.class);
 
+	@UiField Label termsLabel;
 	@UiField(provided=true) 
 	CellTable<HomeworkProxy> termsList;
+	@UiField VerticalPanel calendarPanel;
 	
 	private TextColumn<HomeworkProxy> nameColumn;
 	private TextColumn<HomeworkProxy> dateColumn;
@@ -44,6 +48,7 @@ public class CalendarView extends Composite
 	{
 		initList();
 		initWidget(uiBinder.createAndBindUi(this));
+		calendarPanel.setCellHeight(termsLabel, "20px");
 	}
 	
 	public void setClientFactory(ClientFactory clientFactory) { 

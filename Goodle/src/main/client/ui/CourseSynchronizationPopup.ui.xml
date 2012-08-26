@@ -4,7 +4,7 @@
 
 		<g:VerticalPanel>
 		<g:HorizontalPanel height="">
-			<g:TextBox text="Szukaj kursu" ui:field="searchBox"/>
+			<g:TextBox ui:field="searchBox"/>
 			<g:Button ui:field="searchButton" text="Szukaj"/>
 		</g:HorizontalPanel>
 		<p1:CellList ui:field="cellList"/>

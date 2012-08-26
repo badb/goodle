@@ -63,7 +63,7 @@ public class CourseView extends Composite
 				joinMethodAction.setText(course.getJoinMethod().toString());
 				synchronizationButton.setVisible(true);
 				synchronizationButton.setEnabled(true);
-				synchronizationButton.setText("Synchronize");
+				synchronizationButton.setText("Synchronizuj z Usos");
 			}
 			else if (currentUserIsMember())
 			{

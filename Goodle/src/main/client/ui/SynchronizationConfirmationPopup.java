@@ -66,7 +66,14 @@ public class SynchronizationConfirmationPopup extends AbstractCoursePopup {
 					@Override
 					public void onSuccess(CourseProxy response) 
 					{
-						if (parent != null) parent.setCourse(response);
+						if (parent != null) {
+							course = response;
+							parent.setCourse(response);
+							cf.getCourseInfoView().setCourse(response);
+						}
+						
+						cf.getCourseSynchronizationPopup().hide();
+						hide();						
 					}
 				}
 			);

@@ -12,5 +12,8 @@ import com.google.web.bindery.requestfactory.shared.ProxyFor;
 public interface HomeworkProxy extends ModuleProxy
 {
 	Date getDeadline();
+	Long getCourse();
+	
 	void setDeadline(Date deadline);
+	void setCourse(Long course);
 }

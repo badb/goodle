@@ -33,6 +33,12 @@ public class Homework extends Module
     public boolean getIsVisible() { return isVisible; }
     public void setIsVisible(boolean isVisible) { this.isVisible = isVisible; }
     
+    private Long course;
+    public Long getCourse() { return course; }
+    public void setCourse(Long course) {
+    	this.course = course;
+    }
+    
     public static Homework findHomework(Long id) 
     {
     	if (id == null) { return null; }

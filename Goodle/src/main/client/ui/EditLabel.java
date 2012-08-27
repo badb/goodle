@@ -197,7 +197,7 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 		textArea.setText(text);
 		textBox.setText(text);
 		
-		if (!isEdited && text.equals(""))
+		if (!isEdited && text.equals("") && editable)
 		{
 			label.setVisible(false);
 			if (wordWrapped) textArea.setVisible(true);

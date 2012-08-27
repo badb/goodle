@@ -1,5 +1,8 @@
 package main.client.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.client.BlobServiceAsync;
 import main.client.ClientFactory;
 
@@ -24,8 +27,8 @@ public class FileUploadView extends Composite {
 			.create(FileUploadViewUiBinder.class);
 
 	interface FileUploadViewUiBinder extends UiBinder<Widget, FileUploadView> {
-	}
-
+	}	
+	
 	public FileUploadView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		form.setAction(GWT.getModuleBaseURL() +"uploadservice");

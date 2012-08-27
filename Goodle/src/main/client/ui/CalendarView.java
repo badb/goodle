@@ -8,6 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
+import main.client.NewHomeworkEvent;
+import main.client.NewHomeworkEventHandler;
 import main.client.place.CoursePlace;
 import main.client.util.HomeworkCell;
 import main.shared.proxy.CourseProxy;
@@ -30,7 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CalendarView extends Composite 
+public class CalendarView extends Composite implements NewHomeworkEventHandler 
 {
 
 	private static CalendarViewUiBinder uiBinder = GWT.create(CalendarViewUiBinder.class);
@@ -40,11 +42,11 @@ public class CalendarView extends Composite
 	CellList<HomeworkProxy> termsList;
 	@UiField VerticalPanel calendarPanel;
 	
-	HomeworkCell hc = new HomeworkCell();
-	
 	interface CalendarViewUiBinder extends UiBinder<Widget, CalendarView> { }
 	 
 	private ClientFactory clientFactory;
+	private Logger logger = Logger.getLogger("Goodle.Log");
+	
 	
 	public CalendarView()
 	{
@@ -55,13 +57,16 @@ public class CalendarView extends Composite
 	
 	public void setClientFactory(ClientFactory clientFactory) { 
 		this.clientFactory = clientFactory;
-		hc.setClientFactory(clientFactory);
 		refreshList();
 	}
 
+	@Override
+	public void onNewHomework(NewHomeworkEvent event) {
+		refreshList();
+	}
 	
 	private void initList() {
-		termsList = new CellList<HomeworkProxy> (hc);
+		termsList = new CellList<HomeworkProxy> (new HomeworkCell()	);
 		ValueUpdater<HomeworkProxy> updater = new ValueUpdater<HomeworkProxy>() {
 			public void update(HomeworkProxy value) {
 				clientFactory.getPlaceController().goTo(new CoursePlace(value.getCourse().toString(), "homeworks"));
@@ -89,9 +94,9 @@ public class CalendarView extends Composite
 	private void refresh(List<Long> l) {
 		clientFactory.getRequestFactory().courseRequest().findUserHomeworks(l).fire(
 				new Receiver<List<HomeworkProxy>>() {
-			
 					@Override
 					public void onSuccess(List<HomeworkProxy> h) {
+
 						class HomeworkComparator implements Comparator<HomeworkProxy> {
 					          public int compare(HomeworkProxy h1, HomeworkProxy h2) {
 					        	  Date d1 = h1.getDeadline();
@@ -107,6 +112,7 @@ public class CalendarView extends Composite
 					        }
 					}
 						Collections.sort(h, new HomeworkComparator());
+						termsList.setRowCount(h.size(), true);
 						termsList.setRowData(h);
 					}
 				}

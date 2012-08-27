@@ -72,6 +72,7 @@ public class CourseHomeworksEditView extends AbstractCourseView
 						HomeworkEditView view = new HomeworkEditView();
 						view.setClientFactory(cf);
 						view.setRequest(request);
+						view.setCourse(course);
 						view.setHomework(h);
 
 						int rows = homeworks.getRowCount();
@@ -94,6 +95,7 @@ public class CourseHomeworksEditView extends AbstractCourseView
 	    
 		view.setClientFactory(cf);
 		view.setRequest(request);
+		view.setCourse(course);
 	    view.newHomework(rows + 1);
 	    
 		homeworks.insertRow(rows);

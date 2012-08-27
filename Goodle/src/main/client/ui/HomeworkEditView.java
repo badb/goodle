@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
-public class HomeworkEditView extends Composite {
+public class HomeworkEditView extends AbstractCourseView{
 
 	private static HomeworkWidgetUiBinder uiBinder = GWT.create(HomeworkWidgetUiBinder.class);
 
@@ -40,6 +40,8 @@ public class HomeworkEditView extends Composite {
 	
 	private CourseRequest request;
 	public void setRequest(CourseRequest request) { this.request = request; }
+
+	
 	
 	private HomeworkProxy homework;
 	public HomeworkProxy getHomework()
@@ -60,7 +62,7 @@ public class HomeworkEditView extends Composite {
 		if (n == null) return;
 		
 		homework = request.create(HomeworkProxy.class);
-		homework.setTitle("Zadanie " + n.toString());
+		homework.setTitle(course.getName() + ": Zadanie " + n.toString());
 		homework.setText("Edytuj treść");
 		homework.setIsVisible(false);
 		prepareView();

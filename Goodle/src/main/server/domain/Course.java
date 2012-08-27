@@ -455,6 +455,7 @@ public class Course implements Serializable
     			{
     				h.setAuthor(u.getId());
     				h.setVersion(1);
+    				h.setCourse(id);
     			}
     			
     			em.persist(h);

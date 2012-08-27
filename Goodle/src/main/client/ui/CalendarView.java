@@ -8,13 +8,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
+import main.client.place.CoursePlace;
+import main.client.util.HomeworkCell;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.GoodleUserProxy;
 import main.shared.proxy.HomeworkProxy;
 
+import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.cellview.client.CellList;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -33,12 +37,10 @@ public class CalendarView extends Composite
 
 	@UiField Label termsLabel;
 	@UiField(provided=true) 
-	CellTable<HomeworkProxy> termsList;
+	CellList<HomeworkProxy> termsList;
 	@UiField VerticalPanel calendarPanel;
 	
-	private TextColumn<HomeworkProxy> nameColumn;
-	private TextColumn<HomeworkProxy> dateColumn;
-	ListDataProvider<HomeworkProxy> dataProvider;
+	HomeworkCell hc = new HomeworkCell();
 	
 	interface CalendarViewUiBinder extends UiBinder<Widget, CalendarView> { }
 	 
@@ -52,38 +54,21 @@ public class CalendarView extends Composite
 	}
 	
 	public void setClientFactory(ClientFactory clientFactory) { 
-		this.clientFactory = clientFactory; 
+		this.clientFactory = clientFactory;
+		hc.setClientFactory(clientFactory);
 		refreshList();
 	}
 
 	
 	private void initList() {
-		termsList = new CellTable<HomeworkProxy> ();
-		nameColumn = new TextColumn<HomeworkProxy>() {
-			public String getValue(HomeworkProxy object) 
-			{
-				return object.getTitle();
+		termsList = new CellList<HomeworkProxy> (hc);
+		ValueUpdater<HomeworkProxy> updater = new ValueUpdater<HomeworkProxy>() {
+			public void update(HomeworkProxy value) {
+				clientFactory.getPlaceController().goTo(new CoursePlace(value.getCourse().toString(), "homeworks"));
 			}
 		};
-		
-		dateColumn = new TextColumn<HomeworkProxy>() {
-			public String getValue(HomeworkProxy object) 
-			{
-				
-				Date d = object.getDeadline();
-				if (d != null)
-					return object.getDeadline().toString();
-				else 
-					return ""; 
-			}
-		};
-		dateColumn.setSortable(true);
+		termsList.setValueUpdater(updater);
 
-		termsList.addColumn(nameColumn);
-		termsList.addColumn(dateColumn);
-		
-		dataProvider = new ListDataProvider<HomeworkProxy>();
-		dataProvider.addDataDisplay(termsList);
 	}
 	
 	private void refreshList() {
@@ -116,34 +101,13 @@ public class CalendarView extends Composite
 					            }
 
 					            if (d1 != null) {
-					              return (d2 != null) ? d1.compareTo(d2) : 1;
+					              return (d2 != null) ? d1.compareTo(d2) : -1;
 					            }
-					            return -1;
+					            return 1;
 					        }
 					}
 						Collections.sort(h, new HomeworkComparator());
-						List<HomeworkProxy> list = dataProvider.getList();
-						list.addAll(h);
-						ListHandler<HomeworkProxy> columnSortHandler = new ListHandler<HomeworkProxy>(dataProvider.getList());
-					    columnSortHandler.setComparator(dateColumn,
-					        new Comparator<HomeworkProxy>() {
-					          public int compare(HomeworkProxy h1, HomeworkProxy h2) {
-					        	  Date d1 = h1.getDeadline();
-					        	  Date d2 = h2.getDeadline();
-					            if (d1 == d2) {
-					              return 0;
-					            }
-
-					            if (d1 != null) {
-					              return (d2 != null) ? d1.compareTo(d2) : 1;
-					            }
-					            return -1;
-					          }
-					        });
-					    termsList.addColumnSortHandler(columnSortHandler);
-					    
-					    termsList.getColumnSortList().push(dateColumn);
-					    list = dataProvider.getList();
+						termsList.setRowData(h);
 					}
 				}
 		);

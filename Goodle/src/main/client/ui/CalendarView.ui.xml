@@ -6,7 +6,7 @@
 	
 	<g:VerticalPanel ui:field="calendarPanel">
 		<g:Label ui:field="termsLabel">Nadchodzące terminy:</g:Label>
-	    <c:CellTable ui:field="termsList"/>
+	    <c:CellList ui:field="termsList"/>
 	</g:VerticalPanel> 
 		 
 </ui:UiBinder>

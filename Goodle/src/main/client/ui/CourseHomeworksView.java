@@ -57,9 +57,10 @@ public class CourseHomeworksView  extends AbstractCourseView
 			return;
 		}
 		
-		course = request.edit(course);
-		
-		request.getHomeworksSafe().using(course).fire
+		CourseRequest getRequest = cf.getRequestFactory().courseRequest();
+		course = getRequest.edit(course);
+				
+		getRequest.getHomeworksSafe().using(course).with("materials").fire
 		(
 			new Receiver<List<HomeworkProxy>>()
 			{
@@ -92,4 +93,8 @@ public class CourseHomeworksView  extends AbstractCourseView
 			cf.getPlaceController().goTo(new CoursePlace(courseId, "homeworksEdit"));
 		}
 	}
+	
+	/*public void changeCourse() {
+		
+	}*/
 }

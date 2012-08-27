@@ -54,7 +54,8 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	private void updateCourse(CourseRequest request)
 	{
 		parent.changeCourse();
-		request.update().using(course).fire
+		
+		/*request.update().using(course).fire
 		(
 			new Receiver<CourseProxy>()
 			{
@@ -64,14 +65,16 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 					if (parent != null) parent.setCourse(response);
 				}
 			}
-		);
+		);*/
 	}
 	
 	public void setHomework(HomeworkProxy homework) 
 	{ 
+		this.homework = homework;
 		upload.setParent(this);
 		title.setText(homework.getTitle());
 		text.setText(homework.getText());
+		files = homework.getMaterials();
 		Date d = homework.getDeadline();
 		if (d != null)
 			deadline.setText(d.toString());
@@ -105,6 +108,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 			return;
 		}
 		files.add(file);
+		//updateCourse(request);
 		addFileView(file);
 	}
 
@@ -136,6 +140,11 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	
 	@Override
 	public void removeFile(UploadedFileProxy file) {
-
+		int index = files.lastIndexOf(file);
+		if (index == -1) {
+			return;
+		}
+		filesTable.removeRow(index);
+		files.remove(index);
 	}
 }

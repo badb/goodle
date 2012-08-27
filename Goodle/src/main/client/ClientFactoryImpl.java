@@ -1,5 +1,6 @@
 package main.client;
 
+import main.client.ui.CalendarView;
 import main.client.ui.CourseHomeworksEditView;
 import main.client.ui.CourseHomeworksView;
 import main.client.ui.CourseInfoView;
@@ -29,6 +30,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
 
 	private TopView topView;
+	private CalendarView rightView;
 	private CourseListView courseListView;
 	private CourseView courseView;
 	private CourseInfoView courseInfoView;
@@ -184,10 +186,11 @@ public class ClientFactoryImpl implements ClientFactory
 	public void setCurrentUser(GoodleUserProxy userProxy) { currentUserProxy = userProxy; }
 
 	@Override
-	public void setTopView(TopView topView) {
-		this.topView = topView;
-	}
+	public void setTopView(TopView topView) { this.topView = topView; }
 	
+	@Override
+	public void setRightView(CalendarView rightView) { this.rightView = rightView;}
+
 	@Override
 	public GoodleUserProxy getCurrentUser() { return currentUserProxy; }
 
@@ -227,6 +230,7 @@ public class ClientFactoryImpl implements ClientFactory
 			courseHomeworksEditView = new CourseHomeworksEditView();
 			courseHomeworksEditView.setClientFactory(this);
 			courseHomeworksEditView.setParent(getCourseView());
+			courseHomeworksEditView.addNewHomeworkEventHandler(rightView);
 		}
 		return courseHomeworksEditView;
 	}

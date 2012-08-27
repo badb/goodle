@@ -1,5 +1,6 @@
 package main.client;
 
+import main.client.ui.CalendarView;
 import main.client.ui.CourseHomeworksEditView;
 import main.client.ui.CourseHomeworksView;
 import main.client.ui.CourseInfoView;
@@ -44,6 +45,7 @@ public interface ClientFactory
 	
 	void setCurrentUser(GoodleUserProxy userProxy);
 	void setTopView(TopView topView);
+	void setRightView(CalendarView calendarView);
 	GoodleUserProxy getCurrentUser();
 	CourseModulesEditView getCourseModulesEditView();
 	BlobServiceAsync getBlobService();

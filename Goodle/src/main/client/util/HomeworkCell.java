@@ -27,12 +27,7 @@ public class HomeworkCell extends AbstractCell<HomeworkProxy> {
       }
       
 	private static Templates templates = GWT.create(Templates.class);
-	private ClientFactory clientFactory;
-	
-	public void setClientFactory (ClientFactory clientFactory) {
-		this.clientFactory = clientFactory;
-	}
-	
+		
 	public HomeworkCell () {
 		super("click");
 	}

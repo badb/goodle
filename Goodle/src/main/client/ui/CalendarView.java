@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -8,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
+import main.client.NewHomeworkEvent;
+import main.client.NewHomeworkEventHandler;
 import main.client.place.CoursePlace;
 import main.client.util.HomeworkCell;
 import main.shared.proxy.CourseProxy;
@@ -30,7 +33,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 
-public class CalendarView extends Composite 
+public class CalendarView extends Composite implements NewHomeworkEventHandler 
 {
 
 	private static CalendarViewUiBinder uiBinder = GWT.create(CalendarViewUiBinder.class);
@@ -40,14 +43,15 @@ public class CalendarView extends Composite
 	CellList<HomeworkProxy> termsList;
 	@UiField VerticalPanel calendarPanel;
 	
-	HomeworkCell hc = new HomeworkCell();
-	
 	interface CalendarViewUiBinder extends UiBinder<Widget, CalendarView> { }
 	 
 	private ClientFactory clientFactory;
+	private Logger logger = Logger.getLogger("Goodle.Log");
+	List <Long> ids;
 	
 	public CalendarView()
 	{
+		ids = new ArrayList<Long>();
 		initList();
 		initWidget(uiBinder.createAndBindUi(this));
 		calendarPanel.setCellHeight(termsLabel, "20px");
@@ -55,13 +59,16 @@ public class CalendarView extends Composite
 	
 	public void setClientFactory(ClientFactory clientFactory) { 
 		this.clientFactory = clientFactory;
-		hc.setClientFactory(clientFactory);
 		refreshList();
 	}
 
+	@Override
+	public void onNewHomework(NewHomeworkEvent event) {
+		refreshList();
+	}
 	
 	private void initList() {
-		termsList = new CellList<HomeworkProxy> (hc);
+		termsList = new CellList<HomeworkProxy> (new HomeworkCell()	);
 		ValueUpdater<HomeworkProxy> updater = new ValueUpdater<HomeworkProxy>() {
 			public void update(HomeworkProxy value) {
 				clientFactory.getPlaceController().goTo(new CoursePlace(value.getCourse().toString(), "homeworks"));
@@ -72,6 +79,7 @@ public class CalendarView extends Composite
 	}
 	
 	private void refreshList() {
+		ids.clear();
 		clientFactory.getRequestFactory().goodleUserRequest().getLedCourseIds()
 		.using(clientFactory.getCurrentUser()).fire
 		(
@@ -80,18 +88,35 @@ public class CalendarView extends Composite
 				@Override
 				public void onSuccess(List<Long> response)
 				{
-					refresh(response);
+					ids.addAll(response);
+					getAttended();
 				}
 			}
 		);
 	}
 	
-	private void refresh(List<Long> l) {
-		clientFactory.getRequestFactory().courseRequest().findUserHomeworks(l).fire(
+	private void getAttended() {
+		clientFactory.getRequestFactory().goodleUserRequest().getAttendedCourseIds()
+		.using(clientFactory.getCurrentUser()).fire
+		(
+			new Receiver<List<Long>>()
+			{
+				@Override
+				public void onSuccess(List<Long> response)
+				{
+					ids.addAll(response);
+					refresh();
+				}
+			}
+		);
+	}
+	
+	private void refresh() {
+		clientFactory.getRequestFactory().courseRequest().findUserHomeworks(ids).fire(
 				new Receiver<List<HomeworkProxy>>() {
-			
 					@Override
 					public void onSuccess(List<HomeworkProxy> h) {
+
 						class HomeworkComparator implements Comparator<HomeworkProxy> {
 					          public int compare(HomeworkProxy h1, HomeworkProxy h2) {
 					        	  Date d1 = h1.getDeadline();
@@ -107,6 +132,7 @@ public class CalendarView extends Composite
 					        }
 					}
 						Collections.sort(h, new HomeworkComparator());
+						termsList.setRowCount(h.size(), true);
 						termsList.setRowData(h);
 					}
 				}

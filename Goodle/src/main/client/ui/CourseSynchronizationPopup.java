@@ -33,13 +33,13 @@ public class CourseSynchronizationPopup extends AbstractCoursePopup {
 
 	@UiField TextBox searchBox;
 	@UiField Button searchButton;
-	//	@UiField Button okButton;
 	@UiField Button cancelButton;
 
 
 
 	public CourseSynchronizationPopup() {
 
+		
 		cellList = new CellList<ShortUSOSCourseDescProxy>(new ShortCourseCell());
 
 		ValueUpdater<ShortUSOSCourseDescProxy> updater = new ValueUpdater<ShortUSOSCourseDescProxy>()
@@ -64,6 +64,7 @@ public class CourseSynchronizationPopup extends AbstractCoursePopup {
 		};
 		cellList.setValueUpdater(updater);
 		setWidget(uiBinder.createAndBindUi(this));
+		searchBox.getElement().setAttribute("placeHolder", "Szukaj kursu");
 	}
 
 	@UiHandler("cancelButton")
@@ -87,11 +88,6 @@ public class CourseSynchronizationPopup extends AbstractCoursePopup {
 						cellList.setRowData(response);
 					}
 				});
-	}
-	@UiHandler("searchBox")
-	public void onSearchBoxFocus(FocusEvent focus){
-		if (searchBox.getText().equals("Szukaj kursu"))
-			searchBox.setText("");
 	}
 
 }

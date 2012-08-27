@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import main.shared.proxy.Converter;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.LongUSOSCourseDescProxy;
@@ -59,7 +60,9 @@ public class SynchronizationConfirmationPopup extends AbstractCoursePopup {
 		{
 			CourseRequest request = cf.getRequestFactory().courseRequest();
 			course = request.edit(course);
-			request.changeCourseInfo(usosCourse.getDesc(), usosCourse.getBibliography()).using(course).fire
+			course.setDescription(Converter.getList(usosCourse.getDesc()));
+			course.setBibliography(Converter.getList(usosCourse.getBibliography()));
+			request.update().using(course).fire
 			(
 				new Receiver<CourseProxy>()
 				{
@@ -69,11 +72,10 @@ public class SynchronizationConfirmationPopup extends AbstractCoursePopup {
 						if (parent != null) {
 							course = response;
 							parent.setCourse(response);
-							cf.getCourseInfoView().setCourse(response);
 						}
 						
 						cf.getCourseSynchronizationPopup().hide();
-						hide();						
+						hide();	
 					}
 				}
 			);

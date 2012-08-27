@@ -82,12 +82,16 @@ public class Course implements Serializable
     public void setTerm(String term) { this.term = term; }
     
     @NotNull
-    private Text description = new Text("");
-    public String getDescription() { return description.getValue(); }
+    @Basic
+    private List<String> description = new ArrayList<String>();
+    public List<String> getDescription() { return description; }
+    public void setDescription(List<String> description){ this.description = description;}
     
     @NotNull
-    private Text bibliography = new Text("");
-    public String getBibliography() { return bibliography.getValue(); }
+    @Basic
+    private List<String> bibliography = new ArrayList<String>();
+    public List<String> getBibliography() { return bibliography; }
+    public void setBibliography(List<String> bibliography){ this.bibliography = bibliography;}
     
     @NotNull 
     private JoinMethod joinMethod;
@@ -262,21 +266,21 @@ public class Course implements Serializable
         finally { em.close(); }
     }
     
-    public Course changeCourseInfo(String description, String bibliography)
-    {
-    	EntityManager em = entityManager();
-    	try
-    	{
-            Course c = em.find(Course.class, this.id);
-            if (bibliography != null)
-            	c.bibliography = new Text(bibliography);
-            if (description != null) 
-            	c.description = new Text(description);
-    		em.merge(c);
-            return c;
-    	}
-    	finally { em.close(); }
-    }
+//    public Course changeCourseInfo(String description, String bibliography)
+//    {
+//    	EntityManager em = entityManager();
+//    	try
+//    	{
+//            Course c = em.find(Course.class, this.id);
+//            if (bibliography != null)
+//            	c.bibliography = new Text(bibliography);
+//            if (description != null) 
+//            	c.description = new Text(description);
+//    		em.merge(c);
+//            return c;
+//    	}
+//    	finally { em.close(); }
+//    }
     
     public Course update()
     {

@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import main.shared.proxy.Converter;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 
@@ -26,34 +27,8 @@ public class CourseInfoView extends AbstractCourseView
 	{
 		description.setEditable(isCurrUserOwner());
 		bibliography.setEditable(isCurrUserOwner());
-		
-		CourseRequest request = cf.getRequestFactory().courseRequest();
-		CourseProxy c1 = request.edit(course);
-		request.getDescription().using(c1).fire
-		(
-			new Receiver<String>()
-			{
-				@Override
-				public void onSuccess(String response) 
-				{
-					description.setValue(response);
-				}
-			}
-		);
-		
-		CourseRequest otherRequest = cf.getRequestFactory().courseRequest();
-		CourseProxy c2 = otherRequest.edit(course);
-		otherRequest.getBibliography().using(c2).fire
-		(
-			new Receiver<String>()
-			{
-				@Override
-				public void onSuccess(String response) 
-				{
-					bibliography.setValue(response);
-				}
-			}
-		);
+		description.setValue(Converter.getString(course.getDescription()));
+		bibliography.setValue(Converter.getString(course.getBibliography()));
 	}
 	
 	public CourseInfoView()
@@ -61,15 +36,10 @@ public class CourseInfoView extends AbstractCourseView
 		initWidget(uiBinder.createAndBindUi(this));
 	}	
 	
-	@UiHandler("description")
-	public void onDescriptionChange(ValueChangeEvent<String> event) 
+	private void updateCourse(CourseRequest request)
 	{
-		if (course == null || !isCurrUserOwner()) return;
-		
-		CourseRequest request = cf.getRequestFactory().courseRequest();
-		course = request.edit(course);
 		parent.changeCourse();
-		request.changeCourseInfo(event.getValue(), null).using(course).fire
+		request.update().using(course).fire
 		(
 			new Receiver<CourseProxy>()
 			{
@@ -80,6 +50,18 @@ public class CourseInfoView extends AbstractCourseView
 				}
 			}
 		);
+	}
+	
+	
+	@UiHandler("description")
+	public void onDescriptionChange(ValueChangeEvent<String> event) 
+	{
+		if (course == null || !isCurrUserOwner()) return;
+		
+		CourseRequest request = cf.getRequestFactory().courseRequest();
+		course = request.edit(course);
+		course.setDescription(Converter.getList(event.getValue()));
+		updateCourse(request);
 	}
 	
 	@UiHandler("bibliography")
@@ -89,17 +71,7 @@ public class CourseInfoView extends AbstractCourseView
 		
 		CourseRequest request = cf.getRequestFactory().courseRequest();
 		course = request.edit(course);
-		parent.changeCourse();
-		request.changeCourseInfo(null, event.getValue()).using(course).fire
-		(
-			new Receiver<CourseProxy>()
-			{
-				@Override
-				public void onSuccess(CourseProxy response) 
-				{
-					if (parent != null) parent.setCourse(response);
-				}
-			}
-		);
+		course.setBibliography(Converter.getList(event.getValue()));
+		updateCourse(request);
     }
 }

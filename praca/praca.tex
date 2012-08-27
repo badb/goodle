@@ -161,12 +161,14 @@ W rozdziale \emph{ } objaśniono przyczyny rozpoczęcia projektu i
 uzasadniono wybrany scenariusz biznesowy. Opisano najpierw jakie braki i wady 
 istniejącego rozwiązania - platformy Moodle - stały się motywacją pracy. 
 Następnie wskazano jakie funkcje powinien zapewniać alternatywny, idealny
-system. Dalej streszczono rozważane opcje biznesowe i zaprezentowano argumenty,
-które zadecydowały o stworzeniu nowej aplikacji. Na koniec przedstawiono krótką
-charakterystykę potencjalnych użytkowników.
+system. Na koniec przedstawiono krótką charakterystykę potencjalnych użytkowników.
 
 %  TODO Uzupełnić po napisaniu rozdziału
-Rozdział \emph{Możliwości systemu} omawia dokładnie funkcjonalność produktu.
+Rozdział \emph{Możliwości systemu} omawia dokładnie funkcjonalność produktu. 
+Prześledzono opcję utworzenia i zarządzania kursem, w tym zsynchronizowanie 
+go z ewentualnym odpowiednikiem w USOS. Następnie omówiono metody rejestracji
+na kurs i zarządzanie uczestnikami. Na koniec przedstawiono możliwości 
+związane z publikowaniem materiałów i zadawaniem prac domowych.
 
 %  TODO Uzupełnić po napisaniu rozdziału
 W kolejnym rozdziale omówiono \emph{możliwe scenariusze użycia}. 
@@ -403,6 +405,184 @@ zarejestrowani.
 %
 \chapter{Możliwe scenariusze użycia}
 
+Rozdział prezentuje najważniejsze przypadki użycia systemu Goodle. 
+
+\section{Opis aktorów}
+
+Głównymi odbiorcami platformy Goodle są studenci - uczestnicy kursów - i 
+prowadzący je pracownicy. Pracownicy dbają o założenie kursu w serwisie i 
+wzbogacenie go materiałami dotyczącymi zajęć, których widoczność określają. 
+Mają prawo usuwać uczestników. Sprawdzają i oceniają pracy domowe przesłane 
+przez studentów. Studenci rejestrują się na zajęcia. Korzystają z materiałów 
+zamieszczonych przez prowadzących, wysyłają rozwiązania zadań domowych.
+
+\section {Przypadki użycia dla wszystkich użytkowników}
+
+\subsection{Logowanie do systemu}
+
+\subsubsection{Ścieżka główna}
+
+\begin{enumerate}
+   \item Użytkownik wchodzi na stronę serwisu.
+   \item Serwis przenosi użytkownika na stronę logowania Google.
+   \item Wchodzący podaje swój login oraz hasło konta Google.
+   \item System stwierdza poprawność danych.
+   \iem Użytkownik zostaje zalogowany do serwisu.
+\end{enumerate}
+
+\subsubsection{Ścieżka alternatywna: podane dane są niepoprawne}
+
+\begin{enumerate}
+   \item System odrzuca podane dane.
+   \item Powrót do 2
+\end{enumerate}
+
+\subsubsection{Ścieżka alternatywna: konto nie jest powiązane z USOS}
+
+\begin{enumerate}
+   \item System prosi o umożliwienie aplikacji dostępu do danych z USOSa.
+   \item Użytkownik podaje login i hasło do USOSa.
+   \item System sprawdza poprawność danych i loguje użytkownika.
+\end{enumerate}
+
+\subsection{Wylogowanie z systemu}
+
+Użytkownik zalogował się do serwisu
+
+\begin{enumerate}
+   \item Aktor prosi serwis o wylogowanie.
+   \item Serwis wylogowuje użytkownika.
+\end{enumerate}
+
+\subsection{Wyszukanie kursu}
+
+Użytkownik zalogował się do serwisu.
+
+\subsubsection{Ścieżka główna}
+
+\begin{enumerate}
+   \item Użytkownik podaje wyrazy kluczowe dla kursu, który chciałby odnaleźć.
+   \item System wyświetla wyniki wyszukiwania.
+   \item Użytkownik wybiera jeden z nich i zostaje przeniesiony na stronę 
+      z materiałami danych zajęć.
+\end{enumerate}
+
+\subsubsection{Ścieżka alternatywna}
+
+\begin{enumerate}
+   \item System informuje, że żaden kurs pasujący do podanych słów kluczowych 
+      nie został znaleziony.
+   \item Powrót do 1.
+\end{enumerate}
+
+\section{Przypadki użycia studenta}
+
+W każdym z opisanych niżej przypadków użycia użytkownik jest zalogowany do
+systemu.
+
+\subsection{Rejestracja na zajęcia}
+
+\begin{enumerate}
+   \item Użytkownik znajduje kurs, na który chciałby się zapisać.
+   \item Wchodzi na stronę kursu i wybiera opcję zarejestruj. Może wcześniej
+      przeczytać informacje o zajęciach na odpowiedniej podstronie.
+   \item Jeżeli kurs jest zabezpieczony hasłem, aktor podaje je.
+   \item System wykonuje żądaną operację i informuje o jej pomyślnym zakończeniu
+      lub odrzuceniu żądania.
+\end{enumerate} 
+
+\subsection{Oglądanie materiałów}
+
+W opisanym scenariuszu zakłada się, że użytkownik zarejestrował się na zajęcia.
+
+\begin{enumerate}
+   \item Użytkownik wchodzi na stronę kursu.
+   \item System wyświetla stronę z materiałami.
+   \item Uczestnik zajęć przegląda interesujące go informacje,
+      ewentualnie ładuje pliki dodane przez prowadzącego
+      w załącznikach.
+      
+\end{enumerate} 
+
+\subsection{Wysłanie rozwiązania zadania domowego}
+
+W opisanym scenariuszu zakłada się, że użytkownik zarejestrował się na zajęcia.
+
+\subsubsection{Ścieżka główna}
+
+\begin{enumerate}
+   \item Wybiera z listy prac domowych tę, której rozwiązanie chciałby przesłać.
+   \item Wskazuje na dysku plik z pracą domową.
+   \item System ładuje wybrany plik.
+   \item Użytkownik potwierdza chęć zamieszczenia go.
+   \item Serwis wysyła załadowane rozwiązanie i informuje studenta o pomyślnym 
+      zakończeniu operacji.
+\end{enumerate}
+
+\section{Przypadki użycia pracownika}
+
+W każdym z opisanych niżej przypadków użycia użytkownik jest zalogowany do
+systemu.
+
+\subsection{Założenie nowego kursu}
+
+\begin{enumerate}
+   \item Użytkownik wybiera opcję stwórz kurs.
+   \item System wykonuje żądaną operację i przenosi prowadzącego na stronę
+      nowoutworzonych zajęć.
+\end{enumerate}
+
+W kolejnych scenariuszach zakłada się, że aktor jest na stronie 
+prowadzonych zajęć.
+
+\subsection{Synchronizacja kursu z USOS}
+
+\begin{enumerate}
+   \item Pracownik prosi system o integrację kursu z USOS.
+   \item Podaje nazwę odpowiednika zajęć z USOS i wybiera odpowiedni
+      kurs z propozycji pokazanych przez system.
+   \item Aplikacja ostrzega użytkownika o danych, które zostaną nadpisane.
+   \item Aktor potwierdza decyzję.
+   \item Serwis importuje dane zajęć z USOS i informuje prowadzącego
+      o pomyślnym zakończeniu operacji.
+\end{enumerate}
+
+\subsection{Usunięcie uczestników zajęć}
+
+\begin{enumerate}
+   \item Prowadzący wchodzi na podstronę Uczestnicy.
+   \item Zaznacza na liście uczestników tych, których chciałby usunąć.
+      Potwierdza swoją decyzję.
+   \item System wykonuje żądaną operację i informuje o pomyślnym zakończeniu.
+\end{enumerate}
+
+\subsection{Edycja materiałów}
+
+\begin{enumerate}
+   \item Prowadzący wchodzi na podstronę Materiały i wybiera opcję 
+      edycji.
+   \item Dodaje nowe materiały, nadaje im tytuły, dodaje treść. Wzbogaca
+      ewentualnie wybrane zasoby o pliki załadowane z dysku.
+   \item Usuwa zbędne materiały.
+   \item Odkrywa te materiały, które studenci powinni obejrzeć.
+   \item Po wykonaniu wszystkich operacji zatwierdza swoje decyzje.
+   \item System zapisuje zmiany i informuje użytkownika o pomyślnym zakończeniu
+      operacji.
+\end{enumerate} 
+
+\subsection{Sprawdzenie i ocena pracy domowej studenta}
+
+\begin{enumerate}
+   \item Aktor wchodzi na podstronę Zadania i przewija widok do interesującego
+      go zadania.
+   \item Rozwija listę przesłanych rozwiązań.
+   \item Jeżeli jakakolwiek praca znajduje się w systemie, użytkownik wskazuje 
+      jedną z nich.
+   \item System wyświetla wybrane rozwiązanie.
+   \item Po sprawdzeniu zadania pracownik ocenia je i prosi platformę o 
+      zatwierdzenie.
+   \item Portal zapisuje ocenę i informuje o pomyślnym zakończeniu operacji.
+\end{enumerate}
 
 %
 %  Użyte narzędzia, biblioteki, technologie. Poszczególne rozwiązania powinny 

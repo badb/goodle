@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -46,10 +47,11 @@ public class CalendarView extends Composite implements NewHomeworkEventHandler
 	 
 	private ClientFactory clientFactory;
 	private Logger logger = Logger.getLogger("Goodle.Log");
-	
+	List <Long> ids;
 	
 	public CalendarView()
 	{
+		ids = new ArrayList<Long>();
 		initList();
 		initWidget(uiBinder.createAndBindUi(this));
 		calendarPanel.setCellHeight(termsLabel, "20px");
@@ -77,6 +79,7 @@ public class CalendarView extends Composite implements NewHomeworkEventHandler
 	}
 	
 	private void refreshList() {
+		ids.clear();
 		clientFactory.getRequestFactory().goodleUserRequest().getLedCourseIds()
 		.using(clientFactory.getCurrentUser()).fire
 		(
@@ -85,14 +88,31 @@ public class CalendarView extends Composite implements NewHomeworkEventHandler
 				@Override
 				public void onSuccess(List<Long> response)
 				{
-					refresh(response);
+					ids.addAll(response);
+					getAttended();
 				}
 			}
 		);
 	}
 	
-	private void refresh(List<Long> l) {
-		clientFactory.getRequestFactory().courseRequest().findUserHomeworks(l).fire(
+	private void getAttended() {
+		clientFactory.getRequestFactory().goodleUserRequest().getAttendedCourseIds()
+		.using(clientFactory.getCurrentUser()).fire
+		(
+			new Receiver<List<Long>>()
+			{
+				@Override
+				public void onSuccess(List<Long> response)
+				{
+					ids.addAll(response);
+					refresh();
+				}
+			}
+		);
+	}
+	
+	private void refresh() {
+		clientFactory.getRequestFactory().courseRequest().findUserHomeworks(ids).fire(
 				new Receiver<List<HomeworkProxy>>() {
 					@Override
 					public void onSuccess(List<HomeworkProxy> h) {

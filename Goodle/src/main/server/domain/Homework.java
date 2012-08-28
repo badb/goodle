@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -27,6 +28,7 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 @SuppressWarnings("serial")
 @Entity
+@DiscriminatorValue("HOMEWORK")
 public class Homework extends Module
 {
 	/*@Id
@@ -97,7 +99,7 @@ public class Homework extends Module
         EntityManager em = entityManager();
         try 
         {
-        	Homework attached = em.find(Homework.class, this.id);
+        	Homework attached = em.find(Homework.class, getId());
         	em.remove(attached); 
         }
         finally { em.close(); }

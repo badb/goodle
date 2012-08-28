@@ -1,5 +1,6 @@
 package main.client.ui;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -9,15 +10,18 @@ import main.client.ClientFactory;
 import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
+import main.shared.proxy.ModuleProxy;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.attributeparsers.CssNameConverter.Failure;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 
 public class HomeworkView extends AbstractCourseView implements FileContainerInterface
@@ -34,14 +38,16 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	@UiField FileUploadView upload;
 	
 	private List <UploadedFileProxy> files;
+	//private CourseHomeworksView parent;
+//	public void setParent(CourseHomeworksView parent) {this.parent = parent;}
 
-	private CourseRequest request;
-	public void setRequest(CourseRequest request) { this.request = request; }
+	//private CourseRequest request;
+	//public void setRequest(CourseRequest request) { this.request = request; }
 	
 	private HomeworkProxy homework;
 	
-	private ClientFactory clientFactory;
-	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory; 
+	//private ClientFactory clientFactory;
+	public void setClientFactory(ClientFactory clientFactory) { cf = clientFactory; 
 		upload.setClientFactory(clientFactory);}
 
 	private Logger logger = Logger.getLogger("Goodle.Log");
@@ -53,9 +59,12 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	
 	private void updateCourse(CourseRequest request)
 	{
-		parent.changeCourse();
 		
-		/*request.update().using(course).fire
+		List<HomeworkProxy> updated = new ArrayList<HomeworkProxy>();
+		updated.add(homework);
+
+		course = request.edit(course);
+		request.updateHomeworks(updated).using(course).with("materials").fire
 		(
 			new Receiver<CourseProxy>()
 			{
@@ -63,9 +72,11 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 				public void onSuccess(CourseProxy response) 
 				{
 					if (parent != null) parent.setCourse(response);
-				}
+					course = response;
+				}				
 			}
-		);*/
+		);
+	
 	}
 	
 	public void setHomework(HomeworkProxy homework) 
@@ -89,10 +100,14 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 
 	@Override
 	public void addFile(String url, String title) {
-		if (request == null) {
+		/*if (request == null) {
 			logger.log(Level.SEVERE, "HomeworkView: CourseRequest is NULL");
 			return;
-		}
+		}*/
+
+		CourseRequest request = cf.getRequestFactory().courseRequest();
+		homework = request.edit(homework);
+		
 		logger.log(Level.SEVERE, "Going to create proxy you sheepfaka.");
 		UploadedFileProxy file = request.create(UploadedFileProxy.class);
 		logger.log(Level.SEVERE, "Created proxy you madafaka.");
@@ -103,12 +118,17 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		file.setName(title);
 		file.setUrl(url);
 		file.setModule(homework);
+		
 		if (files == null) {
 			logger.log(Level.SEVERE, "HomeworkView: files is NULL");
 			return;
 		}
 		files.add(file);
-		//updateCourse(request);
+
+		homework.setMaterials(files);
+		
+		updateCourse(request);
+		
 		addFileView(file);
 	}
 
@@ -124,7 +144,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		filesTable.insertRow(rows);
 		filesTable.insertCell(rows, 0);
 		FileEditView view = new FileEditView();
-		view.setClientFactory(clientFactory);
+		view.setClientFactory(cf);
 		view.setUploadedFile(file);
 		view.setParent(this);
 		filesTable.setWidget(rows, 0, view);
@@ -144,7 +164,15 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		if (index == -1) {
 			return;
 		}
+
 		filesTable.removeRow(index);
 		files.remove(index);
+		
+		CourseRequest request = cf.getRequestFactory().courseRequest();
+		course = request.edit(course);
+		
+		homework = request.edit(homework);
+		homework.setMaterials(files);
+		updateCourse(request);
 	}
 }

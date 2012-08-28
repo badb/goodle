@@ -1,10 +1,14 @@
 package main.client.ui;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.client.place.CoursePlace;
+import main.shared.proxy.CourseProxy;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
+import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -16,6 +20,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class CourseHomeworksView  extends AbstractCourseView
 {
@@ -27,7 +32,9 @@ public class CourseHomeworksView  extends AbstractCourseView
 	@UiField Button edit;
 	@UiField FlexTable homeworks;
 	
+	
 	private CourseRequest request;
+	private List<HomeworkProxy> homeworksProxy;
 	
 	public static String notRegistered = "Musisz być zarejestrowany na kurs, aby obejrzeć zawartość.";
 	
@@ -67,13 +74,16 @@ public class CourseHomeworksView  extends AbstractCourseView
 				@Override
 				public void onSuccess(List<HomeworkProxy> result)
 				{
+					homeworksProxy = result;
 					for (HomeworkProxy h : result) 
 					{
 						HomeworkView view = new HomeworkView();
 						view.setClientFactory(cf);
-						view.setRequest(request);
+						//view.setRequest(request);
 						view.setHomework(h);
-
+						view.setCourse(course);
+						view.setParent(parent);
+						
 						int rows = homeworks.getRowCount();
 						homeworks.insertRow(rows);
 						homeworks.insertCell(rows, 0);
@@ -94,7 +104,4 @@ public class CourseHomeworksView  extends AbstractCourseView
 		}
 	}
 	
-	/*public void changeCourse() {
-		
-	}*/
 }

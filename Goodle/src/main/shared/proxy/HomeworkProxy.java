@@ -12,18 +12,6 @@ import com.google.web.bindery.requestfactory.shared.ProxyFor;
 public interface HomeworkProxy extends ModuleProxy
 {
 	
-	Long getId();
-	String getTitle();
-	Long getAuthor();
-	String getText();
-	boolean getIsVisible();
-	//List<UploadedFileProxy> getFiles();
-	
-	void setTitle(String title);
-	void setAuthor(Long author);
-	void setText(String text);
-	void setIsVisible(boolean isVisible);
-	//void setFiles(List<UploadedFileProxy> files);
 	
 	Date getDeadline();
 	Long getCourse();

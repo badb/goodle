@@ -22,10 +22,14 @@ public interface CourseProxy extends EntityProxy
 	Set<Long> getCoordinators();
 	Set<Long> getMembers();
 	List<MessageProxy> getMessages();
+	List<String> getDescription();
+	List<String> getBibliography();
 	
 	void setName(String name);
 	void setTerm(String term);
 	void setJoinMethod(JoinMethod joinMethod);
 	void setKey(String key);
 	void setCalendar(String link);
+	void setDescription(List<String> description);
+	void setBibliography(List<String> bibliography);
 }

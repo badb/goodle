@@ -18,9 +18,9 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, Long> persist();
 	InstanceRequest<CourseProxy, CourseProxy> update();
 	InstanceRequest<CourseProxy, Void> remove();
-	InstanceRequest<CourseProxy, CourseProxy> changeCourseInfo(String description, String bibliography);
-	InstanceRequest<CourseProxy, String> getDescription();
-	InstanceRequest<CourseProxy, String> getBibliography();
+	//InstanceRequest<CourseProxy, CourseProxy> changeCourseInfo(String description, String bibliography);
+	//InstanceRequest<CourseProxy, List<String> > getDescription();
+	//InstanceRequest<CourseProxy, ListString> getBibliography();
 	
 	Request<CourseProxy> findCourse(Long id);
 	Request<List<CourseProxy>> findCoursesByName(String name);

@@ -11,7 +11,7 @@
 % Poprawki spowodowane zmianami przepisow i ujednolicenie 
 % - Seweryn Kar³owicz, 05.05.2006
 % dodaj opcjê [licencjacka] dla pracy licencjackiej
-\documentclass{pracamgr}
+\documentclass[licencjacka]{pracamgr}
 
 \usepackage{polski}
 \usepackage{url}
@@ -55,7 +55,7 @@ Skrzypczak}
 % (podaæ tytu³/stopieñ imiê i nazwisko opiekuna
 % Instytut
 % ew. Wydzia³ ew. Uczelnia (je¿eli nie MIM UW))
-\opiekun{dr Jacek Sroka\\
+\opiekun{dra Jacka Sroki\\
   Instytut Informatyki\\
   }
 
@@ -109,10 +109,10 @@ projektu.
 
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
-Dokument opisuje, stworzon± w~ramach projektu licencjackiego, platformê 
+Dokument opisuje, stworzon± w~ramach projektu licencjackiego, platformê
 edukacyjn± Goodle. Nazwa stanowi kontaminacjê s³ów Google i~Moodle.
-Innowacyjne technologie i~narzêdzia Google'a wykorzystano do~stworzenia
-programu. Moodle, natomiast, to~u¿ywana obecnie przez~Uniwersytet Warszawski
+Innowacyjne technologie i~narzêdzia firmy Google wykorzystano do~stworzenia
+programu. Moodle natomiast to~u¿ywana obecnie przez~Uniwersytet Warszawski
 platforma-rywal, w~stosunku do~której Goodle stanowi alternatywê. Integracja
 z~systemem USOS zapewnia aplikacji wa¿n±, lecz nie jedyn±, przewagê.
 
@@ -187,10 +187,13 @@ W~kolejnym rozdziale omówiono \emph{mo¿liwe scenariusze u¿ycia}.
 Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}. 
 
 %  TODO Uzupe³niæ po napisaniu rozdzia³u
-\emph{Metodyka pracy} 
+W rozdziale \emph{Metodyka~pracy} opisane zosta³y praktyki i~narzêdzia, 
+z~których korzystali¶my podczas pracy nad produktem, jak równie¿ funkcje 
+cz³onków zespo³u oraz stworzone dokumenty.
 
 %  TODO Uzupe³niæ po napisaniu rozdzia³u
-\emph{Podsumowanie}
+W ostatnim rozdziale (\emph{Podsumowanie}) przedstawili¶my wnioski z pracy 
+nad projektem oraz perspektywy dalszego rozwoju aplikacji.
 
 %
 %  Przyczyny rozpoczêcia projektu i uzasadnienie wybranego scenariusza
@@ -198,6 +201,8 @@ Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}.
 %
 \chapter{Motywacja i cele} % TODO Uzupe³niæ nazwê rozdzia³u
 
+W tym rozdziale opisane zosta³y powody, dla których zdecydowali¶my siê 
+na stworzenie takiej aplikacji.
 %
 %  Dlaczego zdecydowano siê na rozpoczêcie projektu.
 %
@@ -221,7 +226,7 @@ pracowników
 wydzia³u. Dodatkowo platforma nie zapewnia prowadz±cemu zajêcia dostatecznej 
 elastyczno¶ci i ³atwo¶ci w udostêpnianiu i organizacji udostêpnianych
 materia³ów. 
-	
+
 Wynikiem wymienionych mankamentów jest niezadowolenie u¿ytkowników oraz 
 nieefektywne wykorzystanie potencja³u tkwi±cego w tego typu portalach. Celem 
 postawionym przed nowym systemem by³o rozwi±zanie ich, co uatrakcyjni³oby pracê 
@@ -332,12 +337,12 @@ Obecnie aplikacja Goodle oferuje u¿ytkownikom nastêpuj±ce funkcje:
 \section{Tworzenie i administracja kursem, synchronizacja z USOS}
 
 Ka¿dy u¿ytkownik Goodle ma mo¿liwo¶æ utworzenia zajêæ poprzez klikniêcie
-przycisku \linebreak``Stwórz~kurs" w~lewym panelu. Powstawowymi operacjami na 
+przycisku \linebreak \emph{Stwórz~kurs} w~lewym panelu. Powstawowymi operacjami na 
 utworzonym kursie s± zmiana jego nazwy oraz semestru i roku szkolnego, 
 w którym odbywaj± siê zajêcia. Kurs w Goodle, podobnie jak na Uniwersytecie
 Warszawskim mo¿e odbywaæ siê w semestrze zimowym, letnim lub byæ ca³oroczny.
 Domy¶lnie kurs zostaje przypisany do aktualnego semestru.
-Zak³adka "Informacje" umo¿liwia dodatkowo dodanie opisu kursu oraz zwi±zanej
+Zak³adka \emph{Informacje} umo¿liwia dodatkowo dodanie opisu kursu oraz zwi±zanej
 z nim bibliografii.
 
 Zda¿a siê czêsto, ¿e tworzony kurs posiada swój odpowiednik w USOS. W takim
@@ -364,7 +369,7 @@ rejestracji.
 
 Istniej± dwa poziomy zabezpieczenia kursu: otwarty i zabezpieczony has³em. 
 Na zajêcia u¿ytkownik Goodle mo¿e zarejestrowaæ siê, klikaj±c przycisk 
-"zarejestruj", znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
+\emph{zarejestruj}, znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
 spowoduje to natychmiastowe do³±czenie u¿ytkownika do listy uczêszczaj±cych.
 Je¿eli prowadz±cy zdefiniowa³ has³o, do ukoñczenia rejestracji konieczne bêdzie
 podanie go. Lista kursów, w których u¿ytkownik uczestniczy, podobnie
@@ -374,9 +379,9 @@ Domy¶lnie kurs nie jest chroniony has³em, ale prowadz±cy ma mo¿liwo¶æ zmiany
 polityki w dowolnym momencie. 
 
 Wszyscy zarejestrowani maj± mo¿liwo¶æ obejrzenia listy wspó³uczestników, 
-dostêpnej w zak³adce "Uczestnicy". Dodatkowo prowadz±cy mo¿e
+dostêpnej w zak³adce \emph{Uczestnicy}. Dodatkowo prowadz±cy mo¿e
 wyrejestrowaæ wybranych uczestników z kursu, zaznaczaj±c ich na wymienionej
-li¶cie, a nastêpnie klikaj±c "usuñ". 
+li¶cie, a nastêpnie klikaj±c \emph{usuñ}. 
 
 \section{Dodawanie i przegl±danie materia³ów}
 
@@ -384,35 +389,35 @@ Prowadz±cy kurs dysponuje mo¿liwo¶ci± umieszczania na stronie kursu
 materia³ów -- tekstu zawieraj±cego na przyk³ad streszczenie wyk³adu czy
 dodatkowe informacje przeznaczone dla bardziej zaanga¿owanych uczestników.
 Ka¿dy materia³ mo¿e byæ widoczny dla uczestników lub ukryty -- widoczny
-tylko dla prowadz±cego. Umo¿liwia do wcze¶niejsze przygotowanie informacji
+tylko dla prowadz±cego. Umo¿liwia to wcze¶niejsze przygotowanie informacji
 i udostêpnianie ich studentom w dogodnym momencie. Dodatkowo materia³y mog± 
 zostaæ wzbogacone za³adowanymi na serwer plikami, np.
-dokumentami pdf, obrazkami czy filmami.  
+dokumentami pdf, obrazkami, czy filmami.
 
 Materia³y modyfikowane s± w trybie edycji, do której prowadz±cy przechodzi
-klikaj±c "edytuj" w zak³adce "Materia³y". Od tego momentu ma mo¿liwo¶æ
+klikaj±c \emph{edytuj} w zak³adce \emph{Materia³y}. Od tego momentu ma mo¿liwo¶æ
 dodawania i usuwania materia³ów, zmieniania ich nazwy, tre¶ci, widoczono¶ci
 oraz ³adowania plików. Zmiany zostan± zapisane dopiero, kiedy prowadz±cy
-zatwierdzi je klikaj±c "zapisz", dlatego te¿ w ka¿dej chwili mo¿e 
-wycofaæ siê z wprowadzonych modyfikacji wybieraj±c "anuluj".
+zatwierdzi je klikaj±c \emph{zapisz}, dlatego te¿ w ka¿dej chwili mo¿e 
+wycofaæ siê z wprowadzonych modyfikacji wybieraj±c \emph{anuluj}.
 
 \section{Zadawanie i ocena prac domowych}
 
 Aby sprawdziæ umiejêtno¶ci uczestników i zachêciæ ich do regularnej pracy,
-prowadz±cy mo¿e dawaæ im zadania do wykonania w zak³adce "Zadania". 
+prowadz±cy mo¿e dawaæ im zadania do wykonania w zak³adce \emph{Zadania}. 
 W wielu aspektach prace domowe funkcjonuj± podobnie jak materia³y: 
-tre¶æ zadania mo¿e zostaæ wzbogacona dodatkowymi plikami, zadanie mo¿e byæ
-widoczne dla wszystkich lub tylko dla prowadz±cego oraz modyfikacji
+tre¶æ zadania mo¿e zostaæ wzbogacona dodatkowymi plikami, a zadanie mo¿e byæ
+widoczne dla wszystkich lub tylko dla prowadz±cego. Modyfikacji
 zadañ dokonuje siê w specjalnym trybie edycji, w którym prowadz±cy mo¿e
 w ka¿dym momencie wycofaæ siê z wprowadzonych zmian. Dodatkowo, prowadz±cy
 mo¿e ustawiæ termin, do którego nale¿y przysy³aæ rozwi±zanie problemu.
 
-Na specjalnej li¶cie prowadz±cy widzi kto z uczestników umie¶ci³ plik
+Na specjalnej li¶cie prowadz±cy widzi, kto z uczestników umie¶ci³ plik
 i czy zrobi³ to w terminie. Mo¿e przejrzeæ zamieszczone rozwi±zania 
-i oceniæ je. Uzyskany wynik studenci zobacz± obok zadania.
+i oceniæ je. Uzyskany wynik studenci zobacz± obok zadania. %tego jeszcze nie ma, nie?
 
 Ka¿de dodane, odkryte zadanie jest widoczne dla studentów nie tylko w zak³adce
-"Zadania", ale równie¿ w prawym panelu wraz z terminem nadsy³ania prac, 
+\emph{Zadania}, ale równie¿ w prawym panelu wraz z terminem nadsy³ania prac, 
 gdzie u¿ytkownicy widz± wszystkie prace domowe z kursów, na które s±
 zarejestrowani.
 
@@ -426,7 +431,7 @@ Rozdzia³ prezentuje najwa¿niejsze przypadki u¿ycia systemu Goodle.
 
 \section{Opis aktorów}
 
-G³ównymi odbiorcami platformy Goodle s± studenci -- uczestnicy kursów -- i 
+G³ównymi odbiorcami platformy Goodle s± studenci --- uczestnicy kursów --- i 
 prowadz±cy je pracownicy. Pracownicy dbaj± o za³o¿enie kursu w serwisie i 
 wzbogacenie go materia³ami dotycz±cymi zajêæ, których widoczno¶æ okre¶laj±. 
 Maj± prawo usuwaæ uczestników. Sprawdzaj± i oceniaj± pracy domowe przes³ane 
@@ -705,7 +710,7 @@ konfiguracyjnych mo¿na wygenerowaæ automatycznie.
 \chapter{Metodyka pracy}
 
 W tym rozdziale opisany zosta³ system pracy nad aplikacj±, 
-podzia³ obowi±zków w zespole, oraz dokumenty, które powsta³y w trakcie pracy.
+podzia³ obowi±zków w zespole oraz stworzone dokumenty.
 
 \section{Zespó³}
 Nad aplikacj± oraz dokumentami pracowali¶my w 4-osobowym zespole. 
@@ -718,7 +723,7 @@ jak i tworzeniem dokumentów.
 Do zadañ szefa projektu nale¿a³a koordynacja pracy pozosta³ych cz³onków zespo³u, 
 w~tym przydzielanie najpilniejszych zadañ i~nadzorowanie postêpów pracy. 
 By³ równie¿ odpowiedzialny za komunikacjê z klientem. 
-Jak pozostali cz³onkowie zespo³u zajmowa³ siê implementacj± aplikacji, 
+Podobnie jak pozostali cz³onkowie zespo³u zajmowa³ siê implementacj± aplikacji, 
 w~szczególno¶ci baz± danych.
 \item{Julia Herman-I¿ycka}\\
 Zajmowa³a siê g³ownie obs³ug± plików.
@@ -736,8 +741,14 @@ Do jego g³ównych zadañ nale¿a³o wykorzystanie USOSapi.
 \section{System pracy}
 Pracowali¶my w krótkich iteracjach, zwykle trwaj±cych tydzieñ, 
 chocia¿ d³ugo¶æ iteracji zale¿a³a od wielko¶ci zadania do wykonania. 
-Do podzia³u zadañ oraz monitorowania postêpu prac u¿ywali¶my witryny Trello 
-(\url{www.trello.com}). 
+Do podzia³u zadañ oraz monitorowania postêpu prac u¿ywali¶my witryny 
+\emph{Trello} (\url{http://www.trello.com}). Dokumentacja powstawa³a 
+przy u¿yciu \emph{Google Docs} (\url{http://docs.google.com}), 
+natomiast jako repozytorium u¿ywali¶my repozytorium \emph{git} 
+dostêpnego na stronach \emph{Google} (\url{http://code.google.com}). 
+Do zebrania informacji o projekcie oraz organizacji materia³ów i dokumentów 
+u¿yli¶my \emph{witryny Google}, któr± za³o¿yli¶my pod adresem 
+\url{https://sites.google.com/site/goodleproject/}.
 
 
 %
@@ -752,13 +763,18 @@ Kolejno by³y to:
 \item Wizja\\
 Dokument \textit{Wizja} powsta³ aby sprecyzowaæ za³o¿enia i cele projektu. 
 W wizji scharakteryzowali¶my potencjalnych u¿ytkowników systemu, opisali¶my 
-wymagania funkcjonalne i ograniczenia systemu. 
+wymagania funkcjonalne i ograniczenia. 
 \item Przypadki u¿ycia\\
 Dokument \textit{Przypadki u¿ycia} mia³ na celu dok³adny opis funkcjonalno¶ci
 systemu. Dziêki temu dokumentowi ustalili¶my przebieg wykonania konkretnych
 czynno¶ci podczas korzystania z aplikacji przez poszczególne grupy 
 u¿ytkowników.
-\item Dok³adny opis przypadku u¿ycia %czy o tym chcemy pisaæ?
+\item{Dok³adny opis przypadku u¿ycia\\}
+Dok³adny opis przypadku u¿ycia \emph{Za³o¿enie nowego kursu} opisuje 
+krok po kroku tworzenie nowego kursu w naszym systemie. Ten dokument 
+napisali¶my aby dok³adnie omówiæ scenariusze, które mog± wyst±piæ przy 
+realizacji tego przypadku u¿ycia. 
+
 \end{enumerate}
 
 %
@@ -768,10 +784,10 @@ u¿ytkowników.
 \chapter{Podsumowanie}
 
 Podczas pracy nad aplikacj± Goodle zdobyli¶my wiele umiejêtno¶ci niezbêdnych 
-w~przysz³ej pracy jako programista. Przede wszystkim nauczyli¶my siê pracy 
-w zespole programistycznym, rozwinêli¶my swoje umiejêtno¶ci podzia³u pracy
-oraz poznali¶my nowe technologie. Jak ka¿da aplikacja, projekt Goodle nie jest 
-zamkniêty i wymaga dalszej pracy nad jego polepszaniem.
+w~przysz³ej pracy jako programi¶ci. Przede wszystkim nauczyli¶my siê wspó³pracy 
+w zespole programistycznym, rozwinêli¶my swoje umiejêtno¶ci komunikacji 
+oraz podzia³u zadañ w grupie programistów. Poznali¶my równie¿ wiele nowych, 
+innowacyjnych technologii, przydatnych przy tworzeniu aplikacji webowych. 
 
 %
 %  Jak móg³by dalej rozwijaæ siê produkt. Czego nie uda³o siê napisaæ i 
@@ -779,10 +795,11 @@ zamkniêty i wymaga dalszej pracy nad jego polepszaniem.
 %  zdobytych dyplomów jako podk³adek pod gofry. 
 %
 \section{Mo¿liwe rozszerzenia}
-Obecne funkcjonalno¶ci Goodle pozwalaj± na wygodne korzystanie z systemu. 
-Jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji dziêki 
-zwiêkszeniu mo¿liwo¶ci USOSapi oraz informacji zwrotnej od u¿ytkowników systemu.
-W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
+Jak ka¿da aplikacja, projekt Goodle nie jest zamkniêty i wymaga dalszego 
+ulepszania. Obecne funkcjonalno¶ci Goodle pozwalaj± na wygodne korzystanie 
+z~systemu. Jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji 
+dziêki zwiêkszeniu mo¿liwo¶ci USOSapi oraz informacji zwrotnej od u¿ytkowników 
+systemu. W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
 \begin{itemize}
 \item Tworzenie kursu na podstawie poprzedniej edycji\\
 Kopiowanie zawarto¶ci istniej±cego kursu do nowo utworzonego usprawni³oby 
@@ -821,6 +838,8 @@ wygenerowan± wiadomo¶æ e-mail.
 \texttt{http://seleniumhq.org/}
 
 \end{thebibliography}
+
+%trzeba prawdopodobnie wymieniæ dokumenty jako za³±czniki
 
 \end{document}
 

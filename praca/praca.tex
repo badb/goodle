@@ -93,8 +93,8 @@ Google Web Toolkit, Google App Engine}
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-W ramach projektu stworzono zestaw narzêdzi usprawniaj±cych korzystaniez
-serwisów internetowych Uniwersytetu Warszawskiego. Tworzona aplikacja zapewni
+W ramach projektu stworzono zestaw narzêdzi usprawniaj±cych korzystanie
+z~serwisów internetowych Uniwersytetu Warszawskiego. Tworzona aplikacja zapewni
 integracjê technologii Google z danymi udostêpnianymi przez USOS. Grono
 potencjalnych odbiorców stanowi± studenci i pracownicy akademiccy. Wa¿nym
 elementem systemu bêdzie zbiór rozwi±zañ alternatywnych w stosunku do
@@ -184,7 +184,10 @@ zwi±zane z~publikowaniem materia³ów i~zadawaniem prac domowych.
 W~kolejnym rozdziale omówiono \emph{mo¿liwe scenariusze u¿ycia}. 
 
 %  TODO Uzupe³niæ po napisaniu rozdzia³u
-Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}. 
+Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}.
+Podana jest krótka charakterystyka Google Web Toolkit i Google App Engine,
+nastêpnie wymienione s± u¿ywane biblioteki. Na koniec wspomniane s± narzêdzia
+u³atwiaj±ce pracê.
 
 %  TODO Uzupe³niæ po napisaniu rozdzia³u
 W rozdziale \emph{Metodyka~pracy} opisane zosta³y praktyki i~narzêdzia, 
@@ -218,7 +221,7 @@ oferowanymi przez firmê narzêdziami. Dla wielu u¿ytkowników uci±¿liwy jest
 równie¿ 
 brak konsolidacji USOS z innymi portalami akademickimi np. platform± Moodle. 
 Tworzenie kursów, zarz±dzanie u¿ytkownikami czy umieszczanie wyników studentów
-musi siê zatem odbywaæ na kilku stronach w sposób niezale¿ny.
+musi siê zatem odbywaæ na~kilku stronach w sposób niezale¿ny.
 
 Do problemów Moodle nale¿y np. trudny w obs³udze, nieprzyjazny dla u¿ytkownika 
 interfejs. Spotyka siê on z nieustann± krytyk± ze strony studentów i
@@ -254,8 +257,8 @@ Drugi wa¿ny cel, jaki postawili sobie twórcy, stanowi³a integracja
 tworzonego portalu z systemem USOS. Kiedy rozpoczêto projekt, nie by³o
 mo¿liwe zalogowanie siê do Moodle przy pomocy uczelnianego Centralnego
 Systemu Uwierzytelniania. Opcjê tê dodano pó¼niej. Dodatkowo tworzone na
-platformie e-learningowej kursy by³y zwykle odpowiednikami tych z USOS. Mimo
-to, nie istnia³a mo¿liwo¶æ transferu infromacji np. danych kursu, listy
+platformie e-learningowej kursy by³y zwykle odpowiednikami tych z~USOS. Mimo
+to, nie istnia³a mo¿liwo¶æ transferu informacji np. danych kursu, listy
 u¿ytkowników czy wystawionych ocen. W Goodle postanowiono zapewniæ tak± 
 komunikacjê. Niestety te zamierzenia uda³o siê zrealizowaæ tylko
 czê¶ciowo, z uwagi za ograniczenia dostêpnego USOS API.   
@@ -302,7 +305,7 @@ bezpieczeñstwo.
          \item[Opis] Studenci zapisani na kursy prowadzone przy u¿yciu
 platformy.
          \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy: 
-            wygodny dostêp do materia³ów, mo¿liwo¶æ przes³ania prac domowych 
+            wygodny dostêp do~materia³ów, mo¿liwo¶æ przes³ania prac domowych 
             prowadz±cemu, wgl±d w wyniki kursu; przejrzysta szata graficzna, 
             integracja z serwisami USOS. 
       \end{description}  
@@ -334,10 +337,11 @@ platformy.
 
 Obecnie aplikacja Goodle oferuje u¿ytkownikom nastêpuj±ce funkcje:
 
-\section{Tworzenie i administracja kursem, synchronizacja z USOS}
+\section{Tworzenie kursu i administracja, synchronizacja z USOS}
 
 Ka¿dy u¿ytkownik Goodle ma mo¿liwo¶æ utworzenia zajêæ poprzez klikniêcie
-przycisku \linebreak \emph{Stwórz~kurs} w~lewym panelu. Powstawowymi operacjami na 
+przycisku \linebreak \emph{Stwórz~kurs} w~lewym panelu. Podstawowymi operacjami
+na 
 utworzonym kursie s± zmiana jego nazwy oraz semestru i roku szkolnego, 
 w którym odbywaj± siê zajêcia. Kurs w Goodle, podobnie jak na Uniwersytecie
 Warszawskim mo¿e odbywaæ siê w semestrze zimowym, letnim lub byæ ca³oroczny.
@@ -345,7 +349,7 @@ Domy¶lnie kurs zostaje przypisany do aktualnego semestru.
 Zak³adka \emph{Informacje} umo¿liwia dodatkowo dodanie opisu kursu oraz zwi±zanej
 z nim bibliografii.
 
-Zda¿a siê czêsto, ¿e tworzony kurs posiada swój odpowiednik w USOS. W takim
+Zdarza siê czêsto, ¿e tworzony kurs posiada swój odpowiednik w USOS. W takim
 przypadku, zamiast wpisywaæ dane rêcznie, prowadz±cy ma mo¿liwo¶æ pobrania
 ich z systemu.
 
@@ -357,7 +361,7 @@ podpowiadaj±c pasuj±ce nazwy.
 
 Na li¶cie wyników wyszukiwania podana jest nie tylko nazwa kursu, 
 ale równie¿ jego semestr i rok szkolny, co pozwala ³atwo odró¿niæ zajêcia z 
-danego przedmiotu prowadzone w kolejnych latach.  
+danego przedmiotu prowadzone w~kolejnych latach.  
 
 \section{Rejestracja na kurs i zarz±dzanie u¿ytkownikami}
 
@@ -379,15 +383,15 @@ Domy¶lnie kurs nie jest chroniony has³em, ale prowadz±cy ma mo¿liwo¶æ zmiany
 polityki w dowolnym momencie. 
 
 Wszyscy zarejestrowani maj± mo¿liwo¶æ obejrzenia listy wspó³uczestników, 
-dostêpnej w zak³adce \emph{Uczestnicy}. Dodatkowo prowadz±cy mo¿e
-wyrejestrowaæ wybranych uczestników z kursu, zaznaczaj±c ich na wymienionej
+dostêpnej w~zak³adce \emph{Uczestnicy}. Dodatkowo prowadz±cy mo¿e
+wyrejestrowaæ wybranych uczestników z~kursu, zaznaczaj±c ich na wymienionej
 li¶cie, a nastêpnie klikaj±c \emph{usuñ}. 
 
 \section{Dodawanie i przegl±danie materia³ów}
 
 Prowadz±cy kurs dysponuje mo¿liwo¶ci± umieszczania na stronie kursu 
 materia³ów -- tekstu zawieraj±cego na przyk³ad streszczenie wyk³adu czy
-dodatkowe informacje przeznaczone dla bardziej zaanga¿owanych uczestników.
+dodatkowych informacji przeznaczonych dla~bardziej zaanga¿owanych uczestników.
 Ka¿dy materia³ mo¿e byæ widoczny dla uczestników lub ukryty -- widoczny
 tylko dla prowadz±cego. Umo¿liwia to wcze¶niejsze przygotowanie informacji
 i udostêpnianie ich studentom w dogodnym momencie. Dodatkowo materia³y mog± 
@@ -396,12 +400,12 @@ dokumentami pdf, obrazkami, czy filmami.
 
 Materia³y modyfikowane s± w trybie edycji, do której prowadz±cy przechodzi
 klikaj±c \emph{edytuj} w zak³adce \emph{Materia³y}. Od tego momentu ma mo¿liwo¶æ
-dodawania i usuwania materia³ów, zmieniania ich nazwy, tre¶ci, widoczono¶ci
+dodawania i usuwania materia³ów, zmieniania ich nazwy, tre¶ci, widoczno¶ci
 oraz ³adowania plików. Zmiany zostan± zapisane dopiero, kiedy prowadz±cy
 zatwierdzi je klikaj±c \emph{zapisz}, dlatego te¿ w ka¿dej chwili mo¿e 
 wycofaæ siê z wprowadzonych modyfikacji wybieraj±c \emph{anuluj}.
 
-\section{Zadawanie i ocena prac domowych}
+\section{Zadawanie i ocenianie prac domowych}
 
 Aby sprawdziæ umiejêtno¶ci uczestników i zachêciæ ich do regularnej pracy,
 prowadz±cy mo¿e dawaæ im zadania do wykonania w zak³adce \emph{Zadania}. 
@@ -617,7 +621,7 @@ Google Web Toolkit to zestaw narzêdzi programistycznych, pozwalaj±cych
 tworzyæ AJAXowe aplikacje sieciowe w~Javie.
 Strona klienta kompiluje siê do zopytmalizowanego JavaScriptu. 
 
-Google Web Toolkit jest przeznaczony do~tworzenia aplikacji z~jednostronowych.
+Google Web Toolkit jest przeznaczony do~tworzenia aplikacji jednostronowych.
 Platformy edukacyjne s± tradycyjnie aplikacjami wielostronowymi. Stawia³o to
 dodatkowe wyzwania i~utrudnienia w~czasie tworzenia Goodle.
 
@@ -634,7 +638,8 @@ aplikacja \linebreak sieciowych\cite{pop}.
 \subsection{AJAX}
 AJAX (\textit{Asynchronous JavaScript and XML}) to technologia tworzenia
 aplikacji sieciowych, w którym komunikacja miêdzy klientem a serwerem mo¿e
-zachodzi w sposób asynchroniczny i nie wymaga ponownego ³adowania ca³ej strony. 
+zachodziæ w sposób asynchroniczny i nie wymaga ponownego ³adowania ca³ej
+strony. 
 
 \section{Google App Engine}
 Google App Engine jest platform± do tworzenia i hostowania aplikacji. Dostarcza
@@ -643,40 +648,42 @@ obci±¿enia strony. Zapewnia skalowalno¶æ, bezpieczeñstwo i wydajno¶æ w tym
 zakresie. 
 
 Posiada ustalone dzienne limity zasobów, takich jak liczba
-odwiedzin,rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
+odwiedzin, rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
 aplikacja jest zatrzymywana do koñca dnia. Limity mo¿na zwiêkszaæ po uiszczeniu
-op³at. W przypadku aplikacji takiej, jak Goodle maj±cej oko³o 1000 potencjalnych
+op³aty. W przypadku aplikacji takiej, jak Goodle maj±cej oko³o 1000
+potencjalnych
 u¿ytkowników korzystaj±cych aktywnie z platformy, standardowe dzienne limity
 powinny byæ wystarczaj±ce. 
 
 \subsection{Datastore}
 
 AppEngine dostarcza rozproszon± bazê danych Datastore. Jest to baza typu NoSQL,
-czyli bazê która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
-bazie maj± rodzaj i zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
-danego rodziaju, filtrowane i sortowane na podstawie w³asno¶ci.
+czyli baza która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
+bazie maj± rodzaj i~zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
+danego rodzaju, filtrowane i sortowane na podstawie w³asno¶ci.
 
 Oczekuje siê, ¿e transakcje w bazie danych bêd± spe³nia³y w³asno¶ci ACID, czyli
 bêd± atomowe, spójne, izolowane i trwa³e. Datatore gwarantuje ACID w modelu OCC
 (\textit{optimistic concurrency control}), czyli przy za³o¿eniu, ¿e wiêkszo¶æ
 przeprowadzonych transakcji nie bêdzie nadpisywaæ wzajemnie danych. Je¶li tak
-siê zdarzy powiedzie siê tylko pierwsza operacja zapisu, pozosta³e wróc± b³±d.
-W Goodle ryzyko wyst±pienia transakcji w których dwóch lub wiêcej u¿ytkowników
-bêdzie chcia³o edytowaæ jednocze¶nie te same dane praktycznie nie istnieje.
-Przedmioty maj± jednego prowadz±cego, który ma uprawnienia do edytowania
+siê zdarzy, powiedzie siê tylko pierwsza operacja zapisu, pozosta³e zwróc± b³±d.
+W Goodle ryzyko wyst±pienia transakcji, w których dwóch lub wiêcej u¿ytkowników
+bêdzie chcia³o edytowaæ jednocze¶nie te same dane, praktycznie nie istnieje.
+Przedmioty maj± jednego prowadz±cego, który jako jedyny ma uprawnienia
+do~edytowania
 powi±zanych z nim materia³ów. Gwarancje, które zapewnia Datastore s± wiêc
 wystarczaj±ce.
 
 \section{Biblioteki}
 \begin{itemize}
- \item Gson -- biblioteka w Javie, która pozwala konwertowaæ objekty w Javie na
-obiekty w JSONie i odwrotnie. JSON (\textit{JavaScript Object Notation}) jest
+ \item Gson -- biblioteka w Javie, która pozwala konwertowaæ obiekty w Javie na
+obiekty w~JSONie i odwrotnie. JSON (\textit{JavaScript Object Notation}) jest
 formatem danych stosowanym do przesy³ania danych w AJAxie.
 \item Hibernate-validator -- realizuje powi±zania miêdzy obiektami bazy danych
 a obiektami Javy, dodaje mo¿liwo¶æ nak³adania ograniczeñ na poszczególne pola.
 \item Objectify -- interfejs do Datastore.
 \item Requestfactory -- dostarcza mechanizmu komunikacji klient-serwer
-zorientowanego na pobieranie danych.
+zorientowanego na~pobieranie danych.
 \item Oauth-signpost -- biblioteka do podpisywania wiadomo¶ci HTTP zgodnie ze
 standardem Oauth-core, potrzebna do komunikacji z system USOS
 \item Validation-API -- pozwala deklarowaæ ograniczenia dla klas w Javie i
@@ -693,7 +700,7 @@ repozytorium, ta operacja jednak wykonywana jest sporadycznie.
 \subsection{Selenium}
 Selenium jest platform± programistyczn± do testowania aplikacji sieciowych.
 Pozwala przeprowadzaæ symulacje dzia³añ u¿ytkownia. Testy tworzy siê metod±
-nagrywania czynno¶ci wykonywanych na stronie za pomoc± przegl±draki i
+nagrywania czynno¶ci wykonywanych na stronie za pomoc± przegl±darki i
 odtwarzaniu ich. 
 GWT posiada specjalny komponent do testowania przy pomocy Selenium. 
 \subsection{Eclipse}
@@ -772,7 +779,7 @@ u¿ytkowników.
 \item{Dok³adny opis przypadku u¿ycia\\}
 Dok³adny opis przypadku u¿ycia \emph{Za³o¿enie nowego kursu} opisuje 
 krok po kroku tworzenie nowego kursu w naszym systemie. Ten dokument 
-napisali¶my aby dok³adnie omówiæ scenariusze, które mog± wyst±piæ przy 
+napisali¶my, aby dok³adnie omówiæ scenariusze, które mog± wyst±piæ przy 
 realizacji tego przypadku u¿ycia. 
 
 \end{enumerate}
@@ -787,7 +794,7 @@ Podczas pracy nad aplikacj± Goodle zdobyli¶my wiele umiejêtno¶ci niezbêdnych
 w~przysz³ej pracy jako programi¶ci. Przede wszystkim nauczyli¶my siê wspó³pracy 
 w zespole programistycznym, rozwinêli¶my swoje umiejêtno¶ci komunikacji 
 oraz podzia³u zadañ w grupie programistów. Poznali¶my równie¿ wiele nowych, 
-innowacyjnych technologii, przydatnych przy tworzeniu aplikacji webowych. 
+innowacyjnych technologii, przydatnych przy tworzeniu aplikacji sieciowych. 
 
 %
 %  Jak móg³by dalej rozwijaæ siê produkt. Czego nie uda³o siê napisaæ i 

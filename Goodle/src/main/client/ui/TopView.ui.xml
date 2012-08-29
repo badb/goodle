@@ -20,7 +20,7 @@
 		 	<g:Image
 		 		styleName='{style.userImage}' 
 		 		ui:field="userImage"
-		 		url="http://userserve-ak.last.fm/serve/34s/66112340.jpg"
+		 		url="https://lh4.googleusercontent.com/-wY7k1k1d85U/UD521hhvxqI/AAAAAAAAAPs/bUxkplgr9Wo/s800/avatar_empty.jpg"
 		 	/>
 		 	<g:Label
 		 		styleName='{style.userName}' 

@@ -21,7 +21,6 @@ public interface CourseProxy extends EntityProxy
 	String getCalendar();
 	Set<Long> getCoordinators();
 	Set<Long> getMembers();
-	List<MessageProxy> getMessages();
 	List<String> getDescription();
 	List<String> getBibliography();
 	

@@ -27,8 +27,6 @@ public class CourseHomeworksView  extends AbstractCourseView
 	@UiField Button edit;
 	@UiField FlexTable homeworks;
 	
-	private CourseRequest request;
-	
 	public static String notRegistered = "Musisz być zarejestrowany na kurs, aby obejrzeć zawartość.";
 	
 	public CourseHomeworksView()
@@ -39,7 +37,6 @@ public class CourseHomeworksView  extends AbstractCourseView
 	@Override
 	public void onCourseSet()
 	{
-		request = cf.getRequestFactory().courseRequest();
 		info.setText("");
 		edit.setEnabled(isCurrUserOwner());
 		edit.setVisible(isCurrUserOwner());
@@ -57,9 +54,10 @@ public class CourseHomeworksView  extends AbstractCourseView
 			return;
 		}
 		
-		course = request.edit(course);
+		CourseRequest getRequest = cf.getRequestFactory().courseRequest();
+		course = getRequest.edit(course);
 		
-		request.getHomeworksSafe().using(course).fire
+		getRequest.getHomeworksSafe().using(course).with("attachedFiles", "solutions").fire
 		(
 			new Receiver<List<HomeworkProxy>>()
 			{
@@ -70,7 +68,8 @@ public class CourseHomeworksView  extends AbstractCourseView
 					{
 						HomeworkView view = new HomeworkView();
 						view.setClientFactory(cf);
-						view.setRequest(request);
+						// Course must be set before homework.
+						view.setCourse(course);
 						view.setHomework(h);
 
 						int rows = homeworks.getRowCount();

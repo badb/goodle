@@ -20,7 +20,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -78,7 +77,7 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 		CourseRequest getRequest = cf.getRequestFactory().courseRequest();
 		course = getRequest.edit(course);
 				
-		getRequest.getHomeworksSafe().using(course).fire
+		getRequest.getHomeworksSafe().using(course).with("attachedFiles", "solutions").fire
 		(
 			new Receiver<List<HomeworkProxy>>() 
 			{
@@ -106,7 +105,6 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 	@UiHandler("newHomework")
 	void onNewHomeworkClick(ClickEvent event)
 	{	
-		try {
 		Integer rows = homeworks.getRowCount();
 		
 	    HomeworkEditView view = new HomeworkEditView();
@@ -119,7 +117,6 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 		homeworks.insertRow(rows);
 		homeworks.insertCell(rows, 0);
 	    homeworks.setWidget(rows, 0, view);
-		} catch(Exception e) { info.setText("new " + e.getMessage()); }
 	}
 	
 	@UiHandler("cancel")
@@ -133,39 +130,39 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 	@UiHandler("save")
 	void onSaveHomeworksButtonClicked(ClickEvent event) 
 	{
-		mayStop = true;
-		List<HomeworkProxy> updated = new ArrayList<HomeworkProxy>();
-		
-		for (int i = 0; i < homeworks.getRowCount(); ++i) 
+		try 
 		{
-			HomeworkEditView view = (HomeworkEditView) homeworks.getWidget(i, 0);
-			if (view != null) updated.add(view.getHomework());
-		}
-		
-		course = request.edit(course);
-		request.updateHomeworks(updated).using(course).fire
-		(
-			new Receiver<CourseProxy>()
+			mayStop = true;
+			List<HomeworkProxy> updated = new ArrayList<HomeworkProxy>();
+			
+			for (int i = 0; i < homeworks.getRowCount(); ++i) 
 			{
-				@Override
-				public void onSuccess(CourseProxy result)
-				{
-					if (result != null)
-					{
-						try {
-						parent.setCourse(result);
-						String courseId = result.getId().toString();
-						cf.getPlaceController().goTo(new CoursePlace(courseId, "homeworks"));
-						} catch(Exception e) { DialogBox db = new DialogBox(); db.setText(e.getMessage()); db.show(); }
-						NewHomeworkEvent event = new NewHomeworkEvent();
-						fireEvent(event);
-					}
-
-				}
+				HomeworkEditView view = (HomeworkEditView) homeworks.getWidget(i, 0);
+				if (view != null) updated.add(view.getHomework());
 			}
-		);
-		
-
+			
+			course = request.edit(course);
+			request.updateHomeworks(updated).using(course).with("attachedFiles").fire
+			(
+				new Receiver<CourseProxy>()
+				{
+					@Override
+					public void onSuccess(CourseProxy result)
+					{
+						if (result != null)
+						{
+							parent.setCourse(result);
+							String courseId = result.getId().toString();
+							cf.getPlaceController().goTo(new CoursePlace(courseId, "homeworks"));
+							NewHomeworkEvent event = new NewHomeworkEvent();
+							fireEvent(event);
+						}
+	
+					}
+				}
+			); 
+		} 
+		catch (Exception e) { info.setText(e.getMessage()); }
 	}
 
 }

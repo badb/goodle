@@ -11,6 +11,7 @@
 	    <my:EditLabel ui:field="text" wordWrapped="true" /> <br />
 	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 
+	 	<g:Label ui:field="info" />
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

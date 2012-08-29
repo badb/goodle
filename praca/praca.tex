@@ -610,12 +610,19 @@ Platformy edukacyjne s± tradycyjnie aplikacjami wielostronowymi. Stawia³o to
 dodatkowe wyzwania i~utrudnienia w~czasie tworzenia Goodle.
 
 Odpowiednikiem nawigacji po wielu stronach jest nawigacjach przy u¿yciu
-identyfikatorów fragmentów (etykietek). 
+identyfikatorów fragmentów (etykietek). Konieczno¶æ budowania aplikacji w taki
+sposób by³a jedn± z przyczyn spowolnienia tempa pracy i niezrealizowania
+wszystkich pocz±tkowo planowanych funkcjonalno¶ci. 
+
 \subsection{Java}
 Java jest wysokopoziomowym, zorientowanym obiektowo jêzykiem programowania. 
-Obecnie jest jednym z najpopularniejszych jêzyków.
+Obecnie jest jednym z najpopularniejszych jêzyków, czêsto wykorzystywanym w
+aplikacja \linebreak sieciowych\cite{pop}.
 
 \subsection{AJAX}
+AJAX (\textit{Asynchronous JavaScript and XML}) to technologia tworzenia
+aplikacji sieciowych, w którym komunikacja miêdzy klientem a serwerem mo¿e
+zachodzi w sposób asynchroniczny i nie wymaga ponownego ³adowania ca³ej strony. 
 
 \section{Google App Engine}
 Google App Engine jest platform± do tworzenia i hostowania aplikacji. Dostarcza
@@ -633,20 +640,35 @@ powinny byæ wystarczaj±ce.
 \subsection{Datastore}
 
 AppEngine dostarcza rozproszon± bazê danych Datastore. Jest to baza typu NoSQL,
-czyli bazê która nie jest relacyjna i nie korzysta z jêzyka SQL
+czyli bazê która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
+bazie maj± rodzaj i zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
+danego rodziaju, filtrowane i sortowane na podstawie w³asno¶ci.
+
+Oczekuje siê, ¿e transakcje w bazie danych bêd± spe³nia³y w³asno¶ci ACID, czyli
+bêd± atomowe, spójne, izolowane i trwa³e. Datatore gwarantuje ACID w modelu OCC
+(\textit{optimistic concurrency control}), czyli przy za³o¿eniu, ¿e wiêkszo¶æ
+przeprowadzonych transakcji nie bêdzie nadpisywaæ wzajemnie danych. Je¶li tak
+siê zdarzy powiedzie siê tylko pierwsza operacja zapisu, pozosta³e wróc± b³±d.
+W Goodle ryzyko wyst±pienia transakcji w których dwóch lub wiêcej u¿ytkowników
+bêdzie chcia³o edytowaæ jednocze¶nie te same dane praktycznie nie istnieje.
+Przedmioty maj± jednego prowadz±cego, który ma uprawnienia do edytowania
+powi±zanych z nim materia³ów. Gwarancje, które zapewnia Datastore s± wiêc
+wystarczaj±ce.
 
 \section{Biblioteki}
 \begin{itemize}
  \item Gson -- biblioteka w Javie, która pozwala konwertowaæ objekty w Javie na
 obiekty w JSONie i odwrotnie. JSON (\textit{JavaScript Object Notation}) jest
 formatem danych stosowanym do przesy³ania danych w AJAxie.
-\item Gwt-servlet-deps
-\item Hibernate-validator
+\item Hibernate-validator -- realizuje powi±zania miêdzy obiektami bazy danych
+a obiektami Javy, dodaje mo¿liwo¶æ nak³adania ograniczeñ na poszczególne pola.
 \item Objectify -- interfejs do Datastore.
 \item Requestfactory -- dostarcza mechanizmu komunikacji klient-serwer
 zorientowanego na pobieranie danych.
-\item Signposte-core
-\item Validation-API
+\item Oauth-signpost -- biblioteka do podpisywania wiadomo¶ci HTTP zgodnie ze
+standardem Oauth-core, potrzebna do komunikacji z system USOS
+\item Validation-API -- pozwala deklarowaæ ograniczenia dla klas w Javie i
+sprawdza poprawno¶æ stworzonych obiektów.
 \end{itemize}
 
 \section{Inne narzêdzia}
@@ -729,8 +751,7 @@ Dokument \textit{Przypadki u¿ycia} mia³ na celu dok³adny opis funkcjonalno¶ci
 systemu. Dziêki temu dokumentowi ustalili¶my przebieg wykonania konkretnych
 czynno¶ci podczas korzystania z aplikacji przez poszczególne grupy 
 u¿ytkowników.
-\item{Dok³adny opis przypadku u¿ycia\\} %czy o tym chcemy pisaæ?
-
+\item Dok³adny opis przypadku u¿ycia %czy o tym chcemy pisaæ?
 \end{enumerate}
 
 %
@@ -785,6 +806,9 @@ wygenerowan± wiadomo¶æ e-mail.
 
 \bibitem[GWT]{gwt} Google Web Toolkit,
 \texttt{https://developers.google.com/web-toolkit/}, 2012.
+
+\bibitem[POP]{pop} Programming Language Popularity, 
+\texttt{http://langpop.com/}, 2011.
 
 \bibitem[Selenium]{selenium} SeleniumHQ -- Web Aplication Testing System, 
 \texttt{http://seleniumhq.org/}

@@ -14,6 +14,7 @@
 \documentclass{pracamgr}
 
 \usepackage{polski}
+\usepackage{url}
 
 %Jesli uzywasz kodowania polskich znakow ISO-8859-2 nastepna linia powinna byc 
 %odkomentowana
@@ -73,11 +74,14 @@ Skrzypczak}
 }
 
 %Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-\klasyfikacja{H.3.5 Online information services\\
+\klasyfikacja{H. Information Systems\\
+H.3. Information storage and retrieval\\
+H.3.5. Online information services\\
 }
 
 % S³owa kluczowe:
-\keywords{Goodle, platforma edukacyjna, e-learning}
+\keywords{Goodle, platforma edukacyjna, e-learning, 
+Google Web Toolkit, Google App Engine}
 
 % Tu jest dobre miejsce na Twoje w³asne makra i~¶rodowiska:
 \newtheorem{defi}{Definicja}[section]
@@ -185,7 +189,7 @@ Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}.
 %  Przyczyny rozpoczêcia projektu i uzasadnienie wybranego scenariusza
 %  biznesowego.
 %
-\chapter{Motwyacja i cele} % TODO Uzupe³niæ nazwê rozdzia³u
+\chapter{Motywacja i cele} % TODO Uzupe³niæ nazwê rozdzia³u
 
 %
 %  Dlaczego zdecydowano siê na rozpoczêcie projektu.
@@ -608,17 +612,63 @@ prowadzonych zajêæ.
 %
 \chapter{Metodyka pracy}
 
+W tym rozdziale opisany zosta³ system pracy nad aplikacj±, 
+podzia³ obowi±zków w zespole, oraz dokumenty, które powsta³y w trakcie pracy.
+
+\section{Zespó³}
+Nad aplikacj± oraz dokumentami pracowali¶my w 4-osobowym zespole. 
+Poniewa¿ organizacja pracy w kilkuosobowym zespole jest trudna, wybrali¶my 
+szefa projektu, który przydziela³ pozosta³ym cz³onkom zadania. Wszyscy cz³onkowie
+zespo³u zajmowali siê zarówno implementacj± poszczególnych funkcji aplikacji, 
+jak i tworzeniem dokumentów.
+\begin{itemize}
+\item{Marcin Jedynak -- szef projektu}\\
+Do zadañ szefa projektu nale¿a³a koordynacja pracy pozosta³ych cz³onków zespo³u, 
+w~tym przydzielanie najpilniejszych zadañ i~nadzorowanie postêpów pracy. 
+By³ równie¿ odpowiedzialny za komunikacjê z klientem. 
+Jak pozostali cz³onkowie zespo³u zajmowa³ siê implementacj± aplikacji, 
+w~szczególno¶ci baz± danych.
+\item{Julia Herman-I¿ycka}\\
+Zajmowa³a siê g³ownie obs³ug± plików.
+\item{Aleksandra Skrzypczak}\\
+By³a odpowiedzialna za wygl±d aplikacji.
+\item{Jakub Partyka}\\
+Do jego g³ównych zadañ nale¿a³o wykorzystanie USOSapi.
+
+\end{itemize}
+
 %
 %  W jakich iteracjach pracowano, jak wygl±da³a komunikacja i podzia³
 %  zadañ, jakie panowa³y zasady, kto by³ szefem projektu :)
 %
 \section{System pracy}
+Pracowali¶my w krótkich iteracjach, zwykle trwaj±cych tydzieñ, 
+chocia¿ d³ugo¶æ iteracji zale¿a³a od wielko¶ci zadania do wykonania. 
+Do podzia³u zadañ oraz monitorowania postêpu prac u¿ywali¶my witryny Trello 
+(\url{www.trello.com}). 
+
 
 %
 %  Jakie dokumenty powsta³y, ich cel i zawarto¶æ.
 %
 \section{Dokumentacja}
+Podczas pracy nad projektem powsta³o wiele dokumentów opisuj±cych aplikacjê. 
+Mia³y one na celu ujednolicenie naszej koncepcji systemu, jak równie¿ 
+u³atwienie komunikacji z klientem. 
+Kolejno by³y to:
+\begin{enumerate}
+\item Wizja\\
+Dokument \textit{Wizja} powsta³ aby sprecyzowaæ za³o¿enia i cele projektu. 
+W wizji scharakteryzowali¶my potencjalnych u¿ytkowników systemu, opisali¶my 
+wymagania funkcjonalne i ograniczenia systemu. 
+\item Przypadki u¿ycia\\
+Dokument \textit{Przypadki u¿ycia} mia³ na celu dok³adny opis funkcjonalno¶ci
+systemu. Dziêki temu dokumentowi ustalili¶my przebieg wykonania konkretnych
+czynno¶ci podczas korzystania z aplikacji przez poszczególne grupy 
+u¿ytkowników.
+\item{Dok³adny opis przypadku u¿ycia\\} %czy o tym chcemy pisaæ?
 
+\end{enumerate}
 
 %
 %  Ocena serwisu, wnioski (poprawa systemu pracy, unikniêcie b³êdów 
@@ -626,12 +676,36 @@ prowadzonych zajêæ.
 %
 \chapter{Podsumowanie}
 
+Podczas pracy nad aplikacj± Goodle zdobyli¶my wiele umiejêtno¶ci niezbêdnych 
+w~przysz³ej pracy jako programista. Przede wszystkim nauczyli¶my siê pracy 
+w zespole programistycznym, rozwinêli¶my swoje umiejêtno¶ci podzia³u pracy
+oraz poznali¶my nowe technologie. Jak ka¿da aplikacja, projekt Goodle nie jest 
+zamkniêty i wymaga dalszej pracy nad jego polepszaniem.
+
 %
 %  Jak móg³by dalej rozwijaæ siê produkt. Czego nie uda³o siê napisaæ i 
 %  nigdy nie zostanie napisane. Zdjêcie cz³onków zespo³u nad morzem, u¿ywaj±cych
 %  zdobytych dyplomów jako podk³adek pod gofry. 
 %
 \section{Mo¿liwe rozszerzenia}
+Obecne funkcjonalno¶ci Goodle pozwalaj± na wygodne korzystanie z systemu. 
+Jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji dziêki 
+zwiêkszeniu mo¿liwo¶ci USOSapi oraz informacji zwrotnej od u¿ytkowników systemu.
+W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
+\begin{itemize}
+\item Tworzenie kursu na podstawie poprzedniej edycji\\
+Kopiowanie zawarto¶ci istniej±cego kursu do nowo utworzonego usprawni³oby 
+tworzenie kursu przez prowadz±cego zajêcia w kolejnych latach.
+\item Informowanie o zmianach w kursach\\
+U¿ytkownik Goodle móg³by widzieæ listê kursów, których zawarto¶æ zosta³a 
+zmodyfikowana od jego ostatniej wizyty.
+\item Pro¶ba o rejestracjê\\
+Dodatkowa forma rejestracji na kurs mog³aby u³atwiæ rejestracjê na kurs. 
+Student móg³by jednym klikniêciem wys³aæ pro¶bê do prowadz±cego zajêcia, który
+zobaczy³by j± odwiedzaj±c stronê kursu, lub nawet dostaj±c odpowiednio 
+wygenerowan± wiadomo¶æ e-mail.
+\end{itemize}
+
 
 
 \begin{thebibliography}{99}

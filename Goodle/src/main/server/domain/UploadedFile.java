@@ -58,7 +58,7 @@ public class UploadedFile implements Serializable
     public Date getUploaded() { return uploaded; }
     // There is an error in GWT, and dummy setter is required to avoid it.
     public void setUploaded(Date d) { }
-   
+  
     @NotNull
     private String url;
     public String getUrl() { return url; }

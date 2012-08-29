@@ -71,7 +71,7 @@ public class CourseHomeworksView  extends AbstractCourseView
 						// Course must be set before homework.
 						view.setCourse(course);
 						view.setHomework(h);
-
+						
 						int rows = homeworks.getRowCount();
 						homeworks.insertRow(rows);
 						homeworks.insertCell(rows, 0);
@@ -91,4 +91,5 @@ public class CourseHomeworksView  extends AbstractCourseView
 			cf.getPlaceController().goTo(new CoursePlace(courseId, "homeworksEdit"));
 		}
 	}
+	
 }

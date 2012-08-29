@@ -8,7 +8,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -27,7 +26,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorValue("MODULE")
 public class Module implements Serializable 
-{ 
+{
 
 	@Id
 	@Column(name="module_id")

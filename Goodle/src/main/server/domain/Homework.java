@@ -3,9 +3,7 @@ package main.server.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
@@ -18,11 +16,12 @@ import javax.persistence.Transient;
 @DiscriminatorValue("HOMEWORK")
 public class Homework extends Module
 {
+
     @Basic
     private Date deadline;
     public Date getDeadline() { return deadline; }
     public void setDeadline(Date date) { deadline = date; } 
-        
+    
     private Long course;
     public Long getCourse() { return course; }
     public void setCourse(Long course) { this.course = course; }

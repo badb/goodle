@@ -1,19 +1,20 @@
 %
-% Niniejszy plik stanowi przykÂ³ad formatowania pracy magisterskiej na
-% Wydziale MIM UW.  Szkielet uÂ¿ytych poleceÃ± moÂ¿na wykorzystywaÃ¦ do
+% Niniejszy plik stanowi przyk³ad formatowania pracy magisterskiej na
+% Wydziale MIM UW.  Szkielet u¿ytych poleceñ mo¿na wykorzystywaæ do
 % woli, np. formatujac wlasna prace.
 %
 % Zawartosc merytoryczna stanowi oryginalnosiagniecie
-% naukowosciowe Marcina Wolinskiego.  Wszelkie prawa zastrzeÂ¿one.
+% naukowosciowe Marcina Wolinskiego.  Wszelkie prawa zastrze¿one.
 %
-% Copyright (c) 2001 by Marcin WoliÃ±ski <M.Wolinski@gust.org.pl>
-% Poprawki spowodowane zmianami przepisÃ³w - Marcin Szczuka, 1.10.2004
+% Copyright (c) 2001 by Marcin Woliñski <M.Wolinski@gust.org.pl>
+% Poprawki spowodowane zmianami przepisów - Marcin Szczuka, 1.10.2004
 % Poprawki spowodowane zmianami przepisow i ujednolicenie 
-% - Seweryn KarÂ³owicz, 05.05.2006
-% dodaj opcjÃª [licencjacka] dla pracy licencjackiej
-\documentclass{pracamgr}
+% - Seweryn Kar³owicz, 05.05.2006
+% dodaj opcjê [licencjacka] dla pracy licencjackiej
+\documentclass[licencjacka]{pracamgr}
 
 \usepackage{polski}
+\usepackage{url}
 
 %Jesli uzywasz kodowania polskich znakow ISO-8859-2 nastepna linia powinna byc 
 %odkomentowana
@@ -24,13 +25,14 @@
 
 % Dane magistranta:
 
-\author{Julia Herman-IÅ¼ycka, Marcin Jedynak, Jakub Partyka, Aleksandra Skrzypczak}
+\author{Julia Herman-I¿ycka, Marcin Jedynak, Jakub Partyka, Aleksandra
+Skrzypczak}
 
 \nralbumu{280468, 292629, 236188, 234586}
 
-\title{Goodle - platforma e-learningowa}
+\title{Goodle -- platforma e-learningowa}
 
-\tytulang{Google - e-learning platform}
+\tytulang{Google -- e-learning platform}
 
 %kierunek: Matematyka, Informatyka, ...
 \kierunek{Informatyka}
@@ -50,17 +52,17 @@
 % \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
 
 % Praca wykonana pod kierunkiem:
-% (podaÃ¦ tytuÂ³/stopieÃ± imiÃª i nazwisko opiekuna
+% (podaæ tytu³/stopieñ imiê i nazwisko opiekuna
 % Instytut
-% ew. WydziaÂ³ ew. Uczelnia (jeÂ¿eli nie MIM UW))
-\opiekun{dr Jacek Sroka\\
+% ew. Wydzia³ ew. Uczelnia (je¿eli nie MIM UW))
+\opiekun{dra Jacka Sroki\\
   Instytut Informatyki\\
   }
 
-% miesiÂ±c i~rok:
-\date{Maj 2012}
+% miesi±c i~rok:
+\date{Wrzesieñ 2012}
 
-%PodaÃ¦ dziedzinÃª wg klasyfikacji Socrates-Erasmus:
+%Podaæ dziedzinê wg klasyfikacji Socrates-Erasmus:
 \dziedzina{ 
 %11.0 Matematyka, Informatyka:\\ 
 %11.1 Matematyka\\ 
@@ -72,14 +74,16 @@
 }
 
 %Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-\klasyfikacja{H.3.5 Online information services\\
-
+\klasyfikacja{H. Information Systems\\
+H.3. Information storage and retrieval\\
+H.3.5. Online information services\\
 }
 
-% SÂ³owa kluczowe:
-\keywords{Goodle, platforma edukacyjna, e-learning}
+% S³owa kluczowe:
+\keywords{Goodle, platforma edukacyjna, e-learning, 
+Google Web Toolkit, Google App Engine}
 
-% Tu jest dobre miejsce na Twoje wÂ³asne makra i~Â¶rodowiska:
+% Tu jest dobre miejsce na Twoje w³asne makra i~¶rodowiska:
 \newtheorem{defi}{Definicja}[section]
 
 % koniec definicji
@@ -87,558 +91,777 @@
 \begin{document}
 \maketitle
 
-%
-%  Abstrakt
-%
+%tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-Dokument opisuje, stworzonÄ… w ramach projektu licencjackiego, platformÄ™ 
-edukacyjnÄ… Goodle. Nazwa stanowi kontaminacjÄ™ sÅ‚Ã³w Google i Moodle. 
-Innowacyjne technologie i narzÄ™dzia Google'a wykorzystano do stworzenia
-programu. Moodle, natomiast, to uÅ¼ywana obecnie przez Uniwersytet Warszawski
-platforma-rywal, w stosunku do ktÃ³rej Goodle stanowi alternatywÄ™. Integracja z
-systemem USOS zapewnia aplikacji waÅ¼nÄ…, lecz nie jedynÄ…, przewagÄ™. 
-
-Grono potencjalnych odbiorcÃ³w stanowiÄ… studenci i pracownicy akademiccy. Nie 
-stworzono dotychczas produktu zapewniajÄ…cego wszystkie poÅ¼Ä…dane funkcje, co 
-stanowiÅ‚o motywacjÄ™ do realizacji projektu. 
-
-W kolejnych rozdziaÅ‚ach pracy opisane zostanÄ…: przyczyny stworzenia systemu,
-charakterystyka potencjalnych uÅ¼ytkownikÃ³w, funkcjonalnoÅ›Ä‡ i architektura 
-aplikacji, moÅ¼liwe scenariusze uÅ¼ycia, zastosowana przy tworzeniu metodyka,
-narzÄ™dzia i technologie oraz ewentualne przyszÅ‚e rozszerzenia.
+W ramach projektu stworzono zestaw narzêdzi usprawniaj±cych korzystanie
+z~serwisów internetowych Uniwersytetu Warszawskiego. Tworzona aplikacja zapewni
+integracjê technologii Google z danymi udostêpnianymi przez USOS. Grono
+potencjalnych odbiorców stanowi± studenci i pracownicy akademiccy. Wa¿nym
+elementem systemu bêdzie zbiór rozwi±zañ alternatywnych w stosunku do
+funkcjonuj±cej platformy Moodle. Nie stworzono dotychczas produktu
+zapewniaj±cego wszystkie po¿±dane funkcje, co stanowi motywacjê do realizacji
+projektu. 
+% TODO czy tylko dla mnie to brzmi ¼le? Czasy przysz³y i przesz³y pomieszane 
+% (Julia)
 \end{abstract}
 
 \tableofcontents
 %\listoffigures
 %\listoftables
 
-\chapter*{Wprowadzenie} % Ta gwiazdka jest potrzebna, czy to bÅ‚Ä…d? 
-\addcontentsline{toc}{chapter}{Wprowadzenie} % Co robi ta komenda?
+\chapter*{Wprowadzenie}
+\addcontentsline{toc}{chapter}{Wprowadzenie}
+Dokument opisuje, stworzon± w~ramach projektu licencjackiego, platformê
+edukacyjn± Goodle. Nazwa stanowi kontaminacjê s³ów Google i~Moodle.
+Innowacyjne technologie i~narzêdzia firmy Google wykorzystano do~stworzenia
+programu. Moodle natomiast to~u¿ywana obecnie przez~Uniwersytet Warszawski
+platforma-rywal, w~stosunku do~której Goodle stanowi alternatywê. Integracja
+z~systemem USOS zapewnia aplikacji wa¿n±, lecz nie jedyn±, przewagê.
+
+Grono potencjalnych odbiorców stanowi± studenci i~pracownicy akademiccy. Nie 
+stworzono dotychczas produktu zapewniaj±cego wszystkie po¿±dane funkcje,
+co~stanowi³o motywacjê do~realizacji projektu.
+
+W~kolejnych rozdzia³ach pracy opisane zostan±: przyczyny stworzenia systemu,
+charakterystyka potencjalnych u¿ytkowników, funkcjonalno¶æ i~architektura 
+aplikacji, mo¿liwe scenariusze u¿ycia, zastosowana przy~tworzeniu metodyka,
+narzêdzia i~technologie oraz~ewentualne przysz³e rozszerzenia.
 
 %
-%  WstÄ™p. Jak wyglÄ…daÅ‚a sytuacja przed rozpoczÄ™ciem projektu i dlaczego
-%  powstaÅ‚a potrzeba stworzenia aplikacji.
+%  Wstêp. Jak wygl±da³a sytuacja przed rozpoczêciem projektu i dlaczego
+%  powsta³a potrzeba stworzenia aplikacji.
 %
-\section{SformuÅ‚owanie problemu}
+\chapter{Sformu³owanie problemu}
 
 %
-%  Definicje uÅ¼ytych w dokumencie trudnych terminÃ³w i rozwiniÄ™cie akronimÃ³w.
+%  Definicje u¿ytych w dokumencie trudnych terminów i rozwiniêcie akronimów.
 %
 \section{Definicje}
 \begin{description}
-   \item[E-learning]
-      nauczanie z wykorzystaniem sieci komputerowych i internetu.
-   \item[Framework]
-      szkielet do budowy aplikacji, definiuje podstawowy mechanizm dziaÅ‚ania
-      programu i dostarcza zestaw komponentÃ³w i bibliotek ogÃ³lnego
-      przeznaczenia do wykonywania okreÅ›lonych zadaÅ„. 
-   \item[GAE]
-      Google App Engine, dziaÅ‚ajÄ…ca na zasadzie chmury platforma do tworzenia 
-      aplikacji internetowych i utrzymywania ich w centrach danych Google.
-   \item[GWT]
-      Google Web Toolkit, framework i zestaw narzÄ™dzi umoÅ¼liwiajÄ…cy 
-      i uÅ‚atwiajÄ…cy uÅ¼ytkownikom tworzenie aplikacji internetowych.
-   \item[Lama]
-      udomowiony ssak parzystokopytny z rodziny wielbÅ‚Ä…dowatych, do ktÃ³rego
-      podejrzanÄ… sÅ‚aboÅ›Ä‡ czuÅ‚ jeden z uczestnikÃ³w projektu.
-   \item[Moodle]
-      Modular Object-Oriented Dynamic Learning Environment, platforma 
-      e-learningowa. 
-   \item[USOS]
-      Uniwersytecki System ObsÅ‚ugi StudiÃ³w.
+   \item[]\textbf{E-learning}\\
+      nauczanie z~wykorzystaniem sieci komputerowych i~internetu.
+   \item[]\textbf{Framework}\\
+      szkielet do~budowy aplikacji, definiuje podstawowy mechanizm dzia³ania
+      programu i~dostarcza zestaw komponentów i~bibliotek ogólnego
+      przeznaczenia do wykonywania okre¶lonych zadañ. 
+   \item[]\textbf{GAE}\\
+      Google App Engine, dzia³aj±ca na~zasadzie chmury platforma do~tworzenia 
+      aplikacji internetowych i~utrzymywania ich w~centrach danych Google.
+   \item[]\textbf{GWT}\\
+      Google Web Toolkit, framework i~zestaw narzêdzi umo¿liwiaj±cy 
+      i~u³atwiaj±cy u¿ytkownikom tworzenie aplikacji internetowych.
+   \item[]\textbf{Moodle}\\
+      Modular Object-Oriented Dynamic Learning Environment,
+      platforma~e-learningowa.
+   \item[]\textbf{USOS}\\
+      Uniwersytecki System Obs³ugi Studiów.
+% TODO dodaæ USOSapi?
 \end{description}
 
 %
-%  Opisana pokrÃ³tce zawartoÅ›Ä‡ kaÅ¼dego rozdziaÅ‚u.
+%  Opisana pokrótce zawarto¶æ ka¿dego rozdzia³u.
 %
-\section{OmÃ³wienie zawartoÅ›ci}
 
-Dokument podzielony zostaÅ‚ na 5 rozdziaÅ‚Ã³w, z ktÃ³rych kaÅ¼dy zawiera po kilka
-logicznie powiÄ…zanych sekcji:
+\section{Omówienie zawarto¶ci}
 
-%  TODO UzupeÅ‚niÄ‡ nazwÄ™ rozdziaÅ‚u
-W rozdziale \emph{ } objaÅ›niono przyczyny rozpoczÄ™cia projektu i
-uzasadniono wybrany scenariusz biznesowy. Opisano najpierw jakie braki i wady 
-istniejÄ…cego rozwiÄ…zania - platformy Moodle - staÅ‚y siÄ™ motywacjÄ… pracy. 
-NastÄ™pnie wskazano jakie funkcje powinien zapewniaÄ‡ alternatywny, idealny
-system. Na koniec przedstawiono krÃ³tkÄ… charakterystykÄ™ potencjalnych uÅ¼ytkownikÃ³w.
+Dokument podzielony zosta³ na~7 rozdzia³ów, z~których ka¿dy zawiera kilka
+logicznie powi±zanych sekcji:
 
-%  TODO UzupeÅ‚niÄ‡ po napisaniu rozdziaÅ‚u
-RozdziaÅ‚ \emph{MoÅ¼liwoÅ›ci systemu} omawia dokÅ‚adnie funkcjonalnoÅ›Ä‡ produktu. 
-PrzeÅ›ledzono opcjÄ™ utworzenia i zarzÄ…dzania kursem, w tym zsynchronizowanie 
-go z ewentualnym odpowiednikiem w USOS. NastÄ™pnie omÃ³wiono metody rejestracji
-na kurs i zarzÄ…dzanie uczestnikami. Na koniec przedstawiono moÅ¼liwoÅ›ci 
-zwiÄ…zane z publikowaniem materiaÅ‚Ã³w i zadawaniem prac domowych.
+%  TODO Uzupe³niæ nazwê rozdzia³u
+W rozdziale \emph{Motywacja i cele} obja¶niono przyczyny rozpoczêcia
+projektu i~uzasadniono wybrany scenariusz biznesowy. Opisano najpierw jakie
+braki i~wady 
+istniej±cego rozwi±zania -- platformy Moodle -- sta³y siê motywacj± pracy. 
+Nastêpnie wskazano jakie funkcje powinien zapewniaæ alternatywny, idealny
+system. Na~koniec przedstawiono krótk± charakterystykê potencjalnych
+u¿ytkowników.
 
-%  TODO UzupeÅ‚niÄ‡ po napisaniu rozdziaÅ‚u
-W kolejnym rozdziale omÃ³wiono \emph{moÅ¼liwe scenariusze uÅ¼ycia}. 
+Rozdzia³ \emph{Mo¿liwo¶ci systemu} omawia dok³adnie funkcjonalno¶æ produktu. 
+Prze¶ledzono opcjê utworzenia i~zarz±dzania kursem, w~tym zsynchronizowanie 
+go z~ewentualnym odpowiednikiem w~USOS. Nastêpnie omówiono metody rejestracji
+na~kurs i~zarz±dzanie uczestnikami. Na~koniec przedstawiono mo¿liwo¶ci 
+zwi±zane z~publikowaniem materia³ów i~zadawaniem prac domowych.
 
-%  TODO UzupeÅ‚niÄ‡ po napisaniu rozdziaÅ‚u
-NastÄ™pnie dokument przechodzi do opisu \emph{uÅ¼ytych narzÄ™dzi i technologii}. 
+W~kolejnym rozdziale omówiono \emph{mo¿liwe scenariusze u¿ycia}. 
 
-%  TODO UzupeÅ‚niÄ‡ po napisaniu rozdziaÅ‚u
-\emph{Metodyka pracy} 
+Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}.
+Podana jest krótka charakterystyka Google Web Toolkit i Google App Engine,
+nastêpnie wymienione s± u¿ywane biblioteki. Na koniec wspomniane s± narzêdzia
+u³atwiaj±ce pracê.
 
-%  TODO UzupeÅ‚niÄ‡ po napisaniu rozdziaÅ‚u
-\emph{Podsumowanie}
+W rozdziale \emph{Metodyka~pracy} opisane zosta³y praktyki i~narzêdzia, 
+z~których korzystali¶my podczas pracy nad produktem, jak równie¿ funkcje 
+cz³onków zespo³u oraz stworzone dokumenty.
+
+W ostatnim rozdziale (\emph{Podsumowanie}) przedstawili¶my wnioski z pracy 
+nad projektem oraz perspektywy dalszego rozwoju aplikacji.
 
 %
-%  Przyczyny rozpoczÄ™cia projektu i uzasadnienie wybranego scenariusza
+%  Przyczyny rozpoczêcia projektu i uzasadnienie wybranego scenariusza
 %  biznesowego.
 %
-\chapter{ } % TODO UzupeÅ‚niÄ‡ nazwÄ™ rozdziaÅ‚u
+\chapter{Motywacja i cele} % TODO Uzupe³niæ nazwê rozdzia³u
 
+W tym rozdziale opisane zosta³y powody, dla których zdecydowali¶my siê 
+na stworzenie takiej aplikacji.
 %
-%  Dlaczego zdecydowano siÄ™ na rozpoczÄ™cie projektu.
+%  Dlaczego zdecydowano siê na rozpoczêcie projektu.
 %
 \section{Motywacja}
 
 Od momentu uruchomienia system USOS podlega kolejnym usprawnieniom. Niestety, 
-wprowadzane modyfikacje i dodawane moduÅ‚y nie sÄ… w stanie nadÄ…Å¼yÄ‡ za rosnÄ…cymi 
-wymaganiami uÅ¼ytkownikÃ³w.
- 
-Jednym z oczekiwaÅ„ niektÃ³rych odbiorcÃ³w jest integracja serwisu z kontem Google i 
-oferowanymi przez firmÄ™ narzÄ™dziami. Dla wielu uÅ¼ytkownikÃ³w uciÄ…Å¼liwy jest rÃ³wnieÅ¼ 
-brak konsolidacji USOS z innymi portalami akademickimi np. platformÄ… Moodle. 
-Tworzenie kursÃ³w, zarzÄ…dzanie uÅ¼ytkownikami czy umieszczanie wynikÃ³w studentÃ³w
-musi siÄ™ zatem odbywaÄ‡ na kilku stronach w sposÃ³b niezaleÅ¼ny.
+wprowadzane modyfikacje i dodawane modu³y nie s± w stanie nad±¿yæ za rosn±cymi 
+wymaganiami u¿ytkowników.
 
-Do problemÃ³w Moodle naleÅ¼y np. trudny w obsÅ‚udze, nieprzyjazny dla uÅ¼ytkownika 
-interfejs. Spotyka siÄ™ on z nieustannÄ… krytykÄ… ze strony studentÃ³w i pracownikÃ³w 
-wydziaÅ‚u. Dodatkowo platforma nie zapewnia prowadzÄ…cemu zajÄ™cia dostatecznej 
-elastycznoÅ›ci i Å‚atwoÅ›ci w udostÄ™pnianiu i organizacji udostÄ™pnianych materiaÅ‚Ã³w. 
-	
-Wynikiem wymienionych mankamentÃ³w jest niezadowolenie uÅ¼ytkownikÃ³w oraz 
-nieefektywne wykorzystanie potencjaÅ‚u tkwiÄ…cego w tego typu portalach. Celem 
-postawionym przed nowym systemem byÅ‚o rozwiÄ…zanie ich, co uatrakcyjniÅ‚oby pracÄ™ 
-i zaoszczÄ™dziÅ‚o czas zarÃ³wno pracownikÃ³w, jak i studentÃ³w oraz podniosÅ‚o komfort 
-ksztaÅ‚cenia na Uniwesytecie Warszawskim.
+% TODO ustaliæ, czy piszemy o tym, ¿e podobno mieli przenie¶æ pocztê studenck± 
+% na Googla
+Jednym z oczekiwañ niektórych odbiorców jest integracja serwisu z kontem Google
+i 
+oferowanymi przez firmê narzêdziami. Dla wielu u¿ytkowników uci±¿liwy jest
+równie¿ 
+brak konsolidacji USOS z innymi portalami akademickimi np. platform± Moodle. 
+Tworzenie kursów, zarz±dzanie u¿ytkownikami czy umieszczanie wyników studentów
+musi siê zatem odbywaæ na~kilku stronach w sposób niezale¿ny.
+
+Do problemów Moodle nale¿y np. trudny w obs³udze, nieprzyjazny dla u¿ytkownika 
+interfejs. Spotyka siê on z nieustann± krytyk± ze strony studentów i
+pracowników 
+wydzia³u. Dodatkowo platforma nie zapewnia prowadz±cemu zajêcia dostatecznej 
+elastyczno¶ci i ³atwo¶ci w udostêpnianiu i organizacji udostêpnianych
+materia³ów. 
+
+Wynikiem wymienionych mankamentów jest niezadowolenie u¿ytkowników oraz 
+nieefektywne wykorzystanie potencja³u tkwi±cego w tego typu portalach. Celem 
+postawionym przed nowym systemem by³o rozwi±zanie ww. problemów, 
+co uatrakcyjni³oby pracê i zaoszczêdzi³o czas zarówno pracowników, 
+jak i studentów oraz podnios³o komfort kszta³cenia na Uniwesytecie Warszawskim.
 
 %
-%  Jakie powinny byÄ‡ cechy idealnego produktu, czyli do czego dÄ…Å¼yÅ‚ projekt.
+%  Jakie powinny byæ cechy idealnego produktu, czyli do czego d±¿y³ projekt.
 %
 \section{Cele}
 
-NajwaÅ¼niejszym celem, jaki stawiano sobie podczas realizacji systemu, byÅ‚o
-zapewnienie prostego, intuicyjnego interfejsu. Moodle oferowaÅ‚ uÅ¼ytkownikom,
-szczegÃ³lnie od strony prowadzÄ…cego, rozmaite funkcje, np. podczas umieszczania
-nowych materiaÅ‚Ã³w. Niestety powodowaÅ‚o to przeÅ‚adowanie aplikacji licznymi
-przyciskami i opcjami. Zapewniana elastycznoÅ›Ä‡ i szeroki wachlarz moÅ¼liwoÅ›ci
-nie skusiÅ‚y uÅ¼ytkownikÃ³w, ktÃ³rzy wiÄ™kszoÅ›ci funkcji nie uÅ¼ywali, a czÄ™sto
-nawet nie znali. PiszÄ…c Goodle, przyjÄ™to innÄ… filozofiÄ™. Ustalono listÄ™
-poÅ¼Ä…danych przez odbiorcÃ³w opcji, w tym kluczowych do uczestnictwa w kursach
-i administrowania nimi, i postanowiono zapewniÄ‡ to minimum w jak najbardziej
+Najwa¿niejszym celem, jaki stawiano sobie podczas realizacji systemu, by³o
+zapewnienie prostego, intuicyjnego interfejsu. Moodle oferowa³ u¿ytkownikom,
+szczególnie prowadz±cym, rozmaite funkcje, np. podczas umieszczania
+nowych materia³ów. Niestety powodowa³o to prze³adowanie aplikacji licznymi
+przyciskami i opcjami. Zapewniana elastyczno¶æ i szeroki wachlarz mo¿liwo¶ci
+nie skusi³y u¿ytkowników, którzy wiêkszo¶ci funkcji nie u¿ywali, a czêsto
+nawet nie znali. Pisz±c Goodle, przyjêto inn± filozofiê. Ustalono listê
+po¿±danych przez odbiorców opcji, w tym kluczowych do uczestnictwa w kursach
+i administrowania nimi, i postanowiono zapewniæ to minimum w jak najbardziej
 klarownej formie. 
 
-Drugi waÅ¼ny cel, jaki postawili sobie twÃ³rcy, stanowiÅ‚a integracja
-tworzonego portalu z systemem USOS. Kiedy rozpoczÄ™to projekt, nie byÅ‚o
-moÅ¼liwe zalogowanie siÄ™ do Moodle przy pomocy uczelnianego Centralnego
-Systemu Uwierzytelniania. OpcjÄ™ tÄ™ dodano pÃ³Åºniej. Dodatkowo tworzone na
-platformie e-learningowej kursy byÅ‚y zwykle odpowiednikami tych z USOS. Mimo
-to, nie istniaÅ‚a moÅ¼liwoÅ›Ä‡ transferu infromacji np. danych kursu, listy
-uÅ¼ytkownikÃ³w czy wystawionych ocen. W Goodle postanowiono zapewniÄ‡ takÄ… 
-komunikacjÄ™. Niestety te zamierzenia udaÅ‚o siÄ™ zrealizowaÄ‡ tylko
-czÄ™Å›ciowo, z uwagi za ograniczenia dostÄ™pnego USOS API.   
+Drugi wa¿ny cel, jaki postawili sobie twórcy, stanowi³a integracja
+tworzonego portalu z systemem USOS. Kiedy rozpoczêto projekt, nie by³o
+mo¿liwe zalogowanie siê do Moodle przy pomocy uczelnianego Centralnego
+Systemu Uwierzytelniania. Opcjê tê dodano pó¼niej. Dodatkowo tworzone na
+platformie e-learningowej kursy by³y zwykle odpowiednikami tych z~USOS. Mimo
+to, nie istnia³a mo¿liwo¶æ transferu informacji np. danych kursu, listy
+u¿ytkowników czy wystawionych ocen. W Goodle postanowiono zapewniæ tak± 
+komunikacjê. Niestety te zamierzenia uda³o siê zrealizowaæ tylko
+czê¶ciowo, z uwagi za ograniczenia dostêpnego USOS API.   
+
+% TODO mo¿e dodaæ s³ówko o wykorzystaniu Googla, którego technologie wszyscy 
+% znaj±, wiêc to upraszcza korzystanie. Co prawda u¿ywamy w koñcu tylko Docsów 
+% i uwierzytelniania, ale u¿ycie Google Apps to te¿ by³ cel.
 
 %
-%  Jakie alternatywne rozwiÄ…zania rozpatrywano i dlaczego zdecydowano siÄ™
-%  na stworzenie wÅ‚asnej aplikacji.
+%  Jakie alternatywne rozwi±zania rozpatrywano i dlaczego zdecydowano siê
+%  na stworzenie w³asnej aplikacji.
 %
-%  TODO PoniÅ¼sza sekcja jest laniem wody na peÅ‚nÄ… skalÄ™. SkomponowaÅ‚em
-%  jÄ… z materiaÅ‚Ã³w wygrzebanych z wizji, ale moÅ¼e warto z niej zrezygnowaÄ‡.
+%  TODO Poni¿sza sekcja jest laniem wody na pe³n± skalê. Skomponowa³em
+%  j± z materia³ów wygrzebanych z wizji, ale mo¿e warto z niej zrezygnowaæ.
 
 %\section{Odrzucone scenariusze} 
 %
-%Praca z systemem Moodle jest Å¼mudna i nieefektywna z powodu problemÃ³w 
-%wymienionych we wczeÅ›niejszych czÄ™Å›ciach dokumentu. RozsÄ…dnym scenariuszem
-%byÅ‚o zatem przejÅ›cie na alternatywnÄ… platformÄ™ e-learningowÄ…. RozwiÄ…zania 
-%komercyjne, np. Blackboard Learning, trzeba byÅ‚o niestety odrzuciÄ‡ ze wzglÄ™du
-%na koszty. Drugim problemem okazaÅ‚a siÄ™ synchronizacja takiego systemu z
-%USOS. W przypadku rozwiÄ…zania open-source (np. platformy OLAT) wymagaÅ‚aby
-%dokonania pracochÅ‚onnych modyfikacji kodu. Z tego powodu, zdecydowano siÄ™ na 
-%stworzenie nowej aplikacji, dostosowanej do potrzeb studentÃ³w i pracownikÃ³w 
+%Praca z systemem Moodle jest ¿mudna i nieefektywna z powodu problemów 
+%wymienionych we wcze¶niejszych czê¶ciach dokumentu. Rozs±dnym scenariuszem
+%by³o zatem przej¶cie na alternatywn± platformê e-learningow±. Rozwi±zania 
+%komercyjne, np. Blackboard Learning, trzeba by³o niestety odrzuciæ ze wzglêdu
+%na koszty. Drugim problemem okaza³a siê synchronizacja takiego systemu z
+%USOS. W przypadku rozwi±zania open-source (np. platformy OLAT) wymaga³aby
+%dokonania pracoch³onnych modyfikacji kodu. Z tego powodu, zdecydowano siê na 
+%stworzenie nowej aplikacji, dostosowanej do potrzeb studentów i pracowników 
 %Uniwersytetu Warszawskiego. 
 
 %
-%  Opis potencjalnych odbiorcÃ³w i ich wymagaÅ„ w stosunku do systemu, ktÃ³re
-%  postanowiono speÅ‚niÄ‡.
+%  Opis potencjalnych odbiorców i ich wymagañ w stosunku do systemu, które
+%  postanowiono spe³niæ.
 %
-\section{Charakterystyka uÅ¼ytkownikÃ³w}
+\section{Charakterystyka u¿ytkowników}
 
-Podczas tworzenia aplikacji przypisano potencjalnych uÅ¼ytkownikÃ³w
-do jednej z czterech rÃ³l, ktÃ³rych wymagania nastÄ™pnie poddano analizie:
+Podczas tworzenia aplikacji przypisano potencjalnych u¿ytkowników
+do jednej z czterech ról, których wymagania nastêpnie poddano analizie:
 
 \begin{itemize}
    \item Administratorzy
       \begin{description}
-         \item[Opis] Osoby zarzÄ…dzajÄ…ce serwisem i dbajÄ…ce o jego bezpieczeÅ„stwo.
-         \item[Potrzeby] Interfejs zapewniajÄ…cy wygodne narzÄ™dzia do 
-            administracji systemem, pozwalajÄ…cy dokonywaÄ‡ typowych operacji 
-            przez przeglÄ…darkÄ™.
+         \item[Opis] Osoby zarz±dzaj±ce serwisem i dbaj±ce o jego
+bezpieczeñstwo.
+         \item[Potrzeby] Interfejs zapewniaj±cy wygodne narzêdzia do 
+            administracji systemem, pozwalaj±cy dokonywaæ typowych operacji 
+            przez przegl±darkê.
       \end{description}
    \item Studenci
       \begin{description}
-         \item[Opis] Studenci zapisani na kursy prowadzone przy uÅ¼yciu platformy.
-         \item[Potrzeby] Intuicyjny i prosty w obsÅ‚udze interfejs zapewniajÄ…cy: 
-            wygodny dostÄ™p do materiaÅ‚Ã³w, moÅ¼liwoÅ›Ä‡ przesÅ‚ania prac domowych 
-            prowadzÄ…cemu, wglÄ…d w wyniki kursu; przejrzysta szata graficzna, 
+         \item[Opis] Studenci zapisani na kursy prowadzone przy u¿yciu
+platformy.
+         \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy: 
+            wygodny dostêp do~materia³ów, mo¿liwo¶æ przes³ania prac domowych 
+            prowadz±cemu, wgl±d w wyniki kursu; przejrzysta szata graficzna, 
             integracja z serwisami USOS. 
       \end{description}  
    \item Byli studenci
       \begin{description}
-         \item[Opis] Osoby, zapisane na kursy prowadzone przy uÅ¼yciu platformy, 
-            ktÃ³re przestaÅ‚y byÄ‡ studentami.
-         \item[Potrzeby] Intuicyjny i prosty w obsÅ‚udze interfejs zapewniajÄ…cy: 
-            wygodny dostÄ™p do materiaÅ‚Ã³w oraz wglÄ…d w wyniki kursu; przejrzysta 
+         \item[Opis] Osoby, zapisane na kursy prowadzone przy u¿yciu platformy, 
+            które przesta³y byæ studentami.
+         \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy: 
+            wygodny dostêp do materia³ów oraz wgl±d w wyniki kursu; przejrzysta 
             szata graficzna.
       \end{description}  
-   \item ProwadzÄ…cy zajÄ™cia
+   \item Prowadz±cy zajêcia
       \begin{description}
-         \item[Opis] Pracownicy Uniwersytetu Warszawskiego prowadzÄ…cy zajÄ™cia 
-            przy uÅ¼yciu platformy.
-         \item[Potrzeby] Intuicyjny i prosty w obsÅ‚udze interfejs zapewniajÄ…cy 
-            moÅ¼liwoÅ›Ä‡: ograniczenia dostÄ™pu do kursu wybranej grupie
-            studentÃ³w, publikacji materiaÅ‚Ã³w i wynikÃ³w kursu, zadania i 
-            przyjÄ™cia prac domowych; integracja z serwisami USOS, przejrzysta 
+         \item[Opis] Pracownicy Uniwersytetu Warszawskiego prowadz±cy zajêcia 
+            przy u¿yciu platformy.
+         \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy 
+            mo¿liwo¶æ: ograniczenia dostêpu do kursu wybranej grupie
+            studentów, publikacji materia³ów i wyników kursu, zadania i 
+            przyjêcia prac domowych; integracja z serwisami USOS, przejrzysta 
             szata graficzna.
       \end{description}  
 \end{itemize}
 
 %
-%  MoÅ¼liwoÅ›ci programu. PoszczegÃ³lne funkcje powinny byÄ‡ sekcjami tego
-%  rozdziaÅ‚u.
+%  Mo¿liwo¶ci programu. Poszczególne funkcje powinny byæ sekcjami tego
+%  rozdzia³u.
 %
-\chapter{MoÅ¼liwoÅ›ci systemu}
+\chapter{Mo¿liwo¶ci systemu}
 
-Obecnie aplikacja Goodle oferuje uÅ¼ytkownikom nastÄ™pujÄ…ce funkcje:
+Obecnie aplikacja Goodle oferuje u¿ytkownikom nastêpuj±ce funkcje:
 
-\section{Tworzenie i administracja kursem, synchronizacja z USOS}
+\section{Tworzenie kursu i administracja, synchronizacja z USOS}
 
-KaÅ¼dy uÅ¼ytkownik Goodle ma moÅ¼liwoÅ›Ä‡ utworzenia zajÄ™Ä‡ poprzez klikniÄ™cie
-przycisku "StwÃ³rz kurs" w lewym panelu. Powstawowymi operacjami na 
-utworzonym kursie sÄ… zmiana jego nazwy oraz semestru i roku szkolnego, 
-w ktÃ³rym odbywajÄ… siÄ™ zajÄ™cia. Kurs w Goodle, podobnie jak na Uniwersytecie
-Warszawskim moÅ¼e odbywaÄ‡ siÄ™ w semestrze zimowym, letnim lub byÄ‡ caÅ‚oroczny.
-DomyÅ›lnie kurs zostaje przypisany do aktualnego semestru.
-ZakÅ‚adka "Informacje" umoÅ¼liwia dodatkowo dodanie opisu kursu oraz zwiÄ…zanej
+Ka¿dy u¿ytkownik Goodle ma mo¿liwo¶æ utworzenia zajêæ poprzez klikniêcie
+przycisku \linebreak \emph{Stwórz~kurs} w~lewym panelu. Podstawowymi operacjami
+na 
+utworzonym kursie s± zmiana jego nazwy oraz semestru i roku szkolnego, 
+w którym odbywaj± siê zajêcia. Kurs w Goodle, podobnie jak na Uniwersytecie
+Warszawskim mo¿e odbywaæ siê w semestrze zimowym, letnim lub byæ ca³oroczny.
+Domy¶lnie kurs zostaje przypisany do aktualnego semestru.
+Zak³adka \emph{Informacje} umo¿liwia dodatkowo dodanie opisu kursu oraz zwi±zanej
 z nim bibliografii.
 
-ZdaÅ¼a siÄ™ czÄ™sto, Å¼e tworzony kurs posiada swÃ³j odpowiednik w USOS. W takim
-przypadku, zamiast wpisywaÄ‡ dane rÄ™cznie, prowadzÄ…cy ma moÅ¼liwoÅ›Ä‡ pobrania
+Zdarza siê czêsto, ¿e tworzony kurs posiada swój odpowiednik w USOS. W takim
+przypadku, zamiast wpisywaæ dane rêcznie, prowadz±cy ma mo¿liwo¶æ pobrania
 ich z systemu.
 
-\section{Wyszukiwanie kursÃ³w}
+\section{Wyszukiwanie kursów}
 
-MoÅ¼liwe jest wyszukiwanie zajÄ™Ä‡ uÅ¼ywajÄ…c panelu znajdujÄ…cego
-siÄ™ u gÃ³ry strony. W trakcie wpisywania, aplikacja wspiera uÅ¼ytkownika,
-podpowiadajÄ…c pasujÄ…ce nazwy. 
+Mo¿liwe jest wyszukiwanie zajêæ u¿ywaj±c panelu znajduj±cego
+siê u góry strony. W trakcie wpisywania, aplikacja wspiera u¿ytkownika,
+podpowiadaj±c pasuj±ce nazwy. 
 
-Na liÅ›cie wynikÃ³w wyszukiwania podana jest nie tylko nazwa kursu, 
-ale rÃ³wnieÅ¼ jego semestr i rok szkolny, co pozwala Å‚atwo odrÃ³Å¼niÄ‡ zajÄ™cia z 
-danego przedmiotu prowadzone w kolejnych latach.  
+Na li¶cie wyników wyszukiwania podana jest nie tylko nazwa kursu, 
+ale równie¿ jego semestr i rok szkolny, co pozwala ³atwo odró¿niæ zajêcia z 
+danego przedmiotu prowadzone w~kolejnych latach.  
 
-\section{Rejestracja na kurs i zarzÄ…dzanie uÅ¼ytkownikami}
+\section{Rejestracja na kurs i zarz±dzanie u¿ytkownikami}
 
-Aby prowadzenie zajÄ™Ä‡ miaÅ‚o sens, do kursu powinni doÅ‚Ä…czyÄ‡ uczestnicy. 
-Nowoutworzony kurs nie jest ukryty - uÅ¼ytkownicy mogÄ… go wyszukaÄ‡ i obejrzeÄ‡
-informacje na jego temat, jednak aby uzyskaÄ‡ wglÄ…d w dodane materiaÅ‚y, prace
-domowe czy listÄ™ uczestnikÃ³w, konieczne jest pomyÅ›lne przejÅ›cie procesu 
+Aby prowadzenie zajêæ mia³o sens, do kursu powinni do³±czyæ uczestnicy. 
+Nowoutworzony kurs nie jest ukryty -- u¿ytkownicy mog± go wyszukaæ i obejrzeæ
+informacje na jego temat, jednak aby uzyskaæ wgl±d w dodane materia³y, prace
+domowe czy listê uczestników, konieczne jest pomy¶lne przej¶cie procesu 
 rejestracji.
 
-IstniejÄ… dwa poziomy zabezpieczenia kursu: otwarty i zabezpieczony hasÅ‚em. 
-Na zajÄ™cia uÅ¼ytkownik Goodle moÅ¼e zarejestrowaÄ‡ siÄ™, klikajÄ…c przycisk 
-"zarejestruj", znajdujÄ…cy siÄ™ obok nazwy kursu. W przypadku zajÄ™Ä‡ otwartych
-spowoduje to natychmiastowe doÅ‚Ä…czenie uÅ¼ytkownika do listy uczÄ™szczajÄ…cych.
-JeÅ¼eli prowadzÄ…cy zdefiniowaÅ‚ hasÅ‚o, do ukoÅ„czenia rejestracji konieczne bÄ™dzie
-podanie go. Lista kursÃ³w, w ktÃ³rych uÅ¼ytkownik uczestniczy, podobnie
-jak prowadzonych przez niego, pojawia siÄ™ w panelu po lewej stronie ekranu.
+Istniej± dwa poziomy zabezpieczenia kursu: otwarty i zabezpieczony has³em. 
+U¿ytkownik Goodle mo¿e zarejestrowaæ siê na zajêcia klikaj±c przycisk 
+\emph{zarejestruj} znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
+spowoduje to natychmiastowe do³±czenie u¿ytkownika do listy uczêszczaj±cych.
+Je¿eli prowadz±cy zdefiniowa³ has³o, do ukoñczenia rejestracji konieczne jest
+podanie go. Lista kursów, w których u¿ytkownik uczestniczy, podobnie
+jak lista kursów prowadzonych przez niego, pojawia siê w panelu po lewej 
+stronie ekranu.
 
-DomyÅ›lnie kurs nie jest chroniony hasÅ‚em, ale prowadzÄ…cy ma moÅ¼liwoÅ›Ä‡ zmiany
+Domy¶lnie kurs nie jest chroniony has³em, ale prowadz±cy ma mo¿liwo¶æ zmiany
 polityki w dowolnym momencie. 
 
-Wszyscy zarejestrowani majÄ… moÅ¼liwoÅ›Ä‡ obejrzenia listy wspÃ³Å‚uczestnikÃ³w, 
-dostÄ™pnej w zakÅ‚adce "Uczestnicy". Dodatkowo prowadzÄ…cy moÅ¼e
-wyrejestrowaÄ‡ wybranych uczestnikÃ³w z kursu, zaznaczajÄ…c ich na wymienionej
-liÅ›cie, a nastÄ™pnie klikajÄ…c "usuÅ„". 
+Wszyscy zarejestrowani maj± mo¿liwo¶æ obejrzenia listy wspó³uczestników, 
+dostêpnej w~zak³adce \emph{Uczestnicy}. Dodatkowo prowadz±cy mo¿e
+wyrejestrowaæ wybranych uczestników z~kursu, zaznaczaj±c ich na wymienionej
+li¶cie, a nastêpnie klikaj±c \emph{usuñ}. 
 
-\section{Dodawanie i przeglÄ…danie materiaÅ‚Ã³w}
+\section{Dodawanie i przegl±danie materia³ów}
 
-ProwadzÄ…cy kurs dysponuje moÅ¼liwoÅ›ciÄ… umieszczania na stronie kursu 
-materiaÅ‚Ã³w - tekstu zawierajÄ…cego na przykÅ‚ad streszczenie wykÅ‚adu czy
-dodatkowe informacje przeznaczone dla bardziej zaangaÅ¼owanych uczestnikÃ³w.
-KaÅ¼dy materiaÅ‚ moÅ¼e byÄ‡ widoczny dla uczestnikÃ³w lub ukryty - widoczny
-tylko dla prowadzÄ…cego. UmoÅ¼liwia do wczeÅ›niejsze przygotowanie informacji
-i udostÄ™pnianie ich studentom w dogodnym momencie. Dodatkowo materiaÅ‚y mogÄ… 
-zostaÄ‡ wzbogacone zaÅ‚adowanymi na serwer plikami, np.
-dokumentami pdf, obrazkami czy filmami.  
+Prowadz±cy kurs dysponuje mo¿liwo¶ci± umieszczania na stronie kursu 
+materia³ów -- tekstu zawieraj±cego na przyk³ad streszczenie wyk³adu czy
+dodatkowych informacji przeznaczonych dla~bardziej zaanga¿owanych uczestników.
+Ka¿dy materia³ mo¿e byæ widoczny dla uczestników lub ukryty -- widoczny
+tylko dla prowadz±cego. Ukrycie materia³ów mo¿liwia wcze¶niejsze przygotowanie 
+informacji i udostêpnianie ich studentom w dogodnym momencie. 
+Dodatkowo materia³y mog± zostaæ wzbogacone za³adowanymi na serwer plikami, np.
+dokumentami pdf, obrazkami, czy filmami.
 
-MateriaÅ‚y modyfikowane sÄ… w trybie edycji, do ktÃ³rej prowadzÄ…cy przechodzi
-klikajÄ…c "edytuj" w zakÅ‚adce "MateriaÅ‚y". Od tego momentu ma moÅ¼liwoÅ›Ä‡
-dodawania i usuwania materiaÅ‚Ã³w, zmieniania ich nazwy, treÅ›ci, widoczonoÅ›ci
-oraz Å‚adowania plikÃ³w. Zmiany zostanÄ… zapisane dopiero, kiedy prowadzÄ…cy
-zatwierdzi je klikajÄ…c "zapisz", dlatego teÅ¼ w kaÅ¼dej chwili moÅ¼e 
-wycofaÄ‡ siÄ™ z wprowadzonych modyfikacji wybierajÄ…c "anuluj".
+Materia³y modyfikowane s± w trybie edycji, do której prowadz±cy przechodzi
+klikaj±c \emph{edytuj} w zak³adce \emph{Materia³y}. Od tego momentu ma mo¿liwo¶æ
+dodawania i usuwania materia³ów, zmieniania ich nazwy, tre¶ci, widoczno¶ci
+oraz ³adowania plików. Zmiany zostan± zapisane dopiero, kiedy prowadz±cy
+zatwierdzi je klikaj±c \emph{zapisz}, dlatego te¿ w ka¿dej chwili mo¿e 
+wycofaæ siê z wprowadzonych modyfikacji wybieraj±c \emph{anuluj}.
 
-\section{Zadawanie i ocena prac domowych}
+\section{Zadawanie i ocenianie prac domowych}
+% TODO napisaæ ocenianie albo usun±æ z tytu³u
+Aby sprawdziæ umiejêtno¶ci uczestników i zachêciæ ich do regularnej pracy,
+prowadz±cy mo¿e dawaæ im zadania do wykonania w zak³adce \emph{Zadania}. 
+W wielu aspektach prace domowe funkcjonuj± podobnie jak materia³y: 
+tre¶æ zadania mo¿e zostaæ wzbogacona dodatkowymi plikami, a zadanie mo¿e byæ
+widoczne dla wszystkich lub tylko dla prowadz±cego. Modyfikacji
+zadañ dokonuje siê w specjalnym trybie edycji, w którym prowadz±cy mo¿e
+w ka¿dym momencie wycofaæ siê z wprowadzonych zmian. Dodatkowo, prowadz±cy
+mo¿e ustawiæ termin, do którego nale¿y przysy³aæ rozwi±zanie problemu.
 
-Aby sprawdziÄ‡ umiejÄ™tnoÅ›ci uczestnikÃ³w i zachÄ™ciÄ‡ ich do regularnej pracy,
-prowadzÄ…cy moÅ¼e dawaÄ‡ im zadania do wykonania w zakÅ‚adce "Zadania". 
-W wielu aspektach prace domowe funkcjonujÄ… podobnie jak materiaÅ‚y: 
-treÅ›Ä‡ zadania moÅ¼e zostaÄ‡ wzbogacona dodatkowymi plikami, zadanie moÅ¼e byÄ‡
-widoczne dla wszystkich lub tylko dla prowadzÄ…cego oraz modyfikacji
-zadaÅ„ dokonuje siÄ™ w specjalnym trybie edycji, w ktÃ³rym prowadzÄ…cy moÅ¼e
-w kaÅ¼dym momencie wycofaÄ‡ siÄ™ z wprowadzonych zmian. Dodatkowo, prowadzÄ…cy
-moÅ¼e ustawiÄ‡ termin, do ktÃ³rego naleÅ¼y przysyÅ‚aÄ‡ rozwiÄ…zanie problemu.
+% TODO to te¿ jest jeszcze do zaimplementowania! 
+Na specjalnej li¶cie prowadz±cy widzi, kto z uczestników umie¶ci³ plik
+i czy zrobi³ to w terminie. Mo¿e przejrzeæ zamieszczone rozwi±zania 
+i oceniæ je. Uzyskany wynik studenci zobacz± obok zadania. 
 
-Na specjalnej liÅ›cie prowadzÄ…cy widzi kto z uczestnikÃ³w umieÅ›ciÅ‚ plik
-i czy zrobiÅ‚ to w terminie. MoÅ¼e przejrzeÄ‡ zamieszczone rozwiÄ…zania 
-i oceniÄ‡ je. Uzyskany wynik studenci zobaczÄ… obok zadania.
-
-KaÅ¼de dodane, odkryte zadanie jest widoczne dla studentÃ³w nie tylko w zakÅ‚adce
-"Zadania", ale rÃ³wnieÅ¼ w prawym panelu wraz z terminem nadsyÅ‚ania prac, 
-gdzie uÅ¼ytkownicy widzÄ… wszystkie prace domowe z kursÃ³w, na ktÃ³re sÄ…
+Ka¿de dodane, odkryte zadanie jest widoczne dla studentów nie tylko w zak³adce
+\emph{Zadania}, ale równie¿ w prawym panelu wraz z terminem nadsy³ania prac, 
+gdzie u¿ytkownicy widz± wszystkie prace domowe z kursów, na które s±
 zarejestrowani.
 
 %
-%  Przypadki uÅ¼ycia. WaÅ¼niejsze przypadki powinny byÄ‡ sekcjami tego
-%  rozdziaÅ‚u. Ewentualne zdjÄ™cia interfejsu. 
+%  Przypadki u¿ycia. Wa¿niejsze przypadki powinny byæ sekcjami tego
+%  rozdzia³u. Ewentualne zdjêcia interfejsu. 
 %
-\chapter{MoÅ¼liwe scenariusze uÅ¼ycia}
+\chapter{Mo¿liwe scenariusze u¿ycia}
 
-RozdziaÅ‚ prezentuje najwaÅ¼niejsze przypadki uÅ¼ycia systemu Goodle. 
+Rozdzia³ prezentuje najwa¿niejsze przypadki u¿ycia systemu Goodle. 
 
-\section{Opis aktorÃ³w}
+\section{Opis aktorów}
 
-GÅ‚Ã³wnymi odbiorcami platformy Goodle sÄ… studenci - uczestnicy kursÃ³w - i 
-prowadzÄ…cy je pracownicy. Pracownicy dbajÄ… o zaÅ‚oÅ¼enie kursu w serwisie i 
-wzbogacenie go materiaÅ‚ami dotyczÄ…cymi zajÄ™Ä‡, ktÃ³rych widocznoÅ›Ä‡ okreÅ›lajÄ…. 
-MajÄ… prawo usuwaÄ‡ uczestnikÃ³w. SprawdzajÄ… i oceniajÄ… pracy domowe przesÅ‚ane 
-przez studentÃ³w. Studenci rejestrujÄ… siÄ™ na zajÄ™cia. KorzystajÄ… z materiaÅ‚Ã³w 
-zamieszczonych przez prowadzÄ…cych, wysyÅ‚ajÄ… rozwiÄ…zania zadaÅ„ domowych.
+G³ównymi odbiorcami platformy Goodle s± studenci --- uczestnicy kursów --- i 
+prowadz±cy je pracownicy. Pracownicy dbaj± o za³o¿enie kursu w serwisie i 
+wzbogacenie go materia³ami dotycz±cymi zajêæ, których widoczno¶æ okre¶laj±. 
+Maj± prawo usuwaæ uczestników. Sprawdzaj± i oceniaj± pracy domowe przes³ane 
+przez studentów. Studenci rejestruj± siê na zajêcia. Korzystaj± z materia³ów 
+zamieszczonych przez prowadz±cych, wysy³aj± rozwi±zania zadañ domowych.
 
-\section {Przypadki uÅ¼ycia dla wszystkich uÅ¼ytkownikÃ³w}
+\section {Przypadki u¿ycia dla wszystkich u¿ytkowników}
 
 \subsection{Logowanie do systemu}
 
-\subsubsection{ÅšcieÅ¼ka gÅ‚Ã³wna}
+\subsubsection{¦cie¿ka g³ówna}
 
 \begin{enumerate}
-   \item UÅ¼ytkownik wchodzi na stronÄ™ serwisu.
-   \item Serwis przenosi uÅ¼ytkownika na stronÄ™ logowania Google.
-   \item WchodzÄ…cy podaje swÃ³j login oraz hasÅ‚o konta Google.
-   \item System stwierdza poprawnoÅ›Ä‡ danych.
-   \iem UÅ¼ytkownik zostaje zalogowany do serwisu.
+   \item U¿ytkownik wchodzi na stronê serwisu.
+   \item Serwis przenosi u¿ytkownika na stronê logowania Google.
+   \item Wchodz±cy podaje swój login oraz has³o konta Google.
+   \item System stwierdza poprawno¶æ danych.
+   \item U¿ytkownik zostaje zalogowany do serwisu.
 \end{enumerate}
 
-\subsubsection{ÅšcieÅ¼ka alternatywna: podane dane sÄ… niepoprawne}
+\subsubsection{¦cie¿ka alternatywna: podane dane s± niepoprawne}
 
 \begin{enumerate}
    \item System odrzuca podane dane.
-   \item PowrÃ³t do 2
+   \item Powrót do 2
 \end{enumerate}
 
-\subsubsection{ÅšcieÅ¼ka alternatywna: konto nie jest powiÄ…zane z USOS}
+\subsubsection{¦cie¿ka alternatywna: konto nie jest powi±zane z USOS}
 
 \begin{enumerate}
-   \item System prosi o umoÅ¼liwienie aplikacji dostÄ™pu do danych z USOSa.
-   \item UÅ¼ytkownik podaje login i hasÅ‚o do USOSa.
-   \item System sprawdza poprawnoÅ›Ä‡ danych i loguje uÅ¼ytkownika.
+   \item System prosi o umo¿liwienie aplikacji dostêpu do danych z USOSa.
+   \item U¿ytkownik podaje login i has³o do USOSa.
+   \item System sprawdza poprawno¶æ danych i loguje u¿ytkownika.
 \end{enumerate}
 
 \subsection{Wylogowanie z systemu}
 
-UÅ¼ytkownik zalogowaÅ‚ siÄ™ do serwisu
+U¿ytkownik zalogowa³ siê do serwisu
 
 \begin{enumerate}
    \item Aktor prosi serwis o wylogowanie.
-   \item Serwis wylogowuje uÅ¼ytkownika.
+   \item Serwis wylogowuje u¿ytkownika.
 \end{enumerate}
 
 \subsection{Wyszukanie kursu}
 
-UÅ¼ytkownik zalogowaÅ‚ siÄ™ do serwisu.
+U¿ytkownik zalogowa³ siê do serwisu.
 
-\subsubsection{ÅšcieÅ¼ka gÅ‚Ã³wna}
-
-\begin{enumerate}
-   \item UÅ¼ytkownik podaje wyrazy kluczowe dla kursu, ktÃ³ry chciaÅ‚by odnaleÅºÄ‡.
-   \item System wyÅ›wietla wyniki wyszukiwania.
-   \item UÅ¼ytkownik wybiera jeden z nich i zostaje przeniesiony na stronÄ™ 
-      z materiaÅ‚ami danych zajÄ™Ä‡.
-\end{enumerate}
-
-\subsubsection{ÅšcieÅ¼ka alternatywna}
+\subsubsection{¦cie¿ka g³ówna}
 
 \begin{enumerate}
-   \item System informuje, Å¼e Å¼aden kurs pasujÄ…cy do podanych sÅ‚Ã³w kluczowych 
-      nie zostaÅ‚ znaleziony.
-   \item PowrÃ³t do 1.
+   \item U¿ytkownik podaje wyrazy kluczowe dla kursu, który chcia³by odnale¼æ.
+   \item System wy¶wietla wyniki wyszukiwania.
+   \item U¿ytkownik wybiera jeden z nich i zostaje przeniesiony na stronê 
+      z materia³ami danych zajêæ.
 \end{enumerate}
 
-\section{Przypadki uÅ¼ycia studenta}
+\subsubsection{¦cie¿ka alternatywna}
 
-W kaÅ¼dym z opisanych niÅ¼ej przypadkÃ³w uÅ¼ycia uÅ¼ytkownik jest zalogowany do
+\begin{enumerate}
+   \item System informuje, ¿e ¿aden kurs pasuj±cy do podanych s³ów kluczowych 
+      nie zosta³ znaleziony.
+   \item Powrót do 1.
+\end{enumerate}
+
+\section{Przypadki u¿ycia studenta}
+
+W ka¿dym z opisanych ni¿ej przypadków u¿ycia u¿ytkownik jest zalogowany do
 systemu.
 
-\subsection{Rejestracja na zajÄ™cia}
+\subsection{Rejestracja na zajêcia}
 
 \begin{enumerate}
-   \item UÅ¼ytkownik znajduje kurs, na ktÃ³ry chciaÅ‚by siÄ™ zapisaÄ‡.
-   \item Wchodzi na stronÄ™ kursu i wybiera opcjÄ™ zarejestruj. MoÅ¼e wczeÅ›niej
-      przeczytaÄ‡ informacje o zajÄ™ciach na odpowiedniej podstronie.
-   \item JeÅ¼eli kurs jest zabezpieczony hasÅ‚em, aktor podaje je.
-   \item System wykonuje Å¼Ä…danÄ… operacjÄ™ i informuje o jej pomyÅ›lnym zakoÅ„czeniu
-      lub odrzuceniu Å¼Ä…dania.
+   \item U¿ytkownik znajduje kurs, na który chcia³by siê zapisaæ.
+   \item Wchodzi na stronê kursu i wybiera opcjê zarejestruj. Mo¿e wcze¶niej
+      przeczytaæ informacje o zajêciach na odpowiedniej podstronie.
+   \item Je¿eli kurs jest zabezpieczony has³em, aktor podaje je.
+   \item System wykonuje ¿±dan± operacjê i informuje o jej pomy¶lnym zakoñczeniu
+      lub odrzuceniu ¿±dania.
 \end{enumerate} 
 
-\subsection{OglÄ…danie materiaÅ‚Ã³w}
+\subsection{Ogl±danie materia³ów}
 
-W opisanym scenariuszu zakÅ‚ada siÄ™, Å¼e uÅ¼ytkownik zarejestrowaÅ‚ siÄ™ na zajÄ™cia.
+W opisanym scenariuszu zak³ada siê, ¿e u¿ytkownik zarejestrowa³ siê na zajêcia.
 
 \begin{enumerate}
-   \item UÅ¼ytkownik wchodzi na stronÄ™ kursu.
-   \item System wyÅ›wietla stronÄ™ z materiaÅ‚ami.
-   \item Uczestnik zajÄ™Ä‡ przeglÄ…da interesujÄ…ce go informacje,
-      ewentualnie Å‚aduje pliki dodane przez prowadzÄ…cego
-      w zaÅ‚Ä…cznikach.
+   \item U¿ytkownik wchodzi na stronê kursu.
+   \item System wy¶wietla stronê z materia³ami.
+   \item Uczestnik zajêæ przegl±da interesuj±ce go informacje,
+      ewentualnie ³aduje pliki dodane przez prowadz±cego
+      w za³±cznikach.
       
 \end{enumerate} 
 
-\subsection{WysÅ‚anie rozwiÄ…zania zadania domowego}
+\subsection{Wys³anie rozwi±zania zadania domowego}
 
-W opisanym scenariuszu zakÅ‚ada siÄ™, Å¼e uÅ¼ytkownik zarejestrowaÅ‚ siÄ™ na zajÄ™cia.
+W opisanym scenariuszu zak³ada siê, ¿e u¿ytkownik zarejestrowa³ siê na zajêcia.
 
-\subsubsection{ÅšcieÅ¼ka gÅ‚Ã³wna}
+\subsubsection{¦cie¿ka g³ówna}
 
 \begin{enumerate}
-   \item Wybiera z listy prac domowych tÄ™, ktÃ³rej rozwiÄ…zanie chciaÅ‚by przesÅ‚aÄ‡.
-   \item Wskazuje na dysku plik z pracÄ… domowÄ….
-   \item System Å‚aduje wybrany plik.
-   \item UÅ¼ytkownik potwierdza chÄ™Ä‡ zamieszczenia go.
-   \item Serwis wysyÅ‚a zaÅ‚adowane rozwiÄ…zanie i informuje studenta o pomyÅ›lnym 
-      zakoÅ„czeniu operacji.
+   \item Wybiera z listy prac domowych tê, której rozwi±zanie chcia³by przes³aæ.
+   \item Wskazuje na dysku plik z prac± domow±.
+   \item System ³aduje wybrany plik.
+   \item U¿ytkownik potwierdza chêæ zamieszczenia go.
+   \item Serwis wysy³a za³adowane rozwi±zanie i informuje studenta o pomy¶lnym 
+      zakoñczeniu operacji.
 \end{enumerate}
 
-\section{Przypadki uÅ¼ycia pracownika}
+\section{Przypadki u¿ycia pracownika}
 
-W kaÅ¼dym z opisanych niÅ¼ej przypadkÃ³w uÅ¼ycia uÅ¼ytkownik jest zalogowany do
+W ka¿dym z opisanych ni¿ej przypadków u¿ycia u¿ytkownik jest zalogowany do
 systemu.
 
-\subsection{ZaÅ‚oÅ¼enie nowego kursu}
+\subsection{Za³o¿enie nowego kursu}
 
 \begin{enumerate}
-   \item UÅ¼ytkownik wybiera opcjÄ™ stwÃ³rz kurs.
-   \item System wykonuje Å¼Ä…danÄ… operacjÄ™ i przenosi prowadzÄ…cego na stronÄ™
-      nowoutworzonych zajÄ™Ä‡.
+   \item U¿ytkownik wybiera opcjê stwórz kurs.
+   \item System wykonuje ¿±dan± operacjê i przenosi prowadz±cego na stronê
+      nowoutworzonych zajêæ.
 \end{enumerate}
 
-W kolejnych scenariuszach zakÅ‚ada siÄ™, Å¼e aktor jest na stronie 
-prowadzonych zajÄ™Ä‡.
+W kolejnych scenariuszach zak³ada siê, ¿e aktor jest na stronie 
+prowadzonych zajêæ.
 
 \subsection{Synchronizacja kursu z USOS}
 
 \begin{enumerate}
-   \item Pracownik prosi system o integracjÄ™ kursu z USOS.
-   \item Podaje nazwÄ™ odpowiednika zajÄ™Ä‡ z USOS i wybiera odpowiedni
+   \item Pracownik prosi system o integracjê kursu z USOS.
+   \item Podaje nazwê odpowiednika zajêæ z USOS i wybiera odpowiedni
       kurs z propozycji pokazanych przez system.
-   \item Aplikacja ostrzega uÅ¼ytkownika o danych, ktÃ³re zostanÄ… nadpisane.
-   \item Aktor potwierdza decyzjÄ™.
-   \item Serwis importuje dane zajÄ™Ä‡ z USOS i informuje prowadzÄ…cego
-      o pomyÅ›lnym zakoÅ„czeniu operacji.
+   \item Aplikacja ostrzega u¿ytkownika o danych, które zostan± nadpisane.
+   \item Aktor potwierdza decyzjê.
+   \item Serwis importuje dane zajêæ z USOS i informuje prowadz±cego
+      o pomy¶lnym zakoñczeniu operacji.
 \end{enumerate}
 
-\subsection{UsuniÄ™cie uczestnikÃ³w zajÄ™Ä‡}
+\subsection{Usuniêcie uczestników zajêæ}
 
 \begin{enumerate}
-   \item ProwadzÄ…cy wchodzi na podstronÄ™ Uczestnicy.
-   \item Zaznacza na liÅ›cie uczestnikÃ³w tych, ktÃ³rych chciaÅ‚by usunÄ…Ä‡.
-      Potwierdza swojÄ… decyzjÄ™.
-   \item System wykonuje Å¼Ä…danÄ… operacjÄ™ i informuje o pomyÅ›lnym zakoÅ„czeniu.
+   \item Prowadz±cy wchodzi na podstronê Uczestnicy.
+   \item Zaznacza na li¶cie uczestników tych, których chcia³by usun±æ.
+      Potwierdza swoj± decyzjê.
+   \item System wykonuje ¿±dan± operacjê i informuje o pomy¶lnym zakoñczeniu.
 \end{enumerate}
 
-\subsection{Edycja materiaÅ‚Ã³w}
+\subsection{Edycja materia³ów}
 
 \begin{enumerate}
-   \item ProwadzÄ…cy wchodzi na podstronÄ™ MateriaÅ‚y i wybiera opcjÄ™ 
+   \item Prowadz±cy wchodzi na podstronê Materia³y i wybiera opcjê 
       edycji.
-   \item Dodaje nowe materiaÅ‚y, nadaje im tytuÅ‚y, dodaje treÅ›Ä‡. Wzbogaca
-      ewentualnie wybrane zasoby o pliki zaÅ‚adowane z dysku.
-   \item Usuwa zbÄ™dne materiaÅ‚y.
-   \item Odkrywa te materiaÅ‚y, ktÃ³re studenci powinni obejrzeÄ‡.
+   \item Dodaje nowe materia³y, nadaje im tytu³y, dodaje tre¶æ. Wzbogaca
+      ewentualnie wybrane zasoby o pliki za³adowane z dysku.
+   \item Usuwa zbêdne materia³y.
+   \item Odkrywa te materia³y, które studenci powinni obejrzeæ.
    \item Po wykonaniu wszystkich operacji zatwierdza swoje decyzje.
-   \item System zapisuje zmiany i informuje uÅ¼ytkownika o pomyÅ›lnym zakoÅ„czeniu
+   \item System zapisuje zmiany i informuje u¿ytkownika o pomy¶lnym zakoñczeniu
       operacji.
 \end{enumerate} 
 
 \subsection{Sprawdzenie i ocena pracy domowej studenta}
 
 \begin{enumerate}
-   \item Aktor wchodzi na podstronÄ™ Zadania i przewija widok do interesujÄ…cego
+   \item Aktor wchodzi na podstronê Zadania i przewija widok do interesuj±cego
       go zadania.
-   \item Rozwija listÄ™ przesÅ‚anych rozwiÄ…zaÅ„.
-   \item JeÅ¼eli jakakolwiek praca znajduje siÄ™ w systemie, uÅ¼ytkownik wskazuje 
-      jednÄ… z nich.
-   \item System wyÅ›wietla wybrane rozwiÄ…zanie.
-   \item Po sprawdzeniu zadania pracownik ocenia je i prosi platformÄ™ o 
+   \item Rozwija listê przes³anych rozwi±zañ.
+   \item Je¿eli jakakolwiek praca znajduje siê w systemie, u¿ytkownik wskazuje 
+      jedn± z nich.
+   \item System wy¶wietla wybrane rozwi±zanie.
+   \item Po sprawdzeniu zadania pracownik ocenia je i prosi platformê o 
       zatwierdzenie.
-   \item Portal zapisuje ocenÄ™ i informuje o pomyÅ›lnym zakoÅ„czeniu operacji.
+   \item Portal zapisuje ocenê i informuje o pomy¶lnym zakoñczeniu operacji.
 \end{enumerate}
 
 %
-%  UÅ¼yte narzÄ™dzia, biblioteki, technologie. PoszczegÃ³lne rozwiÄ…zania powinny 
-%  byÄ‡ sekcjami tego rozdziaÅ‚u. Ewentualne zdjÄ™cia.
+%  U¿yte narzêdzia, biblioteki, technologie. Poszczególne rozwi±zania powinny 
+%  byæ sekcjami tego rozdzia³u. Ewentualne zdjêcia.
 %
 \chapter{Zastosowane technologie}
 
-\section{Java}
-\section{Git}
 \section{Google Web Toolkit}
+Google Web Toolkit to zestaw narzêdzi programistycznych, pozwalaj±cych
+tworzyæ AJAXowe aplikacje sieciowe w~Javie.
+Strona klienta kompiluje siê do zopytmalizowanego JavaScriptu. 
+
+Google Web Toolkit jest przeznaczony do~tworzenia aplikacji jednostronowych.
+Platformy edukacyjne s± tradycyjnie aplikacjami wielostronowymi. Stawia³o to
+dodatkowe wyzwania i~utrudnienia w~czasie tworzenia Goodle.
+
+Odpowiednikiem nawigacji po wielu stronach jest nawigacjach przy u¿yciu
+identyfikatorów fragmentów (etykietek). Konieczno¶æ budowania aplikacji w taki
+sposób by³a jedn± z przyczyn spowolnienia tempa pracy i niezrealizowania
+wszystkich pocz±tkowo planowanych funkcjonalno¶ci. 
+
+\subsection{Java}
+Java jest wysokopoziomowym, zorientowanym obiektowo jêzykiem programowania. 
+Obecnie jest jednym z najpopularniejszych jêzyków, czêsto wykorzystywanym 
+do tworzenia aplikacji sieciowych\cite{pop}.
+
+\subsection{AJAX}
+AJAX (\textit{Asynchronous JavaScript and XML}) to technologia tworzenia
+aplikacji sieciowych, w którym komunikacja miêdzy klientem a serwerem mo¿e
+zachodziæ w sposób asynchroniczny i nie wymaga ponownego ³adowania ca³ej
+strony. 
+
 \section{Google App Engine}
-\section{Selenium}
+Google App Engine jest platform± do tworzenia i hostowania aplikacji. Dostarcza
+infrastrukturê do zarz±dzania ruchem na stronie i sporz±dzania statystyk
+obci±¿enia strony. Zapewnia skalowalno¶æ, bezpieczeñstwo i wydajno¶æ w tym
+zakresie. 
+
+Aplikacja hostowana na Google App Engine posiada ustalone dzienne limity 
+zasobów, takich jak liczba
+odwiedzin, rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
+aplikacja jest zatrzymywana do koñca dnia. Limity mo¿na zwiêkszaæ po uiszczeniu
+op³aty. W przypadku aplikacji takiej, jak Goodle maj±cej oko³o 1000
+potencjalnych
+u¿ytkowników korzystaj±cych aktywnie z platformy, standardowe dzienne limity
+powinny byæ wystarczaj±ce. 
+
+\subsection{Datastore}
+
+Google App Engine dostarcza rozproszon± bazê danych Datastore. 
+Jest to baza typu NoSQL,
+czyli baza która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
+bazie maj± rodzaj i~zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
+danego rodzaju, które s± filtrowane i sortowane na podstawie w³asno¶ci.
+
+Oczekuje siê, ¿e transakcje w bazie danych bêd± spe³nia³y w³asno¶ci ACID, czyli
+bêd± atomowe, spójne, izolowane i trwa³e. Datatore gwarantuje ACID w modelu OCC
+(\textit{optimistic concurrency control}), czyli przy za³o¿eniu, ¿e wiêkszo¶æ
+przeprowadzonych transakcji nie bêdzie nadpisywaæ wzajemnie danych. Je¶li tak
+siê zdarzy, powiedzie siê tylko pierwsza operacja zapisu, pozosta³e zwróc± b³±d.
+W Goodle ryzyko wyst±pienia transakcji, w których dwóch lub wiêcej u¿ytkowników
+bêdzie chcia³o edytowaæ jednocze¶nie te same dane, praktycznie nie istnieje.
+Przedmioty maj± jednego prowadz±cego, który jako jedyny ma uprawnienia
+do~edytowania
+powi±zanych z nim materia³ów. Gwarancje, które zapewnia Datastore s± wiêc
+wystarczaj±ce.
+
+\subsection{Blobstore} % TODO mo¿e kto¶ to sprawdziæ?
+Google App Engine zapewnia równie¿ serwis pozwalaj±cy umieszczaæ i~serwowaæ 
+du¿e pliki, które przekraczaj± rozmiar obiektów w Datastore -- Blobstore.
+Dziêki temu materia³y w naszej aplikacji mog± mieæ rozmiar do 32MB, poniewa¿ 
+taki jest rozmiar danych mo¿liwych do odczytania przez pojedyncze rz±danie. 
+
+\section{Biblioteki}
+\begin{itemize}
+ \item Gson -- biblioteka w Javie, która pozwala konwertowaæ obiekty w Javie na
+obiekty w~JSONie i odwrotnie. JSON (\textit{JavaScript Object Notation}) jest
+formatem danych stosowanym do przesy³ania danych w AJAxie.
+\item Hibernate-validator -- realizuje powi±zania miêdzy obiektami bazy danych
+a obiektami Javy, dodaje mo¿liwo¶æ nak³adania ograniczeñ na poszczególne pola.
+\item Objectify -- interfejs do Datastore.
+\item Requestfactory -- dostarcza mechanizmu komunikacji klient-serwer
+zorientowanego \linebreak na~pobieranie danych.
+\item Oauth-signpost -- biblioteka do podpisywania wiadomo¶ci HTTP zgodnie ze
+standardem Oauth-core, potrzebna do komunikacji z system USOS
+\item Validation-API -- pozwala deklarowaæ ograniczenia dla klas w Javie i
+sprawdza poprawno¶æ stworzonych obiektów.
+\end{itemize}
+
+\section{Inne narzêdzia}
+
+\subsection{Git}
+Git jest rozproszonym systemem kontroli wersji. Powsta³ z my¶l± o du¿ych
+projektach. Operacje commit, diff i log dzia³aj± szybciej ni¿ na g³ównym
+konkurencie Gita -- Subversion. Wolniejsza jest operacja klonowania
+repozytorium, ta operacja jednak wykonywana jest sporadycznie. 
+\subsection{Selenium}
+Selenium jest platform± programistyczn± do testowania aplikacji sieciowych.
+Pozwala przeprowadzaæ symulacje dzia³añ u¿ytkownia. Testy tworzy siê metod±
+nagrywania czynno¶ci wykonywanych na stronie za pomoc± przegl±darki i
+odtwarzaniu ich. 
+GWT posiada specjalny komponent do testowania przy pomocy Selenium. 
+\subsection{Eclipse}
+Eclipse to zintegrowane ¶rodowisko programistyczne wspomagaj±ce
+tworzenie programów w~Javie. Odpowiednie rozszerzenie, GPE (\textit{Google
+Plugin for Eclipse}), pozwala na~³atwiejsze pisanie projektów GWT i~proste
+umieszczenie aplikacji na Google App Engine. Dziêki temu znaczn± czê¶æ plików
+konfiguracyjnych mo¿na wygenerowaæ automatycznie. 
 
 %
-%  SposÃ³b pracy. Epicki epos o bohaterach, opis heroicznego wysiÅ‚ku, potu, krwi 
-%  i Å‚ez. RozdziaÅ‚ powinien byÄ‡ pisany heksametrem.
+%  Sposób pracy. Epicki epos o bohaterach, opis heroicznego wysi³ku, potu, krwi 
+%  i ³ez. Rozdzia³ powinien byæ pisany heksametrem.
 %
 \chapter{Metodyka pracy}
 
+W tym rozdziale opisany zosta³ system pracy nad aplikacj±, 
+podzia³ obowi±zków w zespole oraz stworzone dokumenty.
+
+\section{Zespó³}
+Nad aplikacj± oraz dokumentami pracowali¶my w 4-osobowym zespole. 
+Poniewa¿ organizacja pracy w kilkuosobowym zespole jest trudna, wybrali¶my 
+szefa projektu, który przydziela³ pozosta³ym cz³onkom zadania. Wszyscy cz³onkowie
+zespo³u zajmowali siê zarówno implementacj± poszczególnych funkcji aplikacji, 
+jak i tworzeniem dokumentów.
+\begin{itemize}
+\item{Marcin Jedynak -- szef projektu}\\
+Do zadañ szefa projektu nale¿a³a koordynacja pracy pozosta³ych cz³onków zespo³u, 
+w~tym przydzielanie najpilniejszych zadañ i~nadzorowanie postêpów pracy. 
+By³ równie¿ odpowiedzialny za komunikacjê z klientem. 
+Podobnie jak pozostali cz³onkowie zespo³u zajmowa³ siê implementacj± aplikacji, 
+w~szczególno¶ci baz± danych.
+\item{Julia Herman-I¿ycka}\\
+Zajmowa³a siê g³ównie obs³ug± plików.
+\item{Aleksandra Skrzypczak}\\
+By³a odpowiedzialna za wygl±d aplikacji.
+\item{Jakub Partyka}\\
+Do jego g³ównych zadañ nale¿a³o wykorzystanie USOSapi.
+
+\end{itemize}
+
 %
-%  W jakich iteracjach pracowano, jak wyglÄ…daÅ‚a komunikacja i podziaÅ‚
-%  zadaÅ„, jakie panowaÅ‚y zasady, kto byÅ‚ szefem projektu :)
+%  W jakich iteracjach pracowano, jak wygl±da³a komunikacja i podzia³
+%  zadañ, jakie panowa³y zasady, kto by³ szefem projektu :)
 %
 \section{System pracy}
+Pracowali¶my w krótkich iteracjach, zwykle trwaj±cych tydzieñ, 
+chocia¿ d³ugo¶æ iteracji zale¿a³a od wielko¶ci zadania do wykonania. 
+Do podzia³u zadañ oraz monitorowania postêpu prac u¿ywali¶my witryny 
+\emph{Trello} (\url{http://www.trello.com}). Dokumentacja powstawa³a 
+przy u¿yciu \emph{Google Docs} (\url{http://docs.google.com}), 
+natomiast jako repozytorium u¿ywali¶my repozytorium \emph{git} 
+dostêpnego na stronach \emph{Google} (\url{http://code.google.com}). 
+Do zebrania informacji o projekcie oraz organizacji materia³ów i dokumentów 
+u¿yli¶my \emph{witryny Google}, któr± za³o¿yli¶my pod adresem 
+\url{https://sites.google.com/site/goodleproject}.
+
 
 %
-%  Jakie dokumenty powstaÅ‚y, ich cel i zawartoÅ›Ä‡.
+%  Jakie dokumenty powsta³y, ich cel i zawarto¶æ.
 %
 \section{Dokumentacja}
+Podczas pracy nad projektem powsta³o wiele dokumentów opisuj±cych aplikacjê. 
+Mia³y one na celu ujednolicenie naszej koncepcji systemu, jak równie¿ 
+u³atwienie komunikacji z klientem. 
+Kolejno by³y to:
+\begin{enumerate}
+\item Wizja\\
+Dokument \textit{Wizja} powsta³ aby sprecyzowaæ za³o¿enia i cele projektu. 
+W wizji scharakteryzowali¶my potencjalnych u¿ytkowników systemu, opisali¶my 
+wymagania funkcjonalne i ograniczenia. 
+\item Przypadki u¿ycia\\
+Dokument \textit{Przypadki u¿ycia} mia³ na celu dok³adny opis funkcjonalno¶ci
+systemu. Dziêki temu dokumentowi ustalili¶my przebieg wykonania konkretnych
+czynno¶ci podczas korzystania z aplikacji przez poszczególne grupy 
+u¿ytkowników.
+\item{Dok³adny opis przypadku u¿ycia\\}
+Dok³adny opis przypadku u¿ycia \emph{Za³o¿enie nowego kursu} opisuje 
+krok po kroku tworzenie nowego kursu w naszym systemie. Ten dokument 
+napisali¶my, aby dok³adnie omówiæ scenariusze, które mog± wyst±piæ przy 
+realizacji tego przypadku u¿ycia. 
 
+\end{enumerate}
 
 %
-%  Ocena serwisu, wnioski (poprawa systemu pracy, unikniÄ™cie bÅ‚Ä™dÃ³w 
-%  w przyszÅ‚oÅ›ci).
+%  Ocena serwisu, wnioski (poprawa systemu pracy, unikniêcie b³êdów 
+%  w przysz³o¶ci).
 %
 \chapter{Podsumowanie}
 
+Podczas pracy nad aplikacj± Goodle zdobyli¶my wiele umiejêtno¶ci niezbêdnych 
+w~przysz³ej pracy jako programi¶ci. Przede wszystkim nauczyli¶my siê wspó³pracy 
+w zespole programistycznym -- rozwinêli¶my swoje umiejêtno¶ci komunikacji 
+oraz podzia³u zadañ w grupie programistów. Poznali¶my równie¿ wiele nowych, 
+innowacyjnych technologii, przydatnych przy tworzeniu aplikacji sieciowych. 
+
 %
-%  Jak mÃ³gÅ‚by dalej rozwijaÄ‡ siÄ™ produkt. Czego nie udaÅ‚o siÄ™ napisaÄ‡ i 
-%  nigdy nie zostanie napisane. ZdjÄ™cie czÅ‚onkÃ³w zespoÅ‚u nad morzem, uÅ¼ywajÄ…cych
-%  zdobytych dyplomÃ³w jako podkÅ‚adek pod gofry. 
+%  Jak móg³by dalej rozwijaæ siê produkt. Czego nie uda³o siê napisaæ i 
+%  nigdy nie zostanie napisane. Zdjêcie cz³onków zespo³u nad morzem, u¿ywaj±cych
+%  zdobytych dyplomów jako podk³adek pod gofry. 
 %
-\section{MoÅ¼liwe rozszerzenia}
+\section{Mo¿liwe rozszerzenia}
+Jak ka¿da aplikacja, projekt Goodle nie jest zamkniêty i wymaga dalszego 
+ulepszania. Obecne funkcjonalno¶ci Goodle pozwalaj± na wygodne korzystanie 
+z~systemu, jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji.
+Mamy nadziejê, ¿e bêdzie to mo¿liwe dziêki zwiêkszeniu mo¿liwo¶ci USOSapi oraz 
+informacji zwrotnej od u¿ytkowników systemu. 
+
+W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
+\begin{itemize}
+\item Tworzenie kursu na podstawie poprzedniej edycji\\
+Kopiowanie zawarto¶ci istniej±cego kursu do nowo utworzonego usprawni³oby 
+tworzenie kursu przez prowadz±cego zajêcia w kolejnych latach.
+\item Informowanie o zmianach w kursach\\
+U¿ytkownik Goodle móg³by widzieæ listê kursów, których zawarto¶æ zosta³a 
+zmodyfikowana od jego ostatniej wizyty.
+\item Pro¶ba o rejestracjê\\
+Dodatkowa forma rejestracji na kurs mog³aby u³atwiæ rejestracjê na kurs. 
+Student móg³by jednym klikniêciem wys³aæ pro¶bê do prowadz±cego zajêcia, który
+zobaczy³by j± odwiedzaj±c stronê kursu, lub nawet dostaj±c odpowiednio 
+wygenerowan± wiadomo¶æ e-mail.
+\end{itemize}
+
 
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
+\bibitem[Eclipse]{eclipse} Eclipse,
+\texttt{http://www.eclipse.org/}, 2012.
 
-%PrzykÅ‚ad wpisu do bibliografii
-%\bibitem[Bea65]{beaman} Juliusz Beaman, \textit{Morbidity of the Jolly
-%    function}, Mathematica Absurdica, 117 (1965) 338--9.
+\bibitem[GIT]{git} Git, 
+\texttt{http://git-scm.com/}
 
+\bibitem[GAE]{gae} Google App Engine,
+\texttt{https://developers.google.com/appengine/}, 2012.
 
+\bibitem[GWT]{gwt} Google Web Toolkit,
+\texttt{https://developers.google.com/web-toolkit/}, 2012.
+
+\bibitem[POP]{pop} Programming Language Popularity, 
+\texttt{http://langpop.com/}, 2011.
+
+\bibitem[Selenium]{selenium} SeleniumHQ -- Web Aplication Testing System, 
+\texttt{http://seleniumhq.org/}
 
 \end{thebibliography}
+
+%trzeba prawdopodobnie wymieniæ dokumenty jako za³±czniki
 
 \end{document}
 

@@ -84,20 +84,11 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	@Override
 	public void addFile(String url, String name) 
 	{
-		title.setText("AddFile(" + url + ", " + name + ")...");
-		
 		CourseRequest request = cf.getRequestFactory().courseRequest();
-		
 		UploadedFileProxy file = request.create(UploadedFileProxy.class);
 		file.setName(name);
 		file.setUrl(url);
-		
-		title.setText(title.getText() + " Proxy created.");
-		
 		request.uploadSolution(courseId, homeworkId, file).fire();
-		
-		title.setText(title.getText() + " Request fired.");
-		
 		addSolution(file);
 	}
 

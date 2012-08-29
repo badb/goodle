@@ -285,7 +285,8 @@ public class Course implements Serializable
     	EntityManager em = entityManager();
     	try
     	{
-    		em.persist(this);    	
+    		em.persist(this);
+    		em.refresh(this);
         	return this;
     	}
     	finally { em.close(); }
@@ -526,6 +527,7 @@ public class Course implements Serializable
     			
     			em.persist(h);
     			em.refresh(h);
+
     			newHomeworks.add(h.getId());
     		}
     		for (Long id : c.homeworks)

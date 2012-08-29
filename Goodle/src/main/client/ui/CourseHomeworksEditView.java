@@ -130,39 +130,35 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 	@UiHandler("save")
 	void onSaveHomeworksButtonClicked(ClickEvent event) 
 	{
-		try 
+		mayStop = true;
+		List<HomeworkProxy> updated = new ArrayList<HomeworkProxy>();
+		
+		for (int i = 0; i < homeworks.getRowCount(); ++i) 
 		{
-			mayStop = true;
-			List<HomeworkProxy> updated = new ArrayList<HomeworkProxy>();
-			
-			for (int i = 0; i < homeworks.getRowCount(); ++i) 
+			HomeworkEditView view = (HomeworkEditView) homeworks.getWidget(i, 0);
+			if (view != null) updated.add(view.getHomework());
+		}
+		
+		course = request.edit(course);
+		request.updateHomeworks(updated).using(course).with("attachedFiles").fire
+		(
+			new Receiver<CourseProxy>()
 			{
-				HomeworkEditView view = (HomeworkEditView) homeworks.getWidget(i, 0);
-				if (view != null) updated.add(view.getHomework());
-			}
-			
-			course = request.edit(course);
-			request.updateHomeworks(updated).using(course).with("attachedFiles").fire
-			(
-				new Receiver<CourseProxy>()
+				@Override
+				public void onSuccess(CourseProxy result)
 				{
-					@Override
-					public void onSuccess(CourseProxy result)
+					if (result != null)
 					{
-						if (result != null)
-						{
-							parent.setCourse(result);
-							String courseId = result.getId().toString();
-							cf.getPlaceController().goTo(new CoursePlace(courseId, "homeworks"));
-							NewHomeworkEvent event = new NewHomeworkEvent();
-							fireEvent(event);
-						}
-	
+						parent.setCourse(result);
+						String courseId = result.getId().toString();
+						cf.getPlaceController().goTo(new CoursePlace(courseId, "homeworks"));
+						NewHomeworkEvent event = new NewHomeworkEvent();
+						fireEvent(event);
 					}
+
 				}
-			); 
-		} 
-		catch (Exception e) { info.setText(e.getMessage()); }
+			}
+		); 
 	}
 
 }

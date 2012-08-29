@@ -596,11 +596,74 @@ prowadzonych zajêæ.
 %
 \chapter{Zastosowane technologie}
 
-\section{Java}
-\section{Git}
 \section{Google Web Toolkit}
+Google Web Toolkit to zestaw narzêdzi programistycznych, pozwalaj±cych
+tworzyæ AJAXowe aplikacje sieciowe w~Javie.
+Strona klienta kompiluje siê do zopytmalizowanego JavaScriptu. 
+
+Google Web Toolkit jest przeznaczony do~tworzenia aplikacji z~jednostronowych.
+Platformy edukacyjne s± tradycyjnie aplikacjami wielostronowymi. Stawia³o to
+dodatkowe wyzwania i~utrudnienia w~czasie tworzenia Goodle.
+
+Odpowiednikiem nawigacji po wielu stronach jest nawigacjach przy u¿yciu
+identyfikatorów fragmentów (etykietek). 
+\subsection{Java}
+Java jest wysokopoziomowym, zorientowanym obiektowo jêzykiem programowania. 
+Obecnie jest jednym z najpopularniejszych jêzyków.
+
+\subsection{AJAX}
+
 \section{Google App Engine}
-\section{Selenium}
+Google App Engine jest platform± do tworzenia i hostowania aplikacji. Dostarcza
+infrastrukturê do zarz±dzania ruchem na stronie, sporz±dzania statystyk
+obci±¿enia strony. Zapewnia skalowalno¶æ, bezpieczeñstwo i wydajno¶æ w tym
+zakresie. 
+
+Posiada ustalone dzienne limity zasobów, takich jak liczba
+odwiedzin,rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
+aplikacja jest zatrzymywana do koñca dnia. Limity mo¿na zwiêkszaæ po uiszczeniu
+op³at. W przypadku aplikacji takiej, jak Goodle maj±cej oko³o 1000 potencjalnych
+u¿ytkowników korzystaj±cych aktywnie z platformy, standardowe dzienne limity
+powinny byæ wystarczaj±ce. 
+
+\subsection{Datastore}
+
+AppEngine dostarcza rozproszon± bazê danych Datastore. Jest to baza typu NoSQL,
+czyli bazê która nie jest relacyjna i nie korzysta z jêzyka SQL
+
+\section{Biblioteki}
+\begin{itemize}
+ \item Gson -- biblioteka w Javie, która pozwala konwertowaæ objekty w Javie na
+obiekty w JSONie i odwrotnie. JSON (\textit{JavaScript Object Notation}) jest
+formatem danych stosowanym do przesy³ania danych w AJAxie.
+\item Gwt-servlet-deps
+\item Hibernate-validator
+\item Objectify -- interfejs do Datastore.
+\item Requestfactory -- dostarcza mechanizmu komunikacji klient-serwer
+zorientowanego na pobieranie danych.
+\item Signposte-core
+\item Validation-API
+\end{itemize}
+
+\section{Inne narzêdzia}
+
+\subsection{Git}
+Git jest rozproszonym systemem kontroli wersji. Powsta³ z my¶l± o du¿ych
+projektach. Operacje commit, diff i log dzia³aj± szybciej ni¿ na g³ównym
+konkurencie Gita -- Subversion. Wolniejsza jest operacja klonowania
+repozytorium, ta operacja jednak wykonywana jest sporadycznie. 
+\subsection{Selenium}
+Selenium jest platform± programistyczn± do testowania aplikacji sieciowych.
+Pozwala przeprowadzaæ symulacje dzia³añ u¿ytkownia. Testy tworzy siê metod±
+nagrywania czynno¶ci wykonywanych na stronie za pomoc± przegl±draki i
+odtwarzaniu ich. 
+GWT posiada specjalny komponent do testowania przy pomocy Selenium. 
+\subsection{Eclipse}
+Eclipse to zintegrowane ¶rodowisko programistyczne wspomagaj±ce
+tworzenie programów w~Javie. Odpowiednie rozszerzenie, GPE (\textit{Google
+Plugin for Eclipse}), pozwala na~³atwiejsze pisanie projektów GWT i~proste
+umieszczenie aplikacji na Google App Engine. Dziêki temu znaczn± czê¶æ plików
+konfiguracyjnych mo¿na wygenerowaæ automatycznie. 
 
 %
 %  Sposób pracy. Epicki epos o bohaterach, opis heroicznego wysi³ku, potu, krwi 
@@ -637,8 +700,20 @@ prowadzonych zajêæ.
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
+\bibitem[Eclipse]{eclipse} Eclipse,
+\texttt{http://www.eclipse.org/}, 2012.
+
+\bibitem[GIT]{git} Git, 
+\texttt{http://git-scm.com/}
+
+\bibitem[GAE]{gae} Google App Engine,
+\texttt{https://developers.google.com/appengine/}, 2012.
+
 \bibitem[GWT]{gwt} Google Web Toolkit,
 \texttt{https://developers.google.com/web-toolkit/}, 2012.
+
+\bibitem[Selenium]{selenium} SeleniumHQ -- Web Aplication Testing System, 
+\texttt{http://seleniumhq.org/}
 
 \end{thebibliography}
 

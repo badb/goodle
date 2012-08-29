@@ -24,4 +24,6 @@ public interface UploadedFileProxy extends ValueProxy
 	//void setAuthor(GoodleUserProxy author);
 	void setModule(ModuleProxy module);
 	void setUrl(String url);
+
+	//void setHomework(HomeworkProxy homework);
 }

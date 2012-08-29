@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import main.client.NewHomeworkEvent;
 import main.client.NewHomeworkEventHandler;
@@ -25,6 +26,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
+import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
 public class CourseHomeworksEditView extends AbstractCourseView implements HasHandlers
 {
@@ -143,7 +145,7 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 		}
 		
 		course = request.edit(course);
-		request.updateHomeworks(updated).using(course).fire
+		request.updateHomeworks(updated).using(course).with("materials").fire
 		(
 			new Receiver<CourseProxy>()
 			{
@@ -160,7 +162,13 @@ public class CourseHomeworksEditView extends AbstractCourseView implements HasHa
 						NewHomeworkEvent event = new NewHomeworkEvent();
 						fireEvent(event);
 					}
+					else Logger.getLogger("Goodle.log").severe("course null");
 
+				}
+				@Override
+				public void onFailure(ServerFailure error) {
+					// TODO Auto-generated method stub
+					Logger.getLogger("Goodle.log").severe(error.getMessage());
 				}
 			}
 		);

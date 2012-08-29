@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -295,7 +296,8 @@ public class Course implements Serializable
     	EntityManager em = entityManager();
     	try
     	{
-    		em.persist(this);    	
+    		em.persist(this);
+    		em.refresh(this);
         	return this;
     	}
     	finally { em.close(); }
@@ -438,6 +440,31 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
+    /*public Course addHomework(Homework homework) {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return null;
+    	
+    	if (!coordinators.contains(u.getId()) && !(members.contains(u.getId()))) return null;
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		Course c = em.find(Course.class, this.id);
+			u = em.merge(u);
+			
+    		homework.setAuthor(u.getId());
+    		homework.setVersion(1);
+    		homework.setCourse(c.getId());
+    		em.persist(homework);
+    		em.refresh(homework);
+    		c.homeworks.add(homework.getId());
+    		
+    		em.persist(c);
+        	return c;
+    	}
+    	finally { em.close(); }
+    }*/
+    
     public Course updateHomeworks(List<Homework> homeworks)
     {
     	GoodleUser u = GoodleUser.getCurrentUser();
@@ -459,18 +486,18 @@ public class Course implements Serializable
     			{
     				h.setAuthor(u.getId());
     				h.setVersion(1);
-    				h.setCourse(id);
+    				h.setCourse(c.getId());
     			}
-    			
     			em.persist(h);
     			em.refresh(h);
+
     			newHomeworks.add(h.getId());
     		}
-    		for (Long id : c.homeworks)
+    		/*for (Long id : c.homeworks)
     		{
     			Homework h = em.find(Homework.class, id);
     			em.remove(h);
-    		}
+    		}*/
     		c.homeworks = newHomeworks;
     		em.persist(c);
         	return c;

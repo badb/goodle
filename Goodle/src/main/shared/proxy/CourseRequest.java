@@ -38,5 +38,6 @@ public interface CourseRequest extends RequestContext
 
 	//InstanceRequest<CourseProxy, ModuleProxy> setMaterialProxies(ModuleProxy module, List<UploadedFileProxy> materials);
 	//InstanceRequest<CourseProxy, ModuleProxy> addComment(ModuleProxy module, MessageProxy comments);
+	//InstanceRequest<CourseProxy, CourseProxy> addHomework(HomeworkProxy homework);
 	
 }

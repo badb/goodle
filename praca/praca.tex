@@ -100,7 +100,9 @@ potencjalnych odbiorców stanowi± studenci i pracownicy akademiccy. Wa¿nym
 elementem systemu bêdzie zbiór rozwi±zañ alternatywnych w stosunku do
 funkcjonuj±cej platformy Moodle. Nie stworzono dotychczas produktu
 zapewniaj±cego wszystkie po¿±dane funkcje, co stanowi motywacjê do realizacji
-projektu.
+projektu. 
+% TODO czy tylko dla mnie to brzmi ¼le? Czasy przysz³y i przesz³y pomieszane 
+% (Julia)
 \end{abstract}
 
 \tableofcontents
@@ -153,6 +155,7 @@ narzêdzia i~technologie oraz~ewentualne przysz³e rozszerzenia.
       platforma~e-learningowa.
    \item[]\textbf{USOS}\\
       Uniwersytecki System Obs³ugi Studiów.
+% TODO dodaæ USOSapi?
 \end{description}
 
 %
@@ -173,28 +176,23 @@ Nastêpnie wskazano jakie funkcje powinien zapewniaæ alternatywny, idealny
 system. Na~koniec przedstawiono krótk± charakterystykê potencjalnych
 u¿ytkowników.
 
-%  TODO Uzupe³niæ po napisaniu rozdzia³u
 Rozdzia³ \emph{Mo¿liwo¶ci systemu} omawia dok³adnie funkcjonalno¶æ produktu. 
 Prze¶ledzono opcjê utworzenia i~zarz±dzania kursem, w~tym zsynchronizowanie 
 go z~ewentualnym odpowiednikiem w~USOS. Nastêpnie omówiono metody rejestracji
 na~kurs i~zarz±dzanie uczestnikami. Na~koniec przedstawiono mo¿liwo¶ci 
 zwi±zane z~publikowaniem materia³ów i~zadawaniem prac domowych.
 
-%  TODO Uzupe³niæ po napisaniu rozdzia³u
 W~kolejnym rozdziale omówiono \emph{mo¿liwe scenariusze u¿ycia}. 
 
-%  TODO Uzupe³niæ po napisaniu rozdzia³u
 Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}.
 Podana jest krótka charakterystyka Google Web Toolkit i Google App Engine,
 nastêpnie wymienione s± u¿ywane biblioteki. Na koniec wspomniane s± narzêdzia
 u³atwiaj±ce pracê.
 
-%  TODO Uzupe³niæ po napisaniu rozdzia³u
 W rozdziale \emph{Metodyka~pracy} opisane zosta³y praktyki i~narzêdzia, 
 z~których korzystali¶my podczas pracy nad produktem, jak równie¿ funkcje 
 cz³onków zespo³u oraz stworzone dokumenty.
 
-%  TODO Uzupe³niæ po napisaniu rozdzia³u
 W ostatnim rozdziale (\emph{Podsumowanie}) przedstawili¶my wnioski z pracy 
 nad projektem oraz perspektywy dalszego rozwoju aplikacji.
 
@@ -214,7 +212,9 @@ na stworzenie takiej aplikacji.
 Od momentu uruchomienia system USOS podlega kolejnym usprawnieniom. Niestety, 
 wprowadzane modyfikacje i dodawane modu³y nie s± w stanie nad±¿yæ za rosn±cymi 
 wymaganiami u¿ytkowników.
- 
+
+% TODO ustaliæ, czy piszemy o tym, ¿e podobno mieli przenie¶æ pocztê studenck± 
+% na Googla
 Jednym z oczekiwañ niektórych odbiorców jest integracja serwisu z kontem Google
 i 
 oferowanymi przez firmê narzêdziami. Dla wielu u¿ytkowników uci±¿liwy jest
@@ -232,10 +232,9 @@ materia³ów.
 
 Wynikiem wymienionych mankamentów jest niezadowolenie u¿ytkowników oraz 
 nieefektywne wykorzystanie potencja³u tkwi±cego w tego typu portalach. Celem 
-postawionym przed nowym systemem by³o rozwi±zanie ich, co uatrakcyjni³oby pracê 
-i zaoszczêdzi³o czas zarówno pracowników, jak i studentów oraz podnios³o
-komfort 
-kszta³cenia na Uniwesytecie Warszawskim.
+postawionym przed nowym systemem by³o rozwi±zanie ww. problemów, 
+co uatrakcyjni³oby pracê i zaoszczêdzi³o czas zarówno pracowników, 
+jak i studentów oraz podnios³o komfort kszta³cenia na Uniwesytecie Warszawskim.
 
 %
 %  Jakie powinny byæ cechy idealnego produktu, czyli do czego d±¿y³ projekt.
@@ -244,7 +243,7 @@ kszta³cenia na Uniwesytecie Warszawskim.
 
 Najwa¿niejszym celem, jaki stawiano sobie podczas realizacji systemu, by³o
 zapewnienie prostego, intuicyjnego interfejsu. Moodle oferowa³ u¿ytkownikom,
-szczególnie od strony prowadz±cego, rozmaite funkcje, np. podczas umieszczania
+szczególnie prowadz±cym, rozmaite funkcje, np. podczas umieszczania
 nowych materia³ów. Niestety powodowa³o to prze³adowanie aplikacji licznymi
 przyciskami i opcjami. Zapewniana elastyczno¶æ i szeroki wachlarz mo¿liwo¶ci
 nie skusi³y u¿ytkowników, którzy wiêkszo¶ci funkcji nie u¿ywali, a czêsto
@@ -262,6 +261,10 @@ to, nie istnia³a mo¿liwo¶æ transferu informacji np. danych kursu, listy
 u¿ytkowników czy wystawionych ocen. W Goodle postanowiono zapewniæ tak± 
 komunikacjê. Niestety te zamierzenia uda³o siê zrealizowaæ tylko
 czê¶ciowo, z uwagi za ograniczenia dostêpnego USOS API.   
+
+% TODO mo¿e dodaæ s³ówko o wykorzystaniu Googla, którego technologie wszyscy 
+% znaj±, wiêc to upraszcza korzystanie. Co prawda u¿ywamy w koñcu tylko Docsów 
+% i uwierzytelniania, ale u¿ycie Google Apps to te¿ by³ cel.
 
 %
 %  Jakie alternatywne rozwi±zania rozpatrywano i dlaczego zdecydowano siê
@@ -372,12 +375,13 @@ domowe czy listê uczestników, konieczne jest pomy¶lne przej¶cie procesu
 rejestracji.
 
 Istniej± dwa poziomy zabezpieczenia kursu: otwarty i zabezpieczony has³em. 
-Na zajêcia u¿ytkownik Goodle mo¿e zarejestrowaæ siê, klikaj±c przycisk 
-\emph{zarejestruj}, znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
+U¿ytkownik Goodle mo¿e zarejestrowaæ siê na zajêcia klikaj±c przycisk 
+\emph{zarejestruj} znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
 spowoduje to natychmiastowe do³±czenie u¿ytkownika do listy uczêszczaj±cych.
-Je¿eli prowadz±cy zdefiniowa³ has³o, do ukoñczenia rejestracji konieczne bêdzie
+Je¿eli prowadz±cy zdefiniowa³ has³o, do ukoñczenia rejestracji konieczne jest
 podanie go. Lista kursów, w których u¿ytkownik uczestniczy, podobnie
-jak prowadzonych przez niego, pojawia siê w panelu po lewej stronie ekranu.
+jak lista kursów prowadzonych przez niego, pojawia siê w panelu po lewej 
+stronie ekranu.
 
 Domy¶lnie kurs nie jest chroniony has³em, ale prowadz±cy ma mo¿liwo¶æ zmiany
 polityki w dowolnym momencie. 
@@ -393,9 +397,9 @@ Prowadz±cy kurs dysponuje mo¿liwo¶ci± umieszczania na stronie kursu
 materia³ów -- tekstu zawieraj±cego na przyk³ad streszczenie wyk³adu czy
 dodatkowych informacji przeznaczonych dla~bardziej zaanga¿owanych uczestników.
 Ka¿dy materia³ mo¿e byæ widoczny dla uczestników lub ukryty -- widoczny
-tylko dla prowadz±cego. Umo¿liwia to wcze¶niejsze przygotowanie informacji
-i udostêpnianie ich studentom w dogodnym momencie. Dodatkowo materia³y mog± 
-zostaæ wzbogacone za³adowanymi na serwer plikami, np.
+tylko dla prowadz±cego. Ukrycie materia³ów mo¿liwia wcze¶niejsze przygotowanie 
+informacji i udostêpnianie ich studentom w dogodnym momencie. 
+Dodatkowo materia³y mog± zostaæ wzbogacone za³adowanymi na serwer plikami, np.
 dokumentami pdf, obrazkami, czy filmami.
 
 Materia³y modyfikowane s± w trybie edycji, do której prowadz±cy przechodzi
@@ -406,7 +410,7 @@ zatwierdzi je klikaj±c \emph{zapisz}, dlatego te¿ w ka¿dej chwili mo¿e
 wycofaæ siê z wprowadzonych modyfikacji wybieraj±c \emph{anuluj}.
 
 \section{Zadawanie i ocenianie prac domowych}
-
+% TODO napisaæ ocenianie albo usun±æ z tytu³u
 Aby sprawdziæ umiejêtno¶ci uczestników i zachêciæ ich do regularnej pracy,
 prowadz±cy mo¿e dawaæ im zadania do wykonania w zak³adce \emph{Zadania}. 
 W wielu aspektach prace domowe funkcjonuj± podobnie jak materia³y: 
@@ -416,9 +420,10 @@ zadañ dokonuje siê w specjalnym trybie edycji, w którym prowadz±cy mo¿e
 w ka¿dym momencie wycofaæ siê z wprowadzonych zmian. Dodatkowo, prowadz±cy
 mo¿e ustawiæ termin, do którego nale¿y przysy³aæ rozwi±zanie problemu.
 
+% TODO to te¿ jest jeszcze do zaimplementowania! 
 Na specjalnej li¶cie prowadz±cy widzi, kto z uczestników umie¶ci³ plik
 i czy zrobi³ to w terminie. Mo¿e przejrzeæ zamieszczone rozwi±zania 
-i oceniæ je. Uzyskany wynik studenci zobacz± obok zadania. %tego jeszcze nie ma, nie?
+i oceniæ je. Uzyskany wynik studenci zobacz± obok zadania. 
 
 Ka¿de dodane, odkryte zadanie jest widoczne dla studentów nie tylko w zak³adce
 \emph{Zadania}, ale równie¿ w prawym panelu wraz z terminem nadsy³ania prac, 
@@ -632,8 +637,8 @@ wszystkich pocz±tkowo planowanych funkcjonalno¶ci.
 
 \subsection{Java}
 Java jest wysokopoziomowym, zorientowanym obiektowo jêzykiem programowania. 
-Obecnie jest jednym z najpopularniejszych jêzyków, czêsto wykorzystywanym w
-aplikacja \linebreak sieciowych\cite{pop}.
+Obecnie jest jednym z najpopularniejszych jêzyków, czêsto wykorzystywanym 
+do tworzenia aplikacji sieciowych\cite{pop}.
 
 \subsection{AJAX}
 AJAX (\textit{Asynchronous JavaScript and XML}) to technologia tworzenia
@@ -643,11 +648,12 @@ strony.
 
 \section{Google App Engine}
 Google App Engine jest platform± do tworzenia i hostowania aplikacji. Dostarcza
-infrastrukturê do zarz±dzania ruchem na stronie, sporz±dzania statystyk
+infrastrukturê do zarz±dzania ruchem na stronie i sporz±dzania statystyk
 obci±¿enia strony. Zapewnia skalowalno¶æ, bezpieczeñstwo i wydajno¶æ w tym
 zakresie. 
 
-Posiada ustalone dzienne limity zasobów, takich jak liczba
+Aplikacja hostowana na Google App Engine posiada ustalone dzienne limity 
+zasobów, takich jak liczba
 odwiedzin, rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
 aplikacja jest zatrzymywana do koñca dnia. Limity mo¿na zwiêkszaæ po uiszczeniu
 op³aty. W przypadku aplikacji takiej, jak Goodle maj±cej oko³o 1000
@@ -657,10 +663,11 @@ powinny byæ wystarczaj±ce.
 
 \subsection{Datastore}
 
-AppEngine dostarcza rozproszon± bazê danych Datastore. Jest to baza typu NoSQL,
+Google App Engine dostarcza rozproszon± bazê danych Datastore. 
+Jest to baza typu NoSQL,
 czyli baza która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
 bazie maj± rodzaj i~zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
-danego rodzaju, filtrowane i sortowane na podstawie w³asno¶ci.
+danego rodzaju, które s± filtrowane i sortowane na podstawie w³asno¶ci.
 
 Oczekuje siê, ¿e transakcje w bazie danych bêd± spe³nia³y w³asno¶ci ACID, czyli
 bêd± atomowe, spójne, izolowane i trwa³e. Datatore gwarantuje ACID w modelu OCC
@@ -674,6 +681,12 @@ do~edytowania
 powi±zanych z nim materia³ów. Gwarancje, które zapewnia Datastore s± wiêc
 wystarczaj±ce.
 
+\subsection{Blobstore} % TODO mo¿e kto¶ to sprawdziæ?
+Google App Engine zapewnia równie¿ serwis pozwalaj±cy umieszczaæ i~serwowaæ 
+du¿e pliki, które przekraczaj± rozmiar obiektów w Datastore -- Blobstore.
+Dziêki temu materia³y w naszej aplikacji mog± mieæ rozmiar do 32MB, poniewa¿ 
+taki jest rozmiar danych mo¿liwych do odczytania przez pojedyncze rz±danie. 
+
 \section{Biblioteki}
 \begin{itemize}
  \item Gson -- biblioteka w Javie, która pozwala konwertowaæ obiekty w Javie na
@@ -683,7 +696,7 @@ formatem danych stosowanym do przesy³ania danych w AJAxie.
 a obiektami Javy, dodaje mo¿liwo¶æ nak³adania ograniczeñ na poszczególne pola.
 \item Objectify -- interfejs do Datastore.
 \item Requestfactory -- dostarcza mechanizmu komunikacji klient-serwer
-zorientowanego na~pobieranie danych.
+zorientowanego \linebreak na~pobieranie danych.
 \item Oauth-signpost -- biblioteka do podpisywania wiadomo¶ci HTTP zgodnie ze
 standardem Oauth-core, potrzebna do komunikacji z system USOS
 \item Validation-API -- pozwala deklarowaæ ograniczenia dla klas w Javie i
@@ -733,7 +746,7 @@ By³ równie¿ odpowiedzialny za komunikacjê z klientem.
 Podobnie jak pozostali cz³onkowie zespo³u zajmowa³ siê implementacj± aplikacji, 
 w~szczególno¶ci baz± danych.
 \item{Julia Herman-I¿ycka}\\
-Zajmowa³a siê g³ownie obs³ug± plików.
+Zajmowa³a siê g³ównie obs³ug± plików.
 \item{Aleksandra Skrzypczak}\\
 By³a odpowiedzialna za wygl±d aplikacji.
 \item{Jakub Partyka}\\
@@ -755,7 +768,7 @@ natomiast jako repozytorium u¿ywali¶my repozytorium \emph{git}
 dostêpnego na stronach \emph{Google} (\url{http://code.google.com}). 
 Do zebrania informacji o projekcie oraz organizacji materia³ów i dokumentów 
 u¿yli¶my \emph{witryny Google}, któr± za³o¿yli¶my pod adresem 
-\url{https://sites.google.com/site/goodleproject/}.
+\url{https://sites.google.com/site/goodleproject}.
 
 
 %
@@ -792,7 +805,7 @@ realizacji tego przypadku u¿ycia.
 
 Podczas pracy nad aplikacj± Goodle zdobyli¶my wiele umiejêtno¶ci niezbêdnych 
 w~przysz³ej pracy jako programi¶ci. Przede wszystkim nauczyli¶my siê wspó³pracy 
-w zespole programistycznym, rozwinêli¶my swoje umiejêtno¶ci komunikacji 
+w zespole programistycznym -- rozwinêli¶my swoje umiejêtno¶ci komunikacji 
 oraz podzia³u zadañ w grupie programistów. Poznali¶my równie¿ wiele nowych, 
 innowacyjnych technologii, przydatnych przy tworzeniu aplikacji sieciowych. 
 
@@ -804,9 +817,11 @@ innowacyjnych technologii, przydatnych przy tworzeniu aplikacji sieciowych.
 \section{Mo¿liwe rozszerzenia}
 Jak ka¿da aplikacja, projekt Goodle nie jest zamkniêty i wymaga dalszego 
 ulepszania. Obecne funkcjonalno¶ci Goodle pozwalaj± na wygodne korzystanie 
-z~systemu. Jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji 
-dziêki zwiêkszeniu mo¿liwo¶ci USOSapi oraz informacji zwrotnej od u¿ytkowników 
-systemu. W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
+z~systemu, jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji.
+Mamy nadziejê, ¿e bêdzie to mo¿liwe dziêki zwiêkszeniu mo¿liwo¶ci USOSapi oraz 
+informacji zwrotnej od u¿ytkowników systemu. 
+
+W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
 \begin{itemize}
 \item Tworzenie kursu na podstawie poprzedniej edycji\\
 Kopiowanie zawarto¶ci istniej±cego kursu do nowo utworzonego usprawni³oby 

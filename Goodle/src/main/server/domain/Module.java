@@ -51,9 +51,10 @@ public class Module implements Serializable
 	public void setAuthor(Long author) { this.author = author; }
 	
 	@NotNull
-    private String text;	
-    public String getText() { return text; }
-	public void setText(String text) {this.text = text; }
+	@Basic
+    private List<String> text = new ArrayList<String>();	
+    public List<String> getText() { return text; }
+	public void setText(List<String> text) {this.text = text; }
     
     private boolean isVisible;
     public boolean getIsVisible() { return isVisible; }

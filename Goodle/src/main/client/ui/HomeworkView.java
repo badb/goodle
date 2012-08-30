@@ -3,6 +3,7 @@ package main.client.ui;
 import java.util.Date;
 
 import main.client.ClientFactory;
+import main.shared.proxy.Converter;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
 import main.shared.proxy.UploadedFileProxy;
@@ -50,7 +51,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		upload.setParent(this);
 		
 		title.setText(homework.getTitle());
-		text.setText(homework.getText());
+		text.setText(Converter.getString(homework.getText()));
 		Date d = homework.getDeadline();
 		
 		if (d != null)

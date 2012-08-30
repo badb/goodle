@@ -1,6 +1,7 @@
 package main.client.ui;
 
 import main.client.ClientFactory;
+import main.shared.proxy.Converter;
 import main.shared.proxy.ModuleProxy;
 import main.shared.proxy.UploadedFileProxy;
 
@@ -35,7 +36,7 @@ public class ModuleView extends Composite {
 	{
 		
 		title.setText(module.getTitle());
-		text.setText(module.getText());
+		text.setText(Converter.getString(module.getText()));
 		if (module.getIsVisible())
 			visible.setText("Widoczny");
 		else

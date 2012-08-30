@@ -13,14 +13,14 @@ public interface ModuleProxy extends EntityProxy
 	Long getId();
 	String getTitle();
 	Long getAuthor();
-	String getText();
+	List<String> getText();
 	boolean getIsVisible();
 	
 	List<UploadedFileProxy> getAttachedFiles();
 	
 	void setTitle(String title);
 	void setAuthor(Long author);
-	void setText(String text);
+	void setText(List<String> text);
 	void setIsVisible(boolean isVisible);
 	
 	void setAttachedFiles(List<UploadedFileProxy> files);

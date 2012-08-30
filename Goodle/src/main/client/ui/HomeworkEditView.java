@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.shared.proxy.Converter;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
 import main.shared.proxy.UploadedFileProxy;
@@ -56,7 +57,7 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 	public HomeworkProxy getHomework()
 	{
 		homework.setTitle(title.getText());
-		homework.setText(text.getText());
+		homework.setText(Converter.getList(text.getText()));
 		homework.setDeadline(deadline.getValue());
 		homework.setIsVisible(isVisible.getValue());
 		homework.setAttachedFiles(newFiles);
@@ -75,7 +76,7 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 		
 		homework = request.create(HomeworkProxy.class);
 		homework.setTitle(course.getName() + ": Zadanie " + n.toString());
-		homework.setText("Edytuj treść");
+		homework.setText(Converter.getList("Edytuj treść"));
 		homework.setIsVisible(false);
 		homework.setAttachedFiles(new ArrayList<UploadedFileProxy>());
 		homework.setSolutions(new ArrayList<UploadedFileProxy>());
@@ -85,12 +86,12 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 	public void prepareView()
 	{
 		previousTitle = homework.getTitle();
-		previousText = homework.getText();
+		previousText = Converter.getString(homework.getText());
 		previousIsVisible = homework.getIsVisible();
 		previousDeadline = homework.getDeadline();
 		files = homework.getAttachedFiles();
 		title.setText(homework.getTitle());
-		text.setText(homework.getText());
+		text.setText(Converter.getString(homework.getText()));
 		if (previousDeadline != null)
 			deadline.setValue(homework.getDeadline());
 		isVisible.setValue(homework.getIsVisible());

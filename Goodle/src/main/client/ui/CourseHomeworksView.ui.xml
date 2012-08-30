@@ -8,7 +8,9 @@
         <g:FlowPanel  width="100%">
             <g:Label ui:field="info" />
 	        <g:Button ui:field="edit" ui:text="Edytuj" styleName="{style.courseButton}"/>
+			<g:HorizontalPanel styleName="{style.outerBox}">
 			<g:FlexTable ui:field="homeworks" width="100%"/>	
+			</g:HorizontalPanel>
 		</g:FlowPanel>
 		
 </ui:UiBinder>

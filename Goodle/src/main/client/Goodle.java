@@ -119,6 +119,7 @@ public class Goodle implements EntryPoint
         topPanel.addSuggestions();
         clientFactory.setTopView(topPanel);
         clientFactory.setRightView(rightPanel);
+        clientFactory.setLeftView(leftPanel);
         leftPanel.setClientFactory(clientFactory);
         rightPanel.setClientFactory(clientFactory);
         

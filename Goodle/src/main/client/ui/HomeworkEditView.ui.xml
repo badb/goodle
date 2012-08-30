@@ -6,13 +6,13 @@
 > 
 	<ui:style src="../resources/Goodle.css"/>
   
-	<g:HTMLPanel styleName='{style.module}'>
+	<g:VerticalPanel width="100%" styleName='{style.module}'>
 	    <my:EditLabel ui:field="title" /> 
 	   	<g:CheckBox ui:field="isVisible" /> <br />
 	    <my:EditLabel ui:field="text" /> <br />
 	    <dp:DatePicker ui:field="deadline" /> <br />
 	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 
-	</g:HTMLPanel>
+	</g:VerticalPanel>
 
 </ui:UiBinder> 

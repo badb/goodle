@@ -36,8 +36,8 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		
 		//TODO: usunąć tymczasowe zmiany nazwy komputera na localhost
 		
-		String localName = System.getProperty("computername");
-		return blobstoreService.createUploadUrl("/goodle/uploadservice").replace(localName, "127.0.0.1");
+		//String localName = System.getProperty("computername");
+		return blobstoreService.createUploadUrl("/goodle/uploadservice");//.replace(localName, "127.0.0.1");
 	}
 	
 

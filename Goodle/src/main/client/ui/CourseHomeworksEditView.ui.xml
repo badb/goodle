@@ -13,7 +13,7 @@
 			<g:VerticalPanel styleName="{style.outerBox}">
 			<g:Button ui:field="newHomework" text="Dodaj zadanie" styleName="{style.addButton}"/>
 			
-			<g:FlexTable width="100%" ui:field="homeworks" />
+			<g:FlexTable width="100%" ui:field="homeworks"/>
 			</g:VerticalPanel>
 		</g:FlowPanel>
 	</g:FlowPanel>

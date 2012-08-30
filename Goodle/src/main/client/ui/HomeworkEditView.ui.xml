@@ -3,10 +3,10 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:my="urn:import:main.client.ui"
 	xmlns:dp="urn:import:com.google.gwt.user.datepicker.client" 
->
+> 
 	<ui:style src="../resources/Goodle.css"/>
   
-	<g:HTMLPanel styleName='{style.homework}'>
+	<g:HTMLPanel styleName='{style.module}'>
 	    <my:EditLabel ui:field="title" /> 
 	   	<g:CheckBox ui:field="isVisible" /> <br />
 	    <my:EditLabel ui:field="text" /> <br />

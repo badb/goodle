@@ -225,8 +225,24 @@ public class CourseView extends Composite
 			{
 				CourseRequest request = clientFactory.getRequestFactory().courseRequest();
 				course = request.edit(course);
-				request.registerCurrentUser(null).using(course).fire();
-				onUserRegistered();
+				request.registerCurrentUser(null).using(course).fire(
+					new Receiver<Boolean>() 
+								{
+									@Override
+									public void onSuccess(Boolean response)
+									{
+										if (response) 
+										{
+											onUserRegistered();
+										} else {
+											Logger logger = Logger.getLogger("Goodle.Log");
+											logger.log(Level.SEVERE, "nie udalo sie zarejestrowac");
+										}
+									}
+								}
+						);
+				;
+//				onUserRegistered();
 			}
 			else
 			{

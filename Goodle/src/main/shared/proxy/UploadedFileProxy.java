@@ -4,26 +4,21 @@ import java.util.Date;
 
 import main.server.domain.UploadedFile;
 
-import com.google.web.bindery.requestfactory.shared.EntityProxy;
 import com.google.web.bindery.requestfactory.shared.ProxyFor;
 import com.google.web.bindery.requestfactory.shared.ValueProxy;
 
 @ProxyFor(UploadedFile.class)
 public interface UploadedFileProxy extends ValueProxy
 {
-	//Long getId();
-	String getName();
-	 
-	//GoodleUserProxy getAuthor();
-	/*Date getCreated();
-	Date getModified();*/
+	Long getId();
+	String getName(); 
+	Long getAuthor();
+	String getAuthorName();
+	Date getUploaded();
 	String getUrl();
-	ModuleProxy getModule();
 	
 	void setName(String name);
-	//void setAuthor(GoodleUserProxy author);
-	void setModule(ModuleProxy module);
+	void setAuthor(Long id);
 	void setUrl(String url);
 
-	//void setHomework(HomeworkProxy homework);
 }

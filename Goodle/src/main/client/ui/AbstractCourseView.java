@@ -24,20 +24,26 @@ public abstract class AbstractCourseView extends Composite
 		}
 	}
 	
-	private Boolean owner;
+	protected Boolean owner = null;
 	public boolean isCurrUserOwner() 
 	{
 		if (course == null) return false;
 		
-		return (owner == null ? course.getCoordinators().contains(cf.getCurrentUser().getId()) : owner);
+		if (owner == null)
+			owner = course.getCoordinators().contains(cf.getCurrentUser().getId());
+		
+		return owner;
 	}
 	
-	private boolean member;
+	protected Boolean member = null;
 	public boolean isCurrUserMember() 
 	{
 		if (course == null) return false;
 		
-		return (owner == null ? course.getMembers().contains(cf.getCurrentUser().getId()) : member);
+		if (member == null)
+			member = course.getMembers().contains(cf.getCurrentUser().getId());
+		
+		return member;
 	}
 	
 	public void onCourseSet() { }

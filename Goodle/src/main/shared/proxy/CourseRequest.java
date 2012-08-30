@@ -35,9 +35,6 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, List<HomeworkProxy>> getHomeworksSafe();
 	InstanceRequest<CourseProxy, CourseProxy> updateModules(List<ModuleProxy> modules);
 	InstanceRequest<CourseProxy, CourseProxy> updateHomeworks(List<HomeworkProxy> homeworks);
+	Request<Void> uploadSolution(Long courseId, Long homeworkId, UploadedFileProxy file);
 
-	//InstanceRequest<CourseProxy, ModuleProxy> setMaterialProxies(ModuleProxy module, List<UploadedFileProxy> materials);
-	//InstanceRequest<CourseProxy, ModuleProxy> addComment(ModuleProxy module, MessageProxy comments);
-	//InstanceRequest<CourseProxy, CourseProxy> addHomework(HomeworkProxy homework);
-	
 }

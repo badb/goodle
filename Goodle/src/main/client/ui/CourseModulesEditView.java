@@ -16,7 +16,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -63,7 +62,7 @@ public class CourseModulesEditView extends AbstractCourseView
 		CourseRequest getRequest = cf.getRequestFactory().courseRequest();
 		course = getRequest.edit(course);
 				
-		getRequest.getModulesSafe().using(course).with("materials", "comments").fire
+		getRequest.getModulesSafe().using(course).with("attachedFiles").fire
 		(
 			new Receiver<List<ModuleProxy>>() 
 			{
@@ -90,7 +89,6 @@ public class CourseModulesEditView extends AbstractCourseView
 	@UiHandler("newModule")
 	void onNewModuleClick(ClickEvent event)
 	{	
-		try {
 		Integer rows = modules.getRowCount();
 		
 	    ModuleEditView view = new ModuleEditView();
@@ -102,7 +100,6 @@ public class CourseModulesEditView extends AbstractCourseView
 		modules.insertRow(rows);
 		modules.insertCell(rows, 0);
 	    modules.setWidget(rows, 0, view);
-		} catch(Exception e) { info.setText("new " + e.getMessage()); }
 	}
 	
 	@UiHandler("cancel")
@@ -126,7 +123,7 @@ public class CourseModulesEditView extends AbstractCourseView
 		}
 		
 		course = request.edit(course);
-		request.updateModules(updated).using(course).with("materials", "comments").fire
+		request.updateModules(updated).using(course).with("attachedFiles").fire
 		(
 			new Receiver<CourseProxy>()
 			{
@@ -135,11 +132,9 @@ public class CourseModulesEditView extends AbstractCourseView
 				{
 					if (result != null)
 					{
-						try {
 						parent.setCourse(result);
 						String courseId = result.getId().toString();
 						cf.getPlaceController().goTo(new CoursePlace(courseId, "modules"));
-						} catch(Exception e) { DialogBox db = new DialogBox(); db.setText(e.getMessage()); db.show(); }
 					}
 
 				}

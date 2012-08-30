@@ -8,10 +8,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -21,7 +19,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NoResultException;
-import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -30,8 +27,6 @@ import main.shared.JoinMethod;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
-
-import com.google.appengine.api.datastore.Text;
 
 @SuppressWarnings("serial")
 @Entity
@@ -132,12 +127,6 @@ public class Course implements Serializable
     public List<Long> getHomeworks() { return Collections.unmodifiableList(homeworks); }
     public void addHomework(Long id) { homeworks.add(id); }
     public void removeHomework(Long id) {homeworks.remove(id);}
-    
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Message> messages = new ArrayList<Message>();
-    public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
-    public void addMessage(Message message) { messages.add(message); }
-    public void removeMessage(Message message) { messages.remove(message); }
     
     public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
     
@@ -367,9 +356,16 @@ public class Course implements Serializable
     		for (Long id : modules)
     		{
     			Module m = em.find(Module.class, id);
-    			m.getMaterials().size();
-    			if (m.getIsVisible() || (!m.getIsVisible() && owner))
+
+    			if (m.getIsVisible() || owner)
     			{
+    				List<UploadedFile> files = new ArrayList<UploadedFile>();
+    				for (Long i : m.getAttachedFilesIds())
+    				{
+    					UploadedFile f = em.find(UploadedFile.class, i);
+    					files.add(f);
+    				}
+    				m.setAttachedFiles(files);
     				l.add(m);
     			}
     		}
@@ -393,8 +389,43 @@ public class Course implements Serializable
     		for (Long id : homeworks)
     		{
     			Homework h = em.find(Homework.class, id);
-    			if (h != null && (h.getIsVisible() || (!h.getIsVisible() && owner)))
+    			if (h.getIsVisible() || owner)
     			{
+        			List<UploadedFile> files = new ArrayList<UploadedFile>();
+        			List<UploadedFile> solutions = new ArrayList<UploadedFile>();
+        			UploadedFile mySolution = null;
+    				for (Long i : h.getAttachedFilesIds())
+    				{
+    					UploadedFile f = em.find(UploadedFile.class, i);
+    					files.add(f);
+    				}
+    				if (owner)
+    				{
+	    				for (Long i : h.getSolutionsIds())
+	    				{
+	    					UploadedFile f = em.find(UploadedFile.class, i);
+	    					GoodleUser author = em.find(GoodleUser.class, f.getAuthor());
+	    					f.setAuthorName(author.getFirstName() + " " + author.getLastName());
+	    					solutions.add(f);
+	    				}
+    				}
+    				else
+    				{
+	    				for (Long i : h.getSolutionsIds())
+	    				{
+	    					UploadedFile f = em.find(UploadedFile.class, i);
+	    					if (f.getAuthor().equals(u.getId()))
+	    					{
+	    						mySolution = f;
+		    					f.setAuthorName(u.getFirstName() + " " + u.getLastName());
+	    						break;
+	    					}
+	    				}
+	    				if (mySolution != null)
+	    					solutions.add(mySolution);
+    				}
+        			h.setSolutions(solutions);
+        			h.setAttachedFiles(files);
     				l.add(h);
     			}
     		}
@@ -420,9 +451,21 @@ public class Course implements Serializable
     		
     		for (Module m : modules)
     		{
+    	    	
     			if (!c.modules.remove(m.getId()))
     			{
     				m.setAuthor(u.getId());
+    			}
+    			List<UploadedFile> attachedFiles = m.getAttachedFiles();
+    			if (attachedFiles != null)
+    			{
+    				for (UploadedFile f : attachedFiles)
+    				{
+    					f.setAuthor(u.getId());
+    					em.persist(f);
+    					em.refresh(f);
+    					m.addAttachedFileId(f.getId());
+    				}
     			}
     			em.persist(m);
     			em.refresh(m);
@@ -439,31 +482,6 @@ public class Course implements Serializable
     	}
     	finally { em.close(); }
     }
-    
-    /*public Course addHomework(Homework homework) {
-    	GoodleUser u = GoodleUser.getCurrentUser();
-    	if (u == null) return null;
-    	
-    	if (!coordinators.contains(u.getId()) && !(members.contains(u.getId()))) return null;
-    	
-    	EntityManager em = entityManager();
-    	try
-    	{
-    		Course c = em.find(Course.class, this.id);
-			u = em.merge(u);
-			
-    		homework.setAuthor(u.getId());
-    		homework.setVersion(1);
-    		homework.setCourse(c.getId());
-    		em.persist(homework);
-    		em.refresh(homework);
-    		c.homeworks.add(homework.getId());
-    		
-    		em.persist(c);
-        	return c;
-    	}
-    	finally { em.close(); }
-    }*/
     
     public Course updateHomeworks(List<Homework> homeworks)
     {
@@ -485,19 +503,38 @@ public class Course implements Serializable
     			if (!c.homeworks.remove(h.getId()))
     			{
     				h.setAuthor(u.getId());
-    				h.setVersion(1);
-    				h.setCourse(c.getId());
+    				h.setCourse(id);
     			}
+    			List<UploadedFile> attachedFiles = h.getAttachedFiles();
+    			if (attachedFiles != null)
+    			{
+    				for (UploadedFile f : attachedFiles)
+    				{
+    					f.setAuthor(u.getId());
+    					em.persist(f);
+    					em.refresh(f);
+    					h.addAttachedFileId(f.getId());
+    				}
+    			}
+    			
+    			/*
+    			 *  Autosetting version does not work for homework. Maybe inheritance is the problem. 
+    			 */
+    			if (h.getVersion() == null)
+    				h.setVersion(1);
+    			else
+    				h.setVersion(h.getVersion() + 1);
+    			
     			em.persist(h);
     			em.refresh(h);
 
     			newHomeworks.add(h.getId());
     		}
-    		/*for (Long id : c.homeworks)
+    		for (Long id : c.homeworks)
     		{
     			Homework h = em.find(Homework.class, id);
     			em.remove(h);
-    		}*/
+    		}
     		c.homeworks = newHomeworks;
     		em.persist(c);
         	return c;
@@ -505,15 +542,50 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
-    /*public Module setMaterialProxies(Module module, List<UploadedFile> materials) {
-    
-    	module.setMaterials(materials);
-    	return module;
+    public static void uploadSolution(Long courseId, Long homeworkId, UploadedFile file)
+    {
+    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		Course c = em.find(Course.class, courseId);
+    		GoodleUser u = GoodleUser.getCurrentUser();
+    		
+        	if (u == null) return;
+        	
+        	if (!c.members.contains(u.getId())) return;
+    		
+    		if (!c.homeworks.contains(homeworkId)) return;
+    		
+    		Homework h = em.find(Homework.class, homeworkId);
+    		
+    		// Every student is limited to only one solution. Remove previous one if exists.
+    		Long old = null;
+    		for (Long id : h.getSolutionsIds())
+    		{
+    			UploadedFile f = em.find(UploadedFile.class, id);
+    			if (f.getAuthor().equals(u.getId()))
+    			{
+    				old = f.getId();
+    				em.remove(f);
+    				break;
+    			}
+    		}
+    		if (old != null)
+    		{
+    			h.removeSolutionId(old);
+    		}
+    			
+    		
+    		file.setAuthor(u.getId());
+    		em.persist(file);
+    		em.refresh(file);
+    		h.addSolutionId(file.getId());
+    		em.persist(h);
+    	}
+    	finally { em.close(); }
     }
-    public Module addComment(Module module, Message comment) {
-    	module.addComment(comment);
-    	return module;
-    }*/
+    
     
 	public static List<Homework> findUserHomeworks(List<Long> ids)
 	{

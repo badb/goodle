@@ -1,6 +1,5 @@
 package main.client.ui;
 
-import main.client.ClientFactory;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -17,38 +16,53 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class FileView extends Composite {
 
-	private static FileViewUiBinder uiBinder = GWT
-			.create(FileViewUiBinder.class);
+	private static FileViewUiBinder uiBinder = GWT.create(FileViewUiBinder.class);
+	
+	interface FileViewUiBinder extends UiBinder<Widget, FileView> { }
 
 	private boolean viewFile;
-	@UiField
-	Button showButton;
-	@UiField
-	Button downloadButton;
-	@UiField
-	Frame frame;
-	@UiField
-	Label title;
+	@UiField Button showButton;
+	@UiField Button downloadButton;
+	@UiField Frame frame;
+	@UiField Label title;
+	
 	private UploadedFileProxy file;
 	private String url = "";
-
-	private ClientFactory clientFactory;
 	
-	interface FileViewUiBinder extends UiBinder<Widget, FileView> {
+	private boolean authorNameAsTitle = false;
+	public void setAuthorNameAsTitle(boolean authorNameAsTitle) 
+	{
+		if (file != null)
+		{
+			if (authorNameAsTitle && (file.getAuthorName() != null))
+				title.setText(file.getAuthorName());
+			else
+				title.setText(file.getName());
+		}
+		this.authorNameAsTitle = authorNameAsTitle; 
+		
 	}
 
-	public FileView() {
-		initWidget(uiBinder.createAndBindUi(this));
-	}
 	
-	public void setUploadedFile(UploadedFileProxy file) {
+
+	public FileView() { initWidget(uiBinder.createAndBindUi(this)); }
+	
+	public void setUploadedFile(UploadedFileProxy file) 
+	{
 		this.file = file;
 		init();
 	}
 	
 	private void init() {
 		url = file.getUrl().substring(1);
-		title.setText(file.getName());
+		if (authorNameAsTitle && (file.getAuthorName() != null))
+		{
+			title.setText(file.getAuthorName());
+		}
+		else
+		{
+			title.setText(file.getName());
+		}		
 	}
 	
 
@@ -78,11 +92,6 @@ public class FileView extends Composite {
 	public void onDownloadButtonClick(ClickEvent event) {
 		Window.open(GWT.getHostPageBaseURL() + url, "_self", "");
 		//Window.Location.replace(GWT.getHostPageBaseURL() + url);
-	}
-
-	public void setClientFactory(ClientFactory clientFactory) {
-		this.clientFactory = clientFactory;
-		
 	}
 
 }

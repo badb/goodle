@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -21,7 +20,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.NoResultException;
-import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Version;
 
@@ -74,12 +72,12 @@ public class GoodleUser implements Serializable
 	public void setLogin(String login) { this.login = login; }
 
 	@NotBlank
-	private String firstName;
+	private String firstName = "Llama";
 	public String getFirstName() { return firstName; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }
 
 	@NotBlank
-	private String lastName;
+	private String lastName = "Llama";
 	public String getLastName() { return lastName; }
 	public void setLastName(String lastName) { this.lastName = lastName; }
 
@@ -99,19 +97,6 @@ public class GoodleUser implements Serializable
 	public Set<Long> getCoursesAttended() { return Collections.unmodifiableSet(coursesAttended); }
 	public void addCourseAttended(Course course) { coursesAttended.add(course.getId()); }
 	public void removeCourseAttended(Course course) { coursesAttended.remove(course.getId()); }
-
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<Message> messages = new ArrayList<Message>();
-	public List<Message> getMessages() { return Collections.unmodifiableList(messages); }
-	public void addMessage(Message message) { messages.add(message); }
-	public void removeMessage(Message message) { messages.remove(message); }
-	
-	@Basic
-	private Set<String> flags = new HashSet<String>();
-	public Set<String> getFlags() { return Collections.unmodifiableSet(flags); }
-	public void addFlag(String flag) { flags.add(flag); }
-	public boolean hasFlag(String flag) { return flags.contains(flag); }
-	public void removeFlag(String flag) { flags.remove(flag); }
 
 	public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
 

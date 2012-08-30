@@ -1,6 +1,5 @@
 package main.shared.proxy;
 
-import java.util.List;
 import java.util.Set;
 
 import main.server.domain.GoodleUser;
@@ -18,8 +17,6 @@ public interface GoodleUserProxy extends EntityProxy
 	String getEmail();
 	Set<Long> getCoursesLed();
 	Set<Long> getCoursesAttended();
-	List<MessageProxy> getMessages();
-	Set<String> getFlags();
 	
 	void setLogin(String login);
 	void setFirstName(String firstName);

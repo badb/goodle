@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.client.BlobService;
+
 import com.google.appengine.api.blobstore.BlobInfo;
 import com.google.appengine.api.blobstore.BlobInfoFactory;
 import com.google.appengine.api.blobstore.BlobKey;
@@ -37,7 +38,6 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		
 		String localName = System.getProperty("computername");
 		return blobstoreService.createUploadUrl("/goodle/uploadservice").replace(localName, "127.0.0.1");
-	
 	}
 	
 
@@ -46,7 +46,8 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 	// in the client
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+			throws ServletException, IOException 
+	{
 		BlobInfoFactory blobInfoFactory = new BlobInfoFactory(DatastoreServiceFactory.getDatastoreService());
 
 		BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
@@ -55,7 +56,6 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		resp.setHeader("content-type", blobInfo.getContentType());
 		resp.setHeader("content-disposition", "attachment;filename=" + blobInfo.getFilename());
 		blobstoreService.serve(blobKey, resp);
-		
 	}
 
 }

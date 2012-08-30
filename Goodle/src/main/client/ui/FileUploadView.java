@@ -1,8 +1,5 @@
 package main.client.ui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import main.client.BlobServiceAsync;
 import main.client.ClientFactory;
 
@@ -26,15 +23,14 @@ public class FileUploadView extends Composite {
 	private static FileUploadViewUiBinder uiBinder = GWT
 			.create(FileUploadViewUiBinder.class);
 
-	interface FileUploadViewUiBinder extends UiBinder<Widget, FileUploadView> {
-	}	
+	interface FileUploadViewUiBinder extends UiBinder<Widget, FileUploadView> { }	
 	
-	public FileUploadView() {
+	public FileUploadView() 
+	{
 		initWidget(uiBinder.createAndBindUi(this));
-		form.setAction(GWT.getModuleBaseURL() +"uploadservice");
+		form.setAction(GWT.getModuleBaseURL() + "uploadservice");
 		form.setEncoding(FormPanel.ENCODING_MULTIPART);
 		form.setMethod(FormPanel.METHOD_POST);
-		 
 	}
 
 	private ClientFactory clientFactory;
@@ -48,40 +44,45 @@ public class FileUploadView extends Composite {
 	@UiField Label info;
 	@UiField FileUpload uploadField;
 	
+	// For debugging purposes.
+	@UiField Label error;
+	
 	@UiHandler("submitButton")
-	public void submitButtonClickHandler(ClickEvent event) {
-		if (title.getText().equals("")) {
+	public void submitButtonClickHandler(ClickEvent event) 
+	{
+		if (title.getText().equals(""))
 			titleText = uploadField.getFilename();
-		} else {
+		else
 			titleText = title.getText();
-		}
-		blobService.getBlobStoreUploadUrl(new AsyncCallback<String>() {
-			@Override
-			public void onSuccess(String result) {
-				// Set the form action to the newly created
-				// blobstore upload URL
-				form.setAction(result.toString());
-				// Submit the form to complete the upload
-				form.submit();
-				form.reset();
-			}
+		
+		blobService.getBlobStoreUploadUrl
+		(
+			new AsyncCallback<String>() 
+			{
+				@Override
+				public void onSuccess(String result) 
+				{
+					// Set the form action to the newly created
+					// blobstore upload URL
+					form.setAction(result);
+					// Submit the form to complete the upload
+					form.submit();
+					form.reset();
+				}
 
-			@Override
-			public void onFailure(Throwable caught) {
-				caught.printStackTrace();
+				@Override
+				public void onFailure(Throwable caught) { caught.printStackTrace(); }
 			}
-		});
+		);
 	
 	}
 	
 	@UiHandler("form")
-	public void formSubmitComplete(SubmitCompleteEvent event) {
-			//info.setText("Sukces!" + event.getResults().trim());
-
-			String url = "/goodle/blobservice?blob-key=" + event.getResults().trim();
-			parent.addFile(url, titleText);
-			
-		}
+	public void formSubmitComplete(SubmitCompleteEvent event) 
+	{
+		String url = "/goodle/blobservice?blob-key=" + event.getResults().trim();
+		parent.addFile(url, titleText);
+	}
 
 	public ClientFactory getClientFactory() {
 		return clientFactory;
@@ -94,4 +95,4 @@ public class FileUploadView extends Composite {
 	public void setParent(FileContainerInterface parent) {
 		this.parent = parent;
 	}
-	}
+}

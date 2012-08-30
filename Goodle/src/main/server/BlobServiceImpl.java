@@ -14,6 +14,7 @@ import com.google.appengine.api.blobstore.BlobKey;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -34,10 +35,13 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		// Map the UploadURL to the uploadservice which will be called by
 		// submitting the FormPanel
 		
-		//TODO: usunąć tymczasowe zmiany nazwy komputera na localhost
-		
+		//TODO: zakomentować przed uploadem na appengine
 		String localName = System.getProperty("computername");
 		return blobstoreService.createUploadUrl("/goodle/uploadservice").replace(localName, "127.0.0.1");
+		
+		//TODO: odkomentować przed uploadem na appengine
+		//return blobstoreService.createUploadUrl("/goodle/uploadservice");
+		
 	}
 	
 

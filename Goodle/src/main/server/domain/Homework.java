@@ -33,9 +33,9 @@ public class Homework extends Module
     public void removeSolutionId(Long val) { solutionsIds.remove(val); }
     
     @Transient
-    private List<UploadedFile> solutions;
-    public List<UploadedFile> getSolutions() { return solutions; }
-    public void setSolutions(List<UploadedFile> files) { solutions = new ArrayList<UploadedFile>(files); }
+    private List<Solution> solutions;
+    public List<Solution> getSolutions() { return solutions; }
+    public void setSolutions(List<Solution> files) { solutions = new ArrayList<Solution>(files); }
     
     public static Homework findHomework(Long id) 
     {

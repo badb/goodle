@@ -54,12 +54,19 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 	{
 		BlobInfoFactory blobInfoFactory = new BlobInfoFactory(DatastoreServiceFactory.getDatastoreService());
 
-		BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
-		BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(blobKey);
+		try {
+			BlobKey blobKey = new BlobKey(req.getParameter("blob-key"));
+			BlobInfo blobInfo = blobInfoFactory.loadBlobInfo(blobKey);
 
-		resp.setHeader("content-type", blobInfo.getContentType());
-		resp.setHeader("content-disposition", "attachment;filename=" + blobInfo.getFilename());
-		blobstoreService.serve(blobKey, resp);
+			resp.setHeader("content-type", blobInfo.getContentType());
+			resp.setHeader("content-disposition", "attachment;filename=" + blobInfo.getFilename());
+			blobstoreService.serve(blobKey, resp);
+		}
+		catch (Exception e) {
+			resp.sendError(400);
+			blobstoreService.serve(null, resp);
+			
+		}
 	}
 
 }

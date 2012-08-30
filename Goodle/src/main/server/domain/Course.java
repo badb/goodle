@@ -392,8 +392,8 @@ public class Course implements Serializable
     			if (h.getIsVisible() || owner)
     			{
         			List<UploadedFile> files = new ArrayList<UploadedFile>();
-        			List<UploadedFile> solutions = new ArrayList<UploadedFile>();
-        			UploadedFile mySolution = null;
+        			List<Solution> solutions = new ArrayList<Solution>();
+        			Solution mySolution = null;
     				for (Long i : h.getAttachedFilesIds())
     				{
     					UploadedFile f = em.find(UploadedFile.class, i);
@@ -403,9 +403,10 @@ public class Course implements Serializable
     				{
 	    				for (Long i : h.getSolutionsIds())
 	    				{
-	    					UploadedFile f = em.find(UploadedFile.class, i);
+	    					Solution f = em.find(Solution.class, i);
 	    					GoodleUser author = em.find(GoodleUser.class, f.getAuthor());
-	    					f.setAuthorName(author.getFirstName() + " " + author.getLastName());
+	    					f.setAuthorName(author.getFirstName() + " " + author.getLastName()
+	    							+ " (" + u.getEmail() + ")");
 	    					solutions.add(f);
 	    				}
     				}
@@ -413,11 +414,12 @@ public class Course implements Serializable
     				{
 	    				for (Long i : h.getSolutionsIds())
 	    				{
-	    					UploadedFile f = em.find(UploadedFile.class, i);
+	    					Solution f = em.find(Solution.class, i);
 	    					if (f.getAuthor().equals(u.getId()))
 	    					{
 	    						mySolution = f;
-		    					f.setAuthorName(u.getFirstName() + " " + u.getLastName());
+		    					f.setAuthorName(u.getFirstName() + " " + u.getLastName()
+		    							+ " (" + u.getEmail() + ")");
 	    						break;
 	    					}
 	    				}
@@ -542,7 +544,7 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
-    public static void uploadSolution(Long courseId, Long homeworkId, UploadedFile file)
+    public static void uploadSolution(Long courseId, Long homeworkId, Solution file)
     {
     	
     	EntityManager em = entityManager();
@@ -563,7 +565,7 @@ public class Course implements Serializable
     		Long old = null;
     		for (Long id : h.getSolutionsIds())
     		{
-    			UploadedFile f = em.find(UploadedFile.class, id);
+    			Solution f = em.find(Solution.class, id);
     			if (f.getAuthor().equals(u.getId()))
     			{
     				old = f.getId();

@@ -15,10 +15,10 @@ public interface HomeworkProxy extends ModuleProxy
 	Date getDeadline();
 	Long getCourse();
 
-	List<UploadedFileProxy> getSolutions();
+	List<SolutionProxy> getSolutions();
 	
 	void setDeadline(Date deadline);
 	void setCourse(Long course);
 	
-	void setSolutions(List<UploadedFileProxy> solutions);
+	void setSolutions(List<SolutionProxy> solutions);
 }

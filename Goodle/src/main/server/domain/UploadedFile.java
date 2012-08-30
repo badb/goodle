@@ -5,11 +5,14 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -21,6 +24,8 @@ import com.google.appengine.api.blobstore.BlobKey;
 
 @SuppressWarnings("serial")
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorValue("UPLOADEDFILE")
 public class UploadedFile implements Serializable
 {
 	@Id

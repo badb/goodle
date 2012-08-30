@@ -1,10 +1,12 @@
 package main.client.ui;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
+import main.shared.proxy.SolutionProxy;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -73,7 +75,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 			 attachedFiles.setWidget(rows, 0, view);
 		}
 		
-		for (UploadedFileProxy f : homework.getSolutions()) 
+		for (SolutionProxy f : homework.getSolutions()) 
 			addSolution(f);
 		
 		if (isCurrUserOwner())
@@ -85,14 +87,19 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	public void addFile(String url, String name) 
 	{
 		CourseRequest request = cf.getRequestFactory().courseRequest();
-		UploadedFileProxy file = request.create(UploadedFileProxy.class);
+		
+		SolutionProxy file = request.create(SolutionProxy.class);
+
 		file.setName(name);
 		file.setUrl(url);
-		request.uploadSolution(courseId, homeworkId, file).fire();
+		file.setAuthor(cf.getCurrentUser().getId());
+		file.setChecked(false);
 		addSolution(file);
+		request.uploadSolution(courseId, homeworkId, file).fire();
+
 	}
 
-	private void addSolution(UploadedFileProxy file) 
+	private void addSolution(SolutionProxy solution) 
 	{
 		// Member can upload only one solution.
 		if (isCurrUserMember())
@@ -101,10 +108,12 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		int rows = solutions.getRowCount();
 		solutions.insertRow(rows);
 		solutions.insertCell(rows, 0);
-		FileView view = new FileView();
+		SolutionView view = new SolutionView();
+		view.setClientFactory(cf);
+		view.setCourse(course);
+		view.setSolution(solution);
 		if (isCurrUserOwner())
 			view.setAuthorNameAsTitle(true);
-		view.setUploadedFile(file);
 		solutions.setWidget(rows, 0, view);
 	}
 

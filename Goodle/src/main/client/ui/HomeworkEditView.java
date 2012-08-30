@@ -7,6 +7,7 @@ import java.util.List;
 import main.client.ClientFactory;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
+import main.shared.proxy.SolutionProxy;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -78,7 +79,7 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 		homework.setText("Edytuj treść");
 		homework.setIsVisible(false);
 		homework.setAttachedFiles(new ArrayList<UploadedFileProxy>());
-		homework.setSolutions(new ArrayList<UploadedFileProxy>());
+		homework.setSolutions(new ArrayList<SolutionProxy>());
 		prepareView();
 	}
 	
@@ -94,6 +95,11 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 		if (previousDeadline != null)
 			deadline.setValue(homework.getDeadline());
 		isVisible.setValue(homework.getIsVisible());
+		if (isVisible.getText().equals("Widoczny"))
+		{
+			isVisible.setText("Ukryty");
+		}
+		else isVisible.setText("Widoczny");
 		
 		upload.setParent(this);
 		refreshFiles();

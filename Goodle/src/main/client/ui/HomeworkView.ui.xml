@@ -5,7 +5,7 @@
 >
 	<ui:style src="../resources/Goodle.css"/>
     
-	<g:VerticalPanel width="100%" styleName='{style.homework}'>
+	<g:VerticalPanel styleName='{style.homework}'>
 	    <g:Label ui:field="visible" width="100%"/>
 	    <g:Label ui:field="title" width="100%"/>
 	    <g:Label ui:field="text" />

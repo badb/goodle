@@ -7,8 +7,8 @@
 
         <g:FlowPanel  width="100%">
             <g:Label ui:field="info" />
-	        <g:Button ui:field="edit" ui:text="Edytuj" />
-			<g:FlexTable ui:field="modules" width="100%"/>
+	        <g:Button ui:field="edit" ui:text="Edytuj" styleName="{style.courseButton}"/>
+			<g:FlexTable ui:field="modules" width="100%" />
 		</g:FlowPanel>
 		
 </ui:UiBinder>

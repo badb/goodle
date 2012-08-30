@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
@@ -32,6 +33,7 @@ public class UserCoursesView extends Composite
 	
 	interface UserCoursesViewUiBinder extends UiBinder<Widget, UserCoursesView> { }
 	
+	@UiField VerticalPanel userCoursesPanel;
 	@UiField Button createCourseButton;
 	CellList<CourseProxy> coordinatedList;
 	CellList<CourseProxy> attendedList;
@@ -45,6 +47,10 @@ public class UserCoursesView extends Composite
 	{
 		initLists();
 		initWidget(uiBinder.createAndBindUi(this));
+		userCoursesPanel.setCellHeight(createCourseButton, "50px");
+		userCoursesPanel.setCellHeight(coordinatedLabel, "50px");
+		userCoursesPanel.setCellHeight(attendedLabel, "50px");
+		userCoursesPanel.setCellHeight(coordinatedList, "0px");
 	}
 	
 	public void setClientFactory(ClientFactory clientFactory) { this.clientFactory = clientFactory;
@@ -66,7 +72,7 @@ public class UserCoursesView extends Composite
 				list.add(c);
 				coordinatedList.setRowData(list);
 				coordinatedLabel.setVisible(true);
-				
+				userCoursesPanel.setCellHeight(coordinatedList, "200px");
 				clientFactory.getCourseView().setCourse(c);
 				clientFactory.getPlaceController().goTo(new CoursePlace(c.getId().toString(), "modules"));
 			}
@@ -105,6 +111,7 @@ public class UserCoursesView extends Composite
 	
 	public void refreshCoordinatedList() {
 		coordinatedLabel.setVisible(false);
+		userCoursesPanel.setCellHeight(coordinatedList, "0px");
 		clientFactory.getRequestFactory().goodleUserRequest().getLedCourseProxies()
 			.using(clientFactory.getCurrentUser()).fire
 		(
@@ -117,6 +124,7 @@ public class UserCoursesView extends Composite
 					    coordinatedPanel.setWidget(coordinatedList);
 					    if (coordinatedList.getRowCount() > 0) {
 					    	coordinatedLabel.setVisible(true);
+							userCoursesPanel.setCellHeight(coordinatedList, "200px");
 					    }
 					}
 				}

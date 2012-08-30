@@ -6,12 +6,15 @@
 
         <g:FlowPanel width="100%">
 
-	        <g:Button ui:field="save" text="Zapisz zmiany" />
-	        <g:Button ui:field="cancel" text="Anuluj" />
+	        <g:Button ui:field="save" text="Zapisz zmiany" styleName="{style.courseButton}" />
+	        <g:Button ui:field="cancel" text="Anuluj" styleName="{style.courseButton}"/>
 		<g:FlowPanel width="100%">
 			<g:Label ui:field="info" />
-			<g:Button ui:field="newHomework" text="Dodaj zadanie"/>
+			<g:VerticalPanel styleName="{style.outerBox}">
+			<g:Button ui:field="newHomework" text="Dodaj zadanie" styleName="{style.addButton}"/>
+			
 			<g:FlexTable width="100%" ui:field="homeworks" />
+			</g:VerticalPanel>
 		</g:FlowPanel>
 	</g:FlowPanel>
 

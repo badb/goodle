@@ -5,7 +5,7 @@
 	<ui:style src="../resources/Goodle.css"/>
 	
 	<g:VerticalPanel ui:field="calendarPanel">
-		<g:Label ui:field="termsLabel">Nadchodzące terminy:</g:Label>
+		<g:Label ui:field="termsLabel" styleName='{style.calendarLabel}'>Nadchodzące terminy:</g:Label>
 	    <c:CellList ui:field="termsList"/>
 	</g:VerticalPanel> 
 		 

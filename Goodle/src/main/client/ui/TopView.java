@@ -51,7 +51,7 @@ public class TopView extends Composite implements NameChangedEventHandler
 		horizontalPanel.setCellWidth(userBox, "250px");
 		horizontalPanel.setCellWidth(logoutButton, "46px");
 		Image img = new Image("http://picol.org/images/icons/files/png/64/logout_64.png");
-		img.setPixelSize(20, 20);
+		img.setPixelSize(18, 18);
 		logoutButton.getElement().appendChild(img.getElement());
 	}
 	

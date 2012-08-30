@@ -4,12 +4,12 @@
         xmlns:c='urn:import:com.google.gwt.user.cellview.client' >
 	<ui:style src="../resources/Goodle.css"/>		
 	
-	<g:VerticalPanel height="100%">
+	<g:VerticalPanel height="100%" ui:field="userCoursesPanel">
 		<g:Button ui:field="createCourseButton" text="Stwórz kurs" styleName="{style.createButton}"/>
 		<g:Label ui:field="coordinatedLabel" visible="false"> Prowadzone kursy: </g:Label>
-		<g:ScrollPanel ui:field="coordinatedPanel" height="200px"></g:ScrollPanel>
+		<g:ScrollPanel ui:field="coordinatedPanel" styleName="{style.leftScrollList}"></g:ScrollPanel>
 		<g:Label ui:field="attendedLabel" visible="false"> Uczęszczasz na kursy: </g:Label>
-		<g:ScrollPanel ui:field="attendedPanel" height="200px"></g:ScrollPanel>
+		<g:ScrollPanel ui:field="attendedPanel" styleName="{style.leftScrollList}"></g:ScrollPanel>
 	</g:VerticalPanel>		
 	 
 </ui:UiBinder>

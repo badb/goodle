@@ -6,9 +6,9 @@
 	<ui:style src="../resources/Goodle.css"/>
     <g:FlowPanel>
 		<g:Label ui:field="courseName" styleName="{style.courseName}"/>
-		<g:Button ui:field="joinMethodAction" />
-		<g:Button ui:field="synchronizationButton" />
-		<my:CourseMenuView ui:field="courseMenu" />
+		<g:Button ui:field="joinMethodAction" styleName="{style.courseButton}"/>
+		<g:Button ui:field="synchronizationButton" styleName="{style.courseButton}"/>
+		<my:CourseMenuView ui:field="courseMenu" styleName="{style.courseMenu}"/>
 		<g:SimplePanel ui:field="currentView" styleName="{style.courseCurrentView}"/>
 	</g:FlowPanel>
 	

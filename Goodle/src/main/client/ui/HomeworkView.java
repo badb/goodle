@@ -144,13 +144,10 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		for (int i = 0; i < solutions.getRowCount(); i++) {
 			SolutionView view = (SolutionView) solutions.getWidget(i, 0);
 			SolutionProxy proxy = view.getSolution(request);
-			Logger.getLogger("Goodle.log").severe("updating proxy "+proxy.getId());
 			proxies.add(proxy);
 		}
 
-		course = request.edit(course);
-		//homework = request.edit(homework);
-		request.addHomeworkMark(homework.getId(), proxies.get(0)).using(course).with("solutions").fire();
+		request.addHomeworkMarks(homework.getId(), proxies).using(course).with("solutions").fire();
 	}
 	
 }

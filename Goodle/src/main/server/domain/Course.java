@@ -552,8 +552,6 @@ public class Course implements Serializable
     	
     	if (!coordinators.contains(u.getId())) return;
 
-		Logger.getLogger("Goodle.log").severe("początek "+solutions.get(0).getUrl());
-    	    	
     	EntityManager em = entityManager();
     	try
     	{
@@ -576,10 +574,8 @@ public class Course implements Serializable
     				s.setVersion(1);
     			else
     				s.setVersion(s.getVersion() + 1);
-    			Logger.getLogger("Goodle.log").severe("przed persist "+s.getId());
         		em.persist(s);
        			em.refresh(s);
-    			Logger.getLogger("Goodle.log").severe("po refresh "+s.getId());
     		}
     		em.persist(homework);
     		em.persist(c);
@@ -587,45 +583,7 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
-    public void addHomeworkMark(Long homeworkId, Solution s)
-    {
-    	GoodleUser u = GoodleUser.getCurrentUser();
-    	if (u == null) return;
-    	
-    	if (!coordinators.contains(u.getId())) return;
-    	    	
-    	EntityManager em = entityManager();
-    	try
-    	{
-    		Course c = em.find(Course.class, this.id);
-			//u = em.merge(u);
-			
-			if (!c.homeworks.contains(homeworkId)) return;
-    		
-			Homework homework = em.find(Homework.class, homeworkId);
-			
-    		
-    			//if (!homework.getSolutionsIds().contains(s.getId())) return;
-
-    			if (s.getMark() != null) {
-    				s.setChecked(true);
-    			}
-
-    			if (s.getVersion() == null)
-    				s.setVersion(1);
-    			else
-    				s.setVersion(s.getVersion() + 1);
-    			Logger.getLogger("Goodle.log").severe("przed persist "+s.getId());
-        		em.persist(s);
-       			em.refresh(s);
-    			Logger.getLogger("Goodle.log").severe("po refresh "+s.getId());
-    		
-    		//em.persist(homework);
-    		//em.persist(c);
-    	}
-    	finally { em.close(); }
-    }
-    
+        
     public static void uploadSolution(Long courseId, Long homeworkId, Solution file)
     {
     	

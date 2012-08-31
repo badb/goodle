@@ -39,7 +39,10 @@ public class EditLabel extends Composite implements HasValue<String>, HasValueCh
 	
 	private String text;
 	public String getText() { return text; }
-	public void setText(String text) { setValue(text); }
+	public void setText(String text) { 
+		if (text == null) setValue("");
+		else setValue(text); 
+	}
 	
 	private int maxLength = 1024;
 	public int getMaxLength() { return maxLength; }

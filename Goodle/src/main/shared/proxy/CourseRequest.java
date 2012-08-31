@@ -39,6 +39,7 @@ public interface CourseRequest extends RequestContext
 	Request<Void> uploadSolution(Long courseId, Long homeworkId, SolutionProxy file);
 	
 	InstanceRequest<CourseProxy, Void> addHomeworkMarks(Long homeworkId, List<SolutionProxy> solutions);
+	InstanceRequest<CourseProxy, Void> addHomeworkMark(Long homeworkId, SolutionProxy s);
     
 
 }

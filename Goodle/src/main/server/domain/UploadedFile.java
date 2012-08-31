@@ -78,19 +78,18 @@ public class UploadedFile implements Serializable
     
     public static final EntityManager entityManager() { return EMF.get().createEntityManager(); }
     
-    /* public Long persist() 
+    /*public void persist() 
     {
     	EntityManager em = entityManager();
     	try 
     	{ 
     		em.persist(this);
     		em.refresh(this);
-    		return this.id;
     	}
     	finally { em.close(); }
-    }
+    }*/
     
-    public void remove()
+    /* public void remove()
     {
     	EntityManager em = entityManager();
     	try 

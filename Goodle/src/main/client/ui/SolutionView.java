@@ -1,5 +1,7 @@
 package main.client.ui;
 
+import java.util.logging.Logger;
+
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.SolutionProxy;
 import main.shared.proxy.UploadedFileProxy;
@@ -10,7 +12,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -28,7 +29,7 @@ public class SolutionView extends AbstractCourseView {
 	
 	
 	@UiField FileView fileView;
-	@UiField TextArea comment;
+	@UiField EditLabel comment;
 	@UiField TextBox mark;
 	@UiField HorizontalPanel markPanel;
 	
@@ -42,10 +43,10 @@ public class SolutionView extends AbstractCourseView {
 	public SolutionProxy getSolution(CourseRequest request) {
 		if (solution == null) return null;
 		solution = request.edit(solution);
-		
+
 		if (isCurrUserOwner()) {
-			solution.setComment(comment.getText());			
-			if (mark.getText() != "") {
+			solution.setComment(comment.getText());
+			if (!mark.getText().equals("")) {
 				solution.setMark(Float.parseFloat(mark.getText()));
 			}
 		}
@@ -57,21 +58,22 @@ public class SolutionView extends AbstractCourseView {
 		
 		fileView.setClientFactory(cf);
 		fileView.setCourse(course);
-		fileView.setUploadedFile( (UploadedFileProxy) solution);
+		fileView.setUploadedFile(solution);
 		
-		comment.setText(solution.getComment());
-		if (!(solution.getMark() == null))
-			mark.setText(""+solution.getMark());
-
 		if (isCurrUserOwner()) {
-			comment.setEnabled(true);
+			comment.setEditable(true);
 			mark.setEnabled(true);
-			markPanel.setVisible(true);
 		}
 
-		if (isCurrUserMember() && solution.isChecked()) {
-			comment.setText(solution.getComment());
-			mark.setText(""+solution.getMark());
+		if ((isCurrUserMember() && solution.isChecked()) || isCurrUserOwner()) {
+			if (solution.getComment() != null)
+				mark.setText(solution.getComment());
+			else 
+				comment.setText("");
+			if (solution.getMark() != null)
+				mark.setText(""+solution.getMark());
+			else 
+				mark.setText("");
 			markPanel.setVisible(true);
 		}		
 	}
@@ -90,5 +92,8 @@ public class SolutionView extends AbstractCourseView {
 		fileView.setAuthorNameAsTitle(authorNameAsTitle);
 	}
 	
+	public void setLate() {
+		fileView.date.setStyleName("red");
+	}
 	
 }

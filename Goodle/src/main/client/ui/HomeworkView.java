@@ -3,6 +3,7 @@ package main.client.ui;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.shared.proxy.Converter;
@@ -104,9 +105,9 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 
 		file.setName(name);
 		file.setUrl(url);
-		file.setAuthor(cf.getCurrentUser().getId());
-		file.setComment("komentarz");
-		file.setChecked(false);
+		//file.setAuthor(cf.getCurrentUser().getId());
+		//file.setComment("komentarz");
+		//file.setChecked(false);
 		addSolution(file);
 		request.uploadSolution(courseId, homeworkId, file).fire();
 
@@ -127,6 +128,8 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		view.setSolution(solution);
 		if (isCurrUserOwner())
 			view.setAuthorNameAsTitle(true);
+		if (homework.getDeadline() != null && solution.getUploaded().after(homework.getDeadline())) 
+			view.setLate();
 		solutions.setWidget(rows, 0, view);
 	}
 
@@ -141,10 +144,13 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		for (int i = 0; i < solutions.getRowCount(); i++) {
 			SolutionView view = (SolutionView) solutions.getWidget(i, 0);
 			SolutionProxy proxy = view.getSolution(request);
+			Logger.getLogger("Goodle.log").severe("updating proxy "+proxy.getId());
 			proxies.add(proxy);
 		}
 
-		request.addHomeworkMarks(homework.getId(), proxies).using(course).fire();
+		course = request.edit(course);
+		//homework = request.edit(homework);
+		request.addHomeworkMark(homework.getId(), proxies.get(0)).using(course).with("solutions").fire();
 	}
 	
 }

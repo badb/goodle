@@ -7,6 +7,7 @@ import main.shared.proxy.UploadedFileProxy;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -62,10 +63,12 @@ public class FileView extends AbstractCourseView {
 		else 
 			title.setText(file.getName());
 		
+		Date uploadDate;
 		if (file.getUploaded() == null) 
-			date.setText(dateText + new Date());
+			uploadDate = new Date();
 		else
-			date.setText(dateText+file.getUploaded().toString());
+			uploadDate = file.getUploaded();
+		date.setText(dateText+DateTimeFormat.getFormat("E, dd MMM yyyy, HH:mm:ss").format(uploadDate));
 	}
 	
 

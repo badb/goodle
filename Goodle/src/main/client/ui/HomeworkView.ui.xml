@@ -11,7 +11,10 @@
 	    <g:Label ui:field="text" />
 	    <g:Label ui:field="deadline"/>
 	    <g:FlexTable ui:field="attachedFiles" width="100%" />
-	    <g:Label text="Rozwiązania:" />
+	    <g:HorizontalPanel>
+	    	<g:Label text="Rozwiązania:" />
+	    	<g:Button ui:field="save" text="Zapisz oceny" visible="false" enabled="false"></g:Button>
+	    </g:HorizontalPanel>
 	    <g:FlexTable ui:field="solutions" width="100%" />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 
 	</g:VerticalPanel>

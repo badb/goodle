@@ -95,11 +95,11 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 		if (previousDeadline != null)
 			deadline.setValue(homework.getDeadline());
 		isVisible.setValue(homework.getIsVisible());
-		if (isVisible.getText().equals("Widoczny"))
+		if (homework.getIsVisible())
 		{
-			isVisible.setText("Ukryty");
+			isVisible.setText("Widoczny");
 		}
-		else isVisible.setText("Widoczny");
+		else isVisible.setText("Ukryty");
 		
 		upload.setParent(this);
 		refreshFiles();

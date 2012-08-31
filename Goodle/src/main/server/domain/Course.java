@@ -544,6 +544,37 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
+    public void addHomeworkMarks(Long homeworkId, List<Solution> solutions)
+    {
+    	GoodleUser u = GoodleUser.getCurrentUser();
+    	if (u == null) return;
+    	
+    	if (!coordinators.contains(u.getId())) return;
+    	
+    	    	
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		Course c = em.find(Course.class, this.id);
+			//u = em.merge(u);
+			
+			if (!c.homeworks.contains(homeworkId)) return;
+    		
+			Homework homework = em.find(Homework.class, homeworkId);
+			
+    		for (Solution s : solutions)
+    		{
+    			//if (!homework.getSolutionsIds().contains(s.getId())) return;
+    			if (s.getMark() != null) {
+    				s.setChecked(true);
+    			}
+        		em.persist(s);
+       			em.refresh(s);
+    		}
+    	}
+    	finally { em.close(); }
+    }
+    
     public static void uploadSolution(Long courseId, Long homeworkId, Solution file)
     {
     	

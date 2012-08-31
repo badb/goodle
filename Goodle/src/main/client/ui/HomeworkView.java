@@ -1,7 +1,8 @@
 package main.client.ui;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Logger;
+import java.util.List;
 
 import main.client.ClientFactory;
 import main.shared.proxy.CourseRequest;
@@ -10,8 +11,11 @@ import main.shared.proxy.SolutionProxy;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -30,9 +34,12 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	@UiField FileUploadView upload;
 	@UiField FlexTable attachedFiles;
 	@UiField FlexTable solutions;
+	@UiField Button save;
 	
 	private Long courseId;
 	private Long homeworkId;
+	
+	private HomeworkProxy homework;
 	
 	public void setClientFactory(ClientFactory cf)
 	{
@@ -50,6 +57,8 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		courseId = homework.getCourse();
 		homeworkId = homework.getId();
 		upload.setParent(this);
+		
+		this.homework = homework;
 		
 		title.setText(homework.getTitle());
 		text.setText(homework.getText());
@@ -78,9 +87,11 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		for (SolutionProxy f : homework.getSolutions()) 
 			addSolution(f);
 		
-		if (isCurrUserOwner())
+		if (isCurrUserOwner()) {
 			upload.setVisible(false);
-		
+			save.setVisible(true);
+			save.setEnabled(true);
+		}
 	}
 
 	@Override
@@ -93,6 +104,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		file.setName(name);
 		file.setUrl(url);
 		file.setAuthor(cf.getCurrentUser().getId());
+		file.setComment("komentarz");
 		file.setChecked(false);
 		addSolution(file);
 		request.uploadSolution(courseId, homeworkId, file).fire();
@@ -119,5 +131,19 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 
 	@Override
 	public void removeFile(UploadedFileProxy f) { }
+	
+	@UiHandler("save")
+	public void onButtonClick(ClickEvent event) {
+		CourseRequest request = cf.getRequestFactory().courseRequest();
+		
+		List<SolutionProxy> proxies = new ArrayList<SolutionProxy>();
+		for (int i = 0; i < solutions.getRowCount(); i++) {
+			SolutionView view = (SolutionView) solutions.getWidget(i, 0);
+			SolutionProxy proxy = view.getSolution(request);
+			proxies.add(proxy);
+		}
+
+		request.addHomeworkMarks(homework.getId(), proxies).using(course).fire();
+	}
 	
 }

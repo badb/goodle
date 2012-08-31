@@ -3,6 +3,7 @@ package main.shared.proxy;
 import java.util.List;
 
 import main.server.domain.Course;
+import main.server.domain.Homework;
 
 import com.google.web.bindery.requestfactory.shared.InstanceRequest;
 import com.google.web.bindery.requestfactory.shared.Request;
@@ -36,5 +37,8 @@ public interface CourseRequest extends RequestContext
 	InstanceRequest<CourseProxy, CourseProxy> updateModules(List<ModuleProxy> modules);
 	InstanceRequest<CourseProxy, CourseProxy> updateHomeworks(List<HomeworkProxy> homeworks);
 	Request<Void> uploadSolution(Long courseId, Long homeworkId, SolutionProxy file);
+	
+	InstanceRequest<CourseProxy, Void> addHomeworkMarks(Long homeworkId, List<SolutionProxy> solutions);
+    
 
 }

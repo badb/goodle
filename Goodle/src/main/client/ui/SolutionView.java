@@ -1,10 +1,11 @@
 package main.client.ui;
 
+import main.shared.proxy.CourseRequest;
 import main.shared.proxy.SolutionProxy;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -38,10 +39,15 @@ public class SolutionView extends AbstractCourseView {
 		init();
 	}
 	
-	public SolutionProxy getSolution() {
+	public SolutionProxy getSolution(CourseRequest request) {
+		if (solution == null) return null;
+		solution = request.edit(solution);
+		
 		if (isCurrUserOwner()) {
-			solution.setComment(comment.getText());
-			solution.setMark(Float.parseFloat(comment.getText()));
+			solution.setComment(comment.getText());			
+			if (mark.getText() != "") {
+				solution.setMark(Float.parseFloat(mark.getText()));
+			}
 		}
 		return solution;
 	}
@@ -52,6 +58,10 @@ public class SolutionView extends AbstractCourseView {
 		fileView.setClientFactory(cf);
 		fileView.setCourse(course);
 		fileView.setUploadedFile( (UploadedFileProxy) solution);
+		
+		comment.setText(solution.getComment());
+		if (!(solution.getMark() == null))
+			mark.setText(""+solution.getMark());
 
 		if (isCurrUserOwner()) {
 			comment.setEnabled(true);
@@ -67,7 +77,7 @@ public class SolutionView extends AbstractCourseView {
 	}
 
 	@UiHandler("mark")
-	public void onKeyDownHandler(KeyDownEvent event) {
+	public void onKeyUpHandler(KeyUpEvent event) {
         String input = mark.getText();
         if (!input.matches("[0-9]*[.]?[0-9]*")) {
             mark.setText(input.substring(0, input.length()-1));

@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
+import main.client.NameChangedEvent;
+import main.client.NameChangedEventHandler;
 import main.client.place.CoursePlace;
 import main.client.util.CourseCell;
 import main.shared.proxy.CourseProxy;
@@ -26,7 +28,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
-public class UserCoursesView extends Composite 
+public class UserCoursesView extends Composite implements NameChangedEventHandler
 {
 
 	private static UserCoursesViewUiBinder uiBinder = GWT.create(UserCoursesViewUiBinder.class);
@@ -72,7 +74,6 @@ public class UserCoursesView extends Composite
 				list.add(c);
 				coordinatedList.setRowData(list);
 				coordinatedLabel.setVisible(true);
-				userCoursesPanel.setCellHeight(coordinatedList, "200px");
 				clientFactory.getCourseView().setCourse(c);
 				clientFactory.getPlaceController().goTo(new CoursePlace(c.getId().toString(), "modules"));
 			}
@@ -111,7 +112,6 @@ public class UserCoursesView extends Composite
 	
 	public void refreshCoordinatedList() {
 		coordinatedLabel.setVisible(false);
-		userCoursesPanel.setCellHeight(coordinatedList, "0px");
 		clientFactory.getRequestFactory().goodleUserRequest().getLedCourseProxies()
 			.using(clientFactory.getCurrentUser()).fire
 		(
@@ -123,9 +123,7 @@ public class UserCoursesView extends Composite
 						coordinatedList.setRowData(response);
 					    coordinatedPanel.setWidget(coordinatedList);
 					    if (coordinatedList.getRowCount() > 0) {
-					    	coordinatedLabel.setVisible(true);
-							userCoursesPanel.setCellHeight(coordinatedList, "200px");
-					    }
+					    	coordinatedLabel.setVisible(true);					    }
 					}
 				}
 		);
@@ -149,5 +147,13 @@ public class UserCoursesView extends Composite
 					}
 				}
 		);
+	}
+
+	@Override
+	public void onNameChanged(NameChangedEvent event) {
+		Logger logger = Logger.getLogger("Goodle.Log");
+		logger.log(Level.INFO, "change!");
+		refreshCoordinatedList();
+		refreshAttendedList();
 	}
 }

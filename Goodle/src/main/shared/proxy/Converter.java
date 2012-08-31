@@ -14,6 +14,7 @@ public class Converter {
 		for( String s: val){
 			toRet += s;
 		}
+		logger.log(Level.INFO, "getString returned String Size: " + Integer.toString(toRet.length()));
 		return toRet;
 		
 	}

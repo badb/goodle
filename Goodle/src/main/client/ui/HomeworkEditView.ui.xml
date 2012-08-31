@@ -6,7 +6,7 @@
 > 
 	<ui:style src="../resources/Goodle.css"/>
   
-	<g:HTMLPanel styleName='{style.module}'>
+	<g:HTMLPanel styleName='{style.module}' width="100%">
 	    <my:EditLabel ui:field="title" /> 
 	   	<g:CheckBox ui:field="isVisible" /> <br />
 	    <my:EditLabel ui:field="text" /> <br />

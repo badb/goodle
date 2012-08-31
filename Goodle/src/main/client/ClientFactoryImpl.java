@@ -15,6 +15,7 @@ import main.client.ui.CourseSynchronizationPopup;
 import main.client.ui.CourseView;
 import main.client.ui.SynchronizationConfirmationPopup;
 import main.client.ui.TopView;
+import main.client.ui.UserCoursesView;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -30,6 +31,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private final GoodleRequestFactory requestFactory = GWT.create(GoodleRequestFactory.class);
 
 	private TopView topView;
+	private UserCoursesView leftView;
 	private CalendarView rightView;
 	private CourseListView courseListView;
 	private CourseView courseView;
@@ -148,8 +150,9 @@ public class ClientFactoryImpl implements ClientFactory
 			courseNameTermPopup.setClientFactory(this);
 			courseNameTermPopup.setParent(getCourseView());
 			if (topView != null) {
+				courseNameTermPopup.addNameChangedEventHandler(leftView);
 				courseNameTermPopup.addNameChangedEventHandler(topView);
-			}
+			}	
 		}
 		return courseNameTermPopup;
 	}
@@ -191,6 +194,9 @@ public class ClientFactoryImpl implements ClientFactory
 	@Override
 	public void setRightView(CalendarView rightView) { this.rightView = rightView;}
 
+	@Override
+	public void setLeftView(UserCoursesView leftView) { this.leftView = leftView;}
+	
 	@Override
 	public GoodleUserProxy getCurrentUser() { return currentUserProxy; }
 

@@ -377,7 +377,7 @@ box-shadow: 0 0 5px #888;
 }
 
 .leftScrollList {
-	max-height: 200px;
+	height: 200px;
 }
 
 .calendarLabel {

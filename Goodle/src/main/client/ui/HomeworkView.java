@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.shared.proxy.Converter;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
 import main.shared.proxy.SolutionProxy;
@@ -61,7 +62,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		this.homework = homework;
 		
 		title.setText(homework.getTitle());
-		text.setText(homework.getText());
+		text.setText(Converter.getString(homework.getText()));
 		Date d = homework.getDeadline();
 		
 		if (d != null)

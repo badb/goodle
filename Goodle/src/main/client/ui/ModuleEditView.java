@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.shared.proxy.Converter;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;
 import main.shared.proxy.UploadedFileProxy;
@@ -56,7 +57,7 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 	public ModuleProxy getModule()
 	{
 		module.setTitle(title.getText());
-		module.setText(text.getText());
+		module.setText(Converter.getList(text.getText()));
 		module.setIsVisible(isVisible.getValue());
 		module.setAttachedFiles(newFiles);
 		return module;
@@ -75,7 +76,7 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 		
 		module = request.create(ModuleProxy.class);
 		module.setTitle("Moduł " + n.toString());
-		module.setText("Edytuj treść");
+		module.setText(Converter.getList("Edytuj treść"));
 		module.setIsVisible(false);
 		module.setAttachedFiles(new ArrayList<UploadedFileProxy>());
 		prepareView();
@@ -84,7 +85,7 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 	public void prepareView()
 	{
 		previousTitle = module.getTitle();
-		previousText = module.getText();
+		previousText = Converter.getString( module.getText());
 		previousIsVisible = module.getIsVisible();
 		files = module.getAttachedFiles();
 		title.setText(previousTitle);

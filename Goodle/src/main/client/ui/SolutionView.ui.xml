@@ -6,12 +6,12 @@
 <ui:style src="../resources/Goodle.css"/>
 
 	<g:VerticalPanel>
-		<my:FileView ui:field="fileView"></my:FileView>
+		<my:FileView ui:field="fileView" />
 		<g:HorizontalPanel ui:field="markPanel" visible="false">
-			<g:Label text="Komentarz: "></g:Label>
-			<g:TextArea ui:field="comment" enabled="false"></g:TextArea>
-			<g:Label text="Ocena: "></g:Label>
-			<g:TextBox ui:field="mark" enabled="false"></g:TextBox>
+			<g:Label text="Komentarz: " />
+			<my:EditLabel ui:field="comment" editable="false" wordWrapped="true" />
+			<g:Label text="Ocena: " />
+			<g:TextBox ui:field="mark" enabled="false" />
 		</g:HorizontalPanel>
 	</g:VerticalPanel>
 </ui:UiBinder> 

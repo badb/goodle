@@ -9,8 +9,8 @@
 	<g:HorizontalPanel width="100%">
 		<g:Label ui:field="title"></g:Label>
 		<g:Label ui:field="date"></g:Label>
-		<g:Button ui:field="showButton" styleName='{style.leftButton}'>Podgląd pliku</g:Button>
-		<g:Button ui:field="downloadButton" styleName='{style.rightButton}'>Zapisz plik na dysku</g:Button>
+		<g:Button ui:field="showButton" styleName='{style.leftButton}' />
+		<g:Button ui:field="downloadButton" styleName='{style.rightButton}' />
 	</g:HorizontalPanel>
 	</g:VerticalPanel>
 </ui:UiBinder> 

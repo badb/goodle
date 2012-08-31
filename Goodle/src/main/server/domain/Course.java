@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -544,32 +545,56 @@ public class Course implements Serializable
     	finally { em.close(); }
     }
     
-    public void addHomeworkMarks(Long homeworkId, List<Solution> solutions)
+    public static void updateHomeworkMarks(Long courseId, Homework homework)
     {
+    	List<Solution> solutions = homework.getSolutions();
+    	
+    	Logger l = Logger.getLogger("");
+    	for (Solution s : solutions)
+    	{
+    		if (s.getId() == null)
+    			l.severe("AddHomeworkMarks. Solution has null id.");
+    		else
+    			l.severe("AddHomeworkMarks. Solution id: " + s.getId());
+    	}
+    	
     	GoodleUser u = GoodleUser.getCurrentUser();
     	if (u == null) return;
-    	
-    	if (!coordinators.contains(u.getId())) return;
-    	
     	    	
     	EntityManager em = entityManager();
     	try
     	{
-    		Course c = em.find(Course.class, this.id);
-			//u = em.merge(u);
-			
-			if (!c.homeworks.contains(homeworkId)) return;
+    		homework = em.find(Homework.class, homework.getId());
+    		Course c = em.find(Course.class, courseId);
     		
-			Homework homework = em.find(Homework.class, homeworkId);
+        	if (!c.getCoordinators().contains(u.getId())) return;
+			
+			if (!c.homeworks.contains(homework.getId())) return;
+    		
+			// For some reason solutions ids keep disappearing during
+			// the RequestFactory transport. Since an url is also
+			// unique among files, we try to find the valid solution in the db.
+			Query q = em.createNamedQuery("findSolutionByUrl");
 			
     		for (Solution s : solutions)
     		{
-    			//if (!homework.getSolutionsIds().contains(s.getId())) return;
-    			if (s.getMark() != null) {
-    				s.setChecked(true);
+    			q.setParameter("url", s.getUrl());
+    			Solution oldVersion = (Solution) q.getResultList().get(0);
+    			
+    			if (homework.getSolutionsIds().contains(oldVersion.getId()))
+    			{
+    				oldVersion.setComment(s.getComment());
+    				oldVersion.setMark(s.getMark());
+    				if (oldVersion.getMark() != null)
+    					oldVersion.setChecked(true);
+    				else
+    					oldVersion.setChecked(false);
     			}
-        		em.persist(s);
-       			em.refresh(s);
+    			if (oldVersion.getVersion() == null)
+    				oldVersion.setVersion(1);
+    			else
+    				oldVersion.setVersion(oldVersion.getVersion() + 1);
+        		em.persist(oldVersion);
     		}
     	}
     	finally { em.close(); }
@@ -592,13 +617,18 @@ public class Course implements Serializable
     		
     		Homework h = em.find(Homework.class, homeworkId);
     		
-    		// Every student is limited to only one solution. Remove previous one if exists.
+    		// Every student is limited to only one solution. 
+    		// If previous one is already marked, ignore new one.
+    		// Otherwise, remove older solution.
+
     		Long old = null;
     		for (Long id : h.getSolutionsIds())
     		{
     			Solution f = em.find(Solution.class, id);
     			if (f.getAuthor().equals(u.getId()))
     			{
+    				if (f.isChecked()) return; 
+    					
     				old = f.getId();
     				em.remove(f);
     				break;
@@ -611,6 +641,10 @@ public class Course implements Serializable
     			
     		
     		file.setAuthor(u.getId());
+    		if (file.getVersion() == null)
+    			file.setVersion(1);
+    		else
+    			file.setVersion(file.getVersion() + 1);
     		em.persist(file);
     		em.refresh(file);
     		h.addSolutionId(file.getId());

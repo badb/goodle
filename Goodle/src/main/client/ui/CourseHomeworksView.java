@@ -5,6 +5,7 @@ import java.util.List;
 import main.client.place.CoursePlace;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
+import main.shared.proxy.SolutionProxy;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -76,6 +77,7 @@ public class CourseHomeworksView  extends AbstractCourseView
 						homeworks.insertRow(rows);
 						homeworks.insertCell(rows, 0);
 						homeworks.setWidget(rows, 0, view);
+						
 					}
 				}
 			}

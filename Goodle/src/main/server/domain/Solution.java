@@ -4,11 +4,21 @@ import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 
 @SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue("SOLUTION")
+@NamedQueries 
+({
+        @NamedQuery
+        (
+                name = "findSolutionByUrl",
+                query = "SELECT s FROM Solution s WHERE s.url = :url"        
+        )
+})
 public class Solution extends UploadedFile {
 	
 	@Basic

@@ -2,6 +2,7 @@ package main.client.ui;
 
 import java.util.Date;
 
+import main.client.resources.GoodleResources;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -13,6 +14,7 @@ import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -47,7 +49,19 @@ public class FileView extends AbstractCourseView {
 		
 	}
 
-	public FileView() { initWidget(uiBinder.createAndBindUi(this)); }
+	public FileView() 
+	{ 
+		initWidget(uiBinder.createAndBindUi(this)); 
+		
+		Image downloadIcon = new Image(GoodleResources.INSTANCE.downloadIcon());
+		
+		downloadIcon.getElement().setAttribute("title", "Pobierz plik");
+		downloadButton.getElement().appendChild(downloadIcon.getElement());
+		
+		Image previewIcon = new Image(GoodleResources.INSTANCE.previewIcon());
+		previewIcon.getElement().setAttribute("title", "Podgląd dokumentu");
+		showButton.getElement().appendChild(previewIcon.getElement());
+	}
 	
 	public void setUploadedFile(UploadedFileProxy file) 
 	{

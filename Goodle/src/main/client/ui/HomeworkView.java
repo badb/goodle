@@ -37,6 +37,9 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	@UiField FlexTable solutions;
 	@UiField Button save;
 	
+	// For debugging purposes.
+	@UiField Label _out;
+	
 	private Long courseId;
 	private Long homeworkId;
 	
@@ -114,9 +117,16 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 
 	private void addSolution(SolutionProxy solution) 
 	{
-		// Member can upload only one solution.
+		// Member can upload only one solution and only when his previous
+		// one is not already checked.
 		if (isCurrUserMember())
+		{
 			solutions.removeAllRows();
+			if (solution.isChecked())
+				upload.setVisible(false);
+			else
+				upload.setVisible(true);
+		}
 		
 		int rows = solutions.getRowCount();
 		solutions.insertRow(rows);
@@ -136,15 +146,15 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 	@UiHandler("save")
 	public void onButtonClick(ClickEvent event) {
 		CourseRequest request = cf.getRequestFactory().courseRequest();
+		HomeworkProxy homeworkCopy = request.edit(homework);
 		
-		List<SolutionProxy> proxies = new ArrayList<SolutionProxy>();
-		for (int i = 0; i < solutions.getRowCount(); i++) {
+		for (int i = 0; i < solutions.getRowCount(); i++) 
+		{
 			SolutionView view = (SolutionView) solutions.getWidget(i, 0);
-			SolutionProxy proxy = view.getSolution(request);
-			proxies.add(proxy);
+			view.updateSolution(request);
 		}
-
-		request.addHomeworkMarks(homework.getId(), proxies).using(course).fire();
+		
+		request.updateHomeworkMarks(course.getId(), homeworkCopy).with("solutions").fire();
 	}
 	
 }

@@ -10,7 +10,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -28,7 +27,7 @@ public class SolutionView extends AbstractCourseView {
 	
 	
 	@UiField FileView fileView;
-	@UiField TextArea comment;
+	@UiField EditLabel comment;
 	@UiField TextBox mark;
 	@UiField HorizontalPanel markPanel;
 	
@@ -39,8 +38,8 @@ public class SolutionView extends AbstractCourseView {
 		init();
 	}
 	
-	public SolutionProxy getSolution(CourseRequest request) {
-		if (solution == null) return null;
+	public void updateSolution(CourseRequest request) {
+		if (solution == null) return;
 		solution = request.edit(solution);
 		
 		if (isCurrUserOwner()) {
@@ -49,7 +48,6 @@ public class SolutionView extends AbstractCourseView {
 				solution.setMark(Float.parseFloat(mark.getText()));
 			}
 		}
-		return solution;
 	}
 	
 	private void init() {
@@ -64,14 +62,12 @@ public class SolutionView extends AbstractCourseView {
 			mark.setText(""+solution.getMark());
 
 		if (isCurrUserOwner()) {
-			comment.setEnabled(true);
+			comment.setEditable(true);
 			mark.setEnabled(true);
 			markPanel.setVisible(true);
 		}
 
 		if (isCurrUserMember() && solution.isChecked()) {
-			comment.setText(solution.getComment());
-			mark.setText(""+solution.getMark());
 			markPanel.setVisible(true);
 		}		
 	}

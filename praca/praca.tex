@@ -30,9 +30,9 @@ Skrzypczak}
 
 \nralbumu{280468, 292629, 236188, 234586}
 
-\title{Goodle -- platforma e-learningowa}
+\title{Goodle --- platforma e-learningowa}
 
-\tytulang{Google -- e-learning platform}
+\tytulang{Google --- e-learning platform}
 
 %kierunek: Matematyka, Informatyka, ...
 \kierunek{Informatyka}
@@ -47,7 +47,7 @@ Skrzypczak}
 % {nauczania matematyki}
 % Dla pracy licencjackiej mamy natomiast
 % mozliwosc wpisania takiej wartosci zakresu:
-% {Jednoczesnych Studiow Ekonomiczno--Matematycznych}
+% {Jednoczesnych Studiow Ekonomiczno---Matematycznych}
 
 % \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
 
@@ -93,73 +93,65 @@ Google Web Toolkit, Google App Engine}
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-W ramach projektu stworzono Goodle -- platformê edukacyjn±.  Aplikacja 
-zapewnia wirtualne ¶rodowisko nauczania, alternatywne w stosunku do 
-funkcjonuj±cego systemu Moodle. U¿ytkownicy maj± mo¿liwo¶æ tworzenia i 
-zarz±dzania zajêciami, dzielenie siê materia³ami z uczestnikami i 
-sprawdzania ich wiedzy.
-Potencjanlne grono odbiorców stanowi± studenci i pracownicy akademiccy.
-Stworzona na potrzeby Uniwersytetu Warszawskiego, platforma zapewnia 
-integracjê kursów z systemem USOS.
-Program stworzono przy u¿yciu technologii Google, m.in.: GWT i GAE. 
-Nie stworzono dotychczas rozwi±zania zapewniaj±cego wszystkie po¿±dane 
-przez potencjalnych u¿ytkowników funkcje, co stanowi³o motywacjê do 
-rozpoczêcia projektu.
-% TODO czy tylko dla mnie to brzmi ¼le? Czasy przysz³y i przesz³y pomieszane 
-% (Julia)
+W poni¿szym dokumencie opisano platformê e-learningow± Goodle
+stworzon± w ramach zespo³owego projektu programistycznego. Celem
+powstania platformy by³o stworzenie alternatywy dla niespe³niaj±cego
+wszystkich oczekiwañ systemu Moodle, który jest obecnie u¿ywany na
+Wydziale Matematyki, Informatyki i Mechaniki UW. Potencjalnymi
+odbiorcami platformy
+Goodle s± jednak studenci i pracownicy dydaktyczni ca³ego Uniwersytetu
+Warszawskiego. Dlatego stworzony system jest zintegrowany z USOSem.
+Podstawow± funkcjonalno¶ci± platformy e-lerningowej jest  umo¿liwienie
+prowadz±cym zajêcia dzielenia siê ze studentami materia³ami
+dydaktycznymi i wyznaczanie im zadañ domowych, natomiast studentom
+wgl±d w zamieszczone materia³y oraz nadsy³anie rozwi±zañ prac
+domowych. Do stworzenia systemu Goodle wykorzystano technologie
+Google, m.in. GWT i GAE.
 \end{abstract}
 
 \tableofcontents
 %\listoffigures
 %\listoftables
 
-\chapter*{Wprowadzenie}
-\addcontentsline{toc}{chapter}{Wprowadzenie}
-Dokument opisuje, stworzon± w~ramach projektu licencjackiego, platformê
-edukacyjn± Goodle. Nazwa stanowi kontaminacjê s³ów Google i~Moodle.
-Innowacyjne technologie i~narzêdzia firmy Google wykorzystano do~stworzenia
-programu. Moodle natomiast to~u¿ywana obecnie przez~Uniwersytet Warszawski
-platforma-rywal, w~stosunku do~której Goodle stanowi alternatywê. Integracja
-z~systemem USOS zapewnia aplikacji wa¿n±, lecz nie jedyn±, przewagê.
+\chapter{Wprowadzenie}
+Dokument opisuje, powsta³± w~ramach projektu licencjackiego, platformê
+edukacyjn± Goodle. Do stworzenia programu wykorzystano innowacyjne technologie
+i narzêdzia firmy Google. Moodle to~u¿ywana obecnie przez~Uniwersytet
+Warszawski platforma e-learningowa, w~stosunku do~której Goodle stanowi
+alternatywê. Nazwa Goodle stanowi kontaminacjê nazw Google i~Moodle.
 
-Grono potencjalnych odbiorców stanowi± studenci i~pracownicy akademiccy. Nie 
-stworzono dotychczas produktu zapewniaj±cego wszystkie po¿±dane funkcje,
-co~stanowi³o motywacjê do~realizacji projektu.
+Platforma Moodle posiada trudny w obs³udze, zbyt skomplikowany interfejs,
+brakuje te¿ integracja z~systemem USOS. Celem projektu by³o stworzenie
+aplikacji pozbawionej tych wad. Grono potencjalnych odbiorców stanowi± studenci
+i~pracownicy akademiccy. 
 
 W~kolejnych rozdzia³ach pracy opisane zostan±: przyczyny stworzenia systemu,
 charakterystyka potencjalnych u¿ytkowników, funkcjonalno¶æ i~architektura 
 aplikacji, mo¿liwe scenariusze u¿ycia, zastosowana przy~tworzeniu metodyka,
 narzêdzia i~technologie oraz~ewentualne przysz³e rozszerzenia.
 
-%
-%  Wstêp. Jak wygl±da³a sytuacja przed rozpoczêciem projektu i dlaczego
-%  powsta³a potrzeba stworzenia aplikacji.
-%
-\chapter{Sformu³owanie problemu}
-
-%
-%  Definicje u¿ytych w dokumencie trudnych terminów i rozwiniêcie akronimów.
-%
 \section{Definicje}
 \begin{description}
-   \item[]\textbf{E-learning}\\
-      nauczanie z~wykorzystaniem sieci komputerowych i~internetu.
-   \item[]\textbf{Framework}\\
+   \item[]\textbf{Electronic learning (e-learning)}\\
+      nauczanie z~wykorzystaniem technologi informatycznych.
+   \item[]\textbf{Zrêb programistyczny} (ang. \textit{framework})\\
       szkielet do~budowy aplikacji, definiuje podstawowy mechanizm dzia³ania
       programu i~dostarcza zestaw komponentów i~bibliotek ogólnego
-      przeznaczenia do wykonywania okre¶lonych zadañ. 
-   \item[]\textbf{GAE}\\
-      Google App Engine, dzia³aj±ca na~zasadzie chmury platforma do~tworzenia 
-      aplikacji internetowych i~utrzymywania ich w~centrach danych Google.
-   \item[]\textbf{GWT}\\
-      Google Web Toolkit, framework i~zestaw narzêdzi umo¿liwiaj±cy 
-      i~u³atwiaj±cy u¿ytkownikom tworzenie aplikacji internetowych.
-   \item[]\textbf{Moodle}\\
-      Modular Object-Oriented Dynamic Learning Environment,
-      platforma~e-learningowa.
-   \item[]\textbf{USOS}\\
-      Uniwersytecki System Obs³ugi Studiów.
-% TODO dodaæ USOSapi?
+      przeznaczenia do wykonywania okre¶lonych zadañ. \cite{framework}
+   \item[]\textbf{Google App Engine (GAE)} \cite{gae} \\
+      dzia³aj±ca na~zasadzie chmury platforma do~tworzenia 
+      i hostowania aplikacji internetowych. 
+   \item[]\textbf{Google Web Toolkit (GWT)} \cite{gwt} \\
+      framework i~zestaw narzêdzi umo¿liwiaj±cy 
+      i~u³atwiaj±cy u¿ytkownikom tworzenie aplikacji internetowych. 
+   \item[]\textbf{Modular Object-Oriented Dynamic Learning Environment
+(Moodle)} \cite{moodle}\\
+      platforma~e-learningowa wykorzystywana na Wydziale Matematyki,
+Informatyki i Mechaniki Uniwersytetu Warszawskiego do zamieszczania materia³ów
+dydaktycznych.
+   \item[]\textbf{Uniwersytecki System Obs³ugi Studiów (USOS)} \cite{usos}\\
+    Zintegrowany system do obs³ugi spraw studiów wykorzystywany na
+Uniwersytecie Warszawskim.
 \end{description}
 
 %
@@ -168,14 +160,14 @@ narzêdzia i~technologie oraz~ewentualne przysz³e rozszerzenia.
 
 \section{Omówienie zawarto¶ci}
 
-Dokument podzielony zosta³ na~7 rozdzia³ów, z~których ka¿dy zawiera kilka
-logicznie powi±zanych sekcji:
+Dokument podzielono na~7 rozdzia³ów, z~których ka¿dy zawiera kilka
+logicznie powi±zanych czê¶ci:
 
 %  TODO Uzupe³niæ nazwê rozdzia³u
 W rozdziale \emph{Motywacja i cele} obja¶niono przyczyny rozpoczêcia
 projektu i~uzasadniono wybrany scenariusz biznesowy. Opisano najpierw jakie
 braki i~wady 
-istniej±cego rozwi±zania -- platformy Moodle -- sta³y siê motywacj± pracy. 
+istniej±cego rozwi±zania --- platformy Moodle --- sta³y siê motywacj± pracy. 
 Nastêpnie wskazano jakie funkcje powinien zapewniaæ alternatywny, idealny
 system. Na~koniec przedstawiono krótk± charakterystykê potencjalnych
 u¿ytkowników.
@@ -188,13 +180,13 @@ zwi±zane z~publikowaniem materia³ów i~zadawaniem prac domowych.
 
 W~kolejnym rozdziale omówiono \emph{mo¿liwe scenariusze u¿ycia}. 
 
-Nastêpnie dokument przechodzi do opisu \emph{u¿ytych narzêdzi i technologii}.
-Podana jest krótka charakterystyka Google Web Toolkit i Google App Engine,
-nastêpnie wymienione s± u¿ywane biblioteki. Na koniec wspomniane s± narzêdzia
+Nastêpnie, w rozdziale pi±tym opisano \emph{u¿yte narzêdza i technologie}.
+Podana jest krótka charakterystyka Google Web Toolkit, Google App Engine,
+i wymienione s± u¿ywane biblioteki. Na koniec wymieniono narzêdzia
 u³atwiaj±ce pracê.
 
-W rozdziale \emph{Metodyka~pracy} opisane zosta³y praktyki i~narzêdzia, 
-z~których korzystali¶my podczas pracy nad produktem, jak równie¿ funkcje 
+W rozdziale \emph{Metodyka~pracy} opisano praktyki i~narzêdzia, 
+z~których korzystali¶my podczas pracy, jak równie¿ funkcje 
 cz³onków zespo³u oraz stworzone dokumenty.
 
 W ostatnim rozdziale (\emph{Podsumowanie}) przedstawili¶my wnioski z pracy 
@@ -206,8 +198,7 @@ nad projektem oraz perspektywy dalszego rozwoju aplikacji.
 %
 \chapter{Motywacja i cele} % TODO Uzupe³niæ nazwê rozdzia³u
 
-W tym rozdziale opisane zosta³y powody, dla których zdecydowali¶my siê 
-na stworzenie takiej aplikacji.
+Ten rozdzia³ zawiera motywacjê dla stworzenia aplikacji.
 %
 %  Dlaczego zdecydowano siê na rozpoczêcie projektu.
 %
@@ -219,9 +210,9 @@ wymaganiami u¿ytkowników.
 
 % TODO ustaliæ, czy piszemy o tym, ¿e podobno mieli przenie¶æ pocztê studenck± 
 % na Googla
-Jednym z oczekiwañ niektórych odbiorców jest integracja serwisu z kontem Google
+Jednym z oczekiwañ odbiorców jest integracja serwisu z kontem Google
 i 
-oferowanymi przez firmê narzêdziami. Dla wielu u¿ytkowników uci±¿liwy jest
+oferowanymi przez tê firmê narzêdziami. Dla wielu u¿ytkowników uci±¿liwy jest
 równie¿ 
 brak konsolidacji USOS z innymi portalami akademickimi np. platform± Moodle. 
 Tworzenie kursów, zarz±dzanie u¿ytkownikami czy umieszczanie wyników studentów
@@ -245,7 +236,7 @@ jak i studentów oraz podnios³o komfort kszta³cenia na Uniwesytecie Warszawskim.
 %
 \section{Cele}
 
-Najwa¿niejszym celem, jaki stawiano sobie podczas realizacji systemu, by³o
+Najwa¿niejszym celem, postawionym podczas realizacji systemu, by³o
 zapewnienie prostego, intuicyjnego interfejsu. Moodle oferowa³ u¿ytkownikom,
 szczególnie prowadz±cym, rozmaite funkcje, np. podczas umieszczania
 nowych materia³ów. Niestety powodowa³o to prze³adowanie aplikacji licznymi
@@ -257,7 +248,7 @@ i administrowania nimi, i postanowiono zapewniæ to minimum w jak najbardziej
 klarownej formie. 
 
 Drugi wa¿ny cel, jaki postawili sobie twórcy, stanowi³a integracja
-tworzonego portalu z systemem USOS. Kiedy rozpoczêto projekt, nie by³o
+tworzonego portalu z~systemem USOS. Kiedy rozpoczêto projekt, nie by³o
 mo¿liwe zalogowanie siê do Moodle przy pomocy uczelnianego Centralnego
 Systemu Uwierzytelniania. Opcjê tê dodano pó¼niej. Dodatkowo tworzone na
 platformie e-learningowej kursy by³y zwykle odpowiednikami tych z~USOS. Mimo
@@ -303,36 +294,34 @@ do jednej z czterech ról, których wymagania nastêpnie poddano analizie:
       \begin{description}
          \item[Opis] Osoby zarz±dzaj±ce serwisem i dbaj±ce o jego
 bezpieczeñstwo.
-         \item[Potrzeby] Interfejs zapewniaj±cy wygodne narzêdzia do 
-            administracji systemem, pozwalaj±cy dokonywaæ typowych operacji 
-            przez przegl±darkê.
+         \item[Potrzeby] narzêdzia do administracji systemem, pozwalaj±cy
+dokonywaæ operacji takich jak ogl±danie bazy danych i usuwanie z niej danych
+przez przegl±darkê.
       \end{description}
    \item Studenci
       \begin{description}
          \item[Opis] Studenci zapisani na kursy prowadzone przy u¿yciu
 platformy.
-         \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy: 
-            wygodny dostêp do~materia³ów, mo¿liwo¶æ przes³ania prac domowych 
-            prowadz±cemu, wgl±d w wyniki kursu; przejrzysta szata graficzna, 
+         \item[Potrzeby] 
+            wygodny dostêp do~materia³ów, mo¿liwo¶æ przes³ania prac
+domowych 
+            prowadz±cemu, wgl±d w wyniki kursu;
             integracja z serwisami USOS. 
       \end{description}  
    \item Byli studenci
       \begin{description}
          \item[Opis] Osoby, zapisane na kursy prowadzone przy u¿yciu platformy, 
             które przesta³y byæ studentami.
-         \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy: 
-            wygodny dostêp do materia³ów oraz wgl±d w wyniki kursu; przejrzysta 
-            szata graficzna.
+         \item[Potrzeby] 
+            wygodny dostêp do materia³ów oraz wgl±d w wyniki kursu.
       \end{description}  
    \item Prowadz±cy zajêcia
       \begin{description}
          \item[Opis] Pracownicy Uniwersytetu Warszawskiego prowadz±cy zajêcia 
             przy u¿yciu platformy.
-         \item[Potrzeby] Intuicyjny i prosty w obs³udze interfejs zapewniaj±cy 
-            mo¿liwo¶æ: ograniczenia dostêpu do kursu wybranej grupie
+         \item[Potrzeby] ograniczenia dostêpu do kursu wybranej grupie
             studentów, publikacji materia³ów i wyników kursu, zadania i 
-            przyjêcia prac domowych; integracja z serwisami USOS, przejrzysta 
-            szata graficzna.
+            przyjêcia prac domowych; integracja z serwisami USOS.
       \end{description}  
 \end{itemize}
 
@@ -342,7 +331,8 @@ platformy.
 %
 \chapter{Mo¿liwo¶ci systemu}
 
-Obecnie aplikacja Goodle oferuje u¿ytkownikom nastêpuj±ce funkcje:
+W rozdziale wymieniono funkcje, które aplikacja Goodle obecnie oferuje
+u¿ytkownikom. S±~to:
 
 \section{Tworzenie kursu i administracja, synchronizacja z USOS}
 
@@ -353,7 +343,8 @@ utworzonym kursie s± zmiana jego nazwy oraz semestru i roku szkolnego,
 w którym odbywaj± siê zajêcia. Kurs w Goodle, podobnie jak na Uniwersytecie
 Warszawskim mo¿e odbywaæ siê w semestrze zimowym, letnim lub byæ ca³oroczny.
 Domy¶lnie kurs zostaje przypisany do aktualnego semestru.
-Zak³adka \emph{Informacje} umo¿liwia dodatkowo dodanie opisu kursu oraz zwi±zanej
+Zak³adka \emph{Informacje} umo¿liwia dodatkowo dodanie opisu kursu oraz
+zwi±zanej
 z nim bibliografii.
 
 Zdarza siê czêsto, ¿e tworzony kurs posiada swój odpowiednik w USOS. W takim
@@ -373,7 +364,7 @@ danego przedmiotu prowadzone w~kolejnych latach.
 \section{Rejestracja na kurs i zarz±dzanie u¿ytkownikami}
 
 Aby prowadzenie zajêæ mia³o sens, do kursu powinni do³±czyæ uczestnicy. 
-Nowoutworzony kurs nie jest ukryty -- u¿ytkownicy mog± go wyszukaæ i obejrzeæ
+Nowoutworzony kurs nie jest ukryty --- u¿ytkownicy mog± go wyszukaæ i obejrzeæ
 informacje na jego temat, jednak aby uzyskaæ wgl±d w dodane materia³y, prace
 domowe czy listê uczestników, konieczne jest pomy¶lne przej¶cie procesu 
 rejestracji.
@@ -398,13 +389,13 @@ li¶cie, a nastêpnie klikaj±c \emph{usuñ}.
 \section{Dodawanie i przegl±danie materia³ów}
 
 Prowadz±cy kurs dysponuje mo¿liwo¶ci± umieszczania na stronie kursu 
-materia³ów -- tekstu zawieraj±cego na przyk³ad streszczenie wyk³adu czy
+materia³ów --- tekstu zawieraj±cego na przyk³ad streszczenie wyk³adu czy
 dodatkowych informacji przeznaczonych dla~bardziej zaanga¿owanych uczestników.
-Ka¿dy materia³ mo¿e byæ widoczny dla uczestników lub ukryty -- widoczny
-tylko dla prowadz±cego. Ukrycie materia³ów mo¿liwia wcze¶niejsze przygotowanie 
+Ka¿dy materia³ mo¿e byæ widoczny dla~uczestników lub ukryty --- widoczny
+tylko dla prowadz±cego. Ukrycie materia³ów umo¿liwia wcze¶niejsze przygotowanie 
 informacji i udostêpnianie ich studentom w dogodnym momencie. 
 Dodatkowo materia³y mog± zostaæ wzbogacone za³adowanymi na serwer plikami, np.
-dokumentami pdf, obrazkami, czy filmami.
+dokumentami pdf, obrazkami czy filmami.
 
 Materia³y modyfikowane s± w trybie edycji, do której prowadz±cy przechodzi
 klikaj±c \emph{edytuj} w zak³adce \emph{Materia³y}. Od tego momentu ma mo¿liwo¶æ
@@ -440,11 +431,11 @@ zarejestrowani.
 %
 \chapter{Mo¿liwe scenariusze u¿ycia}
 
-Rozdzia³ prezentuje najwa¿niejsze przypadki u¿ycia systemu Goodle. 
+W rozdziale zaprezentowano najwa¿niejsze przypadki u¿ycia systemu Goodle. 
 
 \section{Opis aktorów}
 
-G³ównymi odbiorcami platformy Goodle s± studenci --- uczestnicy kursów --- i 
+G³ównymi odbiorcami platformy Goodle s± studenci -- uczestnicy kursów -- i 
 prowadz±cy je pracownicy. Pracownicy dbaj± o za³o¿enie kursu w serwisie i 
 wzbogacenie go materia³ami dotycz±cymi zajêæ, których widoczno¶æ okre¶laj±. 
 Maj± prawo usuwaæ uczestników. Sprawdzaj± i oceniaj± pracy domowe przes³ane 
@@ -625,38 +616,41 @@ prowadzonych zajêæ.
 %
 \chapter{Zastosowane technologie}
 
+W rozdziale opisano najwa¿niejsze technologie, narzêdzia i biblioteki u¿yte do
+stworzenia aplikacji.
+
 \section{Google Web Toolkit}
-Google Web Toolkit to zestaw narzêdzi programistycznych, pozwalaj±cych
-tworzyæ AJAXowe aplikacje sieciowe w~Javie.
+GWT \cite{gwt} to zestaw narzêdzi programistycznych, pozwalaj±cych
+tworzyæ ajaxowe aplikacje sieciowe w~Javie.
 Strona klienta kompiluje siê do zopytmalizowanego JavaScriptu. 
 
-Google Web Toolkit jest przeznaczony do~tworzenia aplikacji jednostronowych.
+GWT jest przeznaczony do~tworzenia aplikacji jednostronowych.
 Platformy edukacyjne s± tradycyjnie aplikacjami wielostronowymi. Stawia³o to
 dodatkowe wyzwania i~utrudnienia w~czasie tworzenia Goodle.
 
 Odpowiednikiem nawigacji po wielu stronach jest nawigacjach przy u¿yciu
 identyfikatorów fragmentów (etykietek). Konieczno¶æ budowania aplikacji w taki
-sposób by³a jedn± z przyczyn spowolnienia tempa pracy i niezrealizowania
+sposób by³a jedn± z~przyczyn spowolnienia tempa pracy i niezrealizowania
 wszystkich pocz±tkowo planowanych funkcjonalno¶ci. 
 
 \subsection{Java}
-Java jest wysokopoziomowym, zorientowanym obiektowo jêzykiem programowania. 
+Java \cite{java} jest wysokopoziomowym, obiektowym jêzykiem programowania. 
 Obecnie jest jednym z najpopularniejszych jêzyków, czêsto wykorzystywanym 
-do tworzenia aplikacji sieciowych\cite{pop}.
+do tworzenia aplikacji sieciowych \cite{pop}.
 
 \subsection{AJAX}
-AJAX (\textit{Asynchronous JavaScript and XML}) to technologia tworzenia
-aplikacji sieciowych, w którym komunikacja miêdzy klientem a serwerem mo¿e
+Asynchronous JavaScript and XML (AJAX) to technologia tworzenia
+aplikacji sieciowych, w~której komunikacja miêdzy klientem a serwerem mo¿e
 zachodziæ w sposób asynchroniczny i nie wymaga ponownego ³adowania ca³ej
-strony. 
+strony \cite{ajax}.
 
 \section{Google App Engine}
-Google App Engine jest platform± do tworzenia i hostowania aplikacji. Dostarcza
+GAE \cite{gae} jest platform± do tworzenia i hostowania aplikacji. Dostarcza
 infrastrukturê do zarz±dzania ruchem na stronie i sporz±dzania statystyk
 obci±¿enia strony. Zapewnia skalowalno¶æ, bezpieczeñstwo i wydajno¶æ w tym
 zakresie. 
 
-Aplikacja hostowana na Google App Engine posiada ustalone dzienne limity 
+Aplikacja hostowana na GAE posiada ustalone dzienne limity 
 zasobów, takich jak liczba
 odwiedzin, rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
 aplikacja jest zatrzymywana do koñca dnia. Limity mo¿na zwiêkszaæ po uiszczeniu
@@ -667,11 +661,11 @@ powinny byæ wystarczaj±ce.
 
 \subsection{Datastore}
 
-Google App Engine dostarcza rozproszon± bazê danych Datastore. 
+GAE dostarcza rozproszon± bazê danych Datastore \cite{datastore}. 
 Jest to baza typu NoSQL,
 czyli baza która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
 bazie maj± rodzaj i~zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
-danego rodzaju, które s± filtrowane i sortowane na podstawie w³asno¶ci.
+danego rodzaju, które s± filtrowane i~sortowane na podstawie w³asno¶ci.
 
 Oczekuje siê, ¿e transakcje w bazie danych bêd± spe³nia³y w³asno¶ci ACID, czyli
 bêd± atomowe, spójne, izolowane i trwa³e. Datatore gwarantuje ACID w modelu OCC
@@ -679,52 +673,52 @@ bêd± atomowe, spójne, izolowane i trwa³e. Datatore gwarantuje ACID w modelu OCC
 przeprowadzonych transakcji nie bêdzie nadpisywaæ wzajemnie danych. Je¶li tak
 siê zdarzy, powiedzie siê tylko pierwsza operacja zapisu, pozosta³e zwróc± b³±d.
 W Goodle ryzyko wyst±pienia transakcji, w których dwóch lub wiêcej u¿ytkowników
-bêdzie chcia³o edytowaæ jednocze¶nie te same dane, praktycznie nie istnieje.
-Przedmioty maj± jednego prowadz±cego, który jako jedyny ma uprawnienia
-do~edytowania
-powi±zanych z nim materia³ów. Gwarancje, które zapewnia Datastore s± wiêc
-wystarczaj±ce.
+bêdzie chcia³o edytowaæ jednocze¶nie te same dane, jest niewielkie.
 
-\subsection{Blobstore} % TODO mo¿e kto¶ to sprawdziæ?
-Google App Engine zapewnia równie¿ serwis pozwalaj±cy umieszczaæ i~serwowaæ 
-du¿e pliki, które przekraczaj± rozmiar obiektów w Datastore -- Blobstore.
+\subsection{Blobstore} 
+GAE zapewnia równie¿ serwis Blobstore \cite{gaeblobstore} pozwalaj±cy umieszczaæ
+i~serwowaæ 
+du¿e pliki, które przekraczaj± rozmiar obiektów w Datastore (1MB).
 Dziêki temu materia³y w naszej aplikacji mog± mieæ rozmiar do 32MB, poniewa¿ 
-taki jest rozmiar danych mo¿liwych do odczytania przez pojedyncze rz±danie. 
+taki jest rozmiar danych mo¿liwych do~odczytania przez pojedyncze rz±danie. 
 
 \section{Biblioteki}
 \begin{itemize}
- \item Gson -- biblioteka w Javie, która pozwala konwertowaæ obiekty w Javie na
-obiekty w~JSONie i odwrotnie. JSON (\textit{JavaScript Object Notation}) jest
-formatem danych stosowanym do przesy³ania danych w AJAxie.
-\item Hibernate-validator -- realizuje powi±zania miêdzy obiektami bazy danych
+ \item Gson --- biblioteka w Javie, która pozwala konwertowaæ obiekty w Javie na
+obiekty w~JSONie i odwrotnie. JavaScript Object Notation (JSON) jest
+formatem danych stosowanym do przesy³ania danych w AJAX.
+\item Hibernate-validator --- realizuje powi±zania miêdzy obiektami bazy danych
 a obiektami Javy, dodaje mo¿liwo¶æ nak³adania ograniczeñ na poszczególne pola.
-\item Objectify -- interfejs do Datastore.
-\item Requestfactory -- dostarcza mechanizmu komunikacji klient-serwer
+\item Objectify --- interfejs do Datastore.
+\item Requestfactory --- dostarcza mechanizmu komunikacji klient-serwer
 zorientowanego \linebreak na~pobieranie danych.
-\item Oauth-signpost -- biblioteka do podpisywania wiadomo¶ci HTTP zgodnie ze
+\item Oauth-signpost --- biblioteka do podpisywania wiadomo¶ci HTTP zgodnie ze
 standardem Oauth-core, potrzebna do komunikacji z system USOS
-\item Validation-API -- pozwala deklarowaæ ograniczenia dla klas w Javie i
+\item Validation-API --- pozwala deklarowaæ ograniczenia dla klas w Javie i
 sprawdza poprawno¶æ stworzonych obiektów.
 \end{itemize}
 
 \section{Inne narzêdzia}
 
-\subsection{Git}
-Git jest rozproszonym systemem kontroli wersji. Powsta³ z my¶l± o du¿ych
+\subsection{Git} 
+Git \cite{git} jest rozproszonym systemem kontroli wersji. Powsta³ z my¶l± o
+du¿ych
 projektach. Operacje commit, diff i log dzia³aj± szybciej ni¿ na g³ównym
-konkurencie Gita -- Subversion. Wolniejsza jest operacja klonowania
+konkurencie Gita --- Subversion. Wolniejsza jest operacja klonowania
 repozytorium, ta operacja jednak wykonywana jest sporadycznie. 
 \subsection{Selenium}
-Selenium jest platform± programistyczn± do testowania aplikacji sieciowych.
+Selenium \cite{selenium} jest platform± programistyczn± do testowania
+aplikacji sieciowych.
 Pozwala przeprowadzaæ symulacje dzia³añ u¿ytkownia. Testy tworzy siê metod±
 nagrywania czynno¶ci wykonywanych na stronie za pomoc± przegl±darki i
 odtwarzaniu ich. 
-GWT posiada specjalny komponent do testowania przy pomocy Selenium. 
-\subsection{Eclipse}
-Eclipse to zintegrowane ¶rodowisko programistyczne wspomagaj±ce
-tworzenie programów w~Javie. Odpowiednie rozszerzenie, GPE (\textit{Google
-Plugin for Eclipse}), pozwala na~³atwiejsze pisanie projektów GWT i~proste
-umieszczenie aplikacji na Google App Engine. Dziêki temu znaczn± czê¶æ plików
+GWT posiada specjalny komponent \cite{gwtselenium} do testowania przy pomocy
+Selenium. 
+\subsection{Eclipse} 
+Eclipse \cite{eclipse} to zintegrowane ¶rodowisko programistyczne wspomagaj±ce
+tworzenie programów w~Javie. Odpowiednie rozszerzenie, Google Plugin for Eclipse
+(GPE), pozwala na~³atwiejsze pisanie projektów GWT i~proste
+umieszczenie aplikacji na GAE. Dziêki temu znaczn± czê¶æ plików
 konfiguracyjnych mo¿na wygenerowaæ automatycznie. 
 
 %
@@ -739,12 +733,14 @@ podzia³ obowi±zków w zespole oraz stworzone dokumenty.
 \section{Zespó³}
 Nad aplikacj± oraz dokumentami pracowali¶my w 4-osobowym zespole. 
 Poniewa¿ organizacja pracy w kilkuosobowym zespole jest trudna, wybrali¶my 
-szefa projektu, który przydziela³ pozosta³ym cz³onkom zadania. Wszyscy cz³onkowie
+szefa projektu, który przydziela³ pozosta³ym cz³onkom zadania. Wszyscy
+cz³onkowie
 zespo³u zajmowali siê zarówno implementacj± poszczególnych funkcji aplikacji, 
 jak i tworzeniem dokumentów.
 \begin{itemize}
-\item{Marcin Jedynak -- szef projektu}\\
-Do zadañ szefa projektu nale¿a³a koordynacja pracy pozosta³ych cz³onków zespo³u, 
+\item{Marcin Jedynak --- szef projektu}\\
+Do zadañ szefa projektu nale¿a³a koordynacja pracy pozosta³ych cz³onków
+zespo³u, 
 w~tym przydzielanie najpilniejszych zadañ i~nadzorowanie postêpów pracy. 
 By³ równie¿ odpowiedzialny za komunikacjê z klientem. 
 Podobnie jak pozostali cz³onkowie zespo³u zajmowa³ siê implementacj± aplikacji, 
@@ -801,6 +797,11 @@ realizacji tego przypadku u¿ycia.
 
 \end{enumerate}
 
+Powsta³y kod znajduje siê p³ycie CD do³±czonej do pracy. Dzia³aj±cy serwis
+znajduje siê pod adresem: \url{http://goodleprototype.appspot.com/}, a
+repozytorium zawieraj±ce pliki ¼ród³owe pod adresem
+\url{https://sites.google.com/site/goodleproject}.
+
 %
 %  Ocena serwisu, wnioski (poprawa systemu pracy, unikniêcie b³êdów 
 %  w przysz³o¶ci).
@@ -809,7 +810,7 @@ realizacji tego przypadku u¿ycia.
 
 Podczas pracy nad aplikacj± Goodle zdobyli¶my wiele umiejêtno¶ci niezbêdnych 
 w~przysz³ej pracy jako programi¶ci. Przede wszystkim nauczyli¶my siê wspó³pracy 
-w zespole programistycznym -- rozwinêli¶my swoje umiejêtno¶ci komunikacji 
+w zespole programistycznym --- rozwinêli¶my swoje umiejêtno¶ci komunikacji 
 oraz podzia³u zadañ w grupie programistów. Poznali¶my równie¿ wiele nowych, 
 innowacyjnych technologii, przydatnych przy tworzeniu aplikacji sieciowych. 
 
@@ -836,7 +837,7 @@ zmodyfikowana od jego ostatniej wizyty.
 \item Pro¶ba o rejestracjê\\
 Dodatkowa forma rejestracji na kurs mog³aby u³atwiæ rejestracjê na kurs. 
 Student móg³by jednym klikniêciem wys³aæ pro¶bê do prowadz±cego zajêcia, który
-zobaczy³by j± odwiedzaj±c stronê kursu, lub nawet dostaj±c odpowiednio 
+zobaczy³by j± odwiedzaj±c stronê kursu lub nawet dostaj±c odpowiednio 
 wygenerowan± wiadomo¶æ e-mail.
 \end{itemize}
 
@@ -845,24 +846,47 @@ wygenerowan± wiadomo¶æ e-mail.
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem[Eclipse]{eclipse} Eclipse,
-\texttt{http://www.eclipse.org/}, 2012.
+\bibitem[1]{eclipse} Eclipse,
+\url{http://www.eclipse.org/}.
 
-\bibitem[GIT]{git} Git, 
-\texttt{http://git-scm.com/}
+\bibitem[2]{git} Git, 
+\url{http://git-scm.com/}.
 
-\bibitem[GAE]{gae} Google App Engine,
-\texttt{https://developers.google.com/appengine/}, 2012.
+\bibitem[3]{gae} Google App Engine,
+\url{https://developers.google.com/appengine/}.
 
-\bibitem[GWT]{gwt} Google Web Toolkit,
-\texttt{https://developers.google.com/web-toolkit/}, 2012.
+\bibitem[4]{gaeblobstore} Google App Engine, Blobstore, 
+\url{https://developers.google.com/appengine/docs/java/blobstore/}.
 
-\bibitem[POP]{pop} Programming Language Popularity, 
-\texttt{http://langpop.com/}, 2011.
+\bibitem[5]{datastore} Google App Engine, What is Google App Engine?,
+\url{https://developers.google.com/appengine/docs/whatisgoogleappengine}
 
-\bibitem[Selenium]{selenium} SeleniumHQ -- Web Aplication Testing System, 
-\texttt{http://seleniumhq.org/}
+\bibitem[6]{gwt} Google Web Toolkit,
+\url{https://developers.google.com/web-toolkit/}.
 
+\bibitem[7]{gwtselenium} Google Web Toolkit, Remote Testing --- Selenium,
+\url{
+https://developers.google.com/web-toolkit/doc/latest/DevGuideTestingRemoteTestin
+g#Selenium}.
+
+\bibitem[8]{moodle} MIMUW Moodle, \url{https://moodle.mimuw.edu.pl/}.
+
+\bibitem[9]{java} Oracle Technology Network for Java Developers,
+\url{http://www.oracle.com/technetwork/java/index.html}.
+
+\bibitem[10]{pop} Programming Language Popularity, 
+\url{http://langpop.com/}.
+
+\bibitem[11]{selenium} SeleniumHQ --- Web Aplication Testing System, 
+\url{http://seleniumhq.org/}.
+
+\bibitem[12]{usos} USOS, \url{http://usos.edu.pl/}.
+
+\bibitem[13]{ajax} Wikipedia --- AJAX,
+\url{http://en.wikipedia.org/wiki/Ajax_(programming)}
+
+\bibitem[14]{framework} Wikipedia --- Framework,
+\url{http://pl.wikipedia.org/wiki/Framework}.
 \end{thebibliography}
 
 %trzeba prawdopodobnie wymieniæ dokumenty jako za³±czniki

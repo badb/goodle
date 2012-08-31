@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -549,15 +548,6 @@ public class Course implements Serializable
     {
     	List<Solution> solutions = homework.getSolutions();
     	
-    	Logger l = Logger.getLogger("");
-    	for (Solution s : solutions)
-    	{
-    		if (s.getId() == null)
-    			l.severe("AddHomeworkMarks. Solution has null id.");
-    		else
-    			l.severe("AddHomeworkMarks. Solution id: " + s.getId());
-    	}
-    	
     	GoodleUser u = GoodleUser.getCurrentUser();
     	if (u == null) return;
     	    	
@@ -567,7 +557,7 @@ public class Course implements Serializable
     		homework = em.find(Homework.class, homework.getId());
     		Course c = em.find(Course.class, courseId);
     		
-        	if (!c.getCoordinators().contains(u.getId())) return;
+        	if (!c.coordinators.contains(u.getId())) return;
 			
 			if (!c.homeworks.contains(homework.getId())) return;
     		
@@ -596,10 +586,13 @@ public class Course implements Serializable
     				oldVersion.setVersion(oldVersion.getVersion() + 1);
         		em.persist(oldVersion);
     		}
+    		em.persist(homework);
+    		em.persist(c);
     	}
     	finally { em.close(); }
     }
     
+        
     public static void uploadSolution(Long courseId, Long homeworkId, Solution file)
     {
     	

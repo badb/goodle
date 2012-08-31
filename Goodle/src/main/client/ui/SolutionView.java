@@ -1,5 +1,7 @@
 package main.client.ui;
 
+import java.util.logging.Logger;
+
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.SolutionProxy;
 import main.shared.proxy.UploadedFileProxy;
@@ -41,10 +43,10 @@ public class SolutionView extends AbstractCourseView {
 	public void updateSolution(CourseRequest request) {
 		if (solution == null) return;
 		solution = request.edit(solution);
-		
+
 		if (isCurrUserOwner()) {
-			solution.setComment(comment.getText());			
-			if (mark.getText() != "") {
+			solution.setComment(comment.getText());
+			if (!mark.getText().equals("")) {
 				solution.setMark(Float.parseFloat(mark.getText()));
 			}
 		}
@@ -55,12 +57,12 @@ public class SolutionView extends AbstractCourseView {
 		
 		fileView.setClientFactory(cf);
 		fileView.setCourse(course);
-		fileView.setUploadedFile( (UploadedFileProxy) solution);
+		fileView.setUploadedFile(solution);
 		
 		comment.setText(solution.getComment());
-		if (!(solution.getMark() == null))
-			mark.setText(""+solution.getMark());
-
+		if (solution.getMark() != null)
+			mark.setText("" + solution.getMark());
+		
 		if (isCurrUserOwner()) {
 			comment.setEditable(true);
 			mark.setEnabled(true);
@@ -86,5 +88,8 @@ public class SolutionView extends AbstractCourseView {
 		fileView.setAuthorNameAsTitle(authorNameAsTitle);
 	}
 	
+	public void setLate() {
+		fileView.date.setStyleName("red");
+	}
 	
 }

@@ -3,6 +3,7 @@ package main.client.ui;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import main.client.ClientFactory;
 import main.shared.proxy.Converter;
@@ -107,9 +108,9 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 
 		file.setName(name);
 		file.setUrl(url);
-		file.setAuthor(cf.getCurrentUser().getId());
-		file.setComment("komentarz");
-		file.setChecked(false);
+		//file.setAuthor(cf.getCurrentUser().getId());
+		//file.setComment("komentarz");
+		//file.setChecked(false);
 		addSolution(file);
 		request.uploadSolution(courseId, homeworkId, file).fire();
 
@@ -137,6 +138,8 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		view.setSolution(solution);
 		if (isCurrUserOwner())
 			view.setAuthorNameAsTitle(true);
+		if (homework.getDeadline() != null && solution.getUploaded().after(homework.getDeadline())) 
+			view.setLate();
 		solutions.setWidget(rows, 0, view);
 	}
 
@@ -153,7 +156,6 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 			SolutionView view = (SolutionView) solutions.getWidget(i, 0);
 			view.updateSolution(request);
 		}
-		
 		request.updateHomeworkMarks(course.getId(), homeworkCopy).with("solutions").fire();
 	}
 	

@@ -38,5 +38,4 @@ public interface CourseRequest extends RequestContext
 	Request<Void> uploadSolution(Long courseId, Long homeworkId, SolutionProxy file);
 	Request<Void> updateHomeworkMarks(Long courseId, HomeworkProxy homework);
     
-
 }

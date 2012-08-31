@@ -1,5 +1,7 @@
 package main.server.domain;
 
+import java.util.logging.Logger;
+
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

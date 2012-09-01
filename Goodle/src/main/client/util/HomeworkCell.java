@@ -10,6 +10,7 @@ import com.google.gwt.cell.client.ValueUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.safehtml.client.SafeHtmlTemplates;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;;
@@ -46,7 +47,7 @@ public class HomeworkCell extends AbstractCell<HomeworkProxy> {
         Date d = value.getDeadline();
         String term = "brak terminu";
         if (d != null)
-        	term = d.toString();
+        	term = DateTimeFormat.getFormat(ClientFactory.dateFormat).format(d);
         SafeHtml rendered = templates.cell(id, name, term);
         sb.append(rendered);
 	}

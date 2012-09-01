@@ -7,9 +7,11 @@
 	<ui:style src="../resources/Goodle.css"/>
   
 	<g:HTMLPanel styleName='{style.module}' width="100%">
-	    <my:EditLabel ui:field="title" /> 
+	
+		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'>Usuń pracę domową</g:Button>
+	    <my:EditLabel ui:field="title"/> 
 	   	<g:CheckBox ui:field="isVisible" /> <br />
-	    <my:EditLabel ui:field="text" /> <br />
+	    <my:EditLabel ui:field="text"  width="100%" /> <br />
 	    <dp:DatePicker ui:field="deadline" /> <br />
 	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 

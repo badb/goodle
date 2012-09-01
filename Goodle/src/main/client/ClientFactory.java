@@ -1,5 +1,7 @@
 package main.client;
 
+import java.util.Date;
+
 import main.client.ui.CalendarView;
 import main.client.ui.CourseHomeworksEditView;
 import main.client.ui.CourseHomeworksView;
@@ -51,4 +53,6 @@ public interface ClientFactory
 	CourseModulesEditView getCourseModulesEditView();
 	BlobServiceAsync getBlobService();
 	CourseHomeworksEditView getCourseHomeworksEditView();
+	
+	public String dateFormat  = "E, dd MMM yyyy, HH:mm:ss";
 }

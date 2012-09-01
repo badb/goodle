@@ -6,8 +6,8 @@
 	<g:VerticalPanel width="100%">
 	<g:Frame ui:field="frame" width="100%" height="200px" visible="false"></g:Frame>
 	<g:HorizontalPanel width="100%">
-		<g:Label ui:field="title"></g:Label>
-		<g:Button ui:field="showButton" styleName='{style.leftButton}'>Podgląd pliku</g:Button>
+		<g:Label ui:field="title" styleName='{style.nameLabel}'></g:Label>
+		<g:Button ui:field="showButton" styleName='{style.rightButton}'>Podgląd pliku</g:Button>
 		<!-- <g:Button ui:field="downloadButton">Zapisz plik na dysku</g:Button>  -->
 		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'>Usuń plik</g:Button>
 	</g:HorizontalPanel>

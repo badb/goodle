@@ -6,7 +6,7 @@
 <ui:style src="../resources/Goodle.css"/>
 
 	<g:VerticalPanel>
-		<my:FileView ui:field="fileView" />
+		<my:FileView ui:field="fileView" width="100%"/>
 		<g:HorizontalPanel ui:field="markPanel" visible="false">
 			<g:Label text="Komentarz: " />
 			<my:EditLabel ui:field="comment" editable="false" wordWrapped="true" />

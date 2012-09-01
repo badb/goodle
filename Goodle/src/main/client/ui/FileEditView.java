@@ -1,6 +1,7 @@
 package main.client.ui;
 
 import main.client.ClientFactory;
+import main.client.resources.GoodleResources;
 import main.shared.proxy.UploadedFileProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -12,6 +13,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -51,6 +53,10 @@ public class FileEditView extends Composite {
 	private void init() {
 		url = file.getUrl().substring(1);
 		title.setText(file.getName());
+
+		Image deleteIcon = new Image(GoodleResources.INSTANCE.removeIcon());
+		deleteIcon.getElement().setAttribute("title", "Usuń plik");
+		deleteButton.getElement().appendChild(deleteIcon.getElement());
 	}
 	
 

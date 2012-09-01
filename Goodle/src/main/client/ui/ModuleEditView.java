@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.client.resources.GoodleResources;
 import main.shared.proxy.Converter;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.ModuleProxy;
@@ -14,9 +15,11 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -31,9 +34,8 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 	@UiField FlexTable filesTable;
 	@UiField CheckBox isVisible;
 	@UiField FileUploadView upload;
+	@UiField Button deleteButton;
 	
-	// For debugging purposes
-	@UiField Label info;
 	
 	private String previousTitle;
 	private String previousText;
@@ -65,7 +67,6 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 	
 	public void setModule(ModuleProxy module) 
 	{
-		info.setText("Initialized module edit view.");
 		this.module = request.edit(module);
 		prepareView();
 	}
@@ -95,10 +96,17 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 		{
 			isVisible.setText("Widoczny");
 		}
-		else isVisible.setText("Ukryty");
+		else {
+			this.addStyleName("hidden");
+			isVisible.setText("Ukryty");
+		}
 		
 		upload.setParent(this);
 		refreshFiles();
+		
+		Image deleteIcon = new Image(GoodleResources.INSTANCE.removeIcon());
+		deleteIcon.getElement().setAttribute("title", "Usuń moduł");
+		deleteButton.getElement().appendChild(deleteIcon.getElement());
 	}
 	
 	public boolean isChanged() 
@@ -119,9 +127,13 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 	{
 		if (isVisible.getText().equals("Widoczny"))
 		{
+			this.addStyleName("hidden");
 			isVisible.setText("Ukryty");
 		}
-		else isVisible.setText("Widoczny");
+		else {
+			this.removeStyleName("hidden");
+			isVisible.setText("Widoczny");
+		}
 	}
 	
 	public void addFile(String url, String title) 
@@ -163,5 +175,10 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 		filesTable.removeRow(index);
 		files.remove(file);
 		newFiles.remove(file);
+	}
+	
+	@UiHandler("deleteButton")
+	public void onDeleteButtonClick(ClickEvent event) {
+		this.removeFromParent();
 	}
 }

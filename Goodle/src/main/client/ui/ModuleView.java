@@ -13,7 +13,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
-public class ModuleView extends Composite {
+public class ModuleView extends AbstractCourseView {
 
 	private static ModuleWidgetUiBinder uiBinder = GWT
 			.create(ModuleWidgetUiBinder.class);
@@ -26,22 +26,22 @@ public class ModuleView extends Composite {
 	@UiField EditLabel text;
 	@UiField FlexTable filesTable;
 	
-	private ClientFactory clientFactory;
-
-	public void setClientFactory(ClientFactory clientFactory) {
-		this.clientFactory = clientFactory;
-	}
 
 	public void setModule(ModuleProxy module) 
 	{
 		
 		title.setText(module.getTitle());
 		text.setText(Converter.getString(module.getText()));
-		if (module.getIsVisible())
-			visible.setText("Widoczny");
-		else
-			visible.setText("Ukryty");
-		
+		if (isCurrUserOwner()) {
+			if (module.getIsVisible())
+				visible.setText("Widoczny");
+			else {
+				this.addStyleName("hidden");
+				visible.setText("Ukryty");
+			}
+		} else {
+			visible.setVisible(false);
+		}
 		if (module.getAttachedFiles() != null) 
 		{
 			for (UploadedFileProxy f : module.getAttachedFiles()) 

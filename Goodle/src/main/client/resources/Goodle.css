@@ -437,3 +437,11 @@ box-shadow: 0 0 5px #888;
 .leftMargin {
 	margin-left: 10px;	
 }
+
+.topMargin {
+	margin-top: 5px;
+}
+
+.homeworkEdit {
+	min-width: 400px;
+}

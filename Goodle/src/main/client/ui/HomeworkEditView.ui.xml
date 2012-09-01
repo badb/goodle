@@ -12,7 +12,7 @@
 	    <g:HorizontalPanel width="100%">
 	    <g:VerticalPanel>
 	   	<g:CheckBox ui:field="isVisible" styleName='{style.moduleVisible}'/>
-	    <my:EditLabel ui:field="text"  width="100%" /> 
+	    <my:EditLabel ui:field="text"  width="100%" wordWrapped="true" styleName="{style.homeworkEdit}"/> 
 	    </g:VerticalPanel>
 	    <dp:DatePicker ui:field="deadline" styleName='{style.rightButton}'/>
 	    </g:HorizontalPanel>

@@ -35,11 +35,11 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		// Map the UploadURL to the uploadservice which will be called by
 		// submitting the FormPanel
 		
-		//TODO: zakomentować przed uploadem na appengine
-		String localName = System.getProperty("computername");
-		return blobstoreService.createUploadUrl("/goodle/uploadservice").replace(localName, "127.0.0.1");
+		//TODO: zakomentowa�� przed uploadem na appengine
+	//	String localName = System.getProperty("computername");
+		return blobstoreService.createUploadUrl("/goodle/uploadservice");//.replace(localName, "127.0.0.1");
 		
-		//TODO: odkomentować przed uploadem na appengine
+		//TODO: odkomentowa�� przed uploadem na appengine
 		//return blobstoreService.createUploadUrl("/goodle/uploadservice");
 		
 	}

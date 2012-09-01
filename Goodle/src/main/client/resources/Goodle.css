@@ -400,3 +400,16 @@ box-shadow: 0 0 5px #888;
 .red{
 	color: red;
 }
+
+.popUp {
+	margin: 10px;
+}
+
+.popUpButton {
+	margin: 5px;
+}
+
+.popUpTextArea {
+	width: 400px;
+	height: 250px;
+}

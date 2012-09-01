@@ -7,12 +7,15 @@
 	<ui:style src="../resources/Goodle.css"/>
   
 	<g:HTMLPanel styleName='{style.module}'>
-	
 		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'/>
-	    <my:EditLabel ui:field="title"/> 
-	   	<g:CheckBox ui:field="isVisible" /> <br />
-	    <my:EditLabel ui:field="text"  width="100%" /> <br />
-	    <dp:DatePicker ui:field="deadline" /> <br />
+	    <my:EditLabel ui:field="title" styleName='{style.moduleTitle}'/> 	
+	    <g:HorizontalPanel width="100%">
+	    <g:VerticalPanel>
+	   	<g:CheckBox ui:field="isVisible" styleName='{style.moduleVisible}'/>
+	    <my:EditLabel ui:field="text"  width="100%" /> 
+	    </g:VerticalPanel>
+	    <dp:DatePicker ui:field="deadline" styleName='{style.rightButton}'/>
+	    </g:HorizontalPanel>
 	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 
 	</g:HTMLPanel>

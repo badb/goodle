@@ -8,7 +8,7 @@
 		<g:HTML ui:field="label" ui:text="Edytuj" />
 		<g:TextBox ui:field="textBox" visible="false" maxLength="20000" />
 		<my:ResizableTextArea ui:field="textArea" visible="false" maxLength="20000" styleName='{style.textArea}' /> <br />
-		<g:Button ui:field="save" visible="false" styleName='{style.leftButton}' ui:text="Zapisz" />	
+		<g:Button ui:field="save" visible="false" addStyleNames='{style.leftButton} {style.leftMargin}' ui:text="Zapisz" />	
 		<g:Button ui:field="cancel" visible="false" styleName="{style.leftButton}" ui:text="Anuluj" /> <br />
 	</g:HTMLPanel>
 </ui:UiBinder> 

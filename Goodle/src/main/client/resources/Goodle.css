@@ -352,6 +352,7 @@ box-shadow: 0 0 5px #888;
 
 .leftButton {
 	float: left;
+	margin: 2px;
 }
 
 .textArea {
@@ -422,4 +423,17 @@ box-shadow: 0 0 5px #888;
 
 .hidden{
 	background-color: silver;
+}
+
+.moduleTitle {
+	font-weight: bold;
+}
+
+.moduleVisible {
+	font-style: italic;
+	font-size: 80%;
+}
+
+.leftMargin {
+	margin-left: 10px;	
 }

@@ -7,8 +7,8 @@
     
 	<g:VerticalPanel width="100%" styleName='{style.module}'>
 	
-	    <g:Label ui:field="visible" width="100%"/>
-	    <my:EditLabel ui:field="title" width="100%" editable="false" />
+	    <g:Label ui:field="visible" width="100%" styleName='{style.moduleVisible}'/>
+	    <my:EditLabel ui:field="title" width="100%" editable="false" styleName='{style.moduleTitle}'/>
 	    <my:EditLabel ui:field="text" width="100%" editable="false" wordWrapped="true" />
 	    <g:FlexTable ui:field="filesTable" width="100%"></g:FlexTable>
 	</g:VerticalPanel>

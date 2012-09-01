@@ -2,14 +2,15 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:my="urn:import:main.client.ui">
-
+	
+	<ui:style src="../resources/Goodle.css"/>
     <g:HTMLPanel>
 	<g:FormPanel ui:field="form"> 
-	    <g:HorizontalPanel>
+	    <g:HorizontalPanel styleName="{style.leftMargin}">
 			<g:FileUpload ui:field="uploadField" name="file"/>
 			<g:Label ui:field="info">Podaj opis pliku:</g:Label>
-			<g:TextBox ui:field="title"></g:TextBox>
-			<g:Button ui:field="submitButton">Upload</g:Button>
+			<g:TextBox ui:field="title" styleName="{style.leftMargin}" />
+			<g:Button ui:field="submitButton" styleName="{style.courseButton}">Upload</g:Button>
 		</g:HorizontalPanel>
 	</g:FormPanel>
 	<br />	<g:Label ui:field="error" />

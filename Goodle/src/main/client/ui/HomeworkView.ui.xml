@@ -7,8 +7,8 @@
     
 	<g:VerticalPanel width="100%" styleName='{style.module}'>
 	    <g:Label ui:field="_out" />
-	    <g:Label ui:field="visible" width="100%"/>
-	    <g:Label ui:field="title" width="100%"/>
+	    <g:Label ui:field="visible" width="100%" styleName='{style.moduleVisible}'/>
+	    <g:Label ui:field="title" width="100%" styleName='{style.moduleTitle}'/>
 	    <g:Label ui:field="text" />
 	    <g:Label ui:field="deadline"/>
 	    <g:FlexTable ui:field="attachedFiles" width="100%" />

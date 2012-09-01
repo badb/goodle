@@ -6,9 +6,9 @@
 	<ui:style src="../resources/Goodle.css"/>
 
 	<g:HTMLPanel styleName='{style.module}'>
-	    <my:EditLabel ui:field="title" /> 
-	   	<g:CheckBox ui:field="isVisible" /> 
-		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'/> <br />
+		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'/>
+	    <my:EditLabel ui:field="title" styleName='{style.moduleTitle}'/>
+	   	<g:CheckBox ui:field="isVisible" styleName='{style.moduleVisible}'/> 
 	    <my:EditLabel ui:field="text" wordWrapped="true" /> <br />
 	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 

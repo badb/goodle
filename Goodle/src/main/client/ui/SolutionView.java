@@ -60,8 +60,11 @@ public class SolutionView extends AbstractCourseView {
 		fileView.setUploadedFile(solution);
 		
 		comment.setText(solution.getComment());
-		if (solution.getMark() != null)
-			mark.setText("" + solution.getMark());
+		if (solution.getMark() != null) {
+			float value = solution.getMark();
+			float f = (float) Math.round(value * 100) / 100;
+			mark.setText("" + (new Float(f)).toString());
+		}
 		
 		if (isCurrUserOwner()) {
 			comment.setEditable(true);

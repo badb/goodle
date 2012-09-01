@@ -18,6 +18,7 @@ import main.client.ui.CourseView;
 import main.client.ui.SynchronizationConfirmationPopup;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
+import main.client.ui.UserDataPopup;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -44,6 +45,7 @@ public class ClientFactoryImpl implements ClientFactory
 	private CourseHomeworksView courseHomeworksView;
 	private UserMainPageView userMainPageView;
 	
+	private UserDataPopup userDataPopup;
 	private CourseJoinMethodPopup courseJoinMethodPopup;
 	private CourseNameTermPopup courseNameTermPopup;
 	private CoursePasswordPopup coursePasswordPopup;
@@ -130,6 +132,17 @@ public class ClientFactoryImpl implements ClientFactory
 			userMainPageView.setClientFactory(this);
 		}
 		return userMainPageView; 
+	}
+	
+	@Override
+	public UserDataPopup getUserDataPopup()
+	{
+		if (userDataPopup == null)
+		{
+			userDataPopup = new UserDataPopup();
+			userDataPopup.setClientFactory(this);
+		}
+		return userDataPopup;
 	}
 	
 	@Override

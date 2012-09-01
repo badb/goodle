@@ -20,6 +20,7 @@ public interface GoodleUserRequest extends RequestContext
 	
 	InstanceRequest<GoodleUserProxy, Void> persist();
 	InstanceRequest<GoodleUserProxy, Void> remove();
+	InstanceRequest<GoodleUserProxy, GoodleUserProxy> update();
 
 	InstanceRequest<GoodleUserProxy, List<CourseProxy>> getAttendedCourseProxies();
 	InstanceRequest<GoodleUserProxy, List<CourseProxy>> getLedCourseProxies();

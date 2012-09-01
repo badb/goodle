@@ -18,6 +18,7 @@ import main.client.ui.CourseView;
 import main.client.ui.SynchronizationConfirmationPopup;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
+import main.client.ui.UserDataPopup;
 import main.client.ui.UserMainPageView;
 import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
@@ -40,6 +41,7 @@ public interface ClientFactory
 	CourseHomeworksView getCourseHomeworksView();
 	UserMainPageView getUserMainPageView();
 	
+	UserDataPopup getUserDataPopup();
 	CourseJoinMethodPopup getCourseJoinMethodPopup();
 	CourseNameTermPopup getCourseNameTermPopup();
 	CoursePasswordPopup getCoursePasswordPopup();

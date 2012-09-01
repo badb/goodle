@@ -331,6 +331,19 @@ public class Course implements Serializable
     		for (Long userId : ids)
     		{
     			c.removeMember(userId);
+    			for (Long homeworkId : c.homeworks)
+    			{
+    				Homework h = em.find(Homework.class, homeworkId);
+    				for (Long solutionId : h.getSolutionsIds())
+    				{
+    					Solution s = em.find(Solution.class, solutionId);
+    					if (s.getAuthor() == userId)
+    					{
+    						em.remove(s);
+    						break;
+    					}
+    				}
+    			}
     			u = em.find(GoodleUser.class, userId);
     			u.removeCourseAttended(c);
     			em.merge(u);

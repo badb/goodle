@@ -8,7 +8,7 @@
 	<g:HTMLPanel styleName='{style.module}'>
 	    <my:EditLabel ui:field="title" /> 
 	   	<g:CheckBox ui:field="isVisible" /> 
-		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'>Usuń moduł</g:Button> <br />
+		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'/> <br />
 	    <my:EditLabel ui:field="text" wordWrapped="true" /> <br />
 	    <g:FlexTable ui:field="filesTable" width="100%" /> <br />
 	    <my:FileUploadView ui:field="upload" width="100%" /> 

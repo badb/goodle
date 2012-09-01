@@ -6,9 +6,9 @@
 > 
 	<ui:style src="../resources/Goodle.css"/>
   
-	<g:HTMLPanel styleName='{style.module}' width="100%">
+	<g:HTMLPanel styleName='{style.module}'>
 	
-		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'>Usuń pracę domową</g:Button>
+		<g:Button ui:field="deleteButton" styleName='{style.rightButton}'/>
 	    <my:EditLabel ui:field="title"/> 
 	   	<g:CheckBox ui:field="isVisible" /> <br />
 	    <my:EditLabel ui:field="text"  width="100%" /> <br />

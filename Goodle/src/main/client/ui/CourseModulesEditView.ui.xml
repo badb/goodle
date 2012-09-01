@@ -10,10 +10,10 @@
 	        <g:Button ui:field="cancel" text="Anuluj" styleName="{style.courseButton}" />
 		<g:FlowPanel width="100%">
 			<g:Label ui:field="info" />
-			<g:HorizontalPanel styleName="{style.outerBox}">
+			<g:VerticalPanel styleName="{style.outerBox}">
 			<g:Button ui:field="newModule" text="Dodaj moduł" styleName="{style.addButton}"/>
-			</g:HorizontalPanel>
 			<g:FlexTable width="100%" ui:field="modules" />
+			</g:VerticalPanel>
 		</g:FlowPanel>
 	</g:FlowPanel>
 

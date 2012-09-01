@@ -8,10 +8,10 @@
 	<g:VerticalPanel>
 		<my:FileView ui:field="fileView" width="100%"/>
 		<g:HorizontalPanel ui:field="markPanel" visible="false">
-			<g:Label text="Komentarz: " />
-			<my:EditLabel ui:field="comment" editable="false" wordWrapped="true" />
-			<g:Label text="Ocena: " />
-			<g:TextBox ui:field="mark" enabled="false" />
+			<g:Label text="Ocena: "/>
+			<g:TextBox ui:field="mark" enabled="false" styleName="{style.mark}"/>
+			<g:Label text="Komentarz: "  styleName="{style.leftMargin}" />
+			<my:EditLabel ui:field="comment" editable="false" wordWrapped="true" styleName="{style.comment}" width="100%"/>
 		</g:HorizontalPanel>
 	</g:VerticalPanel>
 </ui:UiBinder> 

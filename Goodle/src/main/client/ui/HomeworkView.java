@@ -3,6 +3,7 @@ package main.client.ui;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.client.ClientFactory;
@@ -110,34 +111,36 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 
 	@Override
 	public void addFile(String url, String name) 
-	{
+	{		
 		CourseRequest request = cf.getRequestFactory().courseRequest();
 		
 		SolutionProxy file = request.create(SolutionProxy.class);
+		
 
 		file.setName(name);
 		file.setUrl(url);
 		//file.setAuthor(cf.getCurrentUser().getId());
-		//file.setComment("komentarz");
-		//file.setChecked(false);
+		file.setComment("komentarz");
+		file.setChecked(false);
 		addSolution(file);
 		request.uploadSolution(courseId, homeworkId, file).fire();
-
 	}
 
 	private void addSolution(SolutionProxy solution) 
 	{
+		Logger logger = Logger.getLogger("Goodle.Log");
+
 		// Member can upload only one solution and only when his previous
 		// one is not already checked.
 		if (isCurrUserMember())
 		{
 			solutions.removeAllRows();
-			if (solution.isChecked())
+			 if (solution.isChecked()) {
 				upload.setVisible(false);
-			else
+			} else {
 				upload.setVisible(true);
+			}
 		}
-		
 		int rows = solutions.getRowCount();
 		solutions.insertRow(rows);
 		solutions.insertCell(rows, 0);

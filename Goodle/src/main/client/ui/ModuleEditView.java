@@ -76,8 +76,8 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 		if (n == null) return;
 		
 		module = request.create(ModuleProxy.class);
-		module.setTitle("Moduł " + n.toString());
-		module.setText(Converter.getList("Edytuj treść"));
+		module.setTitle("Modu�� " + n.toString());
+		module.setText(Converter.getList("Edytuj tre����"));
 		module.setIsVisible(false);
 		module.setAttachedFiles(new ArrayList<UploadedFileProxy>());
 		prepareView();
@@ -105,7 +105,7 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 		refreshFiles();
 		
 		Image deleteIcon = new Image(GoodleResources.INSTANCE.removeIcon());
-		deleteIcon.getElement().setAttribute("title", "Usuń moduł");
+	//	deleteIcon.getElement().setAttribute("title", "Usu�� modu��");
 		deleteButton.getElement().appendChild(deleteIcon.getElement());
 	}
 	

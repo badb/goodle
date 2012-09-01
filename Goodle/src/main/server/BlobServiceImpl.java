@@ -37,10 +37,10 @@ public class BlobServiceImpl extends RemoteServiceServlet implements
 		
 		//TODO: zakomentowa�� przed uploadem na appengine
 	//	String localName = System.getProperty("computername");
-		return blobstoreService.createUploadUrl("/goodle/uploadservice");//.replace(localName, "127.0.0.1");
+	//	return blobstoreService.createUploadUrl("/goodle/uploadservice").replace(localName, "127.0.0.1");
 		
 		//TODO: odkomentowa�� przed uploadem na appengine
-		//return blobstoreService.createUploadUrl("/goodle/uploadservice");
+		return blobstoreService.createUploadUrl("/goodle/uploadservice");
 		
 	}
 	

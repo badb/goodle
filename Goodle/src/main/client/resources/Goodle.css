@@ -445,3 +445,14 @@ box-shadow: 0 0 5px #888;
 .homeworkEdit {
 	min-width: 400px;
 }
+
+.mark {
+	margin-left: 5px;
+	width: 50px;
+}
+
+.comment {
+	margin-left: 5px;
+	width: 200px;
+}
+}

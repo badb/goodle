@@ -2,6 +2,7 @@ package main.client.ui;
 
 import java.util.Date;
 
+import main.client.ClientFactory;
 import main.client.resources.GoodleResources;
 import main.shared.proxy.UploadedFileProxy;
 
@@ -82,7 +83,7 @@ public class FileView extends AbstractCourseView {
 			uploadDate = new Date();
 		else
 			uploadDate = file.getUploaded();
-		date.setText(dateText+DateTimeFormat.getFormat("E, dd MMM yyyy, HH:mm:ss").format(uploadDate));
+		date.setText(dateText+DateTimeFormat.getFormat(ClientFactory.dateFormat).format(uploadDate));
 	}
 	
 

@@ -20,4 +20,6 @@ public interface GoodleResources extends ClientBundle
 	
 	@Source("btn_remove.png") ImageResource removeIcon();
 	
+	@Source("exit.png") ImageResource logoutIcon();
+	
 }

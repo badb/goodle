@@ -68,6 +68,7 @@ public class CourseModulesView  extends AbstractCourseView
 					{
 						ModuleView view = new ModuleView();
 						view.setClientFactory(cf);
+						view.setCourse(course);
 						view.setModule(m);
 
 						int rows = modules.getRowCount();

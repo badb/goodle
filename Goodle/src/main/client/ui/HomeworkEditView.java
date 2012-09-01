@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import main.client.ClientFactory;
+import main.client.resources.GoodleResources;
 import main.shared.proxy.Converter;
 import main.shared.proxy.CourseRequest;
 import main.shared.proxy.HomeworkProxy;
@@ -16,8 +17,10 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DatePicker;
 
@@ -34,6 +37,7 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 	@UiField DatePicker deadline;
 	@UiField FlexTable filesTable;
 	@UiField FileUploadView upload;
+	@UiField Button deleteButton;
 	
 	private String previousTitle;
 	private String previousText;
@@ -100,10 +104,17 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 		{
 			isVisible.setText("Widoczny");
 		}
-		else isVisible.setText("Ukryty");
+		else {
+			this.addStyleName("hidden");
+			isVisible.setText("Ukryty");
+		}
 		
 		upload.setParent(this);
 		refreshFiles();
+		
+		Image deleteIcon = new Image(GoodleResources.INSTANCE.removeIcon());
+		deleteIcon.getElement().setAttribute("title", "Usuń pracę domową");
+		deleteButton.getElement().appendChild(deleteIcon.getElement());
 	}
 	
 	public boolean isChanged() 
@@ -125,9 +136,13 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 	{
 		if (isVisible.getText().equals("Widoczny"))
 		{
+			this.addStyleName("hidden");
 			isVisible.setText("Ukryty");
 		}
-		else isVisible.setText("Widoczny");
+		else {
+			this.removeStyleName("hidden");
+			isVisible.setText("Widoczny");
+		}
 	}
 	
 	public void addFile(String url, String title) 
@@ -169,5 +184,10 @@ public class HomeworkEditView extends AbstractCourseView implements FileContaine
 		filesTable.removeRow(index);
 		files.remove(file);
 		newFiles.remove(file);
+	}
+	
+	@UiHandler("deleteButton")
+	public void onDeleteButtonClick(ClickEvent event) {
+		this.removeFromParent();
 	}
 }

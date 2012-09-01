@@ -6,6 +6,7 @@
 	<ui:style src="../resources/Goodle.css"/>
     
 	<g:VerticalPanel width="100%" styleName='{style.module}'>
+	
 	    <g:Label ui:field="visible" width="100%"/>
 	    <my:EditLabel ui:field="title" width="100%" editable="false" />
 	    <my:EditLabel ui:field="text" width="100%" editable="false" wordWrapped="true" />

@@ -7,6 +7,7 @@ import main.client.ClientFactory;
 import main.client.NameChangedEvent;
 import main.client.NameChangedEventHandler;
 import main.client.place.FindCoursesByNamePlace;
+import main.client.resources.GoodleResources;
 import main.shared.proxy.CourseProxy;
 
 import com.google.gwt.core.client.GWT;
@@ -50,7 +51,8 @@ public class TopView extends Composite implements NameChangedEventHandler
 		horizontalPanel.setCellWidth(goodleLogo, "250px");
 		horizontalPanel.setCellWidth(userBox, "250px");
 		horizontalPanel.setCellWidth(logoutButton, "46px");
-		Image img = new Image("http://picol.org/images/icons/files/png/64/logout_64.png");
+		Image img = new Image(GoodleResources.INSTANCE.logoutIcon());
+//		Image img = new Image("http://picol.org/images/icons/files/png/64/logout_64.png");
 		img.setPixelSize(18, 18);
 		logoutButton.getElement().appendChild(img.getElement());
 	}

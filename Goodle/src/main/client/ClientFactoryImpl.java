@@ -1,5 +1,7 @@
 package main.client;
 
+import java.util.Date;
+
 import main.client.ui.CalendarView;
 import main.client.ui.CourseHomeworksEditView;
 import main.client.ui.CourseHomeworksView;
@@ -22,6 +24,7 @@ import main.shared.GoodleRequestFactory;
 import main.shared.proxy.GoodleUserProxy;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 
@@ -264,6 +267,5 @@ public class ClientFactoryImpl implements ClientFactory
 		}
 		return synchronizationConfirmationPopup;
 	}
-
 
 }

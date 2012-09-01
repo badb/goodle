@@ -10,7 +10,7 @@
       	<g:HorizontalPanel styleName="{style.tabs}">
         <g:SimplePanel styleName="{style.tabBegin}"/>
             <g:Label ui:field="infoLabel" styleName="{style.tab}">Informacje</g:Label>
-            <g:Label ui:field="modulesLabel" styleName="{style.tab}">Moduły</g:Label>
+            <g:Label ui:field="modulesLabel" styleName="{style.tab}">Materiały</g:Label>
             <g:Label ui:field="membersLabel" styleName="{style.tab}">Uczestnicy</g:Label>
             <g:Label ui:field="homeworksLabel" styleName="{style.tab}">Zadania</g:Label>
         </g:HorizontalPanel>

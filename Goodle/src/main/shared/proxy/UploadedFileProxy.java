@@ -20,5 +20,5 @@ public interface UploadedFileProxy extends ValueProxy
 	void setName(String name);
 	void setAuthor(Long id);
 	void setUrl(String url);
-
+	void setUploaded(Date d);
 }

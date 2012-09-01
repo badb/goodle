@@ -122,6 +122,7 @@ public class HomeworkView extends AbstractCourseView implements FileContainerInt
 		//file.setAuthor(cf.getCurrentUser().getId());
 		file.setComment("komentarz");
 		file.setChecked(false);
+		file.setUploaded(new Date());
 		addSolution(file);
 		request.uploadSolution(courseId, homeworkId, file).fire();
 	}

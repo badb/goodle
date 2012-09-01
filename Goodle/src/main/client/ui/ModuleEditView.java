@@ -76,8 +76,8 @@ public class ModuleEditView extends Composite implements FileContainerInterface 
 		if (n == null) return;
 		
 		module = request.create(ModuleProxy.class);
-		module.setTitle("Modu�� " + n.toString());
-		module.setText(Converter.getList("Edytuj tre����"));
+		module.setTitle("Temat " + n.toString());
+		module.setText(Converter.getList("Edytuj treść"));
 		module.setIsVisible(false);
 		module.setAttachedFiles(new ArrayList<UploadedFileProxy>());
 		prepareView();

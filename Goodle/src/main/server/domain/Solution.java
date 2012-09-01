@@ -1,5 +1,6 @@
 package main.server.domain;
 
+import java.util.Date;
 import java.util.logging.Logger;
 
 import javax.persistence.Basic;
@@ -49,8 +50,6 @@ public class Solution extends UploadedFile {
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
-	
-	
 	
     public static Solution findSolution(Long id) 
     {

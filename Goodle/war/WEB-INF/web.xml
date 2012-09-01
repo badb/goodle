@@ -35,6 +35,11 @@
 	</welcome-file-list>
 
 	<!-- Login is allway required -->
+    <security-constraint>
+    	<web-resource-collection>
+        	<url-pattern>/goodle/*</url-pattern>
+    	</web-resource-collection>
+	</security-constraint>
 	<security-constraint>
         <web-resource-collection>
             <url-pattern>/*</url-pattern>

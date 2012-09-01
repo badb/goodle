@@ -405,8 +405,16 @@ public class Course implements Serializable
 	    				{
 	    					Solution f = em.find(Solution.class, i);
 	    					GoodleUser author = em.find(GoodleUser.class, f.getAuthor());
-	    					f.setAuthorName(author.getFirstName() + " " + author.getLastName()
-	    							+ " (" + u.getEmail() + ")");
+	    					if (u.getStudentId() == null)
+	    					{
+	    						f.setAuthorName(author.getFirstName() + " " + author.getLastName()
+	    								+ " (" + u.getEmail() + ")");
+	    					}
+	    					else
+	    					{
+	    						f.setAuthorName(author.getFirstName() + " " + author.getLastName()
+	    								+ " (" + u.getStudentId() + ")");
+	    					}
 	    					solutions.add(f);
 	    				}
     				}

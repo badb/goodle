@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+    <g:HTMLPanel>
+        <g:Label text="Logujesz się do serwisu po raz pierwszy. Podaj swoje dane. Jeżeli nie posiadasz numeru indeksu, pozostaw to pole puste." />
+        <g:Label ui:field="message" /> <br />
+        <g:Label text="Imię" /> <g:TextBox ui:field="firstName" /> <br />
+        <g:Label text="Nazwisko" /> <g:TextBox ui:field="lastName" /> <br />
+        <g:Label text="Nr indeksu" /> <g:TextBox ui:field="studentId" /> <br />
+        <g:Button ui:field="save" text="Zapisz" />
+    </g:HTMLPanel>
+	
+</ui:UiBinder> 

@@ -14,6 +14,7 @@ public interface GoodleUserProxy extends EntityProxy
 	String getLogin();
 	String getFirstName();
 	String getLastName();
+	String getStudentId();
 	String getEmail();
 	Set<Long> getCoursesLed();
 	Set<Long> getCoursesAttended();
@@ -21,5 +22,6 @@ public interface GoodleUserProxy extends EntityProxy
 	void setLogin(String login);
 	void setFirstName(String firstName);
 	void setLastName(String lastName);
+	void setStudentId(String id);
 	void setEmail(String email);
 }

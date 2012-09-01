@@ -80,7 +80,12 @@ public class CourseMembersView extends AbstractCourseView
 			@Override
 			public String getValue(GoodleUserProxy object) 
 			{
-				return object.getFirstName() + " " + object.getLastName() + " (" + object.getEmail() + ")";
+				String value = object.getFirstName() + " " + object.getLastName();
+				if (object.getStudentId() == null)
+					value += " (" + object.getStudentId() + ")";
+				else
+					value += " (" + object.getEmail() + ")";
+				return value;
 			}
 		};
 		nameColumn.setSortable(true);

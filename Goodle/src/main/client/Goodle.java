@@ -10,6 +10,7 @@ import main.client.resources.GoodleResources;
 import main.client.ui.CalendarView;
 import main.client.ui.TopView;
 import main.client.ui.UserCoursesView;
+import main.client.ui.UserDataPopup;
 import main.shared.proxy.GoodleUserProxy;
 
 import com.google.gwt.activity.shared.ActivityManager;
@@ -84,7 +85,13 @@ public class Goodle implements EntryPoint
 					public void onSuccess(GoodleUserProxy response)
 					{
 						clientFactory.setCurrentUser(response);
-						onUserLogged();
+						
+						// Check whether we already collected user's data
+						// and react properly.
+						if (response.getFirstName() == null || response.getLastName() == null)
+							onNewUser();
+						else
+							onUserLogged();
 					}
 					@Override
 					public void onFailure(ServerFailure error)
@@ -98,6 +105,14 @@ public class Goodle implements EntryPoint
 		} catch (Throwable e) {
 			uncaughtExceptionHandler.onUncaughtException(e);
 		}
+	}
+	
+	public void onNewUser()
+	{
+		UserDataPopup popup = clientFactory.getUserDataPopup();
+		popup.setGoodleApp(this);
+		popup.setUser(clientFactory.getCurrentUser());
+		popup.center();
 	}
 	
 	public void onUserLogged()
@@ -114,8 +129,11 @@ public class Goodle implements EntryPoint
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
         historyHandler.register(placeController, eventBus, defaultPlace);
         
+        GoodleUserProxy u = clientFactory.getCurrentUser();
+        String userName = u.getFirstName() + " " + u.getLastName();
+        
         topPanel.setClientFactory(clientFactory);
-        topPanel.setUserName(clientFactory.getCurrentUser().getLogin());
+        topPanel.setUserName(userName);
         topPanel.addSuggestions();
         clientFactory.setTopView(topPanel);
         clientFactory.setRightView(rightPanel);

@@ -72,14 +72,19 @@ public class GoodleUser implements Serializable
 	public void setLogin(String login) { this.login = login; }
 
 	@NotBlank
-	private String firstName = "Llama";
+	private String firstName;
 	public String getFirstName() { return firstName; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }
 
 	@NotBlank
-	private String lastName = "Llama";
+	private String lastName;
 	public String getLastName() { return lastName; }
 	public void setLastName(String lastName) { this.lastName = lastName; }
+	
+	@NotBlank
+	private String studentId;
+	public String getStudentId() { return studentId; }
+	public void setStudentId(String id) { studentId = id; }
 
 	@Email
 	private String email;
@@ -116,6 +121,18 @@ public class GoodleUser implements Serializable
 			em.remove(attached); 
 		}
 		finally { em.close(); }
+	}
+	
+	public GoodleUser update()
+	{
+    	EntityManager em = entityManager();
+    	try
+    	{
+    		em.persist(this);
+    		em.refresh(this);
+        	return this;
+    	}
+    	finally { em.close(); }
 	}
 
 	public static GoodleUser findGoodleUser(Long id) 

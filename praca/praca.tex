@@ -33,7 +33,7 @@ Skrzypczak}
 
 \title{Goodle --- platforma e-learningowa}
 
-\tytulang{Google --- e-learning platform}
+\tytulang{Goodle --- e-learning platform}
 
 %kierunek: Matematyka, Informatyka, ...
 \kierunek{Informatyka}
@@ -102,7 +102,7 @@ Wydziale Matematyki, Informatyki i Mechaniki UW. Potencjalnymi
 odbiorcami platformy
 Goodle s± jednak studenci i pracownicy dydaktyczni ca³ego Uniwersytetu
 Warszawskiego. Dlatego stworzony system jest zintegrowany z USOSem.
-Podstawow± funkcjonalno¶ci± platformy e-lerningowej jest  umo¿liwienie
+Podstawow± funkcjonalno¶ci± platformy e-learningowej jest  umo¿liwienie
 prowadz±cym zajêcia dzielenia siê ze studentami materia³ami
 dydaktycznymi i wyznaczanie im zadañ domowych, natomiast studentom
 wgl±d w zamieszczone materia³y oraz nadsy³anie rozwi±zañ prac
@@ -122,7 +122,7 @@ Warszawski platforma e-learningowa, w~stosunku do~której Goodle stanowi
 alternatywê. Nazwa Goodle stanowi kontaminacjê nazw Google i~Moodle.
 
 Platforma Moodle posiada trudny w obs³udze, zbyt skomplikowany interfejs,
-brakuje te¿ integracja z~systemem USOS. Celem projektu by³o stworzenie
+brakuje te¿ integracji z~systemem USOS. Celem projektu by³o stworzenie
 aplikacji pozbawionej tych wad. Grono potencjalnych odbiorców stanowi± studenci
 i~pracownicy akademiccy. 
 
@@ -184,7 +184,7 @@ W~kolejnym rozdziale omówiono \emph{mo¿liwe scenariusze u¿ycia}.
 Nastêpnie, w rozdziale pi±tym opisano \emph{u¿yte narzêdza i technologie}.
 Podana jest krótka charakterystyka Google Web Toolkit, Google App Engine,
 i wymienione s± u¿ywane biblioteki. Na koniec wymieniono narzêdzia
-u³atwiaj±ce pracê.
+u³atwiaj±ce pracê programistyczn±.
 
 W rozdziale \emph{Metodyka~pracy} opisano praktyki i~narzêdzia, 
 z~których korzystali¶my podczas pracy, jak równie¿ funkcje 
@@ -199,38 +199,38 @@ nad projektem oraz perspektywy dalszego rozwoju aplikacji.
 %
 \chapter{Motywacja i cele} % TODO Uzupe³niæ nazwê rozdzia³u
 
-Ten rozdzia³ zawiera motywacjê dla stworzenia aplikacji.
+Ten rozdzia³ zawiera opis motywacji dla stworzenia aplikacji.
 %
 %  Dlaczego zdecydowano siê na rozpoczêcie projektu.
 %
 \section{Motywacja}
 
-Od momentu uruchomienia system USOS podlega kolejnym usprawnieniom. Niestety, 
+Od momentu uruchomienia system Moodle podlega kolejnym usprawnieniom. Niestety, 
 wprowadzane modyfikacje i dodawane modu³y nie s± w stanie nad±¿yæ za rosn±cymi 
 wymaganiami u¿ytkowników.
 
-% TODO ustaliæ, czy piszemy o tym, ¿e podobno mieli przenie¶æ pocztê studenck± 
-% na Googla
 Jednym z oczekiwañ odbiorców jest integracja serwisu z kontem Google
 i 
 oferowanymi przez tê firmê narzêdziami. Dla wielu u¿ytkowników uci±¿liwy jest
 równie¿ 
-brak konsolidacji USOS z innymi portalami akademickimi np. platform± Moodle. 
+brak konsolidacji portalu z systemem USOS. 
 Tworzenie kursów, zarz±dzanie u¿ytkownikami czy umieszczanie wyników studentów
 musi siê zatem odbywaæ na~kilku stronach w sposób niezale¿ny.
 
-Do problemów Moodle nale¿y np. trudny w obs³udze, nieprzyjazny dla u¿ytkownika 
+Do problemów Moodle nale¿y równie¿ np. trudny w~obs³udze, 
+nieprzyjazny dla u¿ytkownika 
 interfejs. Spotyka siê on z nieustann± krytyk± ze strony studentów i
 pracowników 
 wydzia³u. Dodatkowo platforma nie zapewnia prowadz±cemu zajêcia dostatecznej 
-elastyczno¶ci i ³atwo¶ci w udostêpnianiu i organizacji udostêpnianych
+³atwo¶ci w tworzeniu kursu oraz udostêpnianiu i organizacji udostêpnianych
 materia³ów. 
 
 Wynikiem wymienionych mankamentów jest niezadowolenie u¿ytkowników oraz 
-nieefektywne wykorzystanie potencja³u tkwi±cego w tego typu portalach. Celem 
+nieefektywne wykorzystanie potencja³u tkwi±cego w wykorzystaniu platformy 
+edukacyjnej. Celem 
 postawionym przed nowym systemem by³o rozwi±zanie ww. problemów, 
 co uatrakcyjni³oby pracê i zaoszczêdzi³o czas zarówno pracowników, 
-jak i studentów oraz podnios³o komfort kszta³cenia na Uniwesytecie Warszawskim.
+jak i studentów, oraz podnios³o komfort kszta³cenia na Uniwesytecie Warszawskim.
 
 %
 %  Jakie powinny byæ cechy idealnego produktu, czyli do czego d±¿y³ projekt.
@@ -256,30 +256,7 @@ platformie e-learningowej kursy by³y zwykle odpowiednikami tych z~USOS. Mimo
 to, nie istnia³a mo¿liwo¶æ transferu informacji np. danych kursu, listy
 u¿ytkowników czy wystawionych ocen. W Goodle postanowiono zapewniæ tak± 
 komunikacjê. Niestety te zamierzenia uda³o siê zrealizowaæ tylko
-czê¶ciowo, z uwagi za ograniczenia dostêpnego USOS API.   
-
-% TODO mo¿e dodaæ s³ówko o wykorzystaniu Googla, którego technologie wszyscy 
-% znaj±, wiêc to upraszcza korzystanie. Co prawda u¿ywamy w koñcu tylko Docsów 
-% i uwierzytelniania, ale u¿ycie Google Apps to te¿ by³ cel.
-
-%
-%  Jakie alternatywne rozwi±zania rozpatrywano i dlaczego zdecydowano siê
-%  na stworzenie w³asnej aplikacji.
-%
-%  TODO Poni¿sza sekcja jest laniem wody na pe³n± skalê. Skomponowa³em
-%  j± z materia³ów wygrzebanych z wizji, ale mo¿e warto z niej zrezygnowaæ.
-
-%\section{Odrzucone scenariusze} 
-%
-%Praca z systemem Moodle jest ¿mudna i nieefektywna z powodu problemów 
-%wymienionych we wcze¶niejszych czê¶ciach dokumentu. Rozs±dnym scenariuszem
-%by³o zatem przej¶cie na alternatywn± platformê e-learningow±. Rozwi±zania 
-%komercyjne, np. Blackboard Learning, trzeba by³o niestety odrzuciæ ze wzglêdu
-%na koszty. Drugim problemem okaza³a siê synchronizacja takiego systemu z
-%USOS. W przypadku rozwi±zania open-source (np. platformy OLAT) wymaga³aby
-%dokonania pracoch³onnych modyfikacji kodu. Z tego powodu, zdecydowano siê na 
-%stworzenie nowej aplikacji, dostosowanej do potrzeb studentów i pracowników 
-%Uniwersytetu Warszawskiego. 
+czê¶ciowo, z uwagi za ograniczenia dostêpnego USOS API.
 
 %
 %  Opis potencjalnych odbiorców i ich wymagañ w stosunku do systemu, które
@@ -295,7 +272,7 @@ do jednej z czterech ról, których wymagania nastêpnie poddano analizie:
       \begin{description}
          \item[Opis] Osoby zarz±dzaj±ce serwisem i dbaj±ce o jego
 bezpieczeñstwo.
-         \item[Potrzeby] narzêdzia do administracji systemem, pozwalaj±cy
+         \item[Potrzeby] narzêdzia do administracji systemem, pozwalaj±ce
 dokonywaæ operacji takich jak ogl±danie bazy danych i usuwanie z niej danych
 przez przegl±darkê.
       \end{description}
@@ -320,9 +297,9 @@ domowych
       \begin{description}
          \item[Opis] Pracownicy Uniwersytetu Warszawskiego prowadz±cy zajêcia 
             przy u¿yciu platformy.
-         \item[Potrzeby] ograniczenia dostêpu do kursu wybranej grupie
-            studentów, publikacji materia³ów i wyników kursu, zadania i 
-            przyjêcia prac domowych; integracja z serwisami USOS.
+         \item[Potrzeby] ograniczenie dostêpu do kursu wybranej grupie
+            studentów, publikacja materia³ów i wyników kursu, zadawanie i 
+            przyjmowanie prac domowych; integracja z serwisami USOS.
       \end{description}  
 \end{itemize}
 
@@ -338,7 +315,8 @@ u¿ytkownikom. S±~to:
 \section{Tworzenie kursu i administracja, synchronizacja z USOS}
 
 Ka¿dy u¿ytkownik Goodle ma mo¿liwo¶æ utworzenia zajêæ poprzez klikniêcie
-przycisku \linebreak \emph{Stwórz~kurs} w~lewym panelu (rysunek 3.1).
+przycisku \linebreak \emph{Stwórz~kurs} w~lewym panelu 
+(rysunek \ref{tworzenie}).
 Podstawowymi operacjami
 na 
 utworzonym kursie s± zmiana jego nazwy oraz semestru i roku szkolnego, 
@@ -347,37 +325,40 @@ Warszawskim mo¿e odbywaæ siê w semestrze zimowym, letnim lub byæ ca³oroczny.
 Domy¶lnie kurs zostaje przypisany do aktualnego semestru.
 Zak³adka \emph{Informacje} umo¿liwia dodatkowo dodanie opisu kursu oraz
 zwi±zanej
-z nim bibliografii (rysunek 3.2).
+z nim bibliografii (rysunek \ref{administracja}).
 
 \begin{figure}
 \caption{Tworzenie kursu}
   \centering
 \includegraphics[scale=0.4]{31.png}
+\label{tworzenie}
 \end{figure}
 
 \begin{figure}
  \caption{Administracja kursem}
  \centering
  \includegraphics[scale=0.6]{312.png}
+ \label{administracja}
 \end{figure}
 
 
 Zdarza siê czêsto, ¿e tworzony kurs posiada swój odpowiednik w USOS. W takim
 przypadku, zamiast wpisywaæ dane rêcznie, prowadz±cy ma mo¿liwo¶æ pobrania
-ich z systemu (rysunek 3.3).
+ich z systemu (rysunek \ref{synchronizacja}).
 
 \begin{figure}
 \caption{Synchronizacja z USOS}
   \centering
 \includegraphics[scale=0.6]{311.png}
+\label{synchronizacja}
 \end{figure}
 
-
+\pagebreak
 \section{Wyszukiwanie kursów}
 
 Mo¿liwe jest wyszukiwanie zajêæ u¿ywaj±c panelu znajduj±cego
 siê u góry strony. W trakcie wpisywania, aplikacja wspiera u¿ytkownika,
-podpowiadaj±c pasuj±ce nazwy (rysunek 3.4). 
+podpowiadaj±c pasuj±ce nazwy (rysunek \ref{wyszukiwanie}). 
 
 Na li¶cie wyników wyszukiwania podana jest nie tylko nazwa kursu, 
 ale równie¿ jego semestr i rok szkolny, co pozwala ³atwo odró¿niæ zajêcia z 
@@ -387,6 +368,7 @@ danego przedmiotu prowadzone w~kolejnych latach.
 \caption{Wyszukiwanie kursów}
   \centering
 \includegraphics[scale=0.8]{32.png}
+\label{wyszukiwanie}
 \end{figure}
 
 \section{Rejestracja na kurs i zarz±dzanie u¿ytkownikami}
@@ -397,12 +379,13 @@ informacje na jego temat, jednak aby uzyskaæ wgl±d w dodane materia³y, prace
 domowe czy listê uczestników, konieczne jest pomy¶lne przej¶cie procesu 
 rejestracji.
 
-Istniej± dwa poziomy zabezpieczenia kursu:otwarty i zabezpieczony has³em. 
+Istniej± dwa poziomy zabezpieczenia kursu: otwarty i zabezpieczony has³em. 
 U¿ytkownik Goodle mo¿e zarejestrowaæ siê na zajêcia klikaj±c przycisk 
-\emph{zarejestruj} znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
+\emph{Do³±cz} znajduj±cy siê obok nazwy kursu. W przypadku zajêæ otwartych
 spowoduje to natychmiastowe do³±czenie u¿ytkownika do listy uczêszczaj±cych.
 Je¿eli prowadz±cy zdefiniowa³ has³o, do ukoñczenia rejestracji konieczne jest
-podanie go (rysunek 3.5). Lista kursów, w których u¿ytkownik uczestniczy,
+jego podanie (rysunek \ref{rejestracja}). 
+Lista kursów, w których u¿ytkownik uczestniczy,
 podobnie
 jak lista kursów prowadzonych przez niego, pojawia siê w panelu po lewej 
 stronie ekranu.
@@ -411,6 +394,7 @@ stronie ekranu.
 \caption{Rejestracja na kurs}
   \centering
 \includegraphics[scale=0.6]{33.png}
+\label{rejestracja}
 \end{figure}
 
 
@@ -420,12 +404,13 @@ polityki w dowolnym momencie.
 Wszyscy zarejestrowani maj± mo¿liwo¶æ obejrzenia listy wspó³uczestników, 
 dostêpnej w~zak³adce \emph{Uczestnicy}. Dodatkowo prowadz±cy mo¿e
 wyrejestrowaæ wybranych uczestników z~kursu, zaznaczaj±c ich na wymienionej
-li¶cie, a nastêpnie klikaj±c \emph{usuñ} (rysunek 3.6). 
+li¶cie, a nastêpnie klikaj±c \emph{usuñ} (rysunek \ref{zarzadzanie}). 
 
 \begin{figure}
 \caption{Zarz±dzanie uczestnikami}
   \centering
 \includegraphics[scale=0.6]{331.png}
+\label{zarzadzanie}
 \end{figure}
 
 
@@ -438,30 +423,33 @@ Ka¿dy materia³ mo¿e byæ widoczny dla~uczestników lub ukryty --- widoczny
 tylko dla prowadz±cego. Ukrycie materia³ów umo¿liwia wcze¶niejsze przygotowanie 
 informacji i udostêpnianie ich studentom w dogodnym momencie. 
 Dodatkowo materia³y mog± zostaæ wzbogacone za³adowanymi na serwer plikami, np.
-dokumentami pdf, obrazkami czy filmami (rysunek 3.7 i 3.8).
+dokumentami pdf, obrazkami czy filmami (rysunek 
+\ref{dodawanie} i~\ref{przegladanie}).
 
 \begin{figure}
 \caption{Dodawanie materia³ów}
   \centering
 \includegraphics[scale=0.6]{341.png}
+\label{dodawanie}
 \end{figure}
 
 
 Materia³y modyfikowane s± w trybie edycji, do której prowadz±cy przechodzi
-klikaj±c \emph{edytuj} w zak³adce \emph{Materia³y}. Od tego momentu ma mo¿liwo¶æ
+klikaj±c \emph{Edytuj} w zak³adce \emph{Materia³y}. Od tego momentu ma mo¿liwo¶æ
 dodawania i usuwania materia³ów, zmieniania ich nazwy, tre¶ci, widoczno¶ci
 oraz ³adowania plików. Zmiany zostan± zapisane dopiero, kiedy prowadz±cy
-zatwierdzi je klikaj±c \emph{zapisz}, dlatego te¿ w ka¿dej chwili mo¿e 
-wycofaæ siê z wprowadzonych modyfikacji wybieraj±c \emph{anuluj}.
+zatwierdzi je klikaj±c \emph{Zapisz}, dlatego te¿ w ka¿dej chwili mo¿e 
+wycofaæ siê z wprowadzonych modyfikacji wybieraj±c \emph{Anuluj}.
 
 \begin{figure}
 \caption{Przegl±danie materia³ów}
   \centering
 \includegraphics[scale=0.6]{34.png}
+\label{przegladanie}
 \end{figure}
 
+\pagebreak
 \section{Zadawanie i ocenianie prac domowych}
-% TODO napisaæ ocenianie albo usun±æ z tytu³u
 Aby sprawdziæ umiejêtno¶ci uczestników i zachêciæ ich do regularnej pracy,
 prowadz±cy mo¿e dawaæ im zadania do wykonania w zak³adce \emph{Zadania}. 
 W wielu aspektach prace domowe funkcjonuj± podobnie jak materia³y: 
@@ -471,14 +459,16 @@ zadañ dokonuje siê w specjalnym trybie edycji, w którym prowadz±cy mo¿e
 w ka¿dym momencie wycofaæ siê z wprowadzonych zmian. Dodatkowo, prowadz±cy
 mo¿e ustawiæ termin, do którego nale¿y przysy³aæ rozwi±zanie problemu.
 
-% TODO to te¿ jest jeszcze do zaimplementowania! 
 Na specjalnej li¶cie prowadz±cy widzi, kto z uczestników umie¶ci³ plik
 i czy zrobi³ to w terminie. Mo¿e przejrzeæ zamieszczone rozwi±zania 
-i oceniæ je (rysunek 3.9). Uzyskany wynik studenci zobacz± obok zadania. 
+i oceniæ je (rysunek \ref{ocenianie}). 
+Uzyskany wynik studenci zobacz± obok zadania. 
 
-Ka¿de dodane, odkryte zadanie jest widoczne dla studentów nie tylko w zak³adce
-\emph{Zadania}, ale równie¿ w prawym panelu wraz z terminem nadsy³ania prac, 
-gdzie u¿ytkownicy widz± wszystkie prace domowe z kursów, na które s±
+Ka¿de dodane, odkryte i aktualne zadanie jest widoczne dla studentów, 
+wraz z terminem nadsy³ania prac,  
+nie tylko w zak³adce
+\emph{Zadania}, ale równie¿ w prawym panelu, 
+gdzie u¿ytkownicy widz± prace domowe ze wszystkich kursów, na które s±
 zarejestrowani.
 
 
@@ -486,6 +476,7 @@ zarejestrowani.
 \caption{Ocenianie prac domowych}
   \centering
 \includegraphics[scale=0.6]{35.png}
+\label{ocenianie}
 \end{figure}
 %
 %  Przypadki u¿ycia. Wa¿niejsze przypadki powinny byæ sekcjami tego
@@ -525,14 +516,6 @@ zamieszczonych przez prowadz±cych, wysy³aj± rozwi±zania zadañ domowych.
    \item Powrót do 2
 \end{enumerate}
 
-\subsubsection{¦cie¿ka alternatywna: konto nie jest powi±zane z USOS}
-
-\begin{enumerate}
-   \item System prosi o umo¿liwienie aplikacji dostêpu do danych z USOSa.
-   \item U¿ytkownik podaje login i has³o do USOSa.
-   \item System sprawdza poprawno¶æ danych i loguje u¿ytkownika.
-\end{enumerate}
-
 \subsection{Wylogowanie z systemu}
 
 U¿ytkownik zalogowa³ siê do serwisu
@@ -550,6 +533,7 @@ U¿ytkownik zalogowa³ siê do serwisu.
 
 \begin{enumerate}
    \item U¿ytkownik podaje wyrazy kluczowe dla kursu, który chcia³by odnale¼æ.
+   \item System podpowiada nazwy kursów odpowiadaj±ce wpisanym s³owom
    \item System wy¶wietla wyniki wyszukiwania.
    \item U¿ytkownik wybiera jeden z nich i zostaje przeniesiony na stronê 
       z materia³ami danych zajêæ.
@@ -587,7 +571,7 @@ W opisanym scenariuszu zak³ada siê, ¿e u¿ytkownik zarejestrowa³ siê na zajêcia.
    \item U¿ytkownik wchodzi na stronê kursu.
    \item System wy¶wietla stronê z materia³ami.
    \item Uczestnik zajêæ przegl±da interesuj±ce go informacje,
-      ewentualnie ³aduje pliki dodane przez prowadz±cego
+      ewentualnie zapisuje na dysku pliki dodane przez prowadz±cego
       w za³±cznikach.
       
 \end{enumerate} 
@@ -625,6 +609,9 @@ prowadzonych zajêæ.
 
 \subsection{Synchronizacja kursu z USOS}
 
+Pracownik jest za³o¿ycielem danego kursu 
+i znajduje siê na jednej z jego podstron. 
+
 \begin{enumerate}
    \item Pracownik prosi system o integracjê kursu z USOS.
    \item Podaje nazwê odpowiednika zajêæ z USOS i wybiera odpowiedni
@@ -637,6 +624,9 @@ prowadzonych zajêæ.
 
 \subsection{Usuniêcie uczestników zajêæ}
 
+Pracownik jest za³o¿ycielem danego kursu 
+i znajduje siê na jednej z jego podstron. 
+
 \begin{enumerate}
    \item Prowadz±cy wchodzi na podstronê Uczestnicy.
    \item Zaznacza na li¶cie uczestników tych, których chcia³by usun±æ.
@@ -645,6 +635,9 @@ prowadzonych zajêæ.
 \end{enumerate}
 
 \subsection{Edycja materia³ów}
+
+Pracownik jest za³o¿ycielem danego kursu 
+i znajduje siê na jednej z jego podstron. 
 
 \begin{enumerate}
    \item Prowadz±cy wchodzi na podstronê Materia³y i wybiera opcjê 
@@ -659,6 +652,9 @@ prowadzonych zajêæ.
 \end{enumerate} 
 
 \subsection{Sprawdzenie i ocena pracy domowej studenta}
+
+Pracownik jest za³o¿ycielem danego kursu 
+i znajduje siê na jednej z jego podstron. 
 
 \begin{enumerate}
    \item Aktor wchodzi na podstronê Zadania i przewija widok do interesuj±cego
@@ -714,9 +710,9 @@ zakresie.
 
 Aplikacja hostowana na GAE posiada ustalone dzienne limity 
 zasobów, takich jak liczba
-odwiedzin, rozmiar bazy, liczba operacji na bazie danych. Po ich przekroczeniu
+odwiedzin, rozmiar i liczba operacji na bazie danych. Po ich przekroczeniu
 aplikacja jest zatrzymywana do koñca dnia. Limity mo¿na zwiêkszaæ po uiszczeniu
-op³aty. W przypadku aplikacji takiej, jak Goodle maj±cej oko³o 1000
+op³aty. W przypadku aplikacji takiej jak Goodle, maj±cej oko³o 1000
 potencjalnych
 u¿ytkowników korzystaj±cych aktywnie z platformy, standardowe dzienne limity
 powinny byæ wystarczaj±ce. 
@@ -725,7 +721,7 @@ powinny byæ wystarczaj±ce.
 
 GAE dostarcza rozproszon± bazê danych Datastore \cite{datastore}. 
 Jest to baza typu NoSQL,
-czyli baza która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
+czyli baza, która nie jest relacyjna i nie korzysta z jêzyka SQL. Obiekty w tej
 bazie maj± rodzaj i~zestaw w³asno¶ci. Zapytania do bazy pobieraj± obiekty
 danego rodzaju, które s± filtrowane i~sortowane na podstawie w³asno¶ci.
 
@@ -771,7 +767,7 @@ repozytorium, ta operacja jednak wykonywana jest sporadycznie.
 \subsection{Selenium}
 Selenium \cite{selenium} jest platform± programistyczn± do testowania
 aplikacji sieciowych.
-Pozwala przeprowadzaæ symulacje dzia³añ u¿ytkownia. Testy tworzy siê metod±
+Pozwala przeprowadzaæ symulacje dzia³añ u¿ytkownika. Testy tworzy siê metod±
 nagrywania czynno¶ci wykonywanych na stronie za pomoc± przegl±darki i
 odtwarzaniu ich. 
 GWT posiada specjalny komponent \cite{gwtselenium} do testowania przy pomocy
@@ -812,7 +808,7 @@ Zajmowa³a siê g³ównie obs³ug± plików.
 \item{Aleksandra Skrzypczak}\\
 By³a odpowiedzialna za wygl±d aplikacji.
 \item{Jakub Partyka}\\
-Do jego g³ównych zadañ nale¿a³o wykorzystanie USOSapi.
+Do jego g³ównych zadañ nale¿a³o wykorzystanie USOS API.
 
 \end{itemize}
 
@@ -885,7 +881,7 @@ innowacyjnych technologii, przydatnych przy tworzeniu aplikacji sieciowych.
 Jak ka¿da aplikacja, projekt Goodle nie jest zamkniêty i wymaga dalszego 
 ulepszania. Obecne funkcjonalno¶ci Goodle pozwalaj± na wygodne korzystanie 
 z~systemu, jednak przewidujemy potrzebê dodania w przysz³o¶ci kolejnych funkcji.
-Mamy nadziejê, ¿e bêdzie to mo¿liwe dziêki zwiêkszeniu mo¿liwo¶ci USOSapi oraz 
+Mamy nadziejê, ¿e bêdzie to mo¿liwe dziêki zwiêkszeniu mo¿liwo¶ci USOS API oraz 
 informacji zwrotnej od u¿ytkowników systemu. 
 
 W tej chwili rozwa¿ane s± nastêpuj±ce rozszerzenia:
